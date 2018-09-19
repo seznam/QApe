@@ -1,0 +1,39 @@
+{
+  "name": "opicak",
+  "version": "0.0.1",
+  "description": "Monkey testing library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"There are no tests defined\"",
+    "build": "rm -rf lib && babel src --out-dir lib --copy-files --plugins=transform-es2015-modules-commonjs",
+    "dev": "npm run build -- --source-maps --watch",
+    "start": "node -r source-map-support/register bin/opicak.js"
+  },
+  "bin": {
+    "opicak": "./bin/opicak.js"
+  },
+  "publishConfig": {
+    "registry": "https://npm.dev.dszn.cz"
+  },
+  "keywords": [
+    "testing",
+    "e2e",
+    "monkey"
+  ],
+  "author": "Filip Satek <filip.satek@firma.seznam.cz>",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "2.17.1",
+    "glob-all": "3.1.0",
+    "lodash": "4.17.10",
+    "progress": "2.0.0",
+    "puppeteer": "1.8.0"
+  },
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.26.2",
+    "express": "4.16.3",
+    "serve-static": "1.13.2",
+    "source-map-support": "0.5.9"
+  }
+}

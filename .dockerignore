@@ -1,0 +1,11 @@
+example/
+lib/
+node_modules/
+report/
+.dockerignore
+.gitignore
+Dockerfile
+package-lock.json
+README.md
+server.js
+opicak.conf.js
