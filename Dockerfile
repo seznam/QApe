@@ -2,9 +2,9 @@ FROM node:8-slim
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
-RUN mkdir -p /home/mankey
+RUN mkdir -p /home/qape
 
-WORKDIR /home/mankey
+WORKDIR /home/qape
 
 ADD package.json .
 

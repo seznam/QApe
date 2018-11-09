@@ -8,7 +8,7 @@ var defaultConfigValues = require('../lib/config/template.js');
 var version = require('../package.json').version;
 var configValues = {};
 
-const USER_CONFIG_PATH = path.join(process.cwd(), './mankey.conf.js');
+const USER_CONFIG_PATH = path.join(process.cwd(), './qape.conf.js');
 
 function getOptionSyntax(option, type) {
 	let long = '--' + option.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`);

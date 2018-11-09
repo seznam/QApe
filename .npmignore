@@ -2,7 +2,7 @@
 /package-lock.json
 /coverage/
 /report/
-/mankey.conf.js
+/qape.conf.js
 /example/
 /src/
 /.dockerignore

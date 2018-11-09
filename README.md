@@ -1,31 +1,31 @@
-*Mankey is in alpha phase and still requires a lot of work. You can try it out, but expect breaking changes even between patch releases. Beta phase will be initialized via minor release and production phase will be initialized via major release.*
+*QApe is in alpha phase and still requires a lot of work. You can try it out, but expect breaking changes even between patch releases. Beta phase will be initialized via minor release and production phase will be initialized via major release.*
 
-# Mankey
-Mankey will try out your website and report any errors he finds. He will show you step by step scenario how to reproduce the error.
+# QApe
+QApe will try out your website and report any errors he finds. He will show you step by step scenario how to reproduce the error.
 
 ## Install
 Simply install the latest version via npm install
 ```
-npm install mankey
+npm install qape
 ```
 
-Than you can run mankey like this
+Than you can run qape like this
 ```
-node_modules/.bin/mankey -u https://www.example.com
+node_modules/.bin/qape -u https://www.example.com
 ```
 
 If/When he finds an error, you can display reproducible errors like this
 ```
-node_modules/.bin/mankey report/*minified.json -p -u https://www.example.com
+node_modules/.bin/qape report/*minified.json -p -u https://www.example.com
 ```
 
 Display available options like this
 ```
-node_modules/.bin/mankey --help
+node_modules/.bin/qape --help
 ```
 
 ### Configuration
-Mankey will look for configuraition file in your current directory with name `mankey.conf.js`.
+QApe will look for configuraition file in your current directory with name `qape.conf.js`.
 
 ```javascript
 module.exports = {
@@ -37,12 +37,12 @@ module.exports = {
 	// (if error occures, the scenario is ended)
 	actionsPerScenario: 100,
 	// Number of execution errors of actions to abort the random scenario.
-	// This prevents from infinity loops, when mankey is not able to perform
+	// This prevents from infinity loops, when qape is not able to perform
 	// any action on the page and keeps retrying.
 	numberOfActionFailuresToAbortRandomScenario: 20,
 	// Starting url for all random scenarios
 	url: 'http://localhost:4444',
-	// After an error occured, mankey will try to reproduce the error again
+	// After an error occured, qape will try to reproduce the error again
 	// and will retry up to this number of actions before giving up.
 	numberOfAllowedActionsToReproduceErrorFromPreviousRun: 20,
 	// Disables random scenarios,
@@ -74,10 +74,10 @@ module.exports = {
 	// Page error handler, which should tell what is actually an error.
 	// Function is evaluated in the browser context via
 	// page.evaluateOnNewDocument() and has method
-	// "mankeyError(error)" available.
+	// "qapeError(error)" available.
 	pageErrorHandler: () => {
 		window.addEventListener('error', (event) => {
-			mankeyError(event.error.toString());
+			qapeError(event.error.toString());
 		});
 	},
 	// A browser websocket endpoint to connect to (i.e. ws://5.5.5.5:3505)
@@ -104,7 +104,7 @@ Run local testing website (from example)
 ```
 node server.js
 ```
-Start local version of mankey with source mapping
+Start local version of qape with source mapping
 ```
 npm start -- [options]
 ```

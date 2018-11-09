@@ -72,7 +72,7 @@ describe('Browser', () => {
 		expect(browser._defaultPageErrorHandler)
 			.toEqual(jasmine.any(Function));
 		expect(page.exposeFunction)
-			.toHaveBeenCalledWith('mankeyError', jasmine.any(Function));
+			.toHaveBeenCalledWith('qapeError', jasmine.any(Function));
 		expect(page.evaluateOnNewDocument)
 			.toHaveBeenCalledWith(pageErrorHandler);
 	});

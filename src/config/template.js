@@ -17,7 +17,7 @@ module.exports = {
 	},
 	numberOfActionFailuresToAbortRandomScenario: {
 		value: 20,
-		description: 'Number of execution errors of actions to abort the random scenario. This prevents from infinity loops, when mankey is not able to perform any action on the page and keeps retrying.',
+		description: 'Number of execution errors of actions to abort the random scenario. This prevents from infinity loops, when qape is not able to perform any action on the page and keeps retrying.',
 		type: 'number'
 	},
 	url: {
@@ -27,7 +27,7 @@ module.exports = {
 	},
 	numberOfAllowedActionsToReproduceErrorFromPreviousRun: {
 		value: 20,
-		description: 'After an error occured, mankey will try to reproduce the error again and will retry up to this number of actions before giving up.',
+		description: 'After an error occured, qape will try to reproduce the error again and will retry up to this number of actions before giving up.',
 		type: 'number'
 	},
 	randomScenariosDisabled: {
@@ -80,10 +80,10 @@ module.exports = {
 	pageErrorHandler: {
 		value: () => {
 			window.addEventListener('error', (event) => {
-				mankeyError(event.error.toString());
+				qapeError(event.error.toString());
 			});
 		},
-		description: 'Page error handler, which should tell what is actually an error. Function is evaluated in the browser context via page.evaluateOnNewDocument() and has method "mankeyError(error)" available.',
+		description: 'Page error handler, which should tell what is actually an error. Function is evaluated in the browser context via page.evaluateOnNewDocument() and has method "qapeError(error)" available.',
 		type: 'Function',
 		cli_disabled: true
 	},

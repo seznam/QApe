@@ -66,7 +66,7 @@ export default class Browser {
 		this._pageErrorHandler = this._getEventEmitter();
 		this._defaultPageErrorHandler = error => this._pageErrorHandler.emit('page-error', error);
 
-		await this._page.exposeFunction('mankeyError', (error) => this._pageErrorHandler.emit('page-error', error));
+		await this._page.exposeFunction('qapeError', (error) => this._pageErrorHandler.emit('page-error', error));
 		await this._page.evaluateOnNewDocument(this._config.pageErrorHandler);
 	}
 
