@@ -1,6 +1,6 @@
 {
   "name": "mankey",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Monkey testing library",
   "main": "index.js",
   "scripts": {
