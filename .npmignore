@@ -1,0 +1,11 @@
+/node_modules/
+/package-lock.json
+/coverage/
+/report/
+/mankey.conf.js
+/example/
+/src/
+/.dcokerignore
+/Dockerfile
+/.gitignore
+/server.js

@@ -1,13 +1,15 @@
 {
   "name": "mankey",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Monkey testing library",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "build": "rm -rf lib && babel src --out-dir lib --ignore \"src/**/*Spec.js\" --copy-files --plugins=transform-es2015-modules-commonjs",
     "dev": "npm run build -- --source-maps --watch",
-    "start": "node -r source-map-support/register bin/mankey.js"
+    "start": "node -r source-map-support/register bin/mankey.js",
+    "preversion": "npm test && npm run build",
+    "postversion": "git push origin master && git push --tags && npm publish"
   },
   "bin": {
     "mankey": "./bin/mankey.js"
