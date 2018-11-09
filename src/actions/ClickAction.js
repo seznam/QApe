@@ -8,14 +8,7 @@ export default class ClickAction extends AbstractAction {
 
 	async action(page, browser) {
 		const targetCreatedHandler = target => this._closeNewTab(target);
-		let element = this._actionConfig && this._actionConfig.selector ?
-			(await page.$x(this._actionConfig.selector))[0]
-		:
-			await this._getRandomElementToClick(page);
-
-		if (!element) {
-			throw Error('Unable to initialize an element.');
-		}
+		let element = await this._getElement(page);
 
 		try {
 			await this._logClickedElement(element);
@@ -26,19 +19,39 @@ export default class ClickAction extends AbstractAction {
 		browser.on('targetcreated', targetCreatedHandler);
 
 		try {
-			await element.hover();
-
-			if (this._config.previewMode) {
-				await this._signalClick(element, page);
-			}
-
-			await element.click();
+			await this._clickOnElement(page, element);
 		} catch (e) {
 			browser.removeListener('targetcreated', targetCreatedHandler);
 			throw e;
 		}
 
 		browser.removeListener('targetcreated', targetCreatedHandler);
+	}
+
+	async _getElement(page) {
+		let element = null;
+
+		if (this._actionConfig && this._actionConfig.selector) {
+			element = (await page.$x(this._actionConfig.selector))[0];
+		} else {
+			element = await this._getRandomElementToClick(page);
+		}
+
+		if (!element) {
+			throw Error('Unable to initialize an element.');
+		}
+
+		return element;
+	}
+
+	async _clickOnElement(page, element) {
+		await element.hover();
+
+		if (this._config.previewMode) {
+			await this._signalClick(element, page);
+		}
+
+		await element.click();
 	}
 
 	async _signalClick(element, page) {
@@ -84,7 +97,7 @@ export default class ClickAction extends AbstractAction {
 				return element && element.childElementCount;
 			}, element);
 
-			if (numberOfChildren > 0 || !element || !this._actionsHelper.isElementVisible(element)) {
+			if (numberOfChildren > 0 || !this._actionsHelper.isElementVisible(element)) {
 				return;
 			}
 

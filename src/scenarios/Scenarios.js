@@ -11,8 +11,6 @@ export default class Scenarios {
 
 		this._reporter = reporter;
 
-		this._previewMode = false;
-
 		this._scenariosHelper = null;
 
 		this._userDefinedScenariosHandler = null;
@@ -20,10 +18,6 @@ export default class Scenarios {
 		this._failingScenariosHandler = null;
 
 		this._randomScenariosHandler = null;
-	}
-
-	setPreviewMode(previewMode = true) {
-		this._previewMode = previewMode;
 	}
 
 	init() {

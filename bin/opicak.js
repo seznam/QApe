@@ -60,4 +60,5 @@ Object
 	});
 
 new Runner(configValues)
-	.start(program.args);
+	.start(program.args)
+	.catch(() => process.exit(1));

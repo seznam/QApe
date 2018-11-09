@@ -15,7 +15,7 @@ export default class Progress {
 			return Logger;
 		}
 
-		let bar = new ProgressBar('[:bar] :current/:total :info', { total: length, width: 100 });
+		let bar = this._getProgressBar(length);
 		this._bars.push(bar);
 		let index = this._bars.length - 1;
 
@@ -27,6 +27,10 @@ export default class Progress {
 		this._addCustomMethods(bar);
 
 		return bar;
+	}
+
+	_getProgressBar(length) {
+		return new ProgressBar('[:bar] :current/:total :info', { total: length, width: 100 });
 	}
 
 	_addCustomMethods(bar) {

@@ -34,6 +34,12 @@ export default class Runner {
 
 		return Promise.all(instances).then(() => {
 			this._progress.terminate();
+
+			if (this._reporter.isSuccess()) {
+				return Promise.resolve();
+			}
+
+			return Promise.reject();
 		});
 	}
 

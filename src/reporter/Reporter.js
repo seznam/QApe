@@ -43,6 +43,10 @@ export default class Reporter {
 		this._logConsole(`! Recieved following error, but failed to reproduce it (${filePath})`, scenario, errors);
 	}
 
+	isSuccess() {
+		return this._results.length === 0;
+	}
+
 	_logConsole(text, scenario, errors) {
 		console.log(text);
 		errors.forEach(error => console.log(error));

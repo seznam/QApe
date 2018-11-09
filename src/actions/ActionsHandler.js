@@ -21,23 +21,6 @@ export default class ActionsHandler {
 		return this;
 	}
 
-	_initActionsHelper() {
-		this._actionsHelper = new ActionsHelper(this._config);
-	}
-
-	_initAvailableActions() {
-		glob.sync(localActionsPattern)
-			.map(actionFile => {
-				let action = require(path.resolve(actionFile)).default;
-
-				if (this._availableActions[action.id]) {
-					throw Error('ActionsHandler: The same action id for multiple actions has been set. Action id must be unique!');
-				}
-
-				this._availableActions[action.id] = action;
-			});
-	}
-
 	execute(actionId, actionConfig, instance) {
 		let action = this.getAction(actionId);
 
@@ -53,6 +36,23 @@ export default class ActionsHandler {
 		let Action = this._availableActions[actionId];
 
 		return new Action(this._config, this._actionsHelper);
+	}
+
+	_initActionsHelper() {
+		this._actionsHelper = new ActionsHelper(this._config);
+	}
+
+	_initAvailableActions() {
+		glob.sync(localActionsPattern)
+			.map(actionFile => {
+				let action = require(path.resolve(actionFile)).default;
+
+				if (this._availableActions[action.id]) {
+					throw Error('ActionsHandler: The same action id for multiple actions has been set. Action id must be unique!');
+				}
+
+				this._availableActions[action.id] = action;
+			});
 	}
 
 	_getRandomAction() {
