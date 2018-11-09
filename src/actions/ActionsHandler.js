@@ -3,7 +3,9 @@ import glob from 'glob-all';
 import path from 'path';
 import { getRandomElementFromArray } from '../helpers';
 
-const localActionsPattern = ['./lib/actions/*Action.js', '!./lib/actions/AbstractAction.js'];
+const localActionsPattern = [
+	path.join(__dirname, '!(Abstract)Action.js')
+];
 
 export default class ActionsHandler {
 	constructor(config) {
@@ -45,7 +47,7 @@ export default class ActionsHandler {
 	_initAvailableActions() {
 		glob.sync(localActionsPattern)
 			.map(actionFile => {
-				let action = require(path.resolve(actionFile)).default;
+				let action = require(actionFile).default;
 
 				if (this._availableActions[action.id]) {
 					throw Error('ActionsHandler: The same action id for multiple actions has been set. Action id must be unique!');

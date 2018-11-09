@@ -19,6 +19,10 @@
     "e2e",
     "monkey"
   ],
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/seznam/mankey.git"
+    },
   "author": "Filip Satek <filip.satek@firma.seznam.cz>",
   "license": "MIT",
   "dependencies": {

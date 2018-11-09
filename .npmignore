@@ -5,7 +5,7 @@
 /mankey.conf.js
 /example/
 /src/
-/.dcokerignore
+/.dockerignore
 /Dockerfile
 /.gitignore
 /server.js
