@@ -8,4 +8,4 @@ Dockerfile
 package-lock.json
 README.md
 server.js
-opicak.conf.js
+mankey.conf.js

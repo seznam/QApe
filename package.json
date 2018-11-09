@@ -1,5 +1,5 @@
 {
-  "name": "opicak",
+  "name": "mankey",
   "version": "0.0.1",
   "description": "Monkey testing library",
   "main": "index.js",
@@ -7,10 +7,10 @@
     "test": "jest",
     "build": "rm -rf lib && babel src --out-dir lib --ignore \"src/**/*Spec.js\" --copy-files --plugins=transform-es2015-modules-commonjs",
     "dev": "npm run build -- --source-maps --watch",
-    "start": "node -r source-map-support/register bin/opicak.js"
+    "start": "node -r source-map-support/register bin/mankey.js"
   },
   "bin": {
-    "opicak": "./bin/opicak.js"
+    "mankey": "./bin/mankey.js"
   },
   "publishConfig": {
     "registry": "https://npm.dev.dszn.cz"

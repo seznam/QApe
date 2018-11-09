@@ -2,4 +2,5 @@
 /package-lock.json
 /lib/
 /coverage/
-/opicak.conf.js
+/report/
+/mankey.conf.js
