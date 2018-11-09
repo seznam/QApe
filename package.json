@@ -12,9 +12,6 @@
   "bin": {
     "mankey": "./bin/mankey.js"
   },
-  "publishConfig": {
-    "registry": "https://npm.dev.dszn.cz"
-  },
   "keywords": [
     "testing",
     "e2e",
