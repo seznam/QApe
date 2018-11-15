@@ -11,7 +11,7 @@ export default class Progress {
 	}
 
 	newBar(length) {
-		if (!process.stderr.isTTY) {
+		if (!process.stderr.isTTY || this._config.previewMode) {
 			return Logger;
 		}
 

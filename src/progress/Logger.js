@@ -15,4 +15,10 @@ export default class Logger {
 	static reset() {}
 
 	static updateLength() {}
+
+	static getCurrent() {}
+
+	static terminate() {}
+
+	static untick() {}
 }
