@@ -14,7 +14,9 @@ export default {
 }
 ```
 
-## Example
+## Usage
+This is how you can create your own custom reporter. See [default reporter](../src/reporter/DefaultReporter.js) for extended example.
+
 ```javascript
 import EventEmitter from 'events';
 
