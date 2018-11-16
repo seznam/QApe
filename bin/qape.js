@@ -11,14 +11,13 @@ var configValues = {};
 const USER_CONFIG_PATH = path.join(process.cwd(), './qape.conf.js');
 
 function getOptionSyntax(option, type) {
-	let long = '--' + option.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`);
-	let short = '-' + option.charAt(0);
+	let syntax = '--' + option.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`);
 
 	if (type === 'boolean') {
-		return `${short}, ${long}`;
+		return syntax;
 	}
 
-	return `${short}, ${long} <${type}>`;
+	return `${syntax} <${type}>`;
 }
 
 function getTypeHandler(type) {

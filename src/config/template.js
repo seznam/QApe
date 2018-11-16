@@ -7,7 +7,7 @@ module.exports = {
 	},
 	stopNewScenariosAfterTime: {
 		value: 100000,
-		description: 'Time in ms, after which no more scenarios will be initialized',
+		description: 'Time in ms, after which no more scenarios will be initialized, set to 0 to run forever',
 		type: 'number'
 	},
 	actionsPerScenario: {
@@ -23,7 +23,8 @@ module.exports = {
 	url: {
 		value: 'http://localhost:4444',
 		description: 'Starting url for all random scenarios',
-		type: 'string'
+		type: 'string',
+		syntax: '-u, --url <string>'
 	},
 	numberOfAllowedActionsToReproduceErrorFromPreviousRun: {
 		value: 20,
@@ -33,8 +34,7 @@ module.exports = {
 	randomScenariosDisabled: {
 		value: false,
 		description: 'Disables random scenarios, only user defined scenarios will be executed',
-		type: 'boolean',
-		syntax: '-d, --random-scenarios-disabled'
+		type: 'boolean'
 	},
 	minifyUserDefinedScenarios: {
 		value: true,
@@ -55,14 +55,13 @@ module.exports = {
 	previewModePauseTime: {
 		value: 1500,
 		description: 'Wait time (in ms) between actions in preview mode.',
-		type: 'number',
-		syntax: '-t, --preview-mode-pause-time <number>'
+		type: 'number'
 	},
 	defaultBrowserSettings: {
 		value: {
 			ignoreHTTPSErrors: true,
 			defaultViewport: {
-				width: 1100,
+				width: 1280,
 				height: 720
 			},
 			args: ['--start-maximized']
@@ -74,8 +73,7 @@ module.exports = {
 	defaultNavigationTimeout: {
 		value: 60000,
 		description: 'Default navigation timeout set via page.setDefaultNavigationTimeout()',
-		type: 'number',
-		syntax: '-t, --default-navigation-timeout <number>'
+		type: 'number'
 	},
 	pageErrorHandler: {
 		value: () => {
@@ -90,8 +88,7 @@ module.exports = {
 	browserWebSocketEndpoint: {
 		value: null,
 		description: 'A browser websocket endpoint to connect to (i.e. ws://5.5.5.5:3505)',
-		type: 'string',
-		syntax: '-e, --browser-web-socket-endpoint <string>'
+		type: 'string'
 	},
 	reporters: {
 		value: ['default'],
@@ -101,7 +98,6 @@ module.exports = {
 	reportPath: {
 		value: './report',
 		description: 'Relative path for the report output',
-		type: 'string',
-		syntax: '--report-path'
+		type: 'string'
 	}
 }

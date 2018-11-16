@@ -3,8 +3,8 @@ export default class ActionsHelper {
 		this._config = config;
 	}
 
-	async getElementSelector(input) {
-		let executionContext = await input.executionContext();
+	async getElementSelector(element) {
+		let executionContext = await element.executionContext();
 
 		return executionContext.evaluate(input => {
 			function getPathTo(element) {
@@ -12,30 +12,28 @@ export default class ActionsHelper {
 					return '//' + element.tagName.toLowerCase();
 				}
 
-				var ix = 0;
-				var siblings;
-
 				if (!element.parentNode) {
 					return '';
 				}
 
-				siblings = element.parentNode.childNodes;
+				var siblings = element.parentNode.childNodes;
+				var index = 0;
 
 				for (var i= 0; i < siblings.length; i++) {
 					var sibling = siblings[i];
 
 					if (sibling === element) {
-						return getPathTo(element.parentNode) + '/' + element.tagName.toLowerCase() + '[' + (ix + 1) + ']';
+						return getPathTo(element.parentNode) + '/' + element.tagName.toLowerCase() + '[' + (index + 1) + ']';
 					}
 
 					if (sibling.nodeType === 1 && sibling.tagName === element.tagName) {
-						ix++;
+						index++;
 					}
 				}
 			}
 
 			return getPathTo(input);
-		}, input);
+		}, element);
 	}
 
 	async isElementVisible(element) {

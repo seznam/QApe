@@ -90,6 +90,10 @@ export default class Runner {
 	}
 
 	_isAllowedToStartNewScenario() {
+		if (this._config.stopNewScenariosAfterTime === 0) {
+			return true;
+		}
+
 		return (new Date().getTime() - this._initTime) < this._config.stopNewScenariosAfterTime;
 	}
 

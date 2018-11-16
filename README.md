@@ -31,7 +31,7 @@ QApe will look for configuraition file in your current directory with name `qape
 module.exports = {
 	// Number of parallel chrome instances initialized'
 	parallelInstances: 1,
-	// Time in ms, after which no more scenarios will be initialized
+	// Time in ms, after which no more scenarios will be initialized, set to 0 to run forever
 	stopNewScenariosAfterTime: 100000,
 	// Maximal number of actions performed in a random scenario
 	// (if error occures, the scenario is ended)
