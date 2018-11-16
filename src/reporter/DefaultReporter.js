@@ -89,9 +89,13 @@ export default class DefaultReporter extends EventEmitter {
 	 * @param {Object} eventData
 	 */
 	_handleRandomScenarioEnd({ results }) {
-		console.log('Random scenario recieved following error.');
+		if (results.errors.length > 0) {
+			console.log('Random scenario recieved following error.');
 
-		results.errors.forEach(error => console.log(error));
+			results.errors.forEach(error => console.log(error));
+		} else {
+			console.log('Random scenario did not find any errors.');
+		}
 	}
 
 	/**
