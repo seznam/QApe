@@ -36,9 +36,9 @@ module.exports = {
 		type: 'boolean',
 		syntax: '-d, --random-scenarios-disabled'
 	},
-	minifyUserDefinedScenariosDisabled: {
-		value: false,
-		description: 'When user defined scenario recieves an error, it will no longer try to minify the steps to reproduce this error.',
+	minifyUserDefinedScenarios: {
+		value: true,
+		description: 'When user defined scenario recieves an error, it will try to minify the steps to reproduce this error.',
 		type: 'boolean'
 	},
 	headlessModeDisabled: {
@@ -62,7 +62,7 @@ module.exports = {
 		value: {
 			ignoreHTTPSErrors: true,
 			defaultViewport: {
-				width: 1280,
+				width: 1100,
 				height: 720
 			},
 			args: ['--start-maximized']
@@ -93,9 +93,15 @@ module.exports = {
 		type: 'string',
 		syntax: '-e, --browser-web-socket-endpoint <string>'
 	},
+	reporters: {
+		value: ['default'],
+		description: 'Define your reporters for the QApe run. You can pass a string for reporters in npm registry, i.e. if you pass \'super\', QApe will look for reporter \'qape-reporter-super\'. You can also pass Class.',
+		type: 'string[]|Class[]'
+	},
 	reportPath: {
 		value: './report',
 		description: 'Relative path for the report output',
-		type: 'string'
+		type: 'string',
+		syntax: '--report-path'
 	}
 }

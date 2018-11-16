@@ -20,4 +20,8 @@ export default class AbstractScenariosHandler {
 	hasScenario() {
 		return this._scenarios.length > 0;
 	}
+
+	list() {
+		return this._scenarios;
+	}
 }

@@ -10,7 +10,11 @@ export default class AbstractAction {
 
 		this._actionConfig = {};
 
-		this._results = { action: this.constructor.id, errors: [] };
+		this._results = {
+			action: this.constructor.id,
+			errors: [],
+			message: `Action: ${this.constructor.id}; Config: ${this.actionConfig}`
+		};
 	}
 
 	async execute(instance) {
@@ -47,11 +51,6 @@ export default class AbstractAction {
 
 	getActionConfig() {
 		return this._actionConfig;
-	}
-
-	log() {
-		console.log('Action:', this.constructor.id);
-		console.log('Config:', this.actionConfig);
 	}
 
 	_addErrorToResults(error) {

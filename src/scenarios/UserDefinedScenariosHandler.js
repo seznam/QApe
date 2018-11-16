@@ -1,20 +1,36 @@
 import AbstractScenariosHandler from './AbstractScenariosHandler.js';
 
 export default class UserDefinedScenariosHandler extends AbstractScenariosHandler {
+	get type() {
+		return 'defined';
+	}
+
 	getScenario() {
 		let { scenario, name } = this._scenarios.shift();
 
-		return async (instance, bar) => {
-			bar.reset(scenario.length);
-			let results = await this._scenariosHelper.runScenario(instance, scenario, bar, 'UserDefinedScenario');
+		return async (instance) => {
+			this._reporter.emit('scenario:start', {
+				type: this.type,
+				instance,
+				name,
+				scenario
+			});
+
+			let results = await this._scenariosHelper.runScenario(instance, scenario);
 
 			if (results.executionError) {
-				return this._reporter.log(scenario, [results.executionError.toString()], name);
+				throw results.executionError;
 			}
 
-			if (this._config.minifyUserDefinedScenariosDisabled && results.errors.length > 0) {
-				return this._reporter.log(results.scenario, results.errors, name);
-			} else {
+			this._reporter.emit('scenario:end', {
+				type: this.type,
+				instance,
+				name,
+				scenario,
+				results
+			});
+
+			if (this._config.minifyUserDefinedScenarios && results.errors.length > 0) {
 				return results;
 			}
 		}

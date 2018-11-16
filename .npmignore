@@ -5,6 +5,7 @@
 /qape.conf.js
 /example/
 /src/
+/html-docs/
 /.dockerignore
 /Dockerfile
 /.gitignore

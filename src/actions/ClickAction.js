@@ -75,6 +75,7 @@ export default class ClickAction extends AbstractAction {
 		let selector = await this._actionsHelper.getElementSelector(element);
 
 		this._results.config = { selector };
+		this._results.message = `Click on "${selector}"`;
 	}
 
 	_closeNewTab(target) {

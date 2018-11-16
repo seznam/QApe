@@ -1,43 +1,42 @@
 export default class RandomScenariosHandler {
-	constructor(config, actionsHandler) {
+	constructor(config, actionsHandler, reporter) {
 		this._config = config;
 
 		this._actionsHandler = actionsHandler;
+
+		this._reporter = reporter;
+	}
+
+	get type() {
+		return 'random';
 	}
 
 	getScenario() {
-		return async (instance, bar) => {
+		return async (instance) => {
 			let log = { scenario: [], errors: [] };
 			let failedActionsCount = 0;
 
-			bar.reset(this._config.actionsPerScenario);
+			this._reporter.emit('scenario:start', {
+				type: this.type,
+				instance
+			});
 
-			try {
-				await instance.page.goto(this._config.url);
-			} catch (error) {
-				log.executionError = error;
-
-				return log;
-			}
+			await instance.page.goto(this._config.url);
 
 			for (let i = 0; i < this._config.actionsPerScenario; i++) {
 				let results = await this._actionsHandler.execute(null, null, instance);
 
 				if (results.executionError) {
-					if (!!this._config.numberOfActionFailuresToAbortRandomScenario && failedActionsCount > this._config.numberOfActionFailuresToAbortRandomScenario) {
-						log.executionError = 'Reached limit of allowed action execution errors.\n' + results.executionError;
-						break;
+					if (failedActionsCount > this._config.numberOfActionFailuresToAbortRandomScenario) {
+						throw Error('Reached limit of allowed action execution errors.\n' + results.executionError);
 					}
 
 					failedActionsCount++;
 					i--;
-					bar.tick(0, { info: `RandomScenario (failed: ${failedActionsCount})` });
 					continue;
 				} else {
 					failedActionsCount = 0;
 				}
-
-				bar.tick({ info: 'RandomScenario' });
 
 				log.scenario.push(results);
 
@@ -46,6 +45,12 @@ export default class RandomScenariosHandler {
 					break;
 				}
 			}
+
+			this._reporter.emit('scenario:end', {
+				type: this.type,
+				instance,
+				results: log
+			});
 
 			return log;
 		}

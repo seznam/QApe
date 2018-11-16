@@ -1,4 +1,4 @@
-import Reporter from '../Reporter';
+import Reporter from '../DefaultReporter';
 
 describe('Reporter', () => {
 	let reporter = null;
@@ -9,7 +9,6 @@ describe('Reporter', () => {
 
 	it('can be initialized', () => {
 		expect(reporter._config).toEqual({});
-		expect(reporter._actionsHandler).toEqual({});
 		expect(reporter._results).toEqual([]);
 	});
 });

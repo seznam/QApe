@@ -24,17 +24,17 @@ export default class Scenarios {
 		this._scenariosHelper = new ScenariosHelper(this._config, this._actionsHandler);
 		this._userDefinedScenariosHandler = new UserDefinedScenariosHandler(this._config, this._scenariosHelper, this._reporter);
 		this._failingScenariosHandler = new FailingScenariosHandler(this._config, this._scenariosHelper, this._reporter);
-		this._randomScenariosHandler = new RandomScenariosHandler(this._config, this._actionsHandler);
+		this._randomScenariosHandler = new RandomScenariosHandler(this._config, this._actionsHandler, this._reporter);
 
 		return this;
 	}
 
-	addUserDefinedScenario(log) {
-		this._userDefinedScenariosHandler.addScenario(log);
+	addUserDefinedScenario(scenario) {
+		this._userDefinedScenariosHandler.addScenario(scenario);
 	}
 
-	addFailingScenario(log) {
-		this._failingScenariosHandler.addScenario(log);
+	addFailingScenario(scenario) {
+		this._failingScenariosHandler.addScenario(scenario);
 	}
 
 	getScenario() {
@@ -56,5 +56,12 @@ export default class Scenarios {
 	hasScenario() {
 		return this._userDefinedScenariosHandler.hasScenario() ||
 			this._failingScenariosHandler.hasScenario();
+	}
+
+	list() {
+		return [].concat(
+			this._userDefinedScenariosHandler.list(),
+			this._failingScenariosHandler.list()
+		);
 	}
 }

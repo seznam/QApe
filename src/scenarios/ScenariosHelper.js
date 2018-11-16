@@ -5,7 +5,7 @@ export default class ScenariosHelper {
 		this._actionsHandler = actionsHandler;
 	}
 
-	async runScenario(instance, scenario, bar, info, retry = 0) {
+	async runScenario(instance, scenario) {
 		let errors = [];
 		let executedScenario = [];
 		let executionError;
@@ -29,7 +29,6 @@ export default class ScenariosHelper {
 		}
 
 		for (let i = 0; i < scenario.length; i++) {
-			bar.tick({ info });
 			let results = await this._actionsHandler.execute(
 				scenario[i].action,
 				scenario[i].config,

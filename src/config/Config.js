@@ -33,7 +33,7 @@ export default class Config {
 		this._config = Object.assign(this._config, {
 			parallelInstances: 1,
 			randomScenariosDisabled: true,
-			minifyUserDefinedScenariosDisabled: true,
+			minifyUserDefinedScenarios: false,
 			headlessModeDisabled: true
 		});
 	}

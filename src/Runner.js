@@ -1,20 +1,19 @@
 import Browser from './browser/Browser';
 import Scenarios from './scenarios/Scenarios';
-import Reporter from './reporter/Reporter';
+import Reporter from './reporter/BaseReporter';
 import ActionsHandler from './actions/ActionsHandler';
 import Config from './config/Config';
-import Progress from './progress/Progress';
 import fs from 'fs';
 import path from 'path';
 
 export default class Runner {
 	constructor(config) {
 		this._config = config;
-		this._progress = null;
 		this._scenarios = null;
 		this._actionsHandler = null;
 		this._reporter = null;
 		this._initTime = null;
+		this._isSuccess = true;
 	}
 
 	start(files = []) {
@@ -27,15 +26,11 @@ export default class Runner {
 		let instances = [];
 
 		for (let i = 0; i < this._config.parallelInstances; i++) {
-			let progressBar = this._progress.newBar(this._config.actionsPerScenario);
-
-			instances.push(this._startScenario(progressBar));
+			instances.push(this._startInstance());
 		}
 
 		return Promise.all(instances).then(() => {
-			this._progress.terminate();
-
-			if (this._reporter.isSuccess()) {
+			if (this._isSuccess) {
 				return Promise.resolve();
 			}
 
@@ -58,40 +53,39 @@ export default class Runner {
 		});
 	}
 
-	async _startScenario(progressBar) {
+	async _startInstance() {
 		while (
 			!this._config.randomScenariosDisabled &&
 			this._isAllowedToStartNewScenario() ||
 			this._scenarios.hasScenario()
 		) {
 			let scenario = this._scenarios.getScenario();
-
-			if (!scenario) {
-				console.log('No scenario recieved.');
-				return;
-			}
-
 			let instance = await this._getBrowserInstance();
-			let log;
+			let results;
 
-			progressBar.tick(0, { info: '' });
+			this._reporter.emit('runner:start', {
+				scenario,
+				instance
+			});
 
 			try {
-				log = await scenario(instance, progressBar);
-			} catch (e) {
-				progressBar.tick(0, { info: e.toString() });
+				results = await scenario(instance);
+			} catch (error) {
+				this._reporter.emit('runner:error', {
+					scenario,
+					instance,
+					error
+				});
 			}
 
-			if (log && log.errors && log.errors.length > 0) {
-				this._scenarios.addFailingScenario(log);
-			}
-
-			if (log && log.executionError) {
-				console.log(log.executionError);
-				progressBar.tick(0, { info: log.executionError });
+			if (results && results.errors && results.errors.length > 0) {
+				this._isSuccess = false;
+				this._scenarios.addFailingScenario(results);
 			}
 
 			await instance.clear();
+
+			this._reporter.emit('runner:end');
 		}
 	}
 
@@ -105,7 +99,6 @@ export default class Runner {
 
 	_init() {
 		this._initConfig();
-		this._initProgress();
 		this._initActionsHandler();
 		this._initReporter();
 		this._initScenarios();
@@ -116,16 +109,12 @@ export default class Runner {
 		this._config = new Config().load(this._config);
 	}
 
-	_initProgress() {
-		this._progress = new Progress(this._config);
-	}
-
 	_initActionsHandler() {
 		this._actionsHandler = new ActionsHandler(this._config).init();
 	}
 
 	_initReporter() {
-		this._reporter = new Reporter(this._config, this._actionsHandler);
+		this._reporter = new Reporter(this._config).init();
 	}
 
 	_initScenarios() {

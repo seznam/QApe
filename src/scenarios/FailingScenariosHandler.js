@@ -1,20 +1,27 @@
 import AbstractScenariosHandler from './AbstractScenariosHandler';
-import { sumPartialSeries } from '../helpers';
 
 export default class FailingScenariosHandler extends AbstractScenariosHandler {
+	get type() {
+		return 'failing';
+	}
 	getScenario() {
 		let { scenario, errors } = this._scenarios.shift();
 
-		return async (instance, bar) => {
+		return async (instance) => {
 			let lastSteps = [];
 			let results;
 
-			this._initBar(bar, scenario.length);
+			this._reporter.emit('scenario:start', {
+				type: this.type,
+				instance,
+				scenario,
+				errors
+			});
 
 			for (let i = 0; i < this._getNumberOfRetryActions(scenario.length); i++) {
 				lastSteps.unshift(scenario.pop());
 
-				results = await this._scenariosHelper.runScenario(instance, lastSteps, bar, 'FailingScenario');
+				results = await this._scenariosHelper.runScenario(instance, lastSteps);
 
 				if (results.executionError) {
 					continue;
@@ -26,11 +33,23 @@ export default class FailingScenariosHandler extends AbstractScenariosHandler {
 			}
 
 			if (results && results.errors && results.errors.length > 0) {
-				let minifiedScenario = await this._reduceScenarioSteps(instance, lastSteps, bar);
+				let minifiedScenario = await this._reduceScenarioSteps(instance, lastSteps);
 
-				this._reporter.logScenario(minifiedScenario, results.errors);
+				this._reporter.emit('scenario:end', {
+					type: this.type,
+					instance,
+					minified: true,
+					scenario: minifiedScenario,
+					errors: results.errors
+				});
 			} else {
-				this._reporter.logFailure(scenario.concat(lastSteps), errors);
+				this._reporter.emit('scenario:end', {
+					type: this.type,
+					instance,
+					minified: false,
+					scenario: scenario.concat(lastSteps),
+					errors
+				});
 			}
 		}
 	}
@@ -43,23 +62,13 @@ export default class FailingScenariosHandler extends AbstractScenariosHandler {
 		return this._config.numberOfAllowedActionsToReproduceErrorFromPreviousRun;
 	}
 
-	_initBar(bar, scenarioLength) {
-		let numberOfRetryActions = this._getNumberOfRetryActions(scenarioLength);
-		let maximumPossibleNumberOfActions = sumPartialSeries(numberOfRetryActions) + numberOfRetryActions * (numberOfRetryActions - 1);
-
-		bar.reset(maximumPossibleNumberOfActions);
-	}
-
-	async _reduceScenarioSteps(instance, scenario, bar) {
+	async _reduceScenarioSteps(instance, scenario) {
 		let minifiedScenario = scenario;
 
 		for (let i = 1; i < minifiedScenario.length; i++) {
-			let maxRemainingActions = bar.getCurrent() + minifiedScenario.length * (minifiedScenario.length - 1);
 			let tmpScenario = minifiedScenario.filter((_, index) => index !== i);
 
-			bar.updateLength(maxRemainingActions);
-
-			let results = await this._scenariosHelper.runScenario(instance, tmpScenario, bar, 'FailingScenario');
+			let results = await this._scenariosHelper.runScenario(instance, tmpScenario);
 
 			if (results.errors.length > 0) {
 				minifiedScenario = tmpScenario;

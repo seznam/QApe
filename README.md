@@ -49,8 +49,8 @@ module.exports = {
 	// only user defined scenarios will be executed
 	randomScenariosDisabled: false,
 	// When user defined scenario recieves an error,
-	// it will no longer try to minify the steps to reproduce this error.
-	minifyUserDefinedScenariosDisabled: false,
+	// it will try to minify the steps to reproduce this error.
+	minifyUserDefinedScenarios: true,
 	// Disables chromium headless mode and will display browser GUI.
 	headlessModeDisabled: false,
 	// Preview mode will overwrite other config values
@@ -82,6 +82,11 @@ module.exports = {
 	},
 	// A browser websocket endpoint to connect to (i.e. ws://5.5.5.5:3505)
 	browserWebSocketEndpoint: null,
+	// Define your reporters for the QApe run.
+	// You can pass a string for reporters in npm registry,
+	// i.e. if you pass \'super\', QApe will look for
+	// reporter 'qape-reporter-super'. You can also pass Class.
+	reporters: ['default'],
 	// Relative path for the report output
 	reportPath: './report',
 }
