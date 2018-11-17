@@ -10,6 +10,7 @@
     "dev": "npm run build -- --source-maps --watch",
     "start": "node -r source-map-support/register bin/qape.js",
     "preversion": "npm test && npm run docs:build && npm run build",
+    "version": "auto-changelog -t changelog.hbs -p && git add CHANGELOG.md",
     "postversion": "git push origin master && git push --tags && npm publish"
   },
   "bin": {
@@ -33,6 +34,7 @@
     "puppeteer": "1.8.0"
   },
   "devDependencies": {
+    "auto-changelog": "^1.10.1",
     "babel-cli": "6.26.0",
     "babel-plugin-transform-es2015-modules-commonjs": "6.26.2",
     "documentation": "8.1.2",
