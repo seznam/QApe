@@ -36,6 +36,11 @@ module.exports = {
 	// Maximal number of actions performed in a random scenario
 	// (if error occures, the scenario is ended)
 	actionsPerScenario: 100,
+	// Wait time after each action,
+	// there should be some delay so the javascript
+	// at your website is executed and an error
+	// is displayed before performing another action.
+	afterActionWaitTime: 500,
 	// Number of execution errors of actions to abort the random scenario.
 	// This prevents from infinity loops, when qape is not able to perform
 	// any action on the page and keeps retrying.
@@ -67,7 +72,10 @@ module.exports = {
 			width: 1280,
 			height: 720
 		},
-		args: ['--start-maximized']
+		args: [
+			'--start-maximized',
+			'--user-agent=Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36'
+		]
 	},
 	// Default navigation timeout set via page.setDefaultNavigationTimeout()
 	defaultNavigationTimeout: 60000,
