@@ -1,7 +1,12 @@
 *QApe is in alpha phase and still requires a lot of work. You can try it out, but expect breaking changes even between patch releases. Beta phase will be initialized via minor release and production phase will be initialized via major release.*
 
 # QApe
-QApe will try out your website and report any errors he finds. He will show you step by step scenario how to reproduce the error.
+[![Build Status](https://travis-ci.com/seznam/qape.svg?branch=master)](https://travis-ci.com/seznam/qape)
+[![NPM](https://img.shields.io/npm/v/qape.svg)](https://nodei.co/npm/qape/)
+
+![QApe presentation](https://user-images.githubusercontent.com/755134/49812102-f2fca280-fd64-11e8-84de-3a1bac422216.gif)
+
+QApe is autonomous testing tool, which acts as a manual tester browsing your website, clicking anything it can and reporting any errors it finds with exact steps, how to reproduce it. It also automatically generates a script for regression test, which you can add to set of defined scenarios for QApe, so you will never make the same bug twice! The longer the QApe is testing your website, the more potentially problematic scenarios it knows and re-tests them with each run without any work from your side!
 
 ## Install
 Simply install the latest version via npm install
