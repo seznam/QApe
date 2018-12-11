@@ -47,7 +47,7 @@ export default class ClickAction extends AbstractAction {
 	async _clickOnElement(page, element) {
 		await element.hover();
 
-		if (this._config.previewMode) {
+		if (this._config.headlessModeDisabled) {
 			await this._signalClick(element, page);
 		}
 
