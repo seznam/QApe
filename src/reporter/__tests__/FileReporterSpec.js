@@ -1,3 +1,5 @@
+jest.mock('fs');
+
 import Reporter from '../FileReporter';
 import path from 'path';
 import fs from 'fs';
@@ -149,6 +151,9 @@ describe('FileReporter', () => {
 			path.join(config.reportPath, 'name.json'),
 			JSON.stringify({ name: 'name', errors, scenario }, null, '\t')
 		);
+		fs.existsSync.mockRestore();
+		fs.mkdirSync.mockRestore();
+		fs.writeFileSync.mockRestore();
 	});
 
 	it('can get scenario name', () => {
