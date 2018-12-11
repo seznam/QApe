@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.0.5](https://github.com/seznam/qape/compare/v0.0.4...v0.0.5) - 2018-12-11
+
+### Commits
+
+- Improve documentation [`a6c3e82`](https://github.com/seznam/qape/commit/a6c3e82f19abf56b551baee72361c9aeb3688662)
+- Add travis-ci [`6fb2345`](https://github.com/seznam/qape/commit/6fb23454c82fcc723990a1996cff795d46d87bab)
+- Updated README.md with badges and gif [`a4607e5`](https://github.com/seznam/qape/commit/a4607e5cb5de55171594ce5cf834dcb7f05c3895)
+
 ## [v0.0.4](https://github.com/seznam/qape/compare/v0.0.3...v0.0.4) - 2018-12-11
 
 ### Commits
