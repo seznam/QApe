@@ -6,7 +6,7 @@ describe('ActionsHandler', () => {
 	let actionsHandler = null;
 
 	beforeEach(() => {
-		actionsHandler = new ActionsHandler({});
+		actionsHandler = new ActionsHandler({}, {});
 	});
 
 	it('can be initialized', () => {
@@ -16,6 +16,7 @@ describe('ActionsHandler', () => {
 		actionsHandler.init();
 
 		expect(actionsHandler._config).toEqual({});
+		expect(actionsHandler._reporter).toEqual({});
 		expect(actionsHandler._actionsHelper).toEqual(null);
 		expect(actionsHandler._availableActions).toEqual({});
 		expect(actionsHandler._initActionsHelper).toHaveBeenCalledTimes(1);

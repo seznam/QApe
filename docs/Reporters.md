@@ -2,20 +2,20 @@
 You can define reporters via config.reporters.
 
 ```
-var LocalCool = require('/path/to/LocalCool');
+var ExampleReporter = require('/path/to/ExampleReporter');
 
 export default {
 	reporters: [
-		// For reporter published in npm registry as 'qape-reporter-cool'
-		'cool',
-		// LocalCool is Class extending EventEmitter
-		LocalCool
+		// For reporter published in npm registry as 'qape-reporter-example'
+		'example',
+		// ExampleReporter is Class extending EventEmitter
+		ExampleReporter
 	]
 }
 ```
 
 ## Usage
-This is how you can create your own custom reporter. See [default reporter](../src/reporter/DefaultReporter.js) for extended example.
+This is how you can create your own custom reporter. See [console reporter](../src/reporter/ConsoleReporter.js), [file reporter](../src/reporter/FileReporter.js), or [spinner reporter](../src/reporter/SpinnerReporter.js) for extended examples.
 
 ```javascript
 import EventEmitter from 'events';
@@ -30,12 +30,21 @@ export default class DefaultReporter extends EventEmitter {
 		// runner:start is emitted after browser instance is initialized
 		// eventData contains scenario and browser instance
 		this.on('runner:start', eventData => console.log(eventData));
-		// scenarios:start is emitted after specific scenario starts
+		// scenario:start is emitted after specific scenario starts
 		// eventData contains browser instance, scenario type
 		// For type 'defined' there is also scenario and name
 		// For type 'failing' there is also scenario and errors
 		this.on('scenario:start', eventData => console.log(eventData));
-		// scenarios:end is emitted after specific scenario is finished
+		// action:start is emitted after specific action starts
+		// eventData contains instance and action
+		this.on('action:start', eventData => console.log(eventData));
+		// action:error is emitted after specific action receives an execution error (i.e. by clicking unclickable element)
+		// eventData contains instance, action and error
+		this.on('action:error', eventData => console.log(eventData));
+		// action:end is emitted after specific action ends
+		// eventData contains instance, action and results
+		this.on('action:end', eventData => console.log(eventData));
+		// scenario:end is emitted after specific scenario is finished
 		// eventData contains browser instance, scenario type
 		// For type 'defined' there is also scenario, name and results
 		// For type 'failing' there is also scenario, errors and minified (boolean)
@@ -44,7 +53,7 @@ export default class DefaultReporter extends EventEmitter {
 		// runner:end is emitted after browser instance is cleared
 		this.on('runner:end', () => console.log('it\'s done'));
 		// runner:error is emitted whenever an uncaught error occurred
-		// eventData contains scenario, and browser instance and error
+		// eventData contains scenario, browser instance and error
 		this.on('runner:error', eventData => console.log(eventData));
 	}
 }

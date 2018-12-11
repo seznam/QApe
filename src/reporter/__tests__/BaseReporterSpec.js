@@ -1,5 +1,7 @@
 import BaseReporter from '../BaseReporter';
-import DefaultReporter from '../DefaultReporter';
+import ConsoleReporter from '../ConsoleReporter';
+import SpinnerReporter from '../SpinnerReporter';
+import FileReporter from '../FileReporter';
 import EventEmitter from 'events';
 
 class MockedReporter extends EventEmitter {}
@@ -17,7 +19,7 @@ describe('BaseReporter', () => {
 	});
 
 	it('can initialize all defined reporters', () => {
-		let reporters = ['default', 'non-default', MockedReporter];
+		let reporters = ['spinner', 'console', 'file', 'non-default', MockedReporter];
 		reporter._config = { reporters };
 		reporter._initReporterFromString = jest.fn();
 		reporter._initReporterFromClass = jest.fn();
@@ -25,11 +27,15 @@ describe('BaseReporter', () => {
 		reporter.init();
 
 		expect(reporter._initReporterFromClass)
-			.toHaveBeenCalledWith(DefaultReporter);
-		expect(reporter._initReporterFromString)
-			.toHaveBeenCalledWith(reporters[1]);
+			.toHaveBeenCalledWith(SpinnerReporter);
 		expect(reporter._initReporterFromClass)
-			.toHaveBeenCalledWith(reporters[2]);
+			.toHaveBeenCalledWith(ConsoleReporter);
+		expect(reporter._initReporterFromClass)
+			.toHaveBeenCalledWith(FileReporter);
+		expect(reporter._initReporterFromString)
+			.toHaveBeenCalledWith(reporters[3]);
+		expect(reporter._initReporterFromClass)
+			.toHaveBeenCalledWith(reporters[4]);
 	});
 
 	it('can throw an error when reporter has an invalid format', () => {

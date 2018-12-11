@@ -12,7 +12,6 @@ describe('Browser', () => {
 		expect(browser._browser).toEqual(null);
 		expect(browser._page).toEqual(null);
 		expect(browser._pageErrorHandler).toEqual(null);
-		expect(browser._defaultPageErrorHandler).toEqual(null);
 	});
 
 	it('can init browser instance', async () => {
@@ -69,8 +68,6 @@ describe('Browser', () => {
 		await browser._initPageErrorHandler();
 
 		expect(browser._pageErrorHandler).toEqual(eventEmitter);
-		expect(browser._defaultPageErrorHandler)
-			.toEqual(jasmine.any(Function));
 		expect(page.exposeFunction)
 			.toHaveBeenCalledWith('qapeError', jasmine.any(Function));
 		expect(page.evaluateOnNewDocument)

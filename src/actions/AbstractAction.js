@@ -3,10 +3,12 @@ export default class AbstractAction {
 		throw Error('AbstractAction: Id variable must be overwritten with your identifier.');
 	}
 
-	constructor(config, actionsHelper) {
+	constructor(config, actionsHelper, reporter) {
 		this._config = config;
 
 		this._actionsHelper = actionsHelper;
+
+		this._reporter = reporter;
 
 		this._actionConfig = {};
 
@@ -24,19 +26,37 @@ export default class AbstractAction {
 
 		pageErrorHandler.on('page-error', errorHandler);
 
+		this._reporter.emit('action:start', {
+			instance,
+			action: this.constructor.id
+		});
+
 		try {
 			await this.action(page, browser);
 		} catch (e) {
 			this._results.executionError = e;
+			this._reporter.emit('action:error', {
+				instance,
+				action: this.constructor.id,
+				error: e
+			});
 		}
 
 		if (!page.url().startsWith(this._config.url)) {
 			await page.goBack();
 		}
 
+		await page.waitFor(this._config.afterActionWaitTime);
+
 		pageErrorHandler.removeListener('page-error', errorHandler);
 
 		this._results.afterLocation = this._getLocation(page);
+
+		this._reporter.emit('action:end', {
+			instance,
+			action: this.constructor.id,
+			results: this._results
+		});
 
 		return this._results;
 	}

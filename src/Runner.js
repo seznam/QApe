@@ -103,8 +103,8 @@ export default class Runner {
 
 	_init() {
 		this._initConfig();
-		this._initActionsHandler();
 		this._initReporter();
+		this._initActionsHandler();
 		this._initScenarios();
 		this._initTime = new Date().getTime();
 	}
@@ -113,12 +113,12 @@ export default class Runner {
 		this._config = new Config().load(this._config);
 	}
 
-	_initActionsHandler() {
-		this._actionsHandler = new ActionsHandler(this._config).init();
-	}
-
 	_initReporter() {
 		this._reporter = new Reporter(this._config).init();
+	}
+
+	_initActionsHandler() {
+		this._actionsHandler = new ActionsHandler(this._config, this._reporter).init();
 	}
 
 	_initScenarios() {

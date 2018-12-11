@@ -1,5 +1,7 @@
 import EventEmitter from 'events';
-import DefaultReporter from './DefaultReporter';
+import ConsoleReporter from './ConsoleReporter';
+import FileReporter from './FileReporter';
+import SpinnerReporter from './SpinnerReporter';
 
 /**
  * Base Reporter distributing events to all defined reporters
@@ -29,8 +31,16 @@ export default class BaseReporter extends EventEmitter {
 		}
 
 		this._config.reporters.forEach(reporter => {
-			if (reporter === 'default') {
-				return this._initReporterFromClass(DefaultReporter);
+			if (reporter === 'console') {
+				return this._initReporterFromClass(ConsoleReporter);
+			}
+
+			if (reporter === 'file') {
+				return this._initReporterFromClass(FileReporter);
+			}
+
+			if (reporter === 'spinner') {
+				return this._initReporterFromClass(SpinnerReporter);
 			}
 
 			if (typeof reporter === 'string') {
@@ -55,7 +65,13 @@ export default class BaseReporter extends EventEmitter {
 	 */
 	emit(eventName, eventData) {
 		this._reporters
-			.forEach(reporter => reporter.emit(eventName, eventData));
+			.forEach(reporter => {
+				try {
+					reporter.emit(eventName, eventData)
+				} catch (e) {
+					console.error(e);
+				}
+			});
 	}
 
 	/**

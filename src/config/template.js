@@ -15,6 +15,11 @@ module.exports = {
 		description: 'Maximal number of actions performed in a random scenario (if error occures, the scenario is ended)',
 		type: 'number'
 	},
+	afterActionWaitTime: {
+		value: 500,
+		description: 'Wait time after each action, there should be some delay so the javascript at your website is executed and an error is displayed before performing another action. ',
+		type: 'number'
+	},
 	numberOfActionFailuresToAbortRandomScenario: {
 		value: 20,
 		description: 'Number of execution errors of actions to abort the random scenario. This prevents from infinity loops, when qape is not able to perform any action on the page and keeps retrying.',
@@ -64,7 +69,10 @@ module.exports = {
 				width: 1280,
 				height: 720
 			},
-			args: ['--start-maximized']
+			args: [
+				'--start-maximized',
+				'--user-agent=Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36'
+			]
 		},
 		description: 'Default browser settings passed to puppeteer.launch()',
 		type: 'Object',
@@ -91,7 +99,7 @@ module.exports = {
 		type: 'string'
 	},
 	reporters: {
-		value: ['default'],
+		value: ['console', 'file', 'spinner'],
 		description: 'Define your reporters for the QApe run. You can pass a string for reporters in npm registry, i.e. if you pass \'super\', QApe will look for reporter \'qape-reporter-super\'. You can also pass Class.',
 		type: 'string[]|Class[]'
 	},

@@ -8,8 +8,10 @@ const localActionsPattern = [
 ];
 
 export default class ActionsHandler {
-	constructor(config) {
+	constructor(config, reporter) {
 		this._config = config;
+
+		this._reporter = reporter;
 
 		this._actionsHelper = null;
 
@@ -37,7 +39,7 @@ export default class ActionsHandler {
 		actionId = actionId || this._getRandomAction();
 		let Action = this._availableActions[actionId];
 
-		return new Action(this._config, this._actionsHelper);
+		return new Action(this._config, this._actionsHelper, this._reporter);
 	}
 
 	_initActionsHelper() {
