@@ -2,7 +2,7 @@
   "name": "qape",
   "version": "0.0.4",
   "description": "Monkey testing library",
-  "main": "index.js",
+  "main": "bin/qape.js",
   "scripts": {
     "test": "jest",
     "docs:build": "documentation build src/** -f html -o html-docs",

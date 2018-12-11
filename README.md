@@ -1,36 +1,38 @@
-*QApe is in alpha phase and still requires a lot of work. You can try it out, but expect breaking changes even between patch releases. Beta phase will be initialized via minor release and production phase will be initialized via major release.*
-
 # QApe
+*QApe is in alpha phase and still requires a lot of work. But you are very welcome to try it out and give a feedback!*
+
 [![Build Status](https://travis-ci.com/seznam/qape.svg?branch=master)](https://travis-ci.com/seznam/qape)
 [![NPM](https://img.shields.io/npm/v/qape.svg)](https://nodei.co/npm/qape/)
+[![NPM](https://img.shields.io/badge/powered%20by-puppeteer-blue.svg)](https://github.com/GoogleChrome/puppeteer)
 
 ![QApe presentation](https://user-images.githubusercontent.com/755134/49812102-f2fca280-fd64-11e8-84de-3a1bac422216.gif)
 
-QApe is autonomous testing tool, which acts as a manual tester browsing your website, clicking anything it can and reporting any errors it finds with exact steps, how to reproduce it. It also automatically generates a script for regression test, which you can add to set of defined scenarios for QApe, so you will never make the same bug twice! The longer the QApe is testing your website, the more potentially problematic scenarios it knows and re-tests them with each run without any work from your side!
+QApe is autonomous testing tool, which acts as a manual tester browsing your website, clicking anything it can and reporting any errors it finds with exact steps, how to reproduce it. It also automatically generates a script for regression test, which you can add to set of defined scenarios for QApe, so you will have regression test for every error it finds! The longer the QApe is testing your website, the more potentially problematic scenarios it knows and re-tests them with each run without any work from your side!
 
-## Install
+## Give It a Try!
+Take a look how QApe works!
+
+`npx qape --headless-mode-disabled -u https://www.example.com`
+
+## Get Started
 Simply install the latest version via npm install
-```
-npm install qape
-```
 
-Than you can run qape like this
-```
-node_modules/.bin/qape -u https://www.example.com
-```
+`npm install qape`
 
-If/When he finds an error, you can display reproducible errors like this
-```
-node_modules/.bin/qape report/*minified.json -p -u https://www.example.com
-```
+Than you can run QApe like this
+
+`node_modules/.bin/qape -u https://www.example.com`
+
+By default, QApe saves all scenarios causing an error to `report` folder. You can replay these scenarios like this
+
+`node_modules/.bin/qape report/*minified.json -p`
 
 Display available options like this
-```
-node_modules/.bin/qape --help
-```
+
+`node_modules/.bin/qape --help`
 
 ### Configuration
-QApe will look for configuraition file in your current directory with name `qape.conf.js`.
+QApe will look for configuraition file in your current directory with name `qape.conf.js`. There are following options available.
 
 ```javascript
 module.exports = {
@@ -99,7 +101,7 @@ module.exports = {
 	// You can pass a string for reporters in npm registry,
 	// i.e. if you pass \'super\', QApe will look for
 	// reporter 'qape-reporter-super'. You can also pass Class.
-	reporters: ['default'],
+	reporters: ['console', 'file', 'spinner'],
 	// Relative path for the report output
 	reportPath: './report',
 }
