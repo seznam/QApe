@@ -83,7 +83,7 @@ describe('ClickAction', () => {
 			hover: jest.fn().mockReturnValue(Promise.resolve()),
 			click: jest.fn().mockReturnValue(Promise.resolve())
 		};
-		clickAction._config = { previewMode: true };
+		clickAction._config = { headlessModeDisabled: true };
 		clickAction._signalClick = jest.fn()
 			.mockReturnValue(Promise.resolve());
 
