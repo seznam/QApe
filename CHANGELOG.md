@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.0.4](https://github.com/seznam/qape/compare/v0.0.3...v0.0.4) - 2018-12-11
+
+### Commits
+
+- New default reporters created: [`7f03ddd`](https://github.com/seznam/qape/commit/7f03ddd50e8d05f4529087eb5f7eaa04fc357f07)
+- Update documentation with new config options [`d5ddabd`](https://github.com/seznam/qape/commit/d5ddabd976f746a7ffd8676fd3135080c14bb627)
+- Fix FileReporterSpec tests [`e2a6745`](https://github.com/seznam/qape/commit/e2a674530dc74e11e685fdb92646f65f274ac466)
+
 ## [v0.0.3](https://github.com/seznam/qape/compare/v0.0.2...v0.0.3) - 2018-11-17
 
 ### Commits
