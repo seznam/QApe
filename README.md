@@ -1,7 +1,7 @@
 # QApe
 *QApe is in alpha phase and still requires a lot of work. But you are very welcome to try it out and give us a feedback!*
 
-[![Build Status](https://travis-ci.com/seznam/qape.svg?branch=master)](https://travis-ci.com/seznam/qape)
+[![Build Status](https://travis-ci.com/seznam/QApe.svg?branch=master)](https://travis-ci.com/seznam/QApe)
 [![NPM](https://img.shields.io/npm/v/qape.svg)](https://nodei.co/npm/qape/)
 [![NPM](https://img.shields.io/badge/powered%20by-puppeteer-blue.svg)](https://github.com/GoogleChrome/puppeteer)
 
