@@ -1,6 +1,6 @@
-import AbstractScenariosHandler from './AbstractScenariosHandler';
+import AbstractScenarios from './AbstractScenarios';
 
-export default class FailingScenariosHandler extends AbstractScenariosHandler {
+export default class FailingScenarios extends AbstractScenarios {
 	get type() {
 		return 'failing';
 	}

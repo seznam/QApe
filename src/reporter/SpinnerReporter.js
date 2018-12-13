@@ -18,6 +18,7 @@ const spinner = [
 export default class SpinnerReporter extends EventEmitter {
 	/**
 	 * @param {Object} config
+	 * @param {Object} stdout
 	 */
 	constructor(config, stdout) {
 		super();

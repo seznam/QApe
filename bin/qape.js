@@ -58,8 +58,12 @@ Object
 		}
 	});
 
+if (program.args.length > 0) {
+	configValues.files = program.args;
+}
+
 new Runner(configValues)
-	.start(program.args)
+	.start()
 	.catch(error => {
 		console.error(error);
 		process.exit(1);

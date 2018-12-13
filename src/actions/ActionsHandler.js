@@ -3,11 +3,14 @@ import glob from 'glob-all';
 import path from 'path';
 import { getRandomElementFromArray } from '../helpers';
 
-const localActionsPattern = [
-	path.join(__dirname, '!(Abstract)Action.js')
-];
-
+/**
+ * Actions handler which can work with specific actions.
+ */
 export default class ActionsHandler {
+	/**
+	 * @param {Object} config
+	 * @param {Reporter} reporter
+	 */
 	constructor(config, reporter) {
 		this._config = config;
 
@@ -18,6 +21,10 @@ export default class ActionsHandler {
 		this._availableActions = {};
 	}
 
+	/**
+	 * Initializes actions handler dependencies
+	 * @returns {ActionsHandler} this
+	 */
 	init() {
 		this._initActionsHelper();
 		this._initAvailableActions();
@@ -25,6 +32,13 @@ export default class ActionsHandler {
 		return this;
 	}
 
+	/**
+	 * Executes specific, or random action
+	 * @param {string} [actionId] Random if not defined
+	 * @param {Object} [actionConfig]
+	 * @param {Browser} instance
+	 * @returns {Promise<Object>} Resolves with action results
+	 */
 	execute(actionId, actionConfig, instance) {
 		let action = this.getAction(actionId);
 
@@ -35,6 +49,12 @@ export default class ActionsHandler {
 		return action.execute(instance);
 	}
 
+	/**
+	 * Gets random or specific action
+	 * @param {string} [actionId]
+	 * @returns {AbstractAction} Extended AbstractAction
+	 * instance of some specific action
+	 */
 	getAction(actionId = null) {
 		actionId = actionId || this._getRandomAction();
 		let Action = this._availableActions[actionId];
@@ -42,23 +62,34 @@ export default class ActionsHandler {
 		return new Action(this._config, this._actionsHelper, this._reporter);
 	}
 
+	/**
+	 * Initializes actions helper
+	 */
 	_initActionsHelper() {
 		this._actionsHelper = new ActionsHelper(this._config);
 	}
 
+	/**
+	 * Initializes available actions
+	 */
 	_initAvailableActions() {
-		glob.sync(localActionsPattern)
-			.map(actionFile => {
-				let action = require(actionFile).default;
+		glob.sync([
+			path.join(__dirname, '!(Abstract)Action.js')
+		]).map(actionFile => {
+			let action = require(actionFile).default;
 
-				if (this._availableActions[action.id]) {
-					throw Error('ActionsHandler: The same action id for multiple actions has been set. Action id must be unique!');
-				}
+			if (this._availableActions[action.id]) {
+				throw Error('ActionsHandler: The same action id for multiple actions has been set. Action id must be unique!');
+			}
 
-				this._availableActions[action.id] = action;
-			});
+			this._availableActions[action.id] = action;
+		});
 	}
 
+	/**
+	 * Gets random action ID
+	 * @returns {string} Random key from this._availableActions
+	 */
 	_getRandomAction() {
 		let randomActions = Object.keys(this._availableActions);
 

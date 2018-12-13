@@ -1,4 +1,4 @@
-export default class AbstractScenariosHandler {
+export default class AbstractScenarios {
 	constructor(config, scenariosHelper, reporter) {
 		this._config = config;
 

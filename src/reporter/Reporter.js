@@ -6,17 +6,14 @@ import SpinnerReporter from './SpinnerReporter';
 /**
  * Base Reporter distributing events to all defined reporters
  */
-export default class BaseReporter extends EventEmitter {
+export default class Reporter extends EventEmitter {
 	/**
 	 * @param {Object} config
-	 * @param {Object} instanceInfo
 	 */
-	constructor(config, instanceInfo) {
+	constructor(config) {
 		super();
 
 		this._config = config;
-
-		this._instanceInfo = instanceInfo;
 
 		this._reporters = [];
 	}

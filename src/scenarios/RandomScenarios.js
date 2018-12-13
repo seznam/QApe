@@ -1,4 +1,4 @@
-export default class RandomScenariosHandler {
+export default class RandomScenarios {
 	constructor(config, actionsHandler, reporter) {
 		this._config = config;
 

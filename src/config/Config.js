@@ -1,48 +1,43 @@
 import template from './template';
-import path from 'path';
 
+/**
+ * Class that can parse configuration with default values.
+ */
 export default class Config {
-	constructor(config) {
-		this._config = config;
-	}
+	/**
+	 * Loads configuration with default values
+	 * @param {Object} config Overrides for default config
+	 */
+	static load(userConfig) {
+		let config = {};
 
-	load(config) {
-		let configValues = config;
-		let defaultValues = {};
-
-		if (typeof config === 'string') {
-			configValues = require(path.join(process.cwd(), config));
+		if (typeof userConfig === 'string') {
+			userConfig = require(path.join(process.cwd(), userConfig));
 		}
 
 		Object
 			.keys(template)
-			.forEach(key => defaultValues[key] = template[key].value);
+			.forEach(key => config[key] = template[key].value);
 
-		this._config = Object.assign(defaultValues, configValues);
+		Object.assign(config, userConfig);
 
-		if (this._config.previewMode) {
-			this._setPreviewMode();
+		if (config.previewMode) {
+			Config._setPreviewMode(config);
 		}
 
-		this._resolvePathVariables();
-
-		return this._config;
+		return config;
 	}
 
-	_setPreviewMode() {
-		this._config = Object.assign(this._config, {
+	/**
+	 * Overrides preview mode configurations
+	 * @param {Object} config
+	 */
+	static _setPreviewMode(config) {
+		Object.assign(config, {
 			parallelInstances: 1,
 			randomScenariosDisabled: true,
 			minifyUserDefinedScenarios: false,
 			headlessModeDisabled: true
 		});
-	}
-
-	_resolvePathVariables() {
-		let pathVariables = ['reportPath'];
-
-		pathVariables.forEach(
-			variable => this._config[variable] = path.resolve(this._config[variable])
-		);
 	}
 }

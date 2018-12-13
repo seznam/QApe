@@ -1,6 +1,6 @@
-import AbstractScenariosHandler from './AbstractScenariosHandler.js';
+import AbstractScenarios from './AbstractScenarios';
 
-export default class UserDefinedScenariosHandler extends AbstractScenariosHandler {
+export default class UserDefinedScenarios extends AbstractScenarios {
 	get type() {
 		return 'defined';
 	}

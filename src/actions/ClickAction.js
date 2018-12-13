@@ -1,13 +1,27 @@
 import AbstractAction from './AbstractAction';
-import { getRandomElementFromArray } from '../helpers';
 
+/**
+ * Click action, which will click on random
+ * or specific (if actionConfig is passed) page element
+ * @extends AbstractAction
+ */
 export default class ClickAction extends AbstractAction {
+	/**
+	 * @returns {string} 'click'
+	 */
 	static get id() {
 		return 'click';
 	}
 
+	/**
+	 * Finds specified, or random element
+	 * Generates action config for action re-run
+	 * Performs click on the element
+	 * @params {puppeteer.Page} page
+	 * @param {puppeteer.Browser} browser
+	 * @returns {Promise} Resolves when click is done
+	 */
 	async action(page, browser) {
-		const targetCreatedHandler = target => this._closeNewTab(target);
 		let element = await this._getElement(page);
 
 		try {
@@ -16,25 +30,22 @@ export default class ClickAction extends AbstractAction {
 			throw Error('Unable to log element information.\n' + e.toString());
 		}
 
-		browser.on('targetcreated', targetCreatedHandler);
-
-		try {
-			await this._clickOnElement(page, element);
-		} catch (e) {
-			browser.removeListener('targetcreated', targetCreatedHandler);
-			throw e;
-		}
-
-		browser.removeListener('targetcreated', targetCreatedHandler);
+		await this._clickOnElement(page, element);
 	}
 
+	/**
+	 * Searches for an element based on action configuration,
+	 * or selects random clickable element.
+	 * @param {puppeteer.Page} page
+	 * @returns {Promise<puppeteer.ElementHandle>} element
+	 */
 	async _getElement(page) {
 		let element = null;
 
 		if (this._actionConfig && this._actionConfig.selector) {
 			element = (await page.$x(this._actionConfig.selector))[0];
 		} else {
-			element = await this._getRandomElementToClick(page);
+			element = await this._actionsHelper.getRandomPageElement(page);
 		}
 
 		if (!element) {
@@ -44,67 +55,35 @@ export default class ClickAction extends AbstractAction {
 		return element;
 	}
 
+	/**
+	 * Performs the click action with following wrappers:
+	 * - Hover over the element
+	 * (So that in preview mode, you will see the element before click)
+	 * - Signal click on the element (Only in headfull mode)
+	 * - Click on the element
+	 * @param {puppeteer.Page} page
+	 * @param {puppeteer.ElementHandle} element
+	 * @returns {Promise} Resolves when click is done
+	 */
 	async _clickOnElement(page, element) {
 		await element.hover();
 
 		if (this._config.headlessModeDisabled) {
-			await this._signalClick(element, page);
+			await this._actionsHelper.highlightElement(element);
+			await page.waitFor(this._config.previewModePauseTime);
 		}
 
 		await element.click();
 	}
 
-	async _signalClick(element, page) {
-		let executionContext = await element.executionContext();
-
-		await executionContext.evaluate((element, timeout) => {
-			let originalColor = element.style['color'];
-			let originalBorder = element.style['border'];
-			element.style['color'] = 'red';
-			element.style['border'] = 'solid';
-
-			setTimeout(() => {
-				element.style['color'] = originalColor;
-				element.style['border'] = originalBorder;
-			}, timeout);
-		}, element, this._config.previewModePauseTime - 250);
-		await page.waitFor(this._config.previewModePauseTime);
-	}
-
+	/**
+	 * Adds clicked element info to the action results
+	 * @returns {Promise} Resolves when action info is saved
+	 */
 	async _logClickedElement(element) {
 		let selector = await this._actionsHelper.getElementSelector(element);
 
 		this._results.config = { selector };
 		this._results.message = `Click on "${selector}"`;
-	}
-
-	_closeNewTab(target) {
-		return target.page().then(page => page.close());
-	}
-
-	_getRandomElementToClick(page) {
-		return this._getDeepestNodes(page)
-			.then(nodes => getRandomElementFromArray(nodes));
-	}
-
-	async _getDeepestNodes(page) {
-		let deepNodes = [];
-		let disables = 'not(self::script) and not(self::iframe) and not(self::noscript) and not(self::path)';
-		let allElements = await page.$x(`//body//*[${disables} and ancestor::*[${disables}]]`);
-
-		await Promise.all(allElements.map(async element => {
-			let executionContext = await element.executionContext();
-			let numberOfChildren = await executionContext.evaluate(element => {
-				return element && element.childElementCount;
-			}, element);
-
-			if (numberOfChildren > 0 || !this._actionsHelper.isElementVisible(element)) {
-				return;
-			}
-
-			deepNodes.push(element);
-		}));
-
-		return deepNodes;
 	}
 }
