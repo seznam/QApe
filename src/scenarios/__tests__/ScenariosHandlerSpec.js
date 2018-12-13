@@ -11,7 +11,7 @@ describe('ScenariosHandler', () => {
 		expect(scenariosHandler._config).toEqual({});
 		expect(scenariosHandler._actionsHandler).toEqual({});
 		expect(scenariosHandler._reporter).toEqual({});
-		expect(scenariosHandler._scenariosHandlerHelper).toEqual(null);
+		expect(scenariosHandler._scenariosHelper).toEqual(null);
 		expect(scenariosHandler._userDefinedScenarios).toEqual(null);
 		expect(scenariosHandler._failingScenarios).toEqual(null);
 		expect(scenariosHandler._randomScenarios).toEqual(null);

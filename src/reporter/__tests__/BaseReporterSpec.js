@@ -1,4 +1,4 @@
-import BaseReporter from '../BaseReporter';
+import Reporter from '../Reporter';
 import ConsoleReporter from '../ConsoleReporter';
 import SpinnerReporter from '../SpinnerReporter';
 import FileReporter from '../FileReporter';
@@ -6,11 +6,11 @@ import EventEmitter from 'events';
 
 class MockedReporter extends EventEmitter {}
 
-describe('BaseReporter', () => {
+describe('Reporter', () => {
 	let reporter = null;
 
 	beforeEach(() => {
-		reporter = new BaseReporter({});
+		reporter = new Reporter({});
 	});
 
 	it('can be initialized', () => {

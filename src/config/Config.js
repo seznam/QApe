@@ -6,7 +6,7 @@ import template from './template';
 export default class Config {
 	/**
 	 * Loads configuration with default values
-	 * @param {Object} config Overrides for default config
+	 * @param {Object} [config] Overrides for default config
 	 */
 	static load(userConfig) {
 		let config = {};
