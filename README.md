@@ -58,9 +58,9 @@ module.exports = {
 	// and will retry up to this number of actions before giving up.
 	numberOfAllowedActionsToReproduceErrorFromPreviousRun: 20,
 	// Disables random scenarios,
-	// only user defined scenarios will be executed
+	// only defined scenarios will be executed
 	randomScenariosDisabled: false,
-	// When user defined scenario recieves an error,
+	// When defined scenario recieves an error,
 	// it will try to minify the steps to reproduce this error.
 	minifyUserDefinedScenarios: true,
 	// Disables chromium headless mode and will display browser GUI.
@@ -68,7 +68,7 @@ module.exports = {
 	// Preview mode will overwrite other config values
 	// to display the scenario on the local computer
 	// in non-headless mode. It will also run only
-	// user defined scenarios and will not try to minify them.
+	// defined scenarios and will not try to minify them.
 	previewMode: false,
 	// Wait time (in ms) between actions in preview mode.
 	previewModePauseTime: 1500,

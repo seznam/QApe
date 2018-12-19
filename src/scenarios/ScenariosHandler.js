@@ -1,9 +1,18 @@
-import UserDefinedScenarios from './UserDefinedScenarios';
+import DefinedScenarios from './DefinedScenarios';
 import RandomScenarios from './RandomScenarios';
 import FailingScenarios from './FailingScenarios';
 import ScenariosHelper from './ScenariosHelper';
 
+/**
+ * Handles scenarios execution order and
+ * initializes necessary dependencies
+ */
 export default class ScenariosHandler {
+	/**
+	 * @param {Object} config
+	 * @param {ActionsHandler} actionsHandler
+	 * @param {Reporter} reporter
+	 */
 	constructor(config, actionsHandler, reporter) {
 		this._config = config;
 
@@ -13,37 +22,56 @@ export default class ScenariosHandler {
 
 		this._scenariosHelper = null;
 
-		this._userDefinedScenarios = null;
+		this._definedScenarios = null;
 
 		this._failingScenarios = null;
 
 		this._randomScenarios = null;
 	}
 
+	/**
+	 * Initializes all dependencies
+	 * @returns {ScenariosHandler}
+	 */
 	init() {
 		this._scenariosHelper = new ScenariosHelper(this._config, this._actionsHandler);
-		this._userDefinedScenarios = new UserDefinedScenarios(this._config, this._scenariosHelper, this._reporter);
+		this._definedScenarios = new DefinedScenarios(this._config, this._scenariosHelper, this._reporter);
 		this._failingScenarios = new FailingScenarios(this._config, this._scenariosHelper, this._reporter);
 		this._randomScenarios = new RandomScenarios(this._config, this._actionsHandler, this._reporter);
 
 		return this;
 	}
 
-	addUserDefinedScenario(scenario) {
-		this._userDefinedScenarios.addScenario(scenario);
+	/**
+	 * Adds the defined scenario to execution list
+	 * @param {Object} scenario
+	 */
+	addDefinedScenario(scenario) {
+		this._definedScenarios.addScenario(scenario);
 	}
 
+	/**
+	 * Adds the failing scenario to execution list
+	 * @param {Object} scenario
+	 */
 	addFailingScenario(scenario) {
 		this._failingScenarios.addScenario(scenario);
 	}
 
+	/**
+	 * Returns available scenario with highest priority
+	 * 1) FailingScenario
+	 * 2) DefinedScenario
+	 * 3) RandomScenario (if allowed by config)
+	 * @returns {Function|undefined}
+	 */
 	getScenario() {
 		if (this._failingScenarios.hasScenario()) {
 			return this._failingScenarios.getScenario();
 		}
 
-		if (this._userDefinedScenarios.hasScenario()) {
-			return this._userDefinedScenarios.getScenario();
+		if (this._definedScenarios.hasScenario()) {
+			return this._definedScenarios.getScenario();
 		}
 
 		if (this._config.randomScenariosDisabled) {
@@ -53,15 +81,12 @@ export default class ScenariosHandler {
 		return this._randomScenarios.getScenario();
 	}
 
+	/**
+	 * @returns {Boolean} True if defined or failing scenario
+	 * is available.
+	 */
 	hasScenario() {
-		return this._userDefinedScenarios.hasScenario() ||
+		return this._definedScenarios.hasScenario() ||
 			this._failingScenarios.hasScenario();
-	}
-
-	list() {
-		return [].concat(
-			this._userDefinedScenarios.list(),
-			this._failingScenarios.list()
-		);
 	}
 }

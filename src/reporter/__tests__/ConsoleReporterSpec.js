@@ -163,6 +163,19 @@ describe('ConsoleReporter', () => {
 		expect(console.log).toHaveBeenCalledWith('Random scenario did not find any errors.');
 	});
 
+	it('can handle random scenario end with an execution error in results', () => {
+		let eventData = {
+			results: {
+				executionError: 'executionError'
+			}
+		};
+
+		reporter._handleRandomScenarioEnd(eventData);
+
+		expect(console.log).toHaveBeenCalledWith('Random scenario recieved execution error.');
+		expect(console.log).toHaveBeenCalledWith(eventData.results.executionError);
+	});
+
 	it('can log a scenario to console', () => {
 		let text = 'text';
 		let scenario = [{

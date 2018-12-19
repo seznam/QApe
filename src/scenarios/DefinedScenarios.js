@@ -1,10 +1,26 @@
 import AbstractScenarios from './AbstractScenarios';
 
-export default class UserDefinedScenarios extends AbstractScenarios {
+/**
+ * Defined scenarios are saved scenarios from previous runs,
+ * or manually created. They are executed with higher priority,
+ * than random scenarios.
+ * @extends {AbstractScenarios}
+ */
+export default class DefinedScenarios extends AbstractScenarios {
+	/**
+	 * Specifies scenario type name
+	 * @returns {string} 'defined'
+	 */
 	get type() {
 		return 'defined';
 	}
 
+	/**
+	 * Generates a method,
+	 * which will execute the defined scenario
+	 * @returns {Function} Scenario method takes
+	 * browser instance as an argument.
+	 */
 	getScenario() {
 		let { scenario, name } = this._scenarios.shift();
 
@@ -17,10 +33,6 @@ export default class UserDefinedScenarios extends AbstractScenarios {
 			});
 
 			let results = await this._scenariosHelper.runScenario(instance, scenario);
-
-			if (results.executionError) {
-				throw results.executionError;
-			}
 
 			this._reporter.emit('scenario:end', {
 				type: this.type,

@@ -1,4 +1,13 @@
+jest.mock('../DefinedScenarios');
+jest.mock('../RandomScenarios');
+jest.mock('../FailingScenarios');
+jest.mock('../ScenariosHelper');
+
 import ScenariosHandler from '../ScenariosHandler';
+import DefinedScenarios from '../DefinedScenarios';
+import RandomScenarios from '../RandomScenarios';
+import FailingScenarios from '../FailingScenarios';
+import ScenariosHelper from '../ScenariosHelper';
 
 describe('ScenariosHandler', () => {
 	let scenariosHandler = null;
@@ -12,17 +21,34 @@ describe('ScenariosHandler', () => {
 		expect(scenariosHandler._actionsHandler).toEqual({});
 		expect(scenariosHandler._reporter).toEqual({});
 		expect(scenariosHandler._scenariosHelper).toEqual(null);
-		expect(scenariosHandler._userDefinedScenarios).toEqual(null);
+		expect(scenariosHandler._definedScenarios).toEqual(null);
 		expect(scenariosHandler._failingScenarios).toEqual(null);
 		expect(scenariosHandler._randomScenarios).toEqual(null);
+	});
+
+	it('can initialize its dependencies', () => {
+		scenariosHandler.init();
+
+		expect(
+			scenariosHandler._scenariosHelper instanceof ScenariosHelper
+		).toBeTruthy();
+		expect(
+			scenariosHandler._definedScenarios instanceof DefinedScenarios
+		).toBeTruthy();
+		expect(
+			scenariosHandler._failingScenarios instanceof FailingScenarios
+		).toBeTruthy();
+		expect(
+			scenariosHandler._randomScenarios instanceof RandomScenarios
+		).toBeTruthy();
 	});
 
 	it('can add user defined scenario', () => {
 		let log = {};
 		let userDefinedScenariosHandler = { addScenario: jest.fn() };
-		scenariosHandler._userDefinedScenarios = userDefinedScenariosHandler;
+		scenariosHandler._definedScenarios = userDefinedScenariosHandler;
 
-		scenariosHandler.addUserDefinedScenario(log);
+		scenariosHandler.addDefinedScenario(log);
 
 		expect(userDefinedScenariosHandler.addScenario)
 			.toHaveBeenCalledWith(log);
@@ -31,9 +57,9 @@ describe('ScenariosHandler', () => {
 	it('can add user defined scenario', () => {
 		let log = {};
 		let userDefinedScenariosHandler = { addScenario: jest.fn() };
-		scenariosHandler._userDefinedScenarios = userDefinedScenariosHandler;
+		scenariosHandler._definedScenarios = userDefinedScenariosHandler;
 
-		scenariosHandler.addUserDefinedScenario(log);
+		scenariosHandler.addDefinedScenario(log);
 
 		expect(userDefinedScenariosHandler.addScenario)
 			.toHaveBeenCalledWith(log);
@@ -75,7 +101,7 @@ describe('ScenariosHandler', () => {
 			hasScenario: jest.fn().mockReturnValue(true),
 			getScenario: jest.fn().mockReturnValue(scenario)
 		};
-		scenariosHandler._userDefinedScenarios = userDefinedScenariosHandler;
+		scenariosHandler._definedScenarios = userDefinedScenariosHandler;
 
 		let recievedScenario = scenariosHandler.getScenario();
 
@@ -94,7 +120,7 @@ describe('ScenariosHandler', () => {
 		let userDefinedScenariosHandler = {
 			hasScenario: jest.fn().mockReturnValue(false)
 		};
-		scenariosHandler._userDefinedScenarios = userDefinedScenariosHandler;
+		scenariosHandler._definedScenarios = userDefinedScenariosHandler;
 		let randomScenariosHandler = {
 			getScenario: jest.fn().mockReturnValue(scenario)
 		}
@@ -116,7 +142,7 @@ describe('ScenariosHandler', () => {
 		let userDefinedScenariosHandler = {
 			hasScenario: jest.fn().mockReturnValue(false)
 		};
-		scenariosHandler._userDefinedScenarios = userDefinedScenariosHandler;
+		scenariosHandler._definedScenarios = userDefinedScenariosHandler;
 		scenariosHandler._config.randomScenariosDisabled = true;
 
 		let recievedScenario = scenariosHandler.getScenario();
@@ -130,7 +156,7 @@ describe('ScenariosHandler', () => {
 		let userDefinedScenario = {
 			hasScenario: jest.fn().mockReturnValue(true)
 		}
-		scenariosHandler._userDefinedScenarios = userDefinedScenario;
+		scenariosHandler._definedScenarios = userDefinedScenario;
 
 		expect(scenariosHandler.hasScenario()).toEqual(true);
 	});
@@ -143,7 +169,7 @@ describe('ScenariosHandler', () => {
 		let userDefinedScenario = {
 			hasScenario: jest.fn().mockReturnValue(false)
 		}
-		scenariosHandler._userDefinedScenarios = userDefinedScenario;
+		scenariosHandler._definedScenarios = userDefinedScenario;
 
 		expect(scenariosHandler.hasScenario()).toEqual(true);
 	});
@@ -156,7 +182,7 @@ describe('ScenariosHandler', () => {
 		let userDefinedScenario = {
 			hasScenario: jest.fn().mockReturnValue(false)
 		}
-		scenariosHandler._userDefinedScenarios = userDefinedScenario;
+		scenariosHandler._definedScenarios = userDefinedScenario;
 
 		expect(scenariosHandler.hasScenario()).toEqual(false);
 	});

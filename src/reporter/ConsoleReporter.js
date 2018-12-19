@@ -51,10 +51,10 @@ export default class ConsoleReporter extends EventEmitter {
 	 * @param {Object} eventData
 	 */
 	_handleDefinedScenarioEnd({ name, results }) {
-		let { scenario, errors } = results;
+		let { scenario, errors, executionError } = results;
 		let statusSymbol = '✓';
 
-		if (errors.length > 0) {
+		if (errors.length > 0 || executionError) {
 			statusSymbol = '✘';
 		}
 
@@ -86,7 +86,10 @@ export default class ConsoleReporter extends EventEmitter {
 	 * @param {Object} eventData
 	 */
 	_handleRandomScenarioEnd({ results }) {
-		if (results.errors.length > 0) {
+		if (results.executionError) {
+			console.log('Random scenario recieved execution error.');
+			console.log(results.executionError);
+		} else if (results.errors.length > 0) {
 			console.log('Random scenario recieved following error.');
 
 			results.errors.forEach(error => console.log(error));

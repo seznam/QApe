@@ -24,77 +24,39 @@ describe('AbstractAction', () => {
 	});
 
 	it('can execute an action successfully', async () => {
-		let instance = {
-			browser: 'browser',
-			page: 'page'
-		};
-		action.action = jest.fn()
-			.mockReturnValue(Promise.resolve());
-		action._beforeActionExecute = jest.fn((_, errorHandler) => errorHandler('beforeError'));
-		action._afterActionExecute = jest.fn((_, errorHandler) => {
-			errorHandler('afterError')
+		let instance = 'instance';
+		action._results = {};
+		action._addErrorToResults = jest.fn();
+		action._executeActionLifecycle = jest.fn((_, errorHandler) => {
+			errorHandler('error');
 
 			return Promise.resolve();
 		});
-		action._results = {};
-		action._addErrorToResults = jest.fn();
 
 		let results = await action.execute(instance);
 
-		expect(action._beforeActionExecute)
-			.toHaveBeenCalledWith(instance, jasmine.any(Function));
-		expect(action.action)
-			.toHaveBeenCalledWith(instance.page, instance.browser);
-		expect(action._beforeActionExecute)
+		expect(action._executeActionLifecycle)
 			.toHaveBeenCalledWith(instance, jasmine.any(Function));
 		expect(action._addErrorToResults)
-			.toHaveBeenCalledWith('beforeError');
-		expect(action._addErrorToResults)
-			.toHaveBeenCalledWith('afterError');
+			.toHaveBeenCalledWith('error');
 		expect(results).toEqual({});
 	});
 
 	it('can execute an action and handle execution error', async () => {
-		let instance = {
-			browser: 'browser',
-			page: 'page'
-		};
-		let error = 'An error occured!';
-		action.action = jest.fn()
-			.mockReturnValue(Promise.reject(error));
-		action._beforeActionExecute = jest.fn((_, errorHandler) => errorHandler('beforeError'));
-		action._afterActionExecute = jest.fn((_, errorHandler) => {
-			errorHandler('afterError')
-
-			return Promise.resolve();
-		});
-		action._reporter = {
-			emit: jest.fn()
-		};
+		let instance = 'instance';
 		action._results = {};
 		action._addErrorToResults = jest.fn();
+		action._executeActionLifecycle = jest.fn()
+			.mockReturnValue(Promise.reject('error'));
+		action._handleExecutionError = jest.fn();
 
 		let results = await action.execute(instance);
 
-		expect(action._beforeActionExecute)
+		expect(action._executeActionLifecycle)
 			.toHaveBeenCalledWith(instance, jasmine.any(Function));
-		expect(action.action)
-			.toHaveBeenCalledWith(instance.page, instance.browser);
-		expect(action._reporter.emit)
-			.toHaveBeenCalledWith('action:error', {
-				instance,
-				action: 'id',
-				error
-			});
-		expect(action._beforeActionExecute)
-			.toHaveBeenCalledWith(instance, jasmine.any(Function));
-		expect(action._addErrorToResults)
-			.toHaveBeenCalledWith('beforeError');
-		expect(action._addErrorToResults)
-			.toHaveBeenCalledWith('afterError');
-		expect(results).toEqual({
-			executionError: error
-		});
+		expect(action._handleExecutionError)
+			.toHaveBeenCalledWith(instance, 'error');
+		expect(results).toEqual({});
 	});
 
 	it('can throw an error if method action is not overrided', () => {
@@ -114,6 +76,51 @@ describe('AbstractAction', () => {
 		action._actionConfig = config;
 
 		expect(action.getActionConfig()).toEqual(config);
+	});
+
+	it('can execute action lifecycle', async () => {
+		let instance = {
+			browser: 'browser',
+			page: 'page'
+		};
+		let errorHandler = 'errorHandler'
+		action.action = jest.fn()
+			.mockReturnValue(Promise.resolve());
+		action._beforeActionExecute = jest.fn();
+		action._afterActionExecute = jest.fn();
+
+		await action._executeActionLifecycle(instance, errorHandler);
+
+		expect(action._beforeActionExecute)
+			.toHaveBeenCalledWith(instance, errorHandler);
+		expect(action.action)
+			.toHaveBeenCalledWith(instance.page, instance.browser);
+		expect(action._beforeActionExecute)
+			.toHaveBeenCalledWith(instance, errorHandler);
+	});
+
+	it('can execute action lifecycle and handle execution error', async () => {
+		let instance = {
+			browser: 'browser',
+			page: 'page'
+		};
+		let errorHandler = 'errorHandler'
+		action.action = jest.fn()
+			.mockReturnValue(Promise.reject('error'));
+		action._beforeActionExecute = jest.fn();
+		action._afterActionExecute = jest.fn();
+		action._handleExecutionError = jest.fn();
+
+		await action._executeActionLifecycle(instance, errorHandler);
+
+		expect(action._beforeActionExecute)
+			.toHaveBeenCalledWith(instance, errorHandler);
+		expect(action.action)
+			.toHaveBeenCalledWith(instance.page, instance.browser);
+		expect(action._handleExecutionError)
+			.toHaveBeenCalledWith(instance, 'error');
+		expect(action._beforeActionExecute)
+			.toHaveBeenCalledWith(instance, errorHandler);
 	});
 
 	it('can execute after action scripts', async () => {

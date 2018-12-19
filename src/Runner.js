@@ -30,7 +30,7 @@ export default class Runner {
 	 */
 	start() {
 		this._init();
-		this._loadUserDefinedScenarios();
+		this._loadDefinedScenarios();
 
 		let instances = [];
 
@@ -50,7 +50,7 @@ export default class Runner {
 	/**
 	 * Loads all user defined scenarios specified in config
 	 */
-	_loadUserDefinedScenarios() {
+	_loadDefinedScenarios() {
 		this._config.files.forEach(file => {
 			let scenarioPath = path.join(process.cwd(), file);
 
@@ -59,10 +59,19 @@ export default class Runner {
 				return;
 			}
 
-			let scenario = require(scenarioPath);
+			let scenario = this._loadScenarioFromPath(scenarioPath);
 
-			this._scenariosHandler.addUserDefinedScenario(scenario);
+			this._scenariosHandler.addDefinedScenario(scenario);
 		});
+	}
+
+	/**
+	 * Loads a scenario from specified scenarioPath
+	 * @param {string} scenarioPath
+	 * @returns {Object} scenario
+	 */
+	_loadScenarioFromPath(scenarioPath) {
+		return require(scenarioPath);
 	}
 
 	/**

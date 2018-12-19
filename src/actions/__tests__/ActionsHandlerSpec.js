@@ -1,4 +1,7 @@
+jest.mock('../ActionsHelper');
+
 import ActionsHandler from '../ActionsHandler';
+import ActionsHelper from '../ActionsHelper';
 
 class DummyAction {}
 
@@ -56,5 +59,13 @@ describe('ActionsHandler', () => {
 		let action = actionsHandler.getAction('id');
 
 		expect(action instanceof DummyAction).toBeTruthy();
+	});
+
+	it('can initialize actions helper', () => {
+		actionsHandler._initActionsHelper();
+
+		expect(
+			actionsHandler._actionsHelper instanceof ActionsHelper
+		).toEqual(true);
 	});
 });

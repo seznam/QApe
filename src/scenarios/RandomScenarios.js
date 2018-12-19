@@ -1,4 +1,14 @@
+/**
+ * Random scenarios are default types of scenarios
+ * executed whenever there is nothing else to execute.
+ * They randomly click on the website and search for errors.
+ */
 export default class RandomScenarios {
+	/**
+	 * @param {Object} config
+	 * @param {ActionsHandler} actionsHandler
+	 * @param {Reporter} reporter
+	 */
 	constructor(config, actionsHandler, reporter) {
 		this._config = config;
 
@@ -7,13 +17,25 @@ export default class RandomScenarios {
 		this._reporter = reporter;
 	}
 
+	/**
+	 * Specifies scenario type name
+	 * @returns {string} 'random'
+	 */
 	get type() {
 		return 'random';
 	}
 
+	/**
+	 * Generates a method,
+	 * which will execute a random scenario
+	 * performing actions on random page elements
+	 * @returns {Function} Scenario method takes
+	 * browser instance as an argument and
+	 * it will try to produce some page errors.
+	 */
 	getScenario() {
 		return async (instance) => {
-			let log = { scenario: [], errors: [] };
+			let results = { scenario: [], errors: [] };
 			let failedActionsCount = 0;
 
 			this._reporter.emit('scenario:start', {
@@ -24,24 +46,26 @@ export default class RandomScenarios {
 			await instance.page.goto(this._config.url);
 
 			for (let i = 0; i < this._config.actionsPerScenario; i++) {
-				let results = await this._actionsHandler.execute(null, null, instance);
+				let actionResults = await this._actionsHandler.execute(null, null, instance);
 
-				if (results.executionError) {
-					if (failedActionsCount > this._config.numberOfActionFailuresToAbortRandomScenario) {
-						throw Error('Reached limit of allowed action execution errors.\n' + results.executionError);
+				if (actionResults.executionError) {
+					failedActionsCount++;
+
+					if (failedActionsCount >= this._config.numberOfActionFailuresToAbortRandomScenario) {
+						results.executionError = new Error('Reached limit of allowed action execution errors.\n' + actionResults.executionError);
+						break;
 					}
 
-					failedActionsCount++;
 					i--;
 					continue;
 				} else {
 					failedActionsCount = 0;
 				}
 
-				log.scenario.push(results);
+				results.scenario.push(actionResults);
 
-				if (results && results.errors && results.errors.length > 0) {
-					results.errors.forEach(error => log.errors.push(error));
+				if (actionResults && actionResults.errors && actionResults.errors.length > 0) {
+					results.errors = actionResults.errors;
 					break;
 				}
 			}
@@ -49,10 +73,10 @@ export default class RandomScenarios {
 			this._reporter.emit('scenario:end', {
 				type: this.type,
 				instance,
-				results: log
+				results
 			});
 
-			return log;
+			return results;
 		}
 	}
 }

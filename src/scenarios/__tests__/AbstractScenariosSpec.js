@@ -22,14 +22,6 @@ describe('AbstractScenarios', () => {
 		expect(scenarios._scenarios).toEqual([scenario]);
 	});
 
-	it('can get scenario', () => {
-		let scenario = 'scenario';
-
-		scenarios.addScenario(scenario);
-
-		expect(scenarios.getScenario()).toEqual(scenario);
-	});
-
 	it('can check if there are any available scenarios (true)', () => {
 		let scenario = 'scenario';
 

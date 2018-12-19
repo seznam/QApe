@@ -1,10 +1,23 @@
+/**
+ * Scenarios helpers
+ */
 export default class ScenariosHelper {
+	/**
+	 * @param {Object} config
+	 * @param {ActionsHandler} actionsHandler
+	 */
 	constructor(config, actionsHandler) {
 		this._config = config;
 
 		this._actionsHandler = actionsHandler;
 	}
 
+	/**
+	 * Executes specified scenario
+	 * @param {Browser} instance
+	 * @param {Object[]} scenario
+	 * @returns {Promise<Object>} Execution results
+	 */
 	async runScenario(instance, scenario) {
 		let errors = [];
 		let executedScenario = [];
@@ -15,14 +28,14 @@ export default class ScenariosHelper {
 				await instance.page.goto(scenario[0].beforeLocation);
 			} else {
 				return {
-					executedScenario,
+					scenario: executedScenario,
 					errors,
 					executionError: new Error('ScenariosHelper: beforeLocation of a scenario action is not defined.')
 				}
 			}
 		} catch (e) {
 			return {
-				executedScenario,
+				scenario: executedScenario,
 				errors,
 				executionError: new Error(`ScenariosHelper: Unable to navigate to location ${scenario[0].beforeLocation}\n${e}`)
 			};
