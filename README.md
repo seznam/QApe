@@ -103,6 +103,38 @@ module.exports = {
 	afterActionScript: ({ browser, page }, pageErrorHandler) => {},
 	// Script executed after each scenario
 	afterScenarioScript: ({ browser, page }) => {},
+	// Script executed in browser context,
+	// which should generate unique element selector.
+	// By default a full xpath from body to specific element
+	// will be generated.
+	getElementSelector: input => {
+		function getPathTo(element) {
+			if (element === document.body) {
+				return '//' + element.tagName.toLowerCase();
+			}
+
+			if (!element.parentNode) {
+				return '';
+			}
+
+			var siblings = element.parentNode.childNodes;
+			var index = 0;
+
+			for (var i= 0; i < siblings.length; i++) {
+				var sibling = siblings[i];
+
+				if (sibling === element) {
+					return getPathTo(element.parentNode) + '/' + element.tagName.toLowerCase() + '[' + (index + 1) + ']';
+				}
+
+				if (sibling.nodeType === 1 && sibling.tagName === element.tagName) {
+					index++;
+				}
+			}
+		}
+
+		return getPathTo(input);
+	},
 	// A browser websocket endpoint to connect to (i.e. ws://5.5.5.5:3505)
 	browserWebSocketEndpoint: null,
 	// Define your reporters for the QApe run.

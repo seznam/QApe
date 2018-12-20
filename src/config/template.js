@@ -93,15 +93,60 @@ module.exports = {
 		type: 'Function',
 		cli_disabled: true
 	},
+	beforeScenarioScript: {
+		value: ({ browser, page }) => {},
+		description: 'Script executed before each scenario',
+		type: 'Function',
+		cli_disabled: true
+	},
 	beforeActionScript: {
-		value: (browser, page, pageErrorHandler) => {},
+		value: ({ browser, page }, pageErrorHandler) => {},
 		description: 'Script executed before each action',
 		type: 'Function',
 		cli_disabled: true
 	},
 	afterActionScript: {
-		value: (browser, page, pageErrorHandler) => {},
+		value: ({ browser, page }, pageErrorHandler) => {},
 		description: 'Script executed after each action',
+		type: 'Function',
+		cli_disabled: true
+	},
+	afterScenarioScript: {
+		value: ({ browser, page }) => {},
+		description: 'Script executed after each scenario',
+		type: 'Function',
+		cli_disabled: true
+	},
+	getElementSelector: {
+		value: input => {
+			function getPathTo(element) {
+				if (element === document.body) {
+					return '//' + element.tagName.toLowerCase();
+				}
+
+				if (!element.parentNode) {
+					return '';
+				}
+
+				var siblings = element.parentNode.childNodes;
+				var index = 0;
+
+				for (var i= 0; i < siblings.length; i++) {
+					var sibling = siblings[i];
+
+					if (sibling === element) {
+						return getPathTo(element.parentNode) + '/' + element.tagName.toLowerCase() + '[' + (index + 1) + ']';
+					}
+
+					if (sibling.nodeType === 1 && sibling.tagName === element.tagName) {
+						index++;
+					}
+				}
+			}
+
+			return getPathTo(input);
+		},
+		description: 'Script executed in browser context, which should generate unique element selector',
 		type: 'Function',
 		cli_disabled: true
 	},

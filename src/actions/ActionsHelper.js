@@ -19,34 +19,7 @@ export default class ActionsHelper {
 	async getElementSelector(element) {
 		let executionContext = await element.executionContext();
 
-		return executionContext.evaluate(input => {
-			function getPathTo(element) {
-				if (element === document.body) {
-					return '//' + element.tagName.toLowerCase();
-				}
-
-				if (!element.parentNode) {
-					return '';
-				}
-
-				var siblings = element.parentNode.childNodes;
-				var index = 0;
-
-				for (var i= 0; i < siblings.length; i++) {
-					var sibling = siblings[i];
-
-					if (sibling === element) {
-						return getPathTo(element.parentNode) + '/' + element.tagName.toLowerCase() + '[' + (index + 1) + ']';
-					}
-
-					if (sibling.nodeType === 1 && sibling.tagName === element.tagName) {
-						index++;
-					}
-				}
-			}
-
-			return getPathTo(input);
-		}, element);
+		return executionContext.evaluate(this._config.getElementSelector, element);
 	}
 
 	/**
@@ -96,7 +69,7 @@ export default class ActionsHelper {
 	 */
 	async getAllVisiblePageElements(page) {
 		let visibleElements = [];
-		let disables = 'not(self::script) and not(self::iframe) and not(self::noscript) and not(self::path)';
+		let disables = 'not(self::script) and not(self::noscript) and not(self::path)';
 		let allElements = await page.$x(`//body//*[${disables} and ancestor::*[${disables}]]`);
 
 		await Promise.all(allElements.map(async element => {
