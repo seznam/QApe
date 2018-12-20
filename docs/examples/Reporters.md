@@ -1,4 +1,4 @@
-# Reporters
+## Reporters
 You can define reporters via config.reporters.
 
 ```
