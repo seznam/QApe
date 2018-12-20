@@ -12,24 +12,34 @@ QApe is autonomous testing tool, which acts as a manual tester browsing your web
 ## Give It a Try!
 Take a look how QApe works!
 
-`npx qape --headless-mode-disabled -u https://www.example.com`
+```
+npx qape --headless-mode-disabled -u https://www.example.com
+```
 
 ## Get Started
 Simply install the latest version via npm install
 
-`npm install qape`
+```
+npm install qape
+```
 
 Than you can run QApe like this
 
-`node_modules/.bin/qape -u https://www.example.com`
+```
+node_modules/.bin/qape -u https://www.example.com
+```
 
 By default, QApe saves all scenarios causing an error to `report` folder. You can replay these scenarios like this
 
-`node_modules/.bin/qape report/*minified.json -p`
+```
+node_modules/.bin/qape report/*minified.json -p
+```
 
 Display available options like this
 
-`node_modules/.bin/qape --help`
+```
+node_modules/.bin/qape --help
+```
 
 ### Configuration
 QApe will look for configuraition file in your current directory with name `qape.conf.js`. There are following options available.
