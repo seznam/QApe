@@ -5,7 +5,7 @@
   "main": "bin/qape.js",
   "scripts": {
     "test": "jest",
-    "docs:build": "documentation build src/** -f html -o html-docs",
+    "docs:build": "documentation build src/** --github -f html -o docs/documentation",
     "docs:lint": "documentation lint src/**",
     "build": "rm -rf lib && babel src --out-dir lib --ignore \"src/**/*Spec.js\" --copy-files --plugins=transform-es2015-modules-commonjs",
     "dev": "npm run build -- --source-maps --watch",
@@ -53,9 +53,7 @@
     "babel-cli": "6.26.0",
     "babel-plugin-transform-es2015-modules-commonjs": "6.26.2",
     "documentation": "8.1.2",
-    "express": "4.16.4",
     "jest": "23.6.0",
-    "serve-static": "1.13.2",
     "source-map-support": "0.5.9"
   }
 }

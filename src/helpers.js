@@ -1,5 +1,8 @@
+/** @module helpers */
+
 /**
  * Gets a random element from the array
+ * @memberof helpers
  * @param {Array} array
  * @returns {*} Element from the array
  */
@@ -9,6 +12,7 @@ function getRandomElementFromArray(array) {
 
 /**
  * Formats number to specified number of digits
+ * @memberof helpers
  * @param {number} number
  * @param {number} [digits=2]
  * @returns {string} Number prefixed with ${digits} of zeros
