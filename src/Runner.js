@@ -118,7 +118,7 @@ export default class Runner {
 
 	/**
 	 * Checks if new scenarios are allowed based on configuration
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	_isAllowedToStartNewScenario() {
 		if (this._config.stopNewScenariosAfterTime === 0) {

@@ -82,7 +82,7 @@ export default class ScenariosHandler {
 	}
 
 	/**
-	 * @returns {Boolean} True if defined or failing scenario
+	 * @returns {boolean} True if defined or failing scenario
 	 * is available.
 	 */
 	hasScenario() {

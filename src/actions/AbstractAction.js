@@ -33,7 +33,7 @@ export default class AbstractAction {
 	}
 
 	/**
-	 * Prepers action error handler and executes action lifecycle
+	 * Prepares action error handler and executes action lifecycle
 	 * @param {Object} instance Browser instance
 	 * @returns {Object} results
 	 */

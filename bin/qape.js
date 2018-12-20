@@ -1,70 +1,39 @@
 #!/usr/bin/env node
 
-var program = require('commander');
-var fs = require('fs');
-var path = require('path');
-var Runner = require('../lib/Runner.js').default;
-var defaultConfigValues = require('../lib/config/template.js');
-var version = require('../package.json').version;
-var configValues = {};
-
+const program = require('commander');
+const fs = require('fs');
+const path = require('path');
+const Runner = require('../lib/Runner.js').default;
+const version = require('../package.json').version;
 const USER_CONFIG_PATH = path.join(process.cwd(), './qape.conf.js');
-
-function getOptionSyntax(option, type) {
-	let syntax = '--' + option.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`);
-
-	if (type === 'boolean') {
-		return syntax;
-	}
-
-	return `${syntax} <${type}>`;
-}
-
-function getTypeHandler(type) {
-	switch (type) {
-		case 'number': return val => parseInt(val);
-		case 'string[]': return val => val.split(',');
-		default: return val => val;
-	}
-}
-
-program
-	.version(version)
-	.usage('[options] [scenarioFiles ...]');
-
-Object
-	.keys(defaultConfigValues)
-	.forEach(key => {
-		let { description, type, value, syntax, cli_disabled } = defaultConfigValues[key];
-
-		if (cli_disabled) {
-			return;
-		}
-
-		program.option(syntax || getOptionSyntax(key, type), description, getTypeHandler(type));
-	});
-
-program.parse(process.argv);
+const configValues = {};
 
 if (fs.existsSync(USER_CONFIG_PATH)) {
 	configValues = require(USER_CONFIG_PATH);
 }
 
-Object
-	.keys(defaultConfigValues)
-	.forEach(key => {
-		if (program[key]) {
-			configValues[key] = program[key]
-		}
-	});
+program
+	.version(version)
+	.usage('[options] [files ...]')
+	.option('-u, --url <url>', 'target web url')
+	.option('-h, --headless-mode-disabled', 'run browser in headfull mode')
+	.option('-i, --parallel-instances <number>', 'parallel browser instances', parseInt)
+	.option('-p, --preview-mode', 'run in preview mode')
+	.option('-s, --browser-webs-socket-endpoint <value>', 'connect to remote chrome instance (i.e. "ws://5.5.5.5:3505")')
+	.action(options => {
+		let cliConfig = {
+			files,
+			url,
+			headlessModeDisabled,
+			parallelInstance,
+			previewMode,
+			browserWebSocketEndpoint
+		} = options;
 
-if (program.args.length > 0) {
-	configValues.files = program.args;
-}
-
-new Runner(configValues)
-	.start()
-	.catch(error => {
-		console.error(error);
-		process.exit(1);
-	});
+		return new Runner(Object.assign({}, configValues, cliConfig))
+			.start()
+			.catch(error => {
+				console.error(error);
+				process.exit(1);
+			});
+	}).parse(process.argv);

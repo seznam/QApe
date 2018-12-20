@@ -11,7 +11,7 @@ function getRandomElementFromArray(array) {
  * Formats number to specified number of digits
  * @param {number} number
  * @param {number} [digits=2]
- * @returns {String} Number prefixed with ${digits} of zeros
+ * @returns {string} Number prefixed with ${digits} of zeros
  */
 function formatDigits(number, digits = 2) {
 	return String(number).padStart(digits, '0');

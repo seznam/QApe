@@ -17,7 +17,7 @@ export default class ClickAction extends AbstractAction {
 	 * Finds specified, or random element
 	 * Generates action config for action re-run
 	 * Performs click on the element
-	 * @params {puppeteer.Page} page
+	 * @param {puppeteer.Page} page
 	 * @param {puppeteer.Browser} browser
 	 * @returns {Promise} Resolves when click is done
 	 */

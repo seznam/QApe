@@ -58,7 +58,7 @@ export default class Reporter extends EventEmitter {
 	 * Emits an event with data
 	 * and propagets it to all reporters
 	 * @param {string} eventName
-	 * @param {object} eventData
+	 * @param {Object} eventData
 	 */
 	emit(eventName, eventData) {
 		this._reporters

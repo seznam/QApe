@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "docs:build": "documentation build src/** -f html -o html-docs",
+    "docs:lint": "documentation lint src/**",
     "build": "rm -rf lib && babel src --out-dir lib --ignore \"src/**/*Spec.js\" --copy-files --plugins=transform-es2015-modules-commonjs",
     "dev": "npm run build -- --source-maps --watch",
     "start": "node -r source-map-support/register bin/qape.js",

@@ -26,7 +26,7 @@ export default class AbstractScenarios {
 	}
 
 	/**
-	 * @returns {Boolean} True if there are scenarios available
+	 * @returns {boolean} True if there are scenarios available
 	 */
 	hasScenario() {
 		return this._scenarios.length > 0;
