@@ -94,7 +94,9 @@ export default class Runner {
 			});
 
 			try {
+				await this._config.beforeScenarioScript(instance);
 				results = await scenario(instance);
+				await this._config.afterScenarioScript(instance);
 			} catch (error) {
 				this._reporter.emit('runner:error', {
 					scenario,

@@ -95,10 +95,14 @@ module.exports = {
 			qapeError(event.error.toString());
 		});
 	},
+	// Script executed before each scenario
+	beforeScenarioScript: ({ browser, page }) => {},
 	// Script executed before each action
-	beforeActionScript: (browser, page, pageErrorHandler) => {},
+	beforeActionScript: ({ browser, page }, pageErrorHandler) => {},
 	// Script executed after each action
-	afterActionScript: (browser, page, pageErrorHandler) => {},
+	afterActionScript: ({ browser, page }, pageErrorHandler) => {},
+	// Script executed after each scenario
+	afterScenarioScript: ({ browser, page }) => {},
 	// A browser websocket endpoint to connect to (i.e. ws://5.5.5.5:3505)
 	browserWebSocketEndpoint: null,
 	// Define your reporters for the QApe run.
