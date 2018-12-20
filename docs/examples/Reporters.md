@@ -1,4 +1,4 @@
-## Reporters
+# Reporters
 You can define reporters via config.reporters.
 
 ```
@@ -15,7 +15,7 @@ export default {
 ```
 
 ## Usage
-This is how you can create your own custom reporter. See [console reporter](../src/reporter/ConsoleReporter.js), [file reporter](../src/reporter/FileReporter.js), or [spinner reporter](../src/reporter/SpinnerReporter.js) for extended examples.
+This is how you can create your own custom reporter. See [console reporter](../../src/reporter/ConsoleReporter.js), [file reporter](../../src/reporter/FileReporter.js), or [spinner reporter](../../src/reporter/SpinnerReporter.js) for extended examples.
 
 ```javascript
 import EventEmitter from 'events';
