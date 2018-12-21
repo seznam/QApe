@@ -6,7 +6,8 @@ const path = require('path');
 const Runner = require('../lib/Runner.js').default;
 const version = require('../package.json').version;
 const USER_CONFIG_PATH = path.join(process.cwd(), './qape.conf.js');
-const configValues = {};
+
+let configValues = {};
 
 if (fs.existsSync(USER_CONFIG_PATH)) {
 	configValues = require(USER_CONFIG_PATH);
