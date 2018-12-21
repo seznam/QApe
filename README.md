@@ -33,8 +33,8 @@ node_modules/.bin/qape --preview-mode report/*
 ```
 
 ## Guides
-- [Setup configuration file](./Config.md)
-- [Create custom reporters]('./Reporters.md')
+- [Setup configuration file](./docs/Config.md)
+- [Create custom reporters]('./docs/Reporters.md')
 
 ## Developers
-- [Project documentation](./devs/documentation.md)
+- [Project documentation](./docs/devs/documentation.md)
