@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.1.1](https://github.com/seznam/qape/compare/v0.1.0...v0.1.1) - 2018-12-21
+
+### Commits
+
+- Fix QApe run; Fix release process [`7150359`](https://github.com/seznam/qape/commit/7150359ea463690e8335f44a831f14d68ad4f69a)
+
 ## [v0.1.0](https://github.com/seznam/qape/compare/v0.0.5...v0.1.0) - 2018-12-21
 
 ### Commits
