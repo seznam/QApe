@@ -3,9 +3,9 @@
 /coverage/
 /report/
 /qape.conf.js
-/example/
 /src/
-/html-docs/
+/docs/
+/utils/
 /.dockerignore
 /Dockerfile
 /.gitignore

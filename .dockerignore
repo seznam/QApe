@@ -3,7 +3,6 @@ lib/
 node_modules/
 report/
 docs/
-html-docs/
 .dockerignore
 .gitignore
 Dockerfile
