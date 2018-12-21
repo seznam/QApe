@@ -37,4 +37,5 @@ node_modules/.bin/qape --preview-mode report/*
 - [Create custom reporters]('./docs/Reporters.md')
 
 ## Developers
-- [Project documentation](./docs/devs/documentation.md)
+- [Project documentation](./docs/devs/Documentation.md)
+- [Development guide](./docs/devs/Development.md)

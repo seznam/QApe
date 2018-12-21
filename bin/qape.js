@@ -20,15 +20,16 @@ program
 	.option('-i, --parallel-instances <number>', 'parallel browser instances', parseInt)
 	.option('-p, --preview-mode', 'run in preview mode')
 	.option('-s, --browser-webs-socket-endpoint <value>', 'connect to remote chrome instance (i.e. "ws://5.5.5.5:3505")')
-	.action(options => {
+	.action((...args) => {
 		let cliConfig = {
-			files,
 			url,
 			headlessModeDisabled,
 			parallelInstance,
 			previewMode,
 			browserWebSocketEndpoint
-		} = options;
+		} = args.pop();
+
+		cliConfig.files = args;
 
 		return new Runner(Object.assign({}, configValues, cliConfig))
 			.start()
