@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.1.0](https://github.com/seznam/qape/compare/v0.0.5...v0.1.0) - 2018-12-21
+
+### Commits
+
+- Add project utils; Update documentation [`d71af16`](https://github.com/seznam/qape/commit/d71af16b5a87d30af4957e5c6f1fe770c199b021)
+- Deploy documentation to github pages [`dbe4cde`](https://github.com/seznam/qape/commit/dbe4cdef39079d89759e4b1d0667850a77a57af4)
+- Fix recovery from page crash error; Add tests and documentation [`20e46df`](https://github.com/seznam/qape/commit/20e46df7607fc525bf70728c30aba826f2e3a2b8)
+
 ## [v0.0.5](https://github.com/seznam/qape/compare/v0.0.4...v0.0.5) - 2018-12-11
 
 ### Commits
