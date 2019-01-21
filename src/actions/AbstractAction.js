@@ -124,6 +124,8 @@ export default class AbstractAction {
 	async _afterActionExecute(instance, errorHandler) {
 		const { browser, page, pageErrorHandler } = instance;
 
+		await page.bringToFront();
+
 		this._config.afterActionScript(browser, page, pageErrorHandler);
 
 		await this._clearTabs(browser);
