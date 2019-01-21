@@ -35,7 +35,10 @@ program
 		return new Runner(Object.assign({}, configValues, cliConfig))
 			.start()
 			.catch(error => {
-				console.error(error);
+				if (error) {
+					console.error(error);
+				}
+
 				process.exit(1);
 			});
 	}).parse(process.argv);
