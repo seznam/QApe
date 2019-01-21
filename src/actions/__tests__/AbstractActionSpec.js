@@ -135,6 +135,8 @@ describe('AbstractAction', () => {
 				waitFor: jest.fn()
 					.mockReturnValue(Promise.resolve()),
 				goBack: jest.fn()
+					.mockReturnValue(Promise.resolve()),
+				bringToFront: jest.fn()
 					.mockReturnValue(Promise.resolve())
 			},
 			pageErrorHandler: {
@@ -154,6 +156,7 @@ describe('AbstractAction', () => {
 
 		await action._afterActionExecute(instance, errorHandler);
 
+		expect(instance.page.bringToFront).toHaveBeenCalled();
 		expect(action._config.afterActionScript)
 			.toHaveBeenCalledWith(
 				instance.browser,
