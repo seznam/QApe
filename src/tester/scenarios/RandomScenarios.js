@@ -31,7 +31,7 @@ export default class RandomScenarios {
 	 * Executes a random scenario
 	 * performing actions on random page elements
 	 * and trying to produce some page errors.
-	 * @params {Browser} instance
+	 * @param {Browser} instance
 	 * @returns {Promise}
 	 */
 	async runScenario(instance) {
