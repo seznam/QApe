@@ -1,5 +1,5 @@
 const fs = require('fs');
-const data = require('../../src/config/template.js');
+const data = require('../../src/shared/config/template.js');
 const outputPath = './docs/Config.md';
 const options = Object.keys(data).sort();
 

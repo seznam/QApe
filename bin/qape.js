@@ -1,17 +1,8 @@
 #!/usr/bin/env node
 
 const program = require('commander');
-const fs = require('fs');
-const path = require('path');
-const Runner = require('../lib/Runner.js').default;
+const run = require('../lib/index.js').default;
 const version = require('../package.json').version;
-const USER_CONFIG_PATH = path.join(process.cwd(), './qape.conf.js');
-
-let configValues = {};
-
-if (fs.existsSync(USER_CONFIG_PATH)) {
-	configValues = require(USER_CONFIG_PATH);
-}
 
 program
 	.version(version)
@@ -32,13 +23,5 @@ program
 
 		cliConfig.files = args;
 
-		return new Runner(Object.assign({}, configValues, cliConfig))
-			.start()
-			.catch(error => {
-				if (error) {
-					console.error(error);
-				}
-
-				process.exit(1);
-			});
+		run(cliConfig);
 	}).parse(process.argv);
