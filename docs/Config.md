@@ -26,6 +26,7 @@ QApe will look for a configuration file at current working directory called `qap
 - [reportPath](#reportPath)
 - [reporters](#reporters)
 - [stopNewScenariosAfterTime](#stopNewScenariosAfterTime)
+- [testerTimeout](#testerTimeout)
 - [url](#url)
 
 ## Options
@@ -301,7 +302,17 @@ Time in ms, after which no more scenarios will be initialized, set to 0 to run f
 
 **Default:**
 ```javascript
-100000
+10000
+```
+
+### testerTimeout
+`<number>`
+
+If a tester did not send any message for this period of time, it will be killed and replaced with a new one.
+
+**Default:**
+```javascript
+300000
 ```
 
 ### url
