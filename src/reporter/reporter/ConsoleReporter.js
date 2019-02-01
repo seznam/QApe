@@ -43,7 +43,7 @@ export default class ConsoleReporter extends EventEmitter {
 	 * @param {Object} eventData
 	 */
 	_handleRunnerError(eventData) {
-		console.error(eventData.error.toString());
+		console.error(eventData.error);
 	}
 
 	/**

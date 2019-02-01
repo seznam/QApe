@@ -62,7 +62,7 @@ export default class Runner {
 			} catch (error) {
 				report('runner:error', {
 					scenario,
-					error
+					error: error.toString()
 				});
 			}
 

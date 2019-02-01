@@ -101,7 +101,7 @@ export default class AbstractAction {
 		this._results.executionError = error;
 		report('action:error', {
 			action: this.constructor.id,
-			error
+			error: error.toString()
 		});
 	}
 
