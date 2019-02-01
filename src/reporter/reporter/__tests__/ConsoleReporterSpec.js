@@ -59,11 +59,7 @@ describe('ConsoleReporter', () => {
 	});
 
 	it('can handle a runner:error event', () => {
-		let eventData = {
-			error: {
-				toString: () => 'error'
-			}
-		};
+		let eventData = { error: 'error' };
 
 		reporter.emit('runner:error', eventData);
 
