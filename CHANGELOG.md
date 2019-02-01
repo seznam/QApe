@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.2.1](https://github.com/seznam/QApe/compare/v0.2.0...v0.2.1) - 2019-02-01
+
+### Commits
+
+- Fix unit tests [`320780f`](https://github.com/seznam/QApe/commit/320780f8b05df2481785c4e249dc944ceaa3401b)
+- Fix execution error logging [`3fa910c`](https://github.com/seznam/QApe/commit/3fa910c047ca9e264f976ab94f298791255f90db)
+
 ## [v0.2.0](https://github.com/seznam/QApe/compare/v0.1.1...v0.2.0) - 2019-02-01
 
 ### Commits
