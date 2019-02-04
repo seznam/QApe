@@ -50,7 +50,7 @@ export default class ScenariosHandler {
 			};
 		}
 
-		if (this._isAllowedToStartNewScenario()) {
+		if (this._isAllowedToStartRandomScenario()) {
 			return { type: 'random' }
 		}
 
@@ -62,10 +62,14 @@ export default class ScenariosHandler {
 	}
 
 	/**
-	 * Checks if new scenarios are allowed based on configuration
+	 * Checks if new random scenarios are allowed based on configuration
 	 * @returns {boolean}
 	 */
-	_isAllowedToStartNewScenario() {
+	_isAllowedToStartRandomScenario() {
+		if (this._config.randomScenariosDisabled) {
+			return false;
+		}
+
 		if (this._config.stopNewScenariosAfterTime === 0) {
 			return true;
 		}
