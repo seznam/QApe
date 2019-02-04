@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.2.2](https://github.com/seznam/QApe/compare/v0.2.1...v0.2.2) - 2019-02-04
+
+### Commits
+
+- Log selected element html to the report along with its selector [`0641079`](https://github.com/seznam/QApe/commit/0641079967e05e3290c347b9980e333d3d930f04)
+- Fix defined scenarios execution error handling [`6d5a40f`](https://github.com/seznam/QApe/commit/6d5a40f16371b85e6e871d628e02c6e676fb5712)
+- Update config documentation [`91c8627`](https://github.com/seznam/QApe/commit/91c8627ec64beb501b929882dd6c839327e3ab54)
+
 ## [v0.2.1](https://github.com/seznam/QApe/compare/v0.2.0...v0.2.1) - 2019-02-01
 
 ### Commits
