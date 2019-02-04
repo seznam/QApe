@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import glob from 'glob-all';
 
 /**
  * Handles scenarios execution order
@@ -81,7 +82,7 @@ export default class ScenariosHandler {
 	 * Loads all user defined scenarios specified in config
 	 */
 	_loadDefinedScenarios() {
-		this._config.files.forEach(file => {
+		glob.sync(this._config.files).forEach(file => {
 			let scenarioPath = path.join(process.cwd(), file);
 
 			if (!fs.existsSync(scenarioPath)) {

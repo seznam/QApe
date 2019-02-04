@@ -1,6 +1,8 @@
 jest.mock('fs');
+jest.mock('glob-all');
 
 import fs from 'fs';
+import glob from 'glob-all';
 import path from 'path';
 import ScenariosHandler from '../ScenariosHandler';
 
@@ -98,6 +100,7 @@ describe('ScenariosHandler', () => {
 		};
 		fs.existsSync = jest.fn().mockReturnValue(true);
 		scenariosHandler._loadScenarioFromPath = jest.fn(a => a);
+		glob.sync = jest.fn(files => files);
 
 		scenariosHandler._loadDefinedScenarios();
 
@@ -107,7 +110,9 @@ describe('ScenariosHandler', () => {
 			.toHaveBeenCalledWith(path.join(process.cwd(), 'a'));
 		expect(scenariosHandler._scenarios.defined)
 			.toEqual([path.join(process.cwd(), 'a')])
+		expect(glob.sync).toHaveBeenCalledTimes(1);
 		fs.existsSync.mockRestore();
+		glob.sync.mockRestore();
 	});
 
 	it('can can handle non-existing files when loading defined scenarios', () => {
@@ -116,6 +121,7 @@ describe('ScenariosHandler', () => {
 		};
 		fs.existsSync = jest.fn().mockReturnValue(false);
 		scenariosHandler._loadScenarioFromPath = jest.fn();
+		glob.sync = jest.fn(files => files);
 
 		scenariosHandler._loadDefinedScenarios();
 
@@ -127,6 +133,8 @@ describe('ScenariosHandler', () => {
 			.not.toHaveBeenCalled();
 		expect(scenariosHandler._scenarios.defined.length)
 			.toEqual(0);
+		expect(glob.sync).toHaveBeenCalledTimes(1);
 		fs.existsSync.mockRestore();
+		glob.sync.mockRestore();
 	});
 });

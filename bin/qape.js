@@ -21,7 +21,9 @@ program
 			browserWebSocketEndpoint
 		} = args.pop();
 
-		cliConfig.files = args;
+		if (args.length > 0) {
+			cliConfig.files = args;
+		}
 
 		run(cliConfig);
 	}).parse(process.argv);
