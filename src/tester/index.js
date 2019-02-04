@@ -12,6 +12,7 @@ import Runner from './Runner';
 export default (config) => {
 	return new Runner(config)
 		.start()
+		.then(() => process.exit())
 		.catch(error => {
 			if (error) {
 				console.error(error);
