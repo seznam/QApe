@@ -49,7 +49,9 @@ export default class ClickAction extends AbstractAction {
 		}
 
 		if (!element) {
-			throw Error('Unable to initialize an element.');
+			let config = this._actionConfig ? JSON.stringify(this._actionConfig, null, 2) : '{}';
+
+			throw Error('Unable to initialize an element with following config.\n' + config);
 		}
 
 		return element;
@@ -82,8 +84,10 @@ export default class ClickAction extends AbstractAction {
 	 */
 	async _logClickedElement(element) {
 		let selector = await this._actionsHelper.getElementSelector(element);
+		let html = await this._actionsHelper.getElementHTML(element);
 
 		this._results.config = { selector };
-		this._results.message = `Click on "${selector}"`;
+		this._results.html = html;
+		this._results.message = `Click on ${html} [selector:"${selector}"]`;
 	}
 }

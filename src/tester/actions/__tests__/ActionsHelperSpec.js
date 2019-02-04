@@ -78,4 +78,20 @@ describe('ActionsHelper', () => {
 			.toHaveBeenCalledWith(jasmine.any(Function), element);
 		expect(actionsHelper.isElementVisible).toHaveBeenCalledWith(element);
 	});
+
+	it('can get element html', async () => {
+		let context = {
+			evaluate: jest.fn((fn, el) => fn(el))
+		};
+		let element = {
+			executionContext: jest.fn().mockReturnValue(Promise.resolve(context)),
+			outerHTML: 'html'
+		};
+
+		let html = await actionsHelper.getElementHTML(element);
+
+		expect(html).toEqual('html');
+		expect(element.executionContext).toHaveBeenCalledTimes(1);
+		expect(context.evaluate).toHaveBeenCalledWith(jasmine.any(Function), element);
+	});
 });

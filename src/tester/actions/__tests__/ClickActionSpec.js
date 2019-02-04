@@ -103,15 +103,17 @@ describe('ClickAction', () => {
 
 	it('can log clicked element', async () => {
 		let element = {};
-		let selector = 'selector';
 		let actionsHelper = {
-			getElementSelector: jest.fn().mockReturnValue(selector)
+			getElementSelector: jest.fn().mockReturnValue('selector'),
+			getElementHTML: jest.fn().mockReturnValue('html')
 		};
 		clickAction._actionsHelper = actionsHelper;
 
 		await clickAction._logClickedElement(element);
 
-		expect(clickAction._results.config.selector).toEqual(selector);
+		expect(clickAction._results.config.selector).toEqual('selector');
+		expect(clickAction._results.html).toEqual('html');
 		expect(actionsHelper.getElementSelector).toHaveBeenCalledWith(element);
+		expect(actionsHelper.getElementHTML).toHaveBeenCalledWith(element);
 	});
 });

@@ -87,4 +87,14 @@ export default class ActionsHelper {
 
 		return visibleElements;
 	}
+
+	/**
+	 * @param {puppeteer.ElementHandle} element
+	 * @returns {Promise<string>} element.outerHTML
+	 */
+	async getElementHTML(element) {
+		let executionContext = await element.executionContext();
+
+		return executionContext.evaluate(element => element.outerHTML, element);
+	}
 }

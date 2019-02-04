@@ -27,23 +27,8 @@ export default class FileReporter extends EventEmitter {
 	 * @param {Object} eventData
 	 */
 	_handleScenarioEnd(eventData) {
-		switch (eventData.type) {
-			case 'defined': return this._handleDefinedScenarioEnd(eventData);
-			case 'failing': return this._handleFailingScenarioEnd(eventData);
-		}
-	}
-
-	/**
-	 * Handler for scenario:end of type 'defined'
-	 * @param {Object} eventData
-	 */
-	_handleDefinedScenarioEnd({ name, results }) {
-		let { scenario, errors } = results;
-
-		if (errors.length > 0) {
-			this._results.push(results);
-
-			this._logFile(scenario, errors, name);
+		if (eventData.type === 'failing') {
+			this._handleFailingScenarioEnd(eventData);
 		}
 	}
 

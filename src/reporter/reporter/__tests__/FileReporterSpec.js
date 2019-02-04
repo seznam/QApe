@@ -16,16 +16,6 @@ describe('FileReporter', () => {
 		expect(reporter._results).toEqual([]);
 	});
 
-	it('can handle defined scenario:end event', () => {
-		let eventData = { type: 'defined' };
-		reporter._handleDefinedScenarioEnd = jest.fn();
-
-		reporter.emit('scenario:end', eventData);
-
-		expect(reporter._handleDefinedScenarioEnd)
-			.toHaveBeenCalledWith(eventData);
-	});
-
 	it('can handle failing scenario:end event', () => {
 		let eventData = { type: 'failing' };
 		reporter._handleFailingScenarioEnd = jest.fn();
@@ -34,43 +24,6 @@ describe('FileReporter', () => {
 
 		expect(reporter._handleFailingScenarioEnd)
 			.toHaveBeenCalledWith(eventData);
-	});
-
-	it('can handle defined scenario end for success', () => {
-		let eventData = {
-			name: 'name',
-			results: {
-				scenario: 'scenario',
-				errors: []
-			}
-		};
-		reporter._logFile = jest.fn();
-
-		reporter._handleDefinedScenarioEnd(eventData);
-
-		expect(reporter._results).toEqual([]);
-		expect(reporter._logFile).toHaveBeenCalledTimes(0);
-	});
-
-	it('can handle defined scenario end for failure', () => {
-		let eventData = {
-			name: 'name',
-			results: {
-				scenario: 'scenario',
-				errors: ['error']
-			}
-		};
-		reporter._logFile = jest.fn();
-
-		reporter._handleDefinedScenarioEnd(eventData);
-
-		expect(reporter._results).toEqual([eventData.results]);
-		expect(reporter._logFile)
-			.toHaveBeenCalledWith(
-				eventData.results.scenario,
-				eventData.results.errors,
-				eventData.name
-			);
 	});
 
 	it('can handle failing not reproduced scenario end', () => {
