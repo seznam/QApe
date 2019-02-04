@@ -97,11 +97,11 @@ export default class AbstractAction {
 	 * @param {Browser} instance
 	 * @param {Error} error
 	 */
-	_handleExecutionError(instance, error) {
-		this._results.executionError = error;
+	_handleExecutionError(instance, { stack }) {
+		this._results.executionError = stack;
 		report('action:error', {
 			action: this.constructor.id,
-			error: error.toString()
+			error: stack
 		});
 	}
 

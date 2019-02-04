@@ -34,7 +34,7 @@ describe('ScenariosHandler', () => {
 	});
 
 	it('can get scenario', () => {
-		scenariosHandler._isAllowedToStartNewScenario = jest.fn()
+		scenariosHandler._isAllowedToStartRandomScenario = jest.fn()
 			.mockReturnValueOnce(true)
 			.mockReturnValue(false);
 		scenariosHandler._scenarios = {
@@ -50,7 +50,7 @@ describe('ScenariosHandler', () => {
 			.toEqual({ type: 'random' });
 		expect(scenariosHandler.getScenario())
 			.toEqual({});
-		expect(scenariosHandler._isAllowedToStartNewScenario)
+		expect(scenariosHandler._isAllowedToStartRandomScenario)
 			.toHaveBeenCalledTimes(2);
 	});
 
@@ -67,7 +67,7 @@ describe('ScenariosHandler', () => {
 		};
 		scenariosHandler._initTime = new Date().getTime() - 1;
 
-		expect(scenariosHandler._isAllowedToStartNewScenario()).toEqual(true);
+		expect(scenariosHandler._isAllowedToStartRandomScenario()).toEqual(true);
 	});
 
 	it('can stop new scenarios after stopNewScenariosAfterTime', () => {
@@ -76,11 +76,20 @@ describe('ScenariosHandler', () => {
 		};
 		scenariosHandler._initTime = new Date().getTime() - 50;
 
-		expect(scenariosHandler._isAllowedToStartNewScenario()).toEqual(true);
+		expect(scenariosHandler._isAllowedToStartRandomScenario()).toEqual(true);
 
 		scenariosHandler._initTime = new Date().getTime() - 101;
 
-		expect(scenariosHandler._isAllowedToStartNewScenario()).toEqual(false);
+		expect(scenariosHandler._isAllowedToStartRandomScenario()).toEqual(false);
+	});
+
+	it('can stop new scenarios if no random scenarios are allowed', () => {
+		scenariosHandler._config = {
+			randomScenariosDisabled: true,
+			stopNewScenariosAfterTime: 0
+		};
+
+		expect(scenariosHandler._isAllowedToStartRandomScenario()).toEqual(false);
 	});
 
 	it('can load defined scenarios', () => {

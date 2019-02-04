@@ -54,8 +54,12 @@ export default class ConsoleReporter extends EventEmitter {
 		let { scenario, errors, executionError } = results;
 		let statusSymbol = '✓';
 
-		if (errors.length > 0 || executionError) {
+		if (errors.length > 0) {
 			statusSymbol = '✘';
+		}
+
+		if (executionError) {
+			return this._logConsole(`# ${name} [ExecutionError]`, [], [executionError]);
 		}
 
 		this._logConsole(`${statusSymbol} ${name}`, scenario, errors);

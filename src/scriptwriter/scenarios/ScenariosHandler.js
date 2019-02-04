@@ -101,6 +101,12 @@ export default class ScenariosHandler {
 	 * @returns {Object} scenario
 	 */
 	_loadScenarioFromPath(scenarioPath) {
-		return require(scenarioPath);
+		let scenario = require(scenarioPath);
+
+		if (!scenario.name) {
+			scenario.name = scenarioPath;
+		}
+
+		return scenario;
 	}
 }
