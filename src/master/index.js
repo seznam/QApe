@@ -9,27 +9,36 @@
 export default (cluster, config) => {
 	let exitCode = 0;
 	let liveWorkers = 0;
-	let reporter = cluster
-		.fork({ worker_type: 'reporter' })
-		.on('exit', (code, signal) => {
-			console.error(`Reporter died! [code:${code}, signal: ${signal}]`);
-			reporter = cluster.fork({ worker_type: 'reporter' });
-		});
-	let scriptwriter = cluster
-		.fork({ worker_type: 'scriptwriter' })
-		.on('message', msg => {
-			if (msg.reciever === 'tester') {
-				cluster.workers[msg.workerId].send(msg.eventData);
-			}
-		})
-		.on('exit', (code, signal) => {
-			console.error(`Scriptwriter died! [code: ${code}, signal: ${signal}]`);
-			scriptwriter = cluster.fork({ worker_type: 'scriptwriter' });
-		});
+	let reporter;
+	let scriptwriter;
+
+	initReporter();
+	initScriptwriter();
 
 	for (let i = 0; i < config.parallelInstances; i++) {
 		liveWorkers++;
 		initTester();
+	}
+
+	function initReporter() {
+		reporter = cluster.fork({ worker_type: 'reporter' })
+			.on('exit', (code, signal) => {
+				console.error(`Reporter died! [code:${code}, signal: ${signal}]`);
+				initReporter();
+			});
+	}
+
+	function initScriptwriter() {
+		scriptwriter = cluster.fork({ worker_type: 'scriptwriter' })
+			.on('message', msg => {
+				if (msg.reciever === 'tester') {
+					cluster.workers[msg.workerId].send(msg.eventData);
+				}
+			})
+			.on('exit', (code, signal) => {
+				console.error(`Scriptwriter died! [code: ${code}, signal: ${signal}]`);
+				initScriptwriter();
+			});
 	}
 
 	function initTester() {
