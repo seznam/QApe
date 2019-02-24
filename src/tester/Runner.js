@@ -60,6 +60,7 @@ export default class Runner {
 				results = await this._scenariosHandler.runScenario(instance, type, scenario);
 				await this._config.afterScenarioScript(instance);
 			} catch (error) {
+				this._isSuccess = false;
 				report('runner:error', {
 					scenario,
 					error: error.toString()
@@ -69,6 +70,10 @@ export default class Runner {
 			if (results && results.errors && results.errors.length > 0) {
 				this._isSuccess = false;
 				sendFailingScenario(results);
+			}
+
+			if (results && results.executionError) {
+				this._isSuccess = false;
 			}
 
 			await instance.clear();

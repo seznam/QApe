@@ -106,6 +106,7 @@ describe('Runner', () => {
 		expect(instance.clear).toHaveBeenCalledTimes(1);
 		expect(messanger.report)
 			.toHaveBeenCalledWith('runner:end');
+		expect(runner._isSuccess).toEqual(true);
 	});
 
 	it('can start a test instance and handle run with page errors', async () => {
@@ -184,6 +185,7 @@ describe('Runner', () => {
 		expect(instance.clear).toHaveBeenCalledTimes(1);
 		expect(messanger.report)
 			.toHaveBeenCalledWith('runner:end');
+		expect(runner._isSuccess).toEqual(false);
 	});
 
 	it('can initialize all dependencies', () => {
