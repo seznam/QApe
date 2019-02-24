@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.3.0](https://github.com/seznam/QApe/compare/v0.2.2...v0.3.0) - 2019-02-24
+
+### Commits
+
+- Response status of any page request >= 400 will be now considered a page error [`b27d5fc`](https://github.com/seznam/QApe/commit/b27d5fc61287dc2eb0456f685147168c85aa2ae2)
+- Fix proper respawn of reporter and scriptwriter on exit [`04909b1`](https://github.com/seznam/QApe/commit/04909b112533a916b1125eef594ff6af8a5010b4)
+- Update to latest dependencies [`ebb7d5b`](https://github.com/seznam/QApe/commit/ebb7d5bb32a3c91318f586f6a0260c85b76e4262)
+
 ## [v0.2.2](https://github.com/seznam/QApe/compare/v0.2.1...v0.2.2) - 2019-02-04
 
 ### Commits
