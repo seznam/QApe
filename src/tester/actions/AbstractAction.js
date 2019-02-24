@@ -38,9 +38,17 @@ export default class AbstractAction {
 	 */
 	async execute(instance) {
 		const errorHandler = (error) => this._addErrorToResults(error);
+		const responseHandler = (response) => {
+			if (response.status() >= 400) {
+				let message = `Requested page ${response.request().url()}, ` +
+					`but recieved response with statusCode ${response.status()}`;
+
+				this._addErrorToResults(message);
+			}
+		}
 
 		try {
-			await this._executeActionLifecycle(instance, errorHandler);
+			await this._executeActionLifecycle(instance, errorHandler, responseHandler);
 		} catch (e) {
 			this._handleExecutionError(instance, e);
 		}
@@ -78,10 +86,11 @@ export default class AbstractAction {
 	 * - Executes after action scripts (AbstractAction._afterActionExecute)
 	 * @param {Browser} instance
 	 * @param {Function} errorHandler
+	 * @param {Function} responseHandler
 	 * @returns {Promise} Resolves when lifecycle is finished
 	 */
-	async _executeActionLifecycle(instance, errorHandler) {
-		this._beforeActionExecute(instance, errorHandler);
+	async _executeActionLifecycle(instance, errorHandler, responseHandler) {
+		this._beforeActionExecute(instance, errorHandler, responseHandler);
 
 		try {
 			await this.action(instance.page, instance.browser);
@@ -89,7 +98,7 @@ export default class AbstractAction {
 			this._handleExecutionError(instance, e);
 		}
 
-		await this._afterActionExecute(instance, errorHandler);
+		await this._afterActionExecute(instance, errorHandler, responseHandler);
 	}
 
 	/**
@@ -112,14 +121,16 @@ export default class AbstractAction {
 	 * - If the current url is not part of the tested website, then page.goBack() is called
 	 * - Waits for time specified in config.afterActionWaitTime so all scripts are evaluated
 	 * and no more errors will occure before next action
-	 * - Removes page error handler to clear space for next action
+	 * - Removes page error handler
+	 * - Removes response handler
 	 * - Saves afterLocation to results, which is url after the action was executed
 	 * - Reports event 'action:end'
 	 * @param {Browser} instance
 	 * @param {Function} errorHandler
+	 * @param {Function} responseHandler
 	 * @returns {Promise} Resolves when after action is done
 	 */
-	async _afterActionExecute(instance, errorHandler) {
+	async _afterActionExecute(instance, errorHandler, responseHandler) {
 		const { browser, page, pageErrorHandler } = instance;
 
 		await page.bringToFront();
@@ -135,6 +146,7 @@ export default class AbstractAction {
 		await page.waitFor(this._config.afterActionWaitTime);
 
 		pageErrorHandler.removeListener('page-error', errorHandler);
+		page.removeListener('response', responseHandler);
 
 		this._results.afterLocation = page.url();
 
@@ -148,18 +160,21 @@ export default class AbstractAction {
 	 * Executes before action scripts
 	 * - Saves beforeLocation to results, which is url before the action was executed
 	 * - Adds page error handler to identify errors caused by this action
+	 * - Add response handler to identify invalid responses to page requests
 	 * - Executes config.beforeActionScript
 	 * - Reports event 'action:start'
 	 * @param {Browser} instance
 	 * @param {Function} errorHandler
+	 * @param {Function} responseHandler
 	 * @returns {Promise} Resolves when before action is done
 	 */
-	_beforeActionExecute(instance, errorHandler) {
+	_beforeActionExecute(instance, errorHandler, responseHandler) {
 		const { browser, page, pageErrorHandler } = instance;
 
 		this._results.beforeLocation = page.url();
 
 		pageErrorHandler.on('page-error', errorHandler);
+		page.on('response', responseHandler);
 
 		this._config.beforeActionScript(browser, page, pageErrorHandler);
 

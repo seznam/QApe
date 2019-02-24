@@ -39,7 +39,7 @@ describe('AbstractAction', () => {
 		let results = await action.execute(instance);
 
 		expect(action._executeActionLifecycle)
-			.toHaveBeenCalledWith(instance, jasmine.any(Function));
+			.toHaveBeenCalledWith(instance, jasmine.any(Function), jasmine.any(Function));
 		expect(action._addErrorToResults)
 			.toHaveBeenCalledWith('error');
 		expect(results).toEqual({});
@@ -56,7 +56,7 @@ describe('AbstractAction', () => {
 		let results = await action.execute(instance);
 
 		expect(action._executeActionLifecycle)
-			.toHaveBeenCalledWith(instance, jasmine.any(Function));
+			.toHaveBeenCalledWith(instance, jasmine.any(Function), jasmine.any(Function));
 		expect(action._handleExecutionError)
 			.toHaveBeenCalledWith(instance, 'error');
 		expect(results).toEqual({});
@@ -86,20 +86,21 @@ describe('AbstractAction', () => {
 			browser: 'browser',
 			page: 'page'
 		};
-		let errorHandler = 'errorHandler'
+		let errorHandler = 'errorHandler';
+		let responseHandler = 'responseHandler';
 		action.action = jest.fn()
 			.mockReturnValue(Promise.resolve());
 		action._beforeActionExecute = jest.fn();
 		action._afterActionExecute = jest.fn();
 
-		await action._executeActionLifecycle(instance, errorHandler);
+		await action._executeActionLifecycle(instance, errorHandler, responseHandler);
 
 		expect(action._beforeActionExecute)
-			.toHaveBeenCalledWith(instance, errorHandler);
+			.toHaveBeenCalledWith(instance, errorHandler, responseHandler);
 		expect(action.action)
 			.toHaveBeenCalledWith(instance.page, instance.browser);
 		expect(action._beforeActionExecute)
-			.toHaveBeenCalledWith(instance, errorHandler);
+			.toHaveBeenCalledWith(instance, errorHandler, responseHandler);
 	});
 
 	it('can execute action lifecycle and handle execution error', async () => {
@@ -107,28 +108,31 @@ describe('AbstractAction', () => {
 			browser: 'browser',
 			page: 'page'
 		};
-		let errorHandler = 'errorHandler'
+		let errorHandler = 'errorHandler';
+		let responseHandler = 'responseHandler';
 		action.action = jest.fn()
 			.mockReturnValue(Promise.reject('error'));
 		action._beforeActionExecute = jest.fn();
 		action._afterActionExecute = jest.fn();
 		action._handleExecutionError = jest.fn();
 
-		await action._executeActionLifecycle(instance, errorHandler);
+		await action._executeActionLifecycle(instance, errorHandler, responseHandler);
 
 		expect(action._beforeActionExecute)
-			.toHaveBeenCalledWith(instance, errorHandler);
+			.toHaveBeenCalledWith(instance, errorHandler, responseHandler);
 		expect(action.action)
 			.toHaveBeenCalledWith(instance.page, instance.browser);
 		expect(action._handleExecutionError)
 			.toHaveBeenCalledWith(instance, 'error');
 		expect(action._beforeActionExecute)
-			.toHaveBeenCalledWith(instance, errorHandler);
+			.toHaveBeenCalledWith(instance, errorHandler, responseHandler);
 	});
 
 	it('can execute after action scripts', async () => {
 		let errorHandler = 'errorHandler';
+		let responseHandler = 'responseHandler';
 		let removedPageErrorListeners = [];
+		let removedPageResponseListeners = [];
 		let instance = {
 			browser: 'browser',
 			page: {
@@ -140,7 +144,8 @@ describe('AbstractAction', () => {
 				goBack: jest.fn()
 					.mockReturnValue(Promise.resolve()),
 				bringToFront: jest.fn()
-					.mockReturnValue(Promise.resolve())
+					.mockReturnValue(Promise.resolve()),
+				removeListener: jest.fn((eventName, handler) => removedPageResponseListeners.push({ eventName, handler }))
 			},
 			pageErrorHandler: {
 				removeListener: jest.fn((eventName, handler) => removedPageErrorListeners.push({ eventName, handler }))
@@ -157,7 +162,7 @@ describe('AbstractAction', () => {
 			url: 'url'
 		};
 
-		await action._afterActionExecute(instance, errorHandler);
+		await action._afterActionExecute(instance, errorHandler, responseHandler);
 
 		expect(instance.page.bringToFront).toHaveBeenCalled();
 		expect(action._config.afterActionScript)
@@ -174,6 +179,8 @@ describe('AbstractAction', () => {
 			.toHaveBeenCalledWith(99);
 		expect(instance.pageErrorHandler.removeListener)
 			.toHaveBeenCalledWith('page-error', errorHandler);
+		expect(instance.page.removeListener)
+			.toHaveBeenCalledWith('response', responseHandler);
 		expect(action._results).toEqual({ afterLocation: 'url' });
 		expect(messanger.report)
 			.toHaveBeenCalledWith('action:end', {
@@ -184,16 +191,23 @@ describe('AbstractAction', () => {
 			eventName: 'page-error',
 			handler: errorHandler
 		}]);
+		expect(removedPageResponseListeners).toEqual([{
+			eventName: 'response',
+			handler: responseHandler
+		}]);
 	});
 
 	it('can execute before action scripts', () => {
 		let pageErrorListeners = [];
+		let pageResponseListeners = [];
 		let errorHandler = 'errorHandler';
+		let responseHandler = 'responseHandler';
 		let instance = {
 			browser: 'browser',
 			page: {
 				url: jest.fn()
-					.mockReturnValue('url')
+					.mockReturnValue('url'),
+				on: jest.fn((eventName, handler) => pageResponseListeners.push({ eventName, handler }))
 			},
 			pageErrorHandler: {
 				on: jest.fn((eventName, handler) => pageErrorListeners.push({ eventName, handler }))
@@ -207,13 +221,15 @@ describe('AbstractAction', () => {
 		};
 		action._results = {};
 
-		action._beforeActionExecute(instance, errorHandler);
+		action._beforeActionExecute(instance, errorHandler, responseHandler);
 
 		expect(action._results).toEqual({
 			beforeLocation: 'url'
 		});
 		expect(instance.pageErrorHandler.on)
 			.toHaveBeenCalledWith('page-error', errorHandler);
+		expect(instance.page.on)
+			.toHaveBeenCalledWith('response', responseHandler);
 		expect(action._config.beforeActionScript)
 			.toHaveBeenCalledWith(
 				instance.browser,
@@ -222,6 +238,14 @@ describe('AbstractAction', () => {
 			);
 		expect(messanger.report)
 			.toHaveBeenCalledWith('action:start', { action: 'id' });
+		expect(pageErrorListeners).toEqual([{
+			eventName: 'page-error',
+			handler: errorHandler
+		}]);
+		expect(pageResponseListeners).toEqual([{
+			eventName: 'response',
+			handler: responseHandler
+		}]);
 	});
 
 	it('can add an error to the results', () => {
