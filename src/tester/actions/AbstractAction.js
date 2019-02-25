@@ -39,7 +39,7 @@ export default class AbstractAction {
 	async execute(instance) {
 		const errorHandler = (error) => this._addErrorToResults(error);
 		const responseHandler = (response) => {
-			if (response.status() >= 400) {
+			if (response.status() >= 500) {
 				let message = `Requested page ${response.request().url()}, ` +
 					`but recieved response with statusCode ${response.status()}`;
 
