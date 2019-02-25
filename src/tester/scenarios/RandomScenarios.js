@@ -51,7 +51,7 @@ export default class RandomScenarios {
 				failedActionsCount++;
 
 				if (failedActionsCount >= this._config.numberOfActionFailuresToAbortRandomScenario) {
-					results.executionError = new Error('Reached limit of allowed action execution errors.\n' + actionResults.executionError);
+					results.executionError = 'Reached limit of allowed action execution errors.\n' + actionResults.executionError;
 					break;
 				}
 
