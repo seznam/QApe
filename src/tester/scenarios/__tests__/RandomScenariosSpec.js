@@ -130,7 +130,7 @@ describe('RandomScenarios', () => {
 		expect(results).toEqual({
 			scenario: [],
 			errors: [],
-			executionError: jasmine.any(Error)
+			executionError: jasmine.any(String)
 		});
 	});
 });
