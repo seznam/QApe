@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.3.1](https://github.com/seznam/QApe/compare/v0.3.0...v0.3.1) - 2019-02-25
+
+### Commits
+
+- Fix tests [`e30a843`](https://github.com/seznam/QApe/commit/e30a843e0b64c4f1a586b46d555a15f6ef515502)
+- Fix display of execution error from random scenario [`9d33b27`](https://github.com/seznam/QApe/commit/9d33b27d1d7c28d66f18ab20393477aaa0035352)
+- Requests with status code >= 500 will now cause error (instead of >= 400) [`39ba9f2`](https://github.com/seznam/QApe/commit/39ba9f268d648cc5d32aa6035953b8c73570ed99)
+
 ## [v0.3.0](https://github.com/seznam/QApe/compare/v0.2.2...v0.3.0) - 2019-02-24
 
 ### Commits
