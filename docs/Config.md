@@ -31,6 +31,7 @@ module.exports = {
 - [randomScenariosDisabled](#randomScenariosDisabled)
 - [reportPath](#reportPath)
 - [reporters](#reporters)
+- [shouldRequestCauseError](#shouldRequestCauseError)
 - [stopNewScenariosAfterTime](#stopNewScenariosAfterTime)
 - [testerTimeout](#testerTimeout)
 - [url](#url)
@@ -232,7 +233,7 @@ Page error handler, which should tell what is actually an error. Function is eva
 ```javascript
 () => {
 			window.addEventListener('error', (event) => {
-				qapeError(event.error.toString());
+				qapeError(event.error.stack);
 			});
 		}
 ```
@@ -299,6 +300,16 @@ Define your reporters for the QApe run. You can pass a string for reporters in n
 	"file",
 	"spinner"
 ]
+```
+
+### shouldRequestCauseError
+`<Function>`
+
+This method is called whenever any page request recieves a response. It recieves a puppeteer.Response and QApe config as arguments and should return a boolean value. If it returns true, then the recieved request response is considered a page error.
+
+**Default:**
+```javascript
+(response, config) => (response.status() >= 500)
 ```
 
 ### stopNewScenariosAfterTime

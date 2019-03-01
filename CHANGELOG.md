@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.3.2](https://github.com/seznam/QApe/compare/v0.3.1...v0.3.2) - 2019-03-01
+
+### Commits
+
+- Improve page error handling [`2af2a2d`](https://github.com/seznam/QApe/commit/2af2a2d20b0f56d0cfca06af57d9c36f1c2b9f4e)
+- Add page crash handler and fix problem with hanging chrome instances after longer test run [`05ee4a0`](https://github.com/seznam/QApe/commit/05ee4a0c6e5a1ae7325bbaadef420f1a1aa963f9)
+- Add shouldRequestCauseError configuration [`cfbd031`](https://github.com/seznam/QApe/commit/cfbd03153424306c26773927296bb4cd5c65d9bc)
+
 ## [v0.3.1](https://github.com/seznam/QApe/compare/v0.3.0...v0.3.1) - 2019-02-25
 
 ### Commits
