@@ -6,6 +6,7 @@
 /src/
 /docs/
 /utils/
+/**/__tests__/*
 /.dockerignore
 /Dockerfile
 /.gitignore

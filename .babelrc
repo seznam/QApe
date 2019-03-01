@@ -1,3 +1,4 @@
 {
+	"ignore": ["**/__tests__/*"],
 	"plugins": ["@babel/plugin-transform-modules-commonjs"]
 }
