@@ -9,7 +9,7 @@
     "docs:build:devs": "documentation build src/** --github -f md -o docs/devs/documentation.md",
     "docs:build": "npm run docs:build:devs && npm run docs:build:config",
     "docs:lint": "documentation lint src/**",
-    "build": "rm -rf lib && babel src --out-dir lib --copy-files",
+    "build": "rm -rf lib && babel src --out-dir lib --ignore \"**/__tests__/*\" --copy-files",
     "dev": "npm run build -- --verbose --source-maps --watch",
     "start": "node -r source-map-support/register bin/qape.js",
     "preversion": "npm test && npm run docs:lint && npm run build",
