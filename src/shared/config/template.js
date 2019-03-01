@@ -88,6 +88,11 @@ module.exports = {
 		description: 'Page error handler, which should tell what is actually an error. Function is evaluated in the browser context via page.evaluateOnNewDocument() and has method "qapeError(error)" available.',
 		type: 'Function'
 	},
+	shouldRequestCauseError: {
+		value: (response, config) => (response.status() >= 500),
+		description: 'This method is called whenever any page request recieves a response. It recieves a puppeteer.Response and QApe config as arguments and should return a boolean value. If it returns true, then the recieved request response is considered a page error.',
+		type: 'Function'
+	},
 	beforeScenarioScript: {
 		value: ({ browser, page }) => {},
 		description: 'Script executed before each scenario',

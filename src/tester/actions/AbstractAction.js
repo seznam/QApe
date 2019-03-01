@@ -39,9 +39,8 @@ export default class AbstractAction {
 	async execute(instance) {
 		const errorHandler = (error) => this._addErrorToResults(error);
 		const responseHandler = (response) => {
-			if (response.status() >= 500) {
-				let message = `Requested page ${response.request().url()}, ` +
-					`but recieved response with statusCode ${response.status()}`;
+			if (this._config.shouldRequestCauseError(response, this._config)) {
+				let message = `Requested page "${response.request().url()}" caused an error. [status: ${response.status()}]`;
 
 				this._addErrorToResults(message);
 			}
