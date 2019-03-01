@@ -66,6 +66,14 @@ describe('ConsoleReporter', () => {
 		expect(console.error).toHaveBeenCalledWith('error');
 	});
 
+	it('can handle a browser:error event', () => {
+		let eventData = { error: 'error' };
+
+		reporter.emit('browser:error', eventData);
+
+		expect(console.error).toHaveBeenCalledWith('error');
+	});
+
 	it('can handle defined scenario end for failure', () => {
 		let eventData = {
 			name: 'name',

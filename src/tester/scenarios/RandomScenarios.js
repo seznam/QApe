@@ -32,7 +32,7 @@ export default class RandomScenarios {
 	 * performing actions on random page elements
 	 * and trying to produce some page errors.
 	 * @param {Browser} instance
-	 * @returns {Promise}
+	 * @returns {Promise<Object>} results
 	 */
 	async runScenario(instance) {
 		let results = {};
@@ -57,6 +57,11 @@ export default class RandomScenarios {
 		return results;
 	}
 
+	/**
+	 * Performs random actions on the instance
+	 * @param {Browser} instance
+	 * @returns {Promise<Object>} results
+	 */
 	async _performActions(instance) {
 		let results = { scenario: [], errors: [] };
 		let failedActionsCount = 0;

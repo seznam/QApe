@@ -15,7 +15,8 @@ export default class ConsoleReporter extends EventEmitter {
 
 		this.on('scenario:start', eventData => this._handleScenarioStart(eventData));
 		this.on('scenario:end', eventData => this._handleScenarioEnd(eventData));
-		this.on('runner:error', eventData => this._handleRunnerError(eventData));
+		this.on('runner:error', eventData => this._handleError(eventData));
+		this.on('browser:error', eventData => this._handleError(eventData));
 	}
 
 	/**
@@ -42,7 +43,7 @@ export default class ConsoleReporter extends EventEmitter {
 	 * Handler for runner:error event
 	 * @param {Object} eventData
 	 */
-	_handleRunnerError(eventData) {
+	_handleError(eventData) {
 		console.error(eventData.error);
 	}
 

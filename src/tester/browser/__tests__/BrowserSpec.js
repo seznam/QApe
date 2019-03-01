@@ -1,4 +1,7 @@
+jest.mock('../../messanger');
+
 import Browser from '../Browser';
+import * as messanger from '../../messanger';
 
 describe('Browser', () => {
 	let browser = null;
@@ -26,6 +29,7 @@ describe('Browser', () => {
 			.mockReturnValue(Promise.resolve(browserInstance));
 		browser._initPageErrorHandler = jest.fn()
 			.mockReturnValue(Promise.resolve());
+		browser._initFatalErrorHandler = jest.fn();
 		let defaultNavigationTimeout = 30000;
 		browser._config = { defaultNavigationTimeout };
 
@@ -35,6 +39,7 @@ describe('Browser', () => {
 		expect(browser._page).toEqual(page);
 		expect(browser._getBrowser).toHaveBeenCalledTimes(1);
 		expect(browserInstance.pages).toHaveBeenCalledTimes(1);
+		expect(browser._initFatalErrorHandler).toHaveBeenCalledTimes(1);
 		expect(browser._initPageErrorHandler).toHaveBeenCalledTimes(1);
 		expect(page.setDefaultNavigationTimeout)
 			.toHaveBeenCalledWith(defaultNavigationTimeout);
@@ -51,6 +56,26 @@ describe('Browser', () => {
 
 		expect(browser._pageErrorHandler).not.toBeDefined();
 		expect(browserInstance.close).toHaveBeenCalledTimes(1);
+	});
+
+	it('can initialize fatal error handler', () => {
+		messanger.report = jest.fn();
+		browser._page = {
+			on: jest.fn((_, fn) => {
+				fn({ stack: 'error' })
+			})
+		};
+		browser.clear = jest.fn();
+
+		browser._initFatalErrorHandler();
+
+		expect(browser._page.on)
+			.toHaveBeenCalledWith('error', jasmine.any(Function));
+		expect(messanger.report)
+			.toHaveBeenCalledWith('browser:error', {
+				error: jasmine.any(String)
+			});
+		expect(browser.clear).toHaveBeenCalled();
 	});
 
 	it('can initialize page error handler', async () => {

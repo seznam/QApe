@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer';
 import EventEmitter from 'events';
+import { report } from '../messanger';
 
 /**
  * Browser instance
@@ -51,8 +52,9 @@ export default class Browser {
 	async initBrowser() {
 		this._browser = await this._getBrowser();
 		this._page = (await this._browser.pages())[0];
-		await this._initPageErrorHandler();
 
+		this._initFatalErrorHandler();
+		await this._initPageErrorHandler();
 		await this._page.setDefaultNavigationTimeout(this._config.defaultNavigationTimeout);
 
 		return this;
@@ -93,6 +95,25 @@ export default class Browser {
 					{ headless: !this._config.headlessModeDisabled }
 				)
 			);
+	}
+
+	/**
+	 * Whenever a page error occures, there is a strong possibility,
+	 * that QApe tester is in inconsistent state.
+	 * So it will try to clear the instance and wait for the new
+	 * test run.
+	 */
+	_initFatalErrorHandler() {
+		this._page.on('error', error => {
+			let msg = error.stack + '\n' +
+				'Because of the error above the browser instance ' +
+				'has been cleared and may cause an additional error ' +
+				'in current test run. You can ignore it, since QApe ' +
+				'tester should recover by itself.';
+
+			report('browser:error', { error: msg });
+			this.clear();
+		});
 	}
 
 	/**
