@@ -4,7 +4,7 @@
   "description": "Monkey testing library",
   "main": "bin/qape.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest src",
     "docs:build:config": "node utils/docs/config.js",
     "docs:build:devs": "documentation build src/** --github -f md -o docs/devs/documentation.md",
     "docs:build": "npm run docs:build:devs && npm run docs:build:config",

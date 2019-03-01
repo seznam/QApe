@@ -62,7 +62,7 @@ export default class ConsoleReporter extends EventEmitter {
 			return this._logConsole(`# ${name} [ExecutionError]`, [], [executionError]);
 		}
 
-		this._logConsole(`${statusSymbol} ${name}`, scenario, errors);
+		this._logConsole(`${statusSymbol} ${name}`, errors.length > 0 ? scenario : [], errors);
 	}
 
 	/**

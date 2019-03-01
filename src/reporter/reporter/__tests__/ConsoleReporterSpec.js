@@ -95,7 +95,7 @@ describe('ConsoleReporter', () => {
 		reporter._handleDefinedScenarioEnd(eventData);
 
 		expect(reporter._logConsole)
-			.toHaveBeenCalledWith('✓ name', 'scenario', []);
+			.toHaveBeenCalledWith('✓ name', [], []);
 	});
 
 	it('can handle failing scenario end for minified scenario', () => {

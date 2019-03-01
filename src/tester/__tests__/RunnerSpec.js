@@ -162,7 +162,7 @@ describe('Runner', () => {
 		};
 		runner._scenariosHandler = {
 			runScenario: jest.fn()
-				.mockReturnValue(Promise.reject('executionError'))
+				.mockReturnValue(Promise.reject({ stack: 'executionError' }))
 		};
 		runner._getBrowserInstance = jest.fn()
 			.mockReturnValue(Promise.resolve(instance));

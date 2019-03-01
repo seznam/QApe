@@ -24,20 +24,16 @@ export default class ScenariosHelper {
 		let executionError;
 
 		try {
-			if (scenario && scenario[0] && scenario[0].beforeLocation) {
-				await instance.page.goto(scenario[0].beforeLocation);
-			} else {
-				return {
-					scenario: executedScenario,
-					errors,
-					executionError: new Error('ScenariosHelper: beforeLocation of a scenario action is not defined.')
-				}
+			const response = await instance.page.goto(scenario[0].beforeLocation);
+
+			if (response.status() >= 400) {
+				throw Error(`Recieved wrong status code ${response.status()}`);
 			}
 		} catch (e) {
 			return {
 				scenario: executedScenario,
 				errors,
-				executionError: new Error(`ScenariosHelper: Unable to navigate to location ${scenario[0].beforeLocation}\n${e}`)
+				executionError: `ScenariosHelper: Unable to navigate to location ${scenario && scenario[0] && scenario[0].beforeLocation}\n${e.stack}`
 			};
 		}
 

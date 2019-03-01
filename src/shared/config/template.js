@@ -82,7 +82,7 @@ module.exports = {
 	pageErrorHandler: {
 		value: () => {
 			window.addEventListener('error', (event) => {
-				qapeError(event.error.toString());
+				qapeError(event.error.stack);
 			});
 		},
 		description: 'Page error handler, which should tell what is actually an error. Function is evaluated in the browser context via page.evaluateOnNewDocument() and has method "qapeError(error)" available.',

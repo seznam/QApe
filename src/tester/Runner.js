@@ -63,7 +63,7 @@ export default class Runner {
 				this._isSuccess = false;
 				report('runner:error', {
 					scenario,
-					error: error.toString()
+					error: error.stack
 				});
 			}
 

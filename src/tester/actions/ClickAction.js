@@ -27,7 +27,7 @@ export default class ClickAction extends AbstractAction {
 		try {
 			await this._logClickedElement(element);
 		} catch (e) {
-			throw Error('Unable to log element information.\n' + e.toString());
+			throw Error('Unable to log element information.\n' + e.stack);
 		}
 
 		await this._clickOnElement(page, element);

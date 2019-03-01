@@ -35,14 +35,31 @@ export default class RandomScenarios {
 	 * @returns {Promise}
 	 */
 	async runScenario(instance) {
-		let results = { scenario: [], errors: [] };
-		let failedActionsCount = 0;
+		let results = {};
 
 		report('scenario:start', {
 			type: this.type
 		});
 
-		await instance.page.goto(this._config.url);
+		let response = await instance.page.goto(this._config.url);
+
+		if (response.status() >= 400) {
+			results.executionError = `Cannot load url ${this._config.url} [status: ${response.status()}]`;
+		} else {
+			results = await this._performActions(instance);
+		}
+
+		report('scenario:end', {
+			type: this.type,
+			results
+		});
+
+		return results;
+	}
+
+	async _performActions(instance) {
+		let results = { scenario: [], errors: [] };
+		let failedActionsCount = 0;
 
 		for (let i = 0; i < this._config.actionsPerScenario; i++) {
 			let actionResults = await this._actionsHandler.execute(null, null, instance);
@@ -68,11 +85,6 @@ export default class RandomScenarios {
 				break;
 			}
 		}
-
-		report('scenario:end', {
-			type: this.type,
-			results
-		});
 
 		return results;
 	}

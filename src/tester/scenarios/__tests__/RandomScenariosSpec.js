@@ -18,18 +18,71 @@ describe('RandomScenarios', () => {
 		expect(scenarios.type).toEqual('random');
 	});
 
-	it('can reproduce some page errors', async () => {
+	it('can run a random scenario successfully', async () => {
+		let response = {
+			status: () => 200
+		};
 		let page = {
 			goto: jest.fn()
-				.mockReturnValue(Promise.resolve())
+				.mockReturnValue(Promise.resolve(response))
 		};
 		let instance = { page };
+		scenarios._config = {
+			url: 'url'
+		};
+		scenarios._performActions = jest.fn()
+			.mockReturnValue('results');
+
+		let results = await scenarios.runScenario(instance);
+
+		expect(messanger.report)
+			.toHaveBeenCalledWith('scenario:start', { type: 'random' });
+		expect(page.goto).toHaveBeenCalledWith('url');
+		expect(scenarios._performActions)
+			.toHaveBeenCalledWith(instance);
+		expect(messanger.report)
+			.toHaveBeenCalledWith('scenario:end', {
+				type: 'random',
+				results
+			});
+		expect(results).toEqual('results');
+	});
+
+	it('can handle wrong status code from page load', async () => {
+		let response = {
+			status: () => 400
+		};
+		let page = {
+			goto: jest.fn()
+				.mockReturnValue(Promise.resolve(response))
+		};
+		let instance = { page };
+		scenarios._config = {
+			url: 'url'
+		};
+
+		let results = await scenarios.runScenario(instance);
+
+		expect(messanger.report)
+			.toHaveBeenCalledWith('scenario:start', { type: 'random' });
+		expect(page.goto).toHaveBeenCalledWith('url');
+		expect(messanger.report)
+			.toHaveBeenCalledWith('scenario:end', {
+				type: 'random',
+				results
+			});
+		expect(results).toEqual({
+			executionError: jasmine.any(String)
+		});
+	});
+
+	it('can perform random actions and reproduce some page errors', async () => {
+		let instance = 'instance';
 		let scenario = [
 			{ errors: [] },
 			{ errors: ['error'] }
 		];
 		scenarios._config = {
-			url: 'url',
 			actionsPerScenario: 5
 		};
 		scenarios._actionsHandler = {
@@ -38,34 +91,21 @@ describe('RandomScenarios', () => {
 				.mockReturnValue(scenario[1])
 		};
 
-		let results = await scenarios.runScenario(instance);
+		let results = await scenarios._performActions(instance);
 
-		expect(messanger.report)
-			.toHaveBeenCalledWith('scenario:start', { type: 'random' });
-		expect(page.goto).toHaveBeenCalledWith('url');
 		expect(scenarios._actionsHandler.execute)
 			.toHaveBeenCalledTimes(2);
 		expect(scenarios._actionsHandler.execute)
 			.toHaveBeenCalledWith(null, null, instance);
-		expect(messanger.report)
-			.toHaveBeenCalledWith('scenario:end', {
-				type: 'random',
-				results
-			});
 		expect(results).toEqual({
 			scenario,
 			errors: scenario[1].errors
 		});
 	});
 
-	it('can pass when no error found', async () => {
-		let page = {
-			goto: jest.fn()
-				.mockReturnValue(Promise.resolve())
-		};
-		let instance = { page };
+	it('can perform random actions and pass when no error found', async () => {
+		let instance = 'instance';
 		scenarios._config = {
-			url: 'url',
 			actionsPerScenario: 3
 		};
 		scenarios._actionsHandler = {
@@ -73,20 +113,12 @@ describe('RandomScenarios', () => {
 				.mockReturnValue({ errors: [] })
 		};
 
-		let results = await scenarios.runScenario(instance);
+		let results = await scenarios._performActions(instance);
 
-		expect(messanger.report)
-			.toHaveBeenCalledWith('scenario:start', { type: 'random' });
-		expect(page.goto).toHaveBeenCalledWith('url');
 		expect(scenarios._actionsHandler.execute)
 			.toHaveBeenCalledTimes(3);
 		expect(scenarios._actionsHandler.execute)
 			.toHaveBeenCalledWith(null, null, instance);
-		expect(messanger.report)
-			.toHaveBeenCalledWith('scenario:end', {
-				type: 'random',
-				results
-			});
 		expect(results).toEqual({
 			scenario: [
 				{ errors: [] },
@@ -97,14 +129,9 @@ describe('RandomScenarios', () => {
 		});
 	});
 
-	it('can throw an error when unable to perform any action successfully', async () => {
-		let page = {
-			goto: jest.fn()
-				.mockReturnValue(Promise.resolve())
-		};
-		let instance = { page };
+	it('can perform random actions and handle execution erro when not able to perform any action', async () => {
+		let instance = 'instance';
 		scenarios._config = {
-			url: 'url',
 			actionsPerScenario: 3,
 			numberOfActionFailuresToAbortRandomScenario: 2
 		};
@@ -113,20 +140,12 @@ describe('RandomScenarios', () => {
 				.mockReturnValue({ executionError: 'executionError' })
 		};
 
-		let results = await scenarios.runScenario(instance);
+		let results = await scenarios._performActions(instance);
 
-		expect(messanger.report)
-			.toHaveBeenCalledWith('scenario:start', { type: 'random' });
-		expect(page.goto).toHaveBeenCalledWith('url');
 		expect(scenarios._actionsHandler.execute)
 			.toHaveBeenCalledTimes(2);
 		expect(scenarios._actionsHandler.execute)
 			.toHaveBeenCalledWith(null, null, instance);
-		expect(messanger.report)
-			.toHaveBeenCalledWith('scenario:end', {
-				type: 'random',
-				results
-			});
 		expect(results).toEqual({
 			scenario: [],
 			errors: [],

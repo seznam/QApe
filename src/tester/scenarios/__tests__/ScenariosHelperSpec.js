@@ -13,8 +13,11 @@ describe('ScenariosHelper', () => {
 	});
 
 	it('can run provided scenario', async () => {
+		let response = {
+			status: () => 200
+		};
 		let page = {
-			goto: jest.fn().mockReturnValue(Promise.resolve())
+			goto: jest.fn().mockReturnValue(Promise.resolve(response))
 		};
 		let instance = { page };
 		let scenario = [{
@@ -56,29 +59,40 @@ describe('ScenariosHelper', () => {
 		expect(results).toEqual({
 			scenario: [],
 			errors: [],
-			executionError: jasmine.any(Error)
+			executionError: jasmine.any(String)
 		});
 	});
 
-	it('can run provided scenario and handle missing beforeLocation', async () => {
-		let instance = 'instance';
+	it('can run provided scenario and wrong status code of the loaded page', async () => {
+		let response = {
+			status: () => 400
+		};
+		let page = {
+			goto: jest.fn().mockReturnValue(Promise.resolve(response))
+		};
+		let instance = { page };
 		let scenario = [{
 			action: 'action',
-			config: 'config'
+			config: 'config',
+			beforeLocation: 'beforeLocation'
 		}];
 
 		let results = await scenariosHelper.runScenario(instance, scenario);
 
+		expect(page.goto).toHaveBeenCalledWith('beforeLocation');
 		expect(results).toEqual({
 			scenario: [],
 			errors: [],
-			executionError: jasmine.any(Error)
+			executionError: jasmine.any(String)
 		});
 	});
 
 	it('can run provided scenario and handle execution error', async () => {
+		let response = {
+			status: () => 200
+		};
 		let page = {
-			goto: jest.fn().mockReturnValue(Promise.resolve())
+			goto: jest.fn().mockReturnValue(Promise.resolve(response))
 		};
 		let instance = { page };
 		let scenario = [{
@@ -108,8 +122,11 @@ describe('ScenariosHelper', () => {
 	});
 
 	it('can run provided scenario and handle a page error', async () => {
+		let response = {
+			status: () => 200
+		};
 		let page = {
-			goto: jest.fn().mockReturnValue(Promise.resolve())
+			goto: jest.fn().mockReturnValue(Promise.resolve(response))
 		};
 		let instance = { page };
 		let scenario = [{
