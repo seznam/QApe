@@ -5,8 +5,8 @@ NPM_LOCAL_REGISTRY_URL_NO_PROTOCOL="localhost:4873"
 NPM_LOCAL_REGISTRY_URL="http://${NPM_LOCAL_REGISTRY_URL_NO_PROTOCOL}/"
 NPM_ORIGINAL_REGISTRY=`npm config get registry`
 
-PACKAGE_VERSION="next"
-PACKAGE_NAME="qape"
+PACKAGE_VERSION=`cat package.json | grep \"version\" | head -1 | cut -d':' -f2 | cut -d'"' -f2`-next
+PACKAGE_NAME=`cat package.json | grep \"name\" | head -1 | cut -d':' -f2 | cut -d'"' -f2`
 
 # Setup local registry
 node_modules/.bin/verdaccio -l "$NPM_LOCAL_REGISTRY_URL_NO_PROTOCOL" -c utils/tests/release/verdaccio_config.yml >/dev/null &
@@ -22,11 +22,12 @@ npm publish
 
 # Install QApe prerelease and other test dependencies
 cd utils/tests/release
+sed -i "s/\"$PACKAGE_NAME\":\s\".*\"/\"$PACKAGE_NAME\": \"$PACKAGE_VERSION\"/" package.json
 npm install
 
 # Setup server with tested website
 node server.js &
-IMA_SKELETON_SERVER_PID=$!
+SERVER_PID=$!
 
 sleep 1
 
@@ -42,13 +43,14 @@ node_modules/.bin/qape -u "$TARGET_WEB_URL/error.html"
 [ "$?" = "1" ] && ls report/*-minified.json && echo "pass" || (echo "fail" && STATUS=1)
 
 echo "Test3: QApe can replay the failing scenario."
-node_modules/.bin/qape report/*-minified.json
-[ "$?" = "1" ] && echo "pass" || (echo "fail" && STATUS=1)
+mv report scenarios
+node_modules/.bin/qape -u "$TARGET_WEB_URL/error.html" --random-scenarios-disabled scenarios/*-minified.json
+[ "$?" = "1" ] && ls report/*-minified.json && echo "pass" || (echo "fail" && STATUS=1)
 
 # Cleanup
 npm config set registry "$NPM_ORIGINAL_REGISTRY"
-kill $NPM_LOCAL_REGISTRY_PID
-kill $IMA_SKELETON_SERVER_PID
+kill $NPM_LOCAL_REGISTRY_PID || "Could not kill local registry"
+kill $SERVER_PID || "Could not kill server"
 
 # Send proper exit code
 exit $STATUS

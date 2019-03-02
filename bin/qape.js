@@ -11,6 +11,7 @@ program
 	.option('-h, --headless-mode-disabled', 'run browser in headfull mode')
 	.option('-i, --parallel-instances <number>', 'parallel browser instances', parseInt)
 	.option('-p, --preview-mode', 'run in preview mode')
+	.option('-r, --random-scenarios-disabled', 'disables random scenarios')
 	.option('-s, --browser-webs-socket-endpoint <value>', 'connect to remote chrome instance (i.e. "ws://5.5.5.5:3505")')
 	.action((...args) => {
 		let cliConfig = {
@@ -18,6 +19,7 @@ program
 			headlessModeDisabled,
 			parallelInstance,
 			previewMode,
+			randomScenariosDisabled,
 			browserWebSocketEndpoint
 		} = args.pop();
 
