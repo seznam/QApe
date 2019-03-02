@@ -43,6 +43,9 @@
     "type": "git",
     "url": "https://github.com/seznam/qape.git"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "author": "Filip Satek <filip.satek@firma.seznam.cz>",
   "license": "MIT",
   "dependencies": {

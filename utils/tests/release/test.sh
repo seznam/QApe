@@ -13,17 +13,17 @@ node_modules/.bin/verdaccio -l "$NPM_LOCAL_REGISTRY_URL_NO_PROTOCOL" -c utils/te
 NPM_LOCAL_REGISTRY_PID=$!
 
 npm config set "//$NPM_LOCAL_REGISTRY_URL_NO_PROTOCOL/:_authToken" "0"
-npm config set registry "$NPM_LOCAL_REGISTRY_URL"
 
 # Release QApe
 sed -i "s/\"version\":\s\".*\"/\"version\": \"$PACKAGE_VERSION\"/" package.json
+sed -i "s#https://registry.npmjs.org/#${NPM_LOCAL_REGISTRY_URL}#" package.json
 npm run build
 npm publish
 
 # Install QApe prerelease and other test dependencies
 cd utils/tests/release
 sed -i "s/\"$PACKAGE_NAME\":\s\".*\"/\"$PACKAGE_NAME\": \"$PACKAGE_VERSION\"/" package.json
-npm install
+npm install --registry="$NPM_LOCAL_REGISTRY_URL"
 
 # Setup server with tested website
 node server.js &
@@ -48,7 +48,6 @@ node_modules/.bin/qape -u "$TARGET_WEB_URL/error.html" --random-scenarios-disabl
 [ "$?" = "1" ] && ls report/*-minified.json && echo "pass" || (echo "fail" && STATUS=1)
 
 # Cleanup
-npm config set registry "$NPM_ORIGINAL_REGISTRY"
 kill $NPM_LOCAL_REGISTRY_PID || "Could not kill local registry"
 kill $SERVER_PID || "Could not kill server"
 
