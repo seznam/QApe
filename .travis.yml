@@ -1,4 +1,9 @@
 language: node_js
+dist: trusty
+addons:
+  apt:
+    packages:
+      - libnss3
 node_js:
   - '8'
 cache:
@@ -10,3 +15,4 @@ script:
   - npm test
   - npm run build
   - npm run docs:lint
+  - npm run test:prerelease

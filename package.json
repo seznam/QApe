@@ -5,6 +5,7 @@
   "main": "bin/qape.js",
   "scripts": {
     "test": "jest src",
+    "test:prerelease": "utils/tests/release/test.sh",
     "docs:build:config": "node utils/docs/config.js",
     "docs:build:devs": "documentation build src/** --github -f md -o docs/devs/documentation.md",
     "docs:build": "npm run docs:build:devs && npm run docs:build:config",
@@ -57,6 +58,7 @@
     "auto-changelog": "1.11.0",
     "documentation": "9.1.1",
     "jest": "24.1.0",
-    "source-map-support": "0.5.10"
+    "source-map-support": "0.5.10",
+    "verdaccio": "3.11.6"
   }
 }
