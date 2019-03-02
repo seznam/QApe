@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Page with errors</title>
+	</head>
+	<body>
+		<button onclick="error()">Button</button>
+		<script>
+			var counter = 0;
+
+			function error() {
+				if (counter > 1) {
+					throw Error('Something went wrong.');
+				} else {
+					counter++;
+				}
+			}
+		</script>
+	</body>
+</html>
