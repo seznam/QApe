@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.3.3](https://github.com/seznam/QApe/compare/v0.3.2...v0.3.3) - 2019-03-12
+
+### Merged
+
+- Add prerelease tests to check QApe functionality with the actually released bundle [`#2`](https://github.com/seznam/QApe/pull/2)
+
+### Commits
+
+- Release QApe as a docker image with each release [`a1e3dac`](https://github.com/seznam/QApe/commit/a1e3dac8b0c068411001356ec4b290fa6b5af53f)
+- Add CLI option --stop-new-scenarios-after-time [`9ea7e03`](https://github.com/seznam/QApe/commit/9ea7e03b5f670ddd36b335351063214b657219e3)
+
 ## [v0.3.2](https://github.com/seznam/QApe/compare/v0.3.1...v0.3.2) - 2019-03-01
 
 ### Commits
