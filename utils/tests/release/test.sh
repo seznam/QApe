@@ -1,4 +1,4 @@
-# #!/bin/bash
+#!/bin/bash
 
 TARGET_WEB_URL="http://localhost:3000"
 NPM_LOCAL_REGISTRY_URL_NO_PROTOCOL="localhost:4873"

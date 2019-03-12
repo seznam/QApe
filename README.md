@@ -32,6 +32,11 @@ By default, QApe saves all scenarios causing an error to `report` folder. Reprod
 node_modules/.bin/qape --preview-mode report/*
 ```
 
+## Run QApe in Docker
+You can use pre-built QApe docker image. Just set volumes to your report dir and you can pass any QApe CLI arguments at the end of docker run command and it will be passed to QApe inside. See example below.
+
+`docker run -v report:/home/qape/report qape/qape:latest --url https://www.docker.com`
+
 ## Guides
 - [Setup configuration file](./docs/Config.md)
 - [Create custom reporters]('./docs/Reporters.md')

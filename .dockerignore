@@ -1,12 +1,6 @@
-example/
 lib/
 node_modules/
 report/
 docs/
-.dockerignore
 .gitignore
-Dockerfile
 package-lock.json
-README.md
-server.js
-qape.conf.js
