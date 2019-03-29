@@ -11,11 +11,12 @@
     "docs:build:devs": "documentation build src/** --github -f md -o docs/devs/documentation.md",
     "docs:build": "npm run docs:build:devs && npm run docs:build:config",
     "docs:lint": "documentation lint src/**",
+    "changelog": "auto-changelog -l false -p",
     "build": "rm -rf lib && babel src --out-dir lib --ignore \"**/__tests__/*\" --copy-files",
     "dev": "npm run build -- --verbose --source-maps --watch",
     "start": "node -r source-map-support/register bin/qape.js",
     "preversion": "npm test && npm run docs:lint && npm run build",
-    "version": "auto-changelog -t changelog.hbs -p && npm run docs:build && git add CHANGELOG.md docs",
+    "version": "npm run changelog && npm run docs:build && git add CHANGELOG.md docs",
     "postversion": "git push origin master && git push --tags && npm publish && npm run docker:release"
   },
   "bin": {
@@ -51,18 +52,19 @@
   "license": "MIT",
   "dependencies": {
     "commander": "2.19.0",
+    "faker": "^4.1.0",
     "glob-all": "3.1.0",
     "lodash.isequal": "4.5.0",
-    "puppeteer": "1.13.0"
+    "puppeteer": "1.14.0"
   },
   "devDependencies": {
     "@babel/cli": "7.2.3",
-    "@babel/core": "7.3.4",
-    "@babel/plugin-transform-modules-commonjs": "7.2.0",
-    "auto-changelog": "1.11.0",
-    "documentation": "9.3.0",
-    "jest": "24.4.0",
-    "source-map-support": "0.5.10",
+    "@babel/core": "7.4.0",
+    "@babel/plugin-transform-modules-commonjs": "7.4.0",
+    "auto-changelog": "1.12.0",
+    "documentation": "9.3.1",
+    "jest": "24.5.0",
+    "source-map-support": "0.5.11",
     "verdaccio": "3.11.6"
   }
 }
