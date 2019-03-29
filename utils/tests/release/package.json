@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Test QApe prereleased version against local server",
   "devDependencies": {
-    "express": "4.16.4",
-    "qape": "next"
+    "express": "4.16.4"
   }
 }

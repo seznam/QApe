@@ -10,19 +10,27 @@ export default class AbstractAction {
 	 * Override with action identifier
 	 */
 	static get id() {
-		throw Error('AbstractAction: Id variable must be overwritten with your identifier.');
+		throw Error('AbstractAction: Id variable must be overridden with your identifier.');
+	}
+
+	/**
+	 * Override with method returning true, when the action should be available for the specified element
+	 */
+	static isActionAvailable() {
+		throw Error('AbstractAction: Static method \'isActionAvailable\' must be overridden for specific actions.');
 	}
 
 	/**
 	 * @param {Object} config
 	 * @param {ActionsHelper} actionsHelper
+	 * @param {Object} actionConfig
 	 */
-	constructor(config, actionsHelper) {
+	constructor(config, actionsHelper, actionConfig = {}) {
 		this._config = config;
 
 		this._actionsHelper = actionsHelper;
 
-		this._actionConfig = {};
+		this._actionConfig = actionConfig;
 
 		this._results = {
 			action: this.constructor.id,
@@ -33,10 +41,11 @@ export default class AbstractAction {
 
 	/**
 	 * Prepares action error handler and executes action lifecycle
+	 * @param {puppeteer.ElementHandle} element
 	 * @param {Object} instance Browser instance
 	 * @returns {Object} results
 	 */
-	async execute(instance) {
+	async execute(element, instance) {
 		const errorHandler = (error) => this._addErrorToResults(error);
 		const responseHandler = (response) => {
 			if (this._config.shouldRequestCauseError(response, this._config)) {
@@ -47,7 +56,7 @@ export default class AbstractAction {
 		}
 
 		try {
-			await this._executeActionLifecycle(instance, errorHandler, responseHandler);
+			await this._executeActionLifecycle(element, instance, errorHandler, responseHandler);
 		} catch (e) {
 			this._handleExecutionError(instance, e);
 		}
@@ -64,35 +73,21 @@ export default class AbstractAction {
 	}
 
 	/**
-	 * Sets configuration for the action
-	 * @param {Object} config Action config
-	 */
-	setActionConfig(config) {
-		this._actionConfig = config;
-	}
-
-	/**
-	 * @returns {Object} Action configuration
-	 */
-	getActionConfig() {
-		return this._actionConfig;
-	}
-
-	/**
 	 * Executes action lifecycle:
 	 * - Executes before action scripts (AbstractAction._beforeActionExecute)
 	 * - Executes the action and emits 'action:error' event for any error it throws
 	 * - Executes after action scripts (AbstractAction._afterActionExecute)
+	 * @param {puppeteer.ElementHandle} element
 	 * @param {Browser} instance
 	 * @param {Function} errorHandler
 	 * @param {Function} responseHandler
 	 * @returns {Promise} Resolves when lifecycle is finished
 	 */
-	async _executeActionLifecycle(instance, errorHandler, responseHandler) {
+	async _executeActionLifecycle(element, instance, errorHandler, responseHandler) {
 		this._beforeActionExecute(instance, errorHandler, responseHandler);
 
 		try {
-			await this.action(instance.page, instance.browser);
+			await this.action(element, instance.page, instance.browser);
 		} catch (e) {
 			this._handleExecutionError(instance, e);
 		}

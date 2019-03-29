@@ -78,11 +78,7 @@ describe('Runner', () => {
 			.mockReturnValueOnce(Promise.resolve({ type: 'random', scenario: 'scenario' }))
 			.mockReturnValue(Promise.resolve({}));
 		runner._config = {
-			randomScenariosDisabled: false,
-			beforeScenarioScript: jest.fn()
-				.mockReturnValue(Promise.resolve()),
-			afterScenarioScript: jest.fn()
-				.mockReturnValue(Promise.resolve())
+			randomScenariosDisabled: false
 		};
 		runner._scenariosHandler = {
 			runScenario: jest.fn()
@@ -99,10 +95,6 @@ describe('Runner', () => {
 			.toHaveBeenCalledTimes(1);
 		expect(messanger.report)
 			.toHaveBeenCalledWith('runner:start', { scenario: 'scenario' });
-		expect(runner._config.beforeScenarioScript)
-			.toHaveBeenCalledWith(instance);
-		expect(runner._config.afterScenarioScript)
-			.toHaveBeenCalledWith(instance);
 		expect(instance.clear).toHaveBeenCalledTimes(1);
 		expect(messanger.report)
 			.toHaveBeenCalledWith('runner:end');
@@ -115,11 +107,7 @@ describe('Runner', () => {
 			.mockReturnValueOnce(Promise.resolve({ type: 'random', scenario: 'scenario' }))
 			.mockReturnValue(Promise.resolve({}));
 		runner._config = {
-			randomScenariosDisabled: false,
-			beforeScenarioScript: jest.fn()
-				.mockReturnValue(Promise.resolve()),
-			afterScenarioScript: jest.fn()
-				.mockReturnValue(Promise.resolve())
+			randomScenariosDisabled: false
 		};
 		runner._scenariosHandler = {
 			runScenario: jest.fn()
@@ -138,10 +126,6 @@ describe('Runner', () => {
 			.toHaveBeenCalledTimes(1);
 		expect(messanger.report)
 			.toHaveBeenCalledWith('runner:start', { scenario: 'scenario' });
-		expect(runner._config.beforeScenarioScript)
-			.toHaveBeenCalledWith(instance);
-		expect(runner._config.afterScenarioScript)
-			.toHaveBeenCalledWith(instance);
 		expect(runner._isSuccess).toEqual(false);
 		expect(messanger.sendFailingScenario)
 			.toHaveBeenCalledWith({ errors: ['error'] });
@@ -156,9 +140,7 @@ describe('Runner', () => {
 			.mockReturnValueOnce(Promise.resolve({ type: 'random', scenario: 'scenario' }))
 			.mockReturnValue(Promise.resolve({}));
 		runner._config = {
-			randomScenariosDisabled: false,
-			beforeScenarioScript: jest.fn()
-				.mockReturnValue(Promise.resolve())
+			randomScenariosDisabled: false
 		};
 		runner._scenariosHandler = {
 			runScenario: jest.fn()
@@ -175,8 +157,6 @@ describe('Runner', () => {
 			.toHaveBeenCalledTimes(1);
 		expect(messanger.report)
 			.toHaveBeenCalledWith('runner:start', { scenario: 'scenario' });
-		expect(runner._config.beforeScenarioScript)
-			.toHaveBeenCalledWith(instance);
 		expect(messanger.report)
 			.toHaveBeenCalledWith('runner:error', {
 				scenario: 'scenario',

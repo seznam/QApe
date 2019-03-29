@@ -11,57 +11,22 @@ describe('ClickAction', () => {
 		expect(clickAction._config).toEqual({});
 	});
 
+	it('can check if a click action is available', () => {
+		expect(ClickAction.isActionAvailable()).toEqual(true);
+	});
+
 	it('can perform the click action', async () => {
-		let element = {};
-		clickAction._getElement = jest.fn()
-			.mockReturnValue(Promise.resolve(element));
-		clickAction._logClickedElement = jest.fn()
+		let element = 'element';
+		let page = 'page';
+		clickAction._logInfo = jest.fn()
 			.mockReturnValue(Promise.resolve());
 		clickAction._clickOnElement = jest.fn()
 			.mockReturnValue(Promise.resolve());
-		let eventListeners = [];
-		let browser = {
-			on: jest.fn((name, method) => eventListeners.push({ name, method })),
-			removeListener: jest.fn()
-		};
-		let page = {};
 
-		await clickAction.action(page, browser);
+		await clickAction.action(element, page);
 
-		eventListeners.forEach(({ name, method }) => {
-			expect(browser.on).toHaveBeenCalledWith(name, method);
-			expect(browser.removeListener).toHaveBeenCalledWith(name, method);
-		});
-		expect(clickAction._getElement).toHaveBeenCalledWith(page);
-		expect(clickAction._logClickedElement).toHaveBeenCalledWith(element);
+		expect(clickAction._logInfo).toHaveBeenCalledWith(element);
 		expect(clickAction._clickOnElement).toHaveBeenCalledWith(page, element);
-	});
-
-	it('can get random element', async () => {
-		let element = {};
-		let page = {};
-		clickAction._actionsHelper.getRandomPageElement = jest.fn()
-			.mockReturnValue(Promise.resolve(element));
-
-		let recievedElement = await clickAction._getElement(page);
-
-		expect(recievedElement).toEqual(element);
-		expect(clickAction._actionsHelper.getRandomPageElement)
-			.toHaveBeenCalledWith(page);
-	});
-
-	it('can get specific element', async () => {
-		let element = {};
-		let page = {
-			$x: jest.fn().mockReturnValue(Promise.resolve([element]))
-		};
-		let selector = 'selector';
-		clickAction._actionConfig = { selector };
-
-		let recievedElement = await clickAction._getElement(page);
-
-		expect(recievedElement).toEqual(element);
-		expect(page.$x).toHaveBeenCalledWith(selector);
 	});
 
 	it('can click on a specified element', async () => {
@@ -101,7 +66,7 @@ describe('ClickAction', () => {
 		expect(element.click).toHaveBeenCalledTimes(1);
 	});
 
-	it('can log clicked element', async () => {
+	it('can log element info', async () => {
 		let element = {};
 		let actionsHelper = {
 			getElementSelector: jest.fn().mockReturnValue('selector'),
@@ -109,7 +74,7 @@ describe('ClickAction', () => {
 		};
 		clickAction._actionsHelper = actionsHelper;
 
-		await clickAction._logClickedElement(element);
+		await clickAction._logInfo(element);
 
 		expect(clickAction._results.config.selector).toEqual('selector');
 		expect(clickAction._results.html).toEqual('html');

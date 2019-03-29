@@ -15,7 +15,7 @@ export default class ActionsHandler {
 
 		this._actionsHelper = null;
 
-		this._availableActions = {};
+		this._actions = {};
 	}
 
 	/**
@@ -24,39 +24,53 @@ export default class ActionsHandler {
 	 */
 	init() {
 		this._initActionsHelper();
-		this._initAvailableActions();
+		this._loadActions();
 
 		return this;
 	}
 
 	/**
 	 * Executes specific, or random action
+	 * @param {Browser} instance
 	 * @param {string} [actionId] Random if not defined
 	 * @param {Object} [actionConfig]
-	 * @param {Browser} instance
 	 * @returns {Promise<Object>} Resolves with action results
 	 */
-	execute(actionId, actionConfig, instance) {
-		let action = this.getAction(actionId);
+	async execute(instance, actionId, actionConfig) {
+		let pageAction;
 
-		if (actionConfig) {
-			action.setActionConfig(actionConfig);
+		try {
+			await this._actionsHelper.waitForReadyState(instance.page);
+			pageAction = await this._getAction(instance, actionId, actionConfig);
+		} catch (e) {
+			return { executionError: e.stack };
 		}
 
-		return action.execute(instance);
+		let { Action, element } = pageAction;
+		let action = new Action(this._config, this._actionsHelper, actionConfig);
+
+		return action.execute(element, instance);
 	}
 
 	/**
 	 * Gets random or specific action
+	 * @param {Browser} instance
 	 * @param {string} [actionId]
-	 * @returns {AbstractAction} Extended AbstractAction
-	 * instance of some specific action
+	 * @param {Object} [actionConfig]
+	 * @returns {Object} { Action, element }
 	 */
-	getAction(actionId = null) {
-		actionId = actionId || this._getRandomAction();
-		let Action = this._availableActions[actionId];
+	async _getAction({ page }, actionId, actionConfig) {
+		if (actionId && actionConfig && actionConfig.selector) {
+			return {
+				Action: this._actions[actionId],
+				element: await this._actionsHelper.getElement(page, actionConfig)
+			};
+		}
 
-		return new Action(this._config, this._actionsHelper);
+		let actions = actionId ? [actionId] : Object.keys(this._actions);
+		let pageActions = await this._getAvailablePageActions(page, actions);
+
+		return getRandomElementFromArray(pageActions);
 	}
 
 	/**
@@ -67,29 +81,41 @@ export default class ActionsHandler {
 	}
 
 	/**
-	 * Initializes available actions
+	 * Loads all defined actions
 	 */
-	_initAvailableActions() {
+	_loadActions() {
 		glob.sync([
 			path.join(__dirname, '!(Abstract)Action.js')
 		]).map(actionFile => {
 			let action = require(actionFile).default;
 
-			if (this._availableActions[action.id]) {
+			if (this._actions[action.id]) {
 				throw Error('ActionsHandler: The same action id for multiple actions has been set. Action id must be unique!');
 			}
 
-			this._availableActions[action.id] = action;
+			this._actions[action.id] = action;
 		});
 	}
 
 	/**
-	 * Gets random action ID
-	 * @returns {string} Random key from this._availableActions
+	 * @param {puppeteer.Page} page 
+	 * @returns {Promise<Object[]>} Returns array of objects with keys
+	 * Action and element, which are all available page actions
 	 */
-	_getRandomAction() {
-		let randomActions = Object.keys(this._availableActions);
+	async _getAvailablePageActions(page, availableActionIds) {
+		let elements = await this._actionsHelper.getAllVisiblePageElements(page);
+		let actions = [];
 
-		return getRandomElementFromArray(randomActions);
+		await Promise.all(elements.map(element => {
+			return Promise.all(availableActionIds.map(async id => {
+				let Action = this._actions[id];
+
+				if (await Action.isActionAvailable(element)) {
+					actions.push({ Action, element });
+				}
+			}));
+		}));
+
+		return actions;
 	}
 }

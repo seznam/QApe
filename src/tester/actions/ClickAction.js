@@ -14,47 +14,29 @@ export default class ClickAction extends AbstractAction {
 	}
 
 	/**
+	 * Click action should be always possible
+	 * @returns {Boolean} true
+	 */
+	static isActionAvailable() {
+		return true;
+	}
+
+	/**
 	 * Finds specified, or random element
 	 * Generates action config for action re-run
 	 * Performs click on the element
+	 * @param {puppeteer.ElementHandle} element
 	 * @param {puppeteer.Page} page
-	 * @param {puppeteer.Browser} browser
 	 * @returns {Promise} Resolves when click is done
 	 */
-	async action(page, browser) {
-		let element = await this._getElement(page);
-
+	async action(element, page) {
 		try {
-			await this._logClickedElement(element);
+			await this._logInfo(element);
 		} catch (e) {
 			throw Error('Unable to log element information.\n' + e.stack);
 		}
 
 		await this._clickOnElement(page, element);
-	}
-
-	/**
-	 * Searches for an element based on action configuration,
-	 * or selects random clickable element.
-	 * @param {puppeteer.Page} page
-	 * @returns {Promise<puppeteer.ElementHandle>} element
-	 */
-	async _getElement(page) {
-		let element = null;
-
-		if (this._actionConfig && this._actionConfig.selector) {
-			element = (await page.$x(this._actionConfig.selector))[0];
-		} else {
-			element = await this._actionsHelper.getRandomPageElement(page);
-		}
-
-		if (!element) {
-			let config = this._actionConfig ? JSON.stringify(this._actionConfig, null, 2) : '{}';
-
-			throw Error('Unable to initialize an element with following config.\n' + config);
-		}
-
-		return element;
 	}
 
 	/**
@@ -82,7 +64,7 @@ export default class ClickAction extends AbstractAction {
 	 * Adds clicked element info to the action results
 	 * @returns {Promise} Resolves when action info is saved
 	 */
-	async _logClickedElement(element) {
+	async _logInfo(element) {
 		let selector = await this._actionsHelper.getElementSelector(element);
 		let html = await this._actionsHelper.getElementHTML(element);
 

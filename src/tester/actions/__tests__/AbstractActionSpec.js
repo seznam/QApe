@@ -26,20 +26,25 @@ describe('AbstractAction', () => {
 		});
 	});
 
+	it('can throw an error if method isActionAvailable is not overrided', () => {
+		expect(AbstractAction.isActionAvailable).toThrow();
+	});
+
 	it('can execute an action successfully', async () => {
 		let instance = 'instance';
+		let element = 'element';
 		action._results = {};
 		action._addErrorToResults = jest.fn();
-		action._executeActionLifecycle = jest.fn((_, errorHandler) => {
+		action._executeActionLifecycle = jest.fn((element, page, errorHandler) => {
 			errorHandler('error');
 
 			return Promise.resolve();
 		});
 
-		let results = await action.execute(instance);
+		let results = await action.execute(element, instance);
 
 		expect(action._executeActionLifecycle)
-			.toHaveBeenCalledWith(instance, jasmine.any(Function), jasmine.any(Function));
+			.toHaveBeenCalledWith(element, instance, jasmine.any(Function), jasmine.any(Function));
 		expect(action._addErrorToResults)
 			.toHaveBeenCalledWith('error');
 		expect(results).toEqual({});
@@ -47,16 +52,17 @@ describe('AbstractAction', () => {
 
 	it('can execute an action and handle execution error', async () => {
 		let instance = 'instance';
+		let element = 'element';
 		action._results = {};
 		action._addErrorToResults = jest.fn();
 		action._executeActionLifecycle = jest.fn()
 			.mockReturnValue(Promise.reject('error'));
 		action._handleExecutionError = jest.fn();
 
-		let results = await action.execute(instance);
+		let results = await action.execute(element, instance);
 
 		expect(action._executeActionLifecycle)
-			.toHaveBeenCalledWith(instance, jasmine.any(Function), jasmine.any(Function));
+			.toHaveBeenCalledWith(element, instance, jasmine.any(Function), jasmine.any(Function));
 		expect(action._handleExecutionError)
 			.toHaveBeenCalledWith(instance, 'error');
 		expect(results).toEqual({});
@@ -66,22 +72,8 @@ describe('AbstractAction', () => {
 		expect(action.action).toThrow();
 	});
 
-	it('can set action config', () => {
-		let config = 'config';
-
-		action.setActionConfig(config);
-
-		expect(action._actionConfig).toEqual(config);
-	});
-
-	it('can get action config', () => {
-		let config = 'config';
-		action._actionConfig = config;
-
-		expect(action.getActionConfig()).toEqual(config);
-	});
-
 	it('can execute action lifecycle', async () => {
+		let element = 'element';
 		let instance = {
 			browser: 'browser',
 			page: 'page'
@@ -93,17 +85,18 @@ describe('AbstractAction', () => {
 		action._beforeActionExecute = jest.fn();
 		action._afterActionExecute = jest.fn();
 
-		await action._executeActionLifecycle(instance, errorHandler, responseHandler);
+		await action._executeActionLifecycle(element, instance, errorHandler, responseHandler);
 
 		expect(action._beforeActionExecute)
 			.toHaveBeenCalledWith(instance, errorHandler, responseHandler);
 		expect(action.action)
-			.toHaveBeenCalledWith(instance.page, instance.browser);
+			.toHaveBeenCalledWith(element, instance.page, instance.browser);
 		expect(action._beforeActionExecute)
 			.toHaveBeenCalledWith(instance, errorHandler, responseHandler);
 	});
 
 	it('can execute action lifecycle and handle execution error', async () => {
+		let element = 'element';
 		let instance = {
 			browser: 'browser',
 			page: 'page'
@@ -116,12 +109,12 @@ describe('AbstractAction', () => {
 		action._afterActionExecute = jest.fn();
 		action._handleExecutionError = jest.fn();
 
-		await action._executeActionLifecycle(instance, errorHandler, responseHandler);
+		await action._executeActionLifecycle(element, instance, errorHandler, responseHandler);
 
 		expect(action._beforeActionExecute)
 			.toHaveBeenCalledWith(instance, errorHandler, responseHandler);
 		expect(action.action)
-			.toHaveBeenCalledWith(instance.page, instance.browser);
+			.toHaveBeenCalledWith(element, instance.page, instance.browser);
 		expect(action._handleExecutionError)
 			.toHaveBeenCalledWith(instance, 'error');
 		expect(action._beforeActionExecute)

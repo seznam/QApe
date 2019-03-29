@@ -66,8 +66,10 @@ export default class RandomScenarios {
 		let results = { scenario: [], errors: [] };
 		let failedActionsCount = 0;
 
+		await this._config.beforeScenarioScript(instance);
+
 		for (let i = 0; i < this._config.actionsPerScenario; i++) {
-			let actionResults = await this._actionsHandler.execute(null, null, instance);
+			let actionResults = await this._actionsHandler.execute(instance);
 
 			if (actionResults.executionError) {
 				failedActionsCount++;
@@ -90,6 +92,8 @@ export default class RandomScenarios {
 				break;
 			}
 		}
+
+		await this._config.afterScenarioScript(instance);
 
 		return results;
 	}

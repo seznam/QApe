@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Page without errors</title>
+	</head>
+	<body>
+		<input onchange="error()" type="text" placeholder="QApe" />
+		<button>Click!</button>
+		<script>
+			var counter = 0;
+
+			function error() {
+				if (counter > 0) {
+					throw Error('Something went wrong.');
+				} else {
+					counter++;
+				}
+			}
+		</script>
+	</body>
+</html>

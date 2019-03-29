@@ -37,11 +37,13 @@ export default class ScenariosHelper {
 			};
 		}
 
+		await this._config.beforeScenarioScript(instance);
+
 		for (let i = 0; i < scenario.length; i++) {
 			let results = await this._actionsHandler.execute(
+				instance,
 				scenario[i].action,
-				scenario[i].config,
-				instance
+				scenario[i].config
 			);
 
 			executedScenario.push(results);
@@ -56,6 +58,8 @@ export default class ScenariosHelper {
 				break;
 			}
 		}
+
+		await this._config.afterScenarioScript(instance);
 
 		return { scenario: executedScenario, errors, executionError };
 	}

@@ -56,9 +56,7 @@ export default class Runner {
 			report('runner:start', { scenario });
 
 			try {
-				await this._config.beforeScenarioScript(instance);
 				results = await this._scenariosHandler.runScenario(instance, type, scenario);
-				await this._config.afterScenarioScript(instance);
 			} catch (error) {
 				this._isSuccess = false;
 				report('runner:error', {

@@ -29,17 +29,27 @@ describe('ScenariosHelper', () => {
 			execute: jest.fn()
 				.mockReturnValue(scenario[0])
 		};
+		scenariosHelper._config = {
+			beforeScenarioScript: jest.fn()
+				.mockReturnValue(Promise.resolve()),
+			afterScenarioScript: jest.fn()
+				.mockReturnValue(Promise.resolve())
+		}
 
 		let results = await scenariosHelper.runScenario(instance, scenario);
 
 		expect(page.goto).toHaveBeenCalledWith('beforeLocation');
 		expect(scenariosHelper._actionsHandler.execute)
-			.toHaveBeenCalledWith('action', 'config', instance);
+			.toHaveBeenCalledWith(instance, 'action', 'config');
 		expect(results).toEqual({
 			scenario,
 			errors: [],
 			executionError: undefined
 		});
+		expect(scenariosHelper._config.beforeScenarioScript)
+			.toHaveBeenCalledWith(instance);
+		expect(scenariosHelper._config.afterScenarioScript)
+			.toHaveBeenCalledWith(instance);
 	});
 
 	it('can run provided scenario and handle navigation error', async () => {
@@ -106,12 +116,18 @@ describe('ScenariosHelper', () => {
 					executionError: 'executionError'
 				}))
 		};
+		scenariosHelper._config = {
+			beforeScenarioScript: jest.fn()
+				.mockReturnValue(Promise.resolve()),
+			afterScenarioScript: jest.fn()
+				.mockReturnValue(Promise.resolve())
+		}
 
 		let results = await scenariosHelper.runScenario(instance, scenario);
 
 		expect(page.goto).toHaveBeenCalledWith('beforeLocation');
 		expect(scenariosHelper._actionsHandler.execute)
-			.toHaveBeenCalledWith('action', 'config', instance);
+			.toHaveBeenCalledWith(instance, 'action', 'config');
 		expect(results).toEqual({
 			scenario: [Object.assign({}, scenario[0], {
 				executionError: 'executionError'
@@ -119,6 +135,10 @@ describe('ScenariosHelper', () => {
 			errors: [],
 			executionError: 'executionError'
 		});
+		expect(scenariosHelper._config.beforeScenarioScript)
+			.toHaveBeenCalledWith(instance);
+		expect(scenariosHelper._config.afterScenarioScript)
+			.toHaveBeenCalledWith(instance);
 	});
 
 	it('can run provided scenario and handle a page error', async () => {
@@ -140,12 +160,18 @@ describe('ScenariosHelper', () => {
 					errors: ['error']
 				}))
 		};
+		scenariosHelper._config = {
+			beforeScenarioScript: jest.fn()
+				.mockReturnValue(Promise.resolve()),
+			afterScenarioScript: jest.fn()
+				.mockReturnValue(Promise.resolve())
+		}
 
 		let results = await scenariosHelper.runScenario(instance, scenario);
 
 		expect(page.goto).toHaveBeenCalledWith('beforeLocation');
 		expect(scenariosHelper._actionsHandler.execute)
-			.toHaveBeenCalledWith('action', 'config', instance);
+			.toHaveBeenCalledWith(instance, 'action', 'config');
 		expect(results).toEqual({
 			scenario: [Object.assign({}, scenario[0], {
 				errors: ['error']
@@ -153,5 +179,9 @@ describe('ScenariosHelper', () => {
 			errors: ['error'],
 			executionError: undefined
 		});
+		expect(scenariosHelper._config.beforeScenarioScript)
+			.toHaveBeenCalledWith(instance);
+		expect(scenariosHelper._config.afterScenarioScript)
+			.toHaveBeenCalledWith(instance);
 	});
 });
