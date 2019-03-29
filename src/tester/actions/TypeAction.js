@@ -19,7 +19,7 @@ export default class TypeAction extends AbstractAction {
 	/**
 	 * Checks if an elements is a typable input or textarea
 	 * @param {puppeteer.ElementHandle} element 
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	static isActionAvailable(element) {
 			return element.executionContext().evaluate(element => {

@@ -15,7 +15,7 @@ export default class ClickAction extends AbstractAction {
 
 	/**
 	 * Click action should be always possible
-	 * @returns {Boolean} true
+	 * @returns {boolean} true
 	 */
 	static isActionAvailable() {
 		return true;
