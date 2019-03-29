@@ -1,6 +1,6 @@
 {
   "name": "qape",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "Monkey testing library",
   "main": "bin/qape.js",
   "scripts": {

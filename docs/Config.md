@@ -34,6 +34,8 @@ module.exports = {
 - [shouldRequestCauseError](#shouldRequestCauseError)
 - [stopNewScenariosAfterTime](#stopNewScenariosAfterTime)
 - [testerTimeout](#testerTimeout)
+- [typeActionDelay](#typeActionDelay)
+- [typeActionTextTypes](#typeActionTextTypes)
 - [url](#url)
 
 ## Options
@@ -330,6 +332,123 @@ If a tester did not send any message for this period of time, it will be killed 
 **Default:**
 ```javascript
 300000
+```
+
+### typeActionDelay
+`<number>`
+
+Delay between key strokes for type action so it would seem more user-like.
+
+**Default:**
+```javascript
+20
+```
+
+### typeActionTextTypes
+`<string[]>`
+
+Available text types from npm package "faker", which will generate string of the random type from this list.
+
+**Default:**
+```javascript
+[
+	"name.firstName",
+	"name.lastName",
+	"name.findName",
+	"name.prefix",
+	"name.suffix",
+	"address.zipCode",
+	"address.city",
+	"address.cityPrefix",
+	"address.citySuffix",
+	"address.streetName",
+	"address.streetAddress",
+	"address.streetSuffix",
+	"address.secondaryAddress",
+	"address.county",
+	"address.country",
+	"address.state",
+	"address.stateAbbr",
+	"address.latitude",
+	"address.longitude",
+	"phone.phoneNumber",
+	"phone.phoneNumberFormat",
+	"phone.phoneFormats",
+	"internet.avatar",
+	"internet.email",
+	"internet.userName",
+	"internet.domainName",
+	"internet.domainSuffix",
+	"internet.domainWord",
+	"internet.ip",
+	"internet.userAgent",
+	"internet.color",
+	"internet.password",
+	"company.suffixes",
+	"company.companyName",
+	"company.companySuffix",
+	"company.catchPhrase",
+	"company.bs",
+	"company.catchPhraseAdjective",
+	"company.catchPhraseDescriptor",
+	"company.catchPhraseNoun",
+	"company.bsAdjective",
+	"company.bsBuzz",
+	"company.bsNoun",
+	"image.image",
+	"image.avatar",
+	"image.imageUrl",
+	"image.abstract",
+	"image.animals",
+	"image.business",
+	"image.cats",
+	"image.city",
+	"image.food",
+	"image.nightlife",
+	"image.fashion",
+	"image.people",
+	"image.nature",
+	"image.sports",
+	"image.technics",
+	"image.transport",
+	"lorem.words",
+	"lorem.sentence",
+	"lorem.sentences",
+	"lorem.paragraph",
+	"lorem.paragraphs",
+	"helpers.randomNumber",
+	"helpers.randomize",
+	"helpers.slugify",
+	"helpers.replaceSymbolWithNumber",
+	"helpers.shuffle",
+	"helpers.mustache",
+	"helpers.createCard",
+	"helpers.contextualCard",
+	"helpers.userCard",
+	"helpers.createTransaction",
+	"date.past",
+	"date.future",
+	"date.between",
+	"date.recent",
+	"random.number",
+	"random.array_element",
+	"random.object_element",
+	"random.uuid",
+	"finance.account",
+	"finance.accountName",
+	"finance.mask",
+	"finance.amount",
+	"finance.transactionType",
+	"finance.currencyCode",
+	"finance.currencyName",
+	"finance.currencySymbol",
+	"hacker.abbreviation",
+	"hacker.adjective",
+	"hacker.noun",
+	"hacker.verb",
+	"hacker.ingverb",
+	"hacker.phrase"
+]
 ```
 
 ### url
