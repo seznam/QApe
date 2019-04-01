@@ -1882,105 +1882,105 @@ Returns **[Promise][251]&lt;[Object][201]>** Execution results
 
 [198]: #parameters-73
 
-[199]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/index.js#L15-L39 "Source code on GitHub"
+[199]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/index.js#L15-L39 "Source code on GitHub"
 
-[200]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/master/index.js#L9-L78 "Source code on GitHub"
+[200]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/master/index.js#L9-L78 "Source code on GitHub"
 
 [201]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[202]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/index.js#L12-L18 "Source code on GitHub"
+[202]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/index.js#L12-L18 "Source code on GitHub"
 
-[203]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/ConsoleReporter.js#L7-L120 "Source code on GitHub"
+[203]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/ConsoleReporter.js#L7-L120 "Source code on GitHub"
 
-[204]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/ConsoleReporter.js#L26-L28 "Source code on GitHub"
+[204]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/ConsoleReporter.js#L26-L28 "Source code on GitHub"
 
-[205]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/ConsoleReporter.js#L34-L40 "Source code on GitHub"
+[205]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/ConsoleReporter.js#L34-L40 "Source code on GitHub"
 
-[206]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/ConsoleReporter.js#L46-L48 "Source code on GitHub"
+[206]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/ConsoleReporter.js#L46-L48 "Source code on GitHub"
 
-[207]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/ConsoleReporter.js#L54-L67 "Source code on GitHub"
+[207]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/ConsoleReporter.js#L54-L67 "Source code on GitHub"
 
-[208]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/ConsoleReporter.js#L73-L87 "Source code on GitHub"
+[208]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/ConsoleReporter.js#L73-L87 "Source code on GitHub"
 
-[209]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/ConsoleReporter.js#L93-L104 "Source code on GitHub"
+[209]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/ConsoleReporter.js#L93-L104 "Source code on GitHub"
 
-[210]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/ConsoleReporter.js#L112-L119 "Source code on GitHub"
+[210]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/ConsoleReporter.js#L112-L119 "Source code on GitHub"
 
 [211]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
 [212]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[213]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/FileReporter.js#L11-L106 "Source code on GitHub"
+[213]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/FileReporter.js#L11-L106 "Source code on GitHub"
 
-[214]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/FileReporter.js#L29-L33 "Source code on GitHub"
+[214]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/FileReporter.js#L29-L33 "Source code on GitHub"
 
-[215]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/FileReporter.js#L39-L51 "Source code on GitHub"
+[215]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/FileReporter.js#L39-L51 "Source code on GitHub"
 
-[216]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/FileReporter.js#L59-L77 "Source code on GitHub"
+[216]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/FileReporter.js#L59-L77 "Source code on GitHub"
 
-[217]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/FileReporter.js#L85-L97 "Source code on GitHub"
+[217]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/FileReporter.js#L85-L97 "Source code on GitHub"
 
-[218]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/FileReporter.js#L103-L105 "Source code on GitHub"
+[218]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/FileReporter.js#L103-L105 "Source code on GitHub"
 
 [219]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[220]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/Reporter.js#L9-L89 "Source code on GitHub"
+[220]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/Reporter.js#L9-L89 "Source code on GitHub"
 
-[221]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/Reporter.js#L24-L50 "Source code on GitHub"
+[221]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/Reporter.js#L24-L50 "Source code on GitHub"
 
-[222]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/Reporter.js#L58-L67 "Source code on GitHub"
+[222]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/Reporter.js#L58-L67 "Source code on GitHub"
 
-[223]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/Reporter.js#L73-L78 "Source code on GitHub"
+[223]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/Reporter.js#L73-L78 "Source code on GitHub"
 
-[224]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/Reporter.js#L84-L88 "Source code on GitHub"
+[224]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/Reporter.js#L84-L88 "Source code on GitHub"
 
-[225]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/SpinnerReporter.js#L18-L66 "Source code on GitHub"
+[225]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/SpinnerReporter.js#L18-L66 "Source code on GitHub"
 
-[226]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/reporter/reporter/SpinnerReporter.js#L46-L56 "Source code on GitHub"
+[226]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/reporter/reporter/SpinnerReporter.js#L46-L56 "Source code on GitHub"
 
-[227]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/scriptwriter/index.js#L11-L27 "Source code on GitHub"
+[227]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/scriptwriter/index.js#L11-L27 "Source code on GitHub"
 
-[228]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/scriptwriter/scenarios/ScenariosHandler.js#L8-L113 "Source code on GitHub"
+[228]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/scriptwriter/scenarios/ScenariosHandler.js#L8-L113 "Source code on GitHub"
 
-[229]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/scriptwriter/scenarios/ScenariosHandler.js#L25-L30 "Source code on GitHub"
+[229]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/scriptwriter/scenarios/ScenariosHandler.js#L25-L30 "Source code on GitHub"
 
-[230]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/scenarios/ScenariosHandler.js#L33-L40 "Source code on GitHub"
+[230]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/scenarios/ScenariosHandler.js#L33-L40 "Source code on GitHub"
 
 [231]: #scenarioshandler
 
-[232]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/scriptwriter/scenarios/ScenariosHandler.js#L39-L59 "Source code on GitHub"
+[232]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/scriptwriter/scenarios/ScenariosHandler.js#L39-L59 "Source code on GitHub"
 
-[233]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/scriptwriter/scenarios/ScenariosHandler.js#L69-L79 "Source code on GitHub"
+[233]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/scriptwriter/scenarios/ScenariosHandler.js#L69-L79 "Source code on GitHub"
 
-[234]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/scriptwriter/scenarios/ScenariosHandler.js#L84-L97 "Source code on GitHub"
+[234]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/scriptwriter/scenarios/ScenariosHandler.js#L84-L97 "Source code on GitHub"
 
-[235]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/scriptwriter/scenarios/ScenariosHandler.js#L104-L112 "Source code on GitHub"
+[235]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/scriptwriter/scenarios/ScenariosHandler.js#L104-L112 "Source code on GitHub"
 
-[236]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/scenarios/ScenariosHandler.js#L10-L53 "Source code on GitHub"
+[236]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/scenarios/ScenariosHandler.js#L10-L53 "Source code on GitHub"
 
 [237]: #actionshandler
 
-[238]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/shared/config/Config.js#L6-L43 "Source code on GitHub"
+[238]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/shared/config/Config.js#L6-L43 "Source code on GitHub"
 
-[239]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/shared/config/Config.js#L11-L29 "Source code on GitHub"
+[239]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/shared/config/Config.js#L11-L29 "Source code on GitHub"
 
-[240]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/shared/config/Config.js#L35-L42 "Source code on GitHub"
+[240]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/shared/config/Config.js#L35-L42 "Source code on GitHub"
 
-[241]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/shared/helpers.js#L9-L11 "Source code on GitHub"
+[241]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/shared/helpers.js#L9-L11 "Source code on GitHub"
 
-[242]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/shared/helpers.js#L20-L22 "Source code on GitHub"
+[242]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/shared/helpers.js#L20-L22 "Source code on GitHub"
 
 [243]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
-[244]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/AbstractAction.js#L8-L204 "Source code on GitHub"
+[244]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/AbstractAction.js#L8-L204 "Source code on GitHub"
 
 [245]: #actionshelper
 
-[246]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/AbstractAction.js#L48-L65 "Source code on GitHub"
+[246]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/AbstractAction.js#L48-L65 "Source code on GitHub"
 
-[247]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/AbstractAction.js#L71-L73 "Source code on GitHub"
+[247]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/AbstractAction.js#L71-L73 "Source code on GitHub"
 
-[248]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/AbstractAction.js#L86-L96 "Source code on GitHub"
+[248]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/AbstractAction.js#L86-L96 "Source code on GitHub"
 
 [249]: #browser
 
@@ -1988,150 +1988,150 @@ Returns **[Promise][251]&lt;[Object][201]>** Execution results
 
 [251]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-[252]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/AbstractAction.js#L103-L109 "Source code on GitHub"
+[252]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/AbstractAction.js#L103-L109 "Source code on GitHub"
 
 [253]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error
 
-[254]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/AbstractAction.js#L127-L151 "Source code on GitHub"
+[254]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/AbstractAction.js#L127-L151 "Source code on GitHub"
 
-[255]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/AbstractAction.js#L165-L178 "Source code on GitHub"
+[255]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/AbstractAction.js#L165-L178 "Source code on GitHub"
 
-[256]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/AbstractAction.js#L184-L189 "Source code on GitHub"
+[256]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/AbstractAction.js#L184-L189 "Source code on GitHub"
 
-[257]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/AbstractAction.js#L196-L203 "Source code on GitHub"
+[257]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/AbstractAction.js#L196-L203 "Source code on GitHub"
 
-[258]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/AbstractAction.js#L12-L14 "Source code on GitHub"
+[258]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/AbstractAction.js#L12-L14 "Source code on GitHub"
 
-[259]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/AbstractAction.js#L19-L21 "Source code on GitHub"
+[259]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/AbstractAction.js#L19-L21 "Source code on GitHub"
 
-[260]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ActionsHandler.js#L9-L121 "Source code on GitHub"
+[260]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ActionsHandler.js#L9-L121 "Source code on GitHub"
 
-[261]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ActionsHandler.js#L25-L30 "Source code on GitHub"
+[261]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ActionsHandler.js#L25-L30 "Source code on GitHub"
 
-[262]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ActionsHandler.js#L39-L53 "Source code on GitHub"
+[262]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ActionsHandler.js#L39-L53 "Source code on GitHub"
 
-[263]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ActionsHandler.js#L62-L74 "Source code on GitHub"
+[263]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ActionsHandler.js#L62-L74 "Source code on GitHub"
 
-[264]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ActionsHandler.js#L79-L81 "Source code on GitHub"
+[264]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ActionsHandler.js#L79-L81 "Source code on GitHub"
 
-[265]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ActionsHandler.js#L86-L98 "Source code on GitHub"
+[265]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ActionsHandler.js#L86-L98 "Source code on GitHub"
 
-[266]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ActionsHandler.js#L105-L120 "Source code on GitHub"
+[266]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ActionsHandler.js#L105-L120 "Source code on GitHub"
 
-[267]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ActionsHelper.js#L4-L137 "Source code on GitHub"
+[267]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ActionsHelper.js#L4-L137 "Source code on GitHub"
 
-[268]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ActionsHelper.js#L21-L41 "Source code on GitHub"
+[268]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ActionsHelper.js#L21-L41 "Source code on GitHub"
 
-[269]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ActionsHelper.js#L48-L67 "Source code on GitHub"
+[269]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ActionsHelper.js#L48-L67 "Source code on GitHub"
 
-[270]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ActionsHelper.js#L75-L85 "Source code on GitHub"
+[270]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ActionsHelper.js#L75-L85 "Source code on GitHub"
 
-[271]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ActionsHelper.js#L92-L96 "Source code on GitHub"
+[271]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ActionsHelper.js#L92-L96 "Source code on GitHub"
 
-[272]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ActionsHelper.js#L103-L117 "Source code on GitHub"
+[272]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ActionsHelper.js#L103-L117 "Source code on GitHub"
 
-[273]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ActionsHelper.js#L123-L127 "Source code on GitHub"
+[273]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ActionsHelper.js#L123-L127 "Source code on GitHub"
 
-[274]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ActionsHelper.js#L134-L136 "Source code on GitHub"
+[274]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ActionsHelper.js#L134-L136 "Source code on GitHub"
 
-[275]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ClickAction.js#L8-L75 "Source code on GitHub"
+[275]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ClickAction.js#L8-L75 "Source code on GitHub"
 
-[276]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ClickAction.js#L32-L40 "Source code on GitHub"
+[276]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ClickAction.js#L32-L40 "Source code on GitHub"
 
-[277]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ClickAction.js#L52-L61 "Source code on GitHub"
+[277]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ClickAction.js#L52-L61 "Source code on GitHub"
 
-[278]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ClickAction.js#L67-L74 "Source code on GitHub"
+[278]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ClickAction.js#L67-L74 "Source code on GitHub"
 
-[279]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ClickAction.js#L12-L14 "Source code on GitHub"
+[279]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ClickAction.js#L12-L14 "Source code on GitHub"
 
-[280]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/ClickAction.js#L20-L22 "Source code on GitHub"
+[280]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/ClickAction.js#L20-L22 "Source code on GitHub"
 
-[281]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/TypeAction.js#L11-L107 "Source code on GitHub"
+[281]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/TypeAction.js#L11-L107 "Source code on GitHub"
 
-[282]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/TypeAction.js#L50-L60 "Source code on GitHub"
+[282]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/TypeAction.js#L50-L60 "Source code on GitHub"
 
-[283]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/TypeAction.js#L66-L72 "Source code on GitHub"
+[283]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/TypeAction.js#L66-L72 "Source code on GitHub"
 
-[284]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/TypeAction.js#L84-L93 "Source code on GitHub"
+[284]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/TypeAction.js#L84-L93 "Source code on GitHub"
 
-[285]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/TypeAction.js#L99-L106 "Source code on GitHub"
+[285]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/TypeAction.js#L99-L106 "Source code on GitHub"
 
-[286]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/TypeAction.js#L15-L17 "Source code on GitHub"
+[286]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/TypeAction.js#L15-L17 "Source code on GitHub"
 
-[287]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/actions/TypeAction.js#L24-L40 "Source code on GitHub"
+[287]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/actions/TypeAction.js#L24-L40 "Source code on GitHub"
 
-[288]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/browser/Browser.js#L8-L137 "Source code on GitHub"
+[288]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/browser/Browser.js#L8-L137 "Source code on GitHub"
 
-[289]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/browser/Browser.js#L25-L27 "Source code on GitHub"
+[289]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/browser/Browser.js#L25-L27 "Source code on GitHub"
 
-[290]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/browser/Browser.js#L32-L34 "Source code on GitHub"
+[290]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/browser/Browser.js#L32-L34 "Source code on GitHub"
 
-[291]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/browser/Browser.js#L44-L46 "Source code on GitHub"
+[291]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/browser/Browser.js#L44-L46 "Source code on GitHub"
 
-[292]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/browser/Browser.js#L52-L61 "Source code on GitHub"
+[292]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/browser/Browser.js#L52-L61 "Source code on GitHub"
 
-[293]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/browser/Browser.js#L67-L71 "Source code on GitHub"
+[293]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/browser/Browser.js#L67-L71 "Source code on GitHub"
 
-[294]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/browser/Browser.js#L80-L98 "Source code on GitHub"
+[294]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/browser/Browser.js#L80-L98 "Source code on GitHub"
 
-[295]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/browser/Browser.js#L106-L117 "Source code on GitHub"
+[295]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/browser/Browser.js#L106-L117 "Source code on GitHub"
 
-[296]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/browser/Browser.js#L124-L129 "Source code on GitHub"
+[296]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/browser/Browser.js#L124-L129 "Source code on GitHub"
 
-[297]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/browser/Browser.js#L134-L136 "Source code on GitHub"
+[297]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/browser/Browser.js#L134-L136 "Source code on GitHub"
 
-[298]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/index.js#L12-L23 "Source code on GitHub"
+[298]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/index.js#L12-L23 "Source code on GitHub"
 
 [299]: #runner
 
-[300]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/messanger.js#L9-L11 "Source code on GitHub"
+[300]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/messanger.js#L9-L11 "Source code on GitHub"
 
-[301]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/messanger.js#L19-L29 "Source code on GitHub"
+[301]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/messanger.js#L19-L29 "Source code on GitHub"
 
-[302]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/messanger.js#L36-L38 "Source code on GitHub"
+[302]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/messanger.js#L36-L38 "Source code on GitHub"
 
-[303]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/Runner.js#L11-L112 "Source code on GitHub"
+[303]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/Runner.js#L11-L112 "Source code on GitHub"
 
-[304]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/Runner.js#L28-L39 "Source code on GitHub"
+[304]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/Runner.js#L28-L39 "Source code on GitHub"
 
-[305]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/Runner.js#L45-L81 "Source code on GitHub"
+[305]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/Runner.js#L45-L81 "Source code on GitHub"
 
-[306]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/Runner.js#L87-L89 "Source code on GitHub"
+[306]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/Runner.js#L87-L89 "Source code on GitHub"
 
-[307]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/Runner.js#L94-L97 "Source code on GitHub"
+[307]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/Runner.js#L94-L97 "Source code on GitHub"
 
-[308]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/Runner.js#L102-L104 "Source code on GitHub"
+[308]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/Runner.js#L102-L104 "Source code on GitHub"
 
-[309]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/Runner.js#L109-L111 "Source code on GitHub"
+[309]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/Runner.js#L109-L111 "Source code on GitHub"
 
-[310]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/scenarios/DefinedScenarios.js#L8-L55 "Source code on GitHub"
+[310]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/scenarios/DefinedScenarios.js#L8-L55 "Source code on GitHub"
 
 [311]: #scenarioshelper
 
-[312]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/scenarios/DefinedScenarios.js#L23-L25 "Source code on GitHub"
+[312]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/scenarios/DefinedScenarios.js#L23-L25 "Source code on GitHub"
 
-[313]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/scenarios/DefinedScenarios.js#L33-L54 "Source code on GitHub"
+[313]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/scenarios/DefinedScenarios.js#L33-L54 "Source code on GitHub"
 
-[314]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/scenarios/FailingScenarios.js#L8-L114 "Source code on GitHub"
+[314]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/scenarios/FailingScenarios.js#L8-L114 "Source code on GitHub"
 
-[315]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/scenarios/FailingScenarios.js#L23-L25 "Source code on GitHub"
+[315]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/scenarios/FailingScenarios.js#L23-L25 "Source code on GitHub"
 
-[316]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/scenarios/FailingScenarios.js#L35-L76 "Source code on GitHub"
+[316]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/scenarios/FailingScenarios.js#L35-L76 "Source code on GitHub"
 
-[317]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/scenarios/FailingScenarios.js#L83-L89 "Source code on GitHub"
+[317]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/scenarios/FailingScenarios.js#L83-L89 "Source code on GitHub"
 
-[318]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/scenarios/FailingScenarios.js#L98-L113 "Source code on GitHub"
+[318]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/scenarios/FailingScenarios.js#L98-L113 "Source code on GitHub"
 
-[319]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/scenarios/RandomScenarios.js#L8-L100 "Source code on GitHub"
+[319]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/scenarios/RandomScenarios.js#L8-L100 "Source code on GitHub"
 
 [320]: #reporter
 
-[321]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/scenarios/RandomScenarios.js#L26-L28 "Source code on GitHub"
+[321]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/scenarios/RandomScenarios.js#L26-L28 "Source code on GitHub"
 
-[322]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/scenarios/RandomScenarios.js#L37-L58 "Source code on GitHub"
+[322]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/scenarios/RandomScenarios.js#L37-L58 "Source code on GitHub"
 
-[323]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/scenarios/RandomScenarios.js#L65-L99 "Source code on GitHub"
+[323]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/scenarios/RandomScenarios.js#L65-L99 "Source code on GitHub"
 
-[324]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/scenarios/ScenariosHelper.js#L4-L66 "Source code on GitHub"
+[324]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/scenarios/ScenariosHelper.js#L4-L66 "Source code on GitHub"
 
-[325]: https://github.com/seznam/QApe/blob/8901e9a1f2f7763d4339413275dae8d69b590b0d/src/tester/scenarios/ScenariosHelper.js#L21-L65 "Source code on GitHub"
+[325]: https://github.com/seznam/QApe/blob/d2ede27609a889f3f13aceb7dedc377fa66edb4f/src/tester/scenarios/ScenariosHelper.js#L21-L65 "Source code on GitHub"
