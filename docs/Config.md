@@ -16,6 +16,7 @@ module.exports = {
 - [beforeActionScript](#beforeActionScript)
 - [beforeScenarioScript](#beforeScenarioScript)
 - [browserWebSocketEndpoint](#browserWebSocketEndpoint)
+- [debug](#debug)
 - [defaultBrowserSettings](#defaultBrowserSettings)
 - [defaultNavigationTimeout](#defaultNavigationTimeout)
 - [files](#files)
@@ -107,6 +108,16 @@ A browser websocket endpoint to connect to (i.e. ws://5.5.5.5:3505)
 **Default:**
 ```javascript
 null
+```
+
+### debug
+`<boolean>`
+
+Enables debug mode with extra logging
+
+**Default:**
+```javascript
+false
 ```
 
 ### defaultBrowserSettings
