@@ -13,6 +13,10 @@ export default (config) => {
 	let reporter = new Reporter(config).init();
 
 	process.on('message', ({ eventName, eventData }) => {
+		if (config.debug) {
+			console.log(eventName, '-', eventData);
+		}
+
 		reporter.emit(eventName, eventData);
 	});
 }

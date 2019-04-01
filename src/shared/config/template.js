@@ -74,6 +74,11 @@ module.exports = {
 		description: 'Default browser settings passed to puppeteer.launch()',
 		type: 'Object'
 	},
+	debug: {
+		value: false,
+		description: 'Enables debug mode with extra logging',
+		type: 'boolean'
+	},
 	defaultNavigationTimeout: {
 		value: 60000,
 		description: 'Default navigation timeout set via page.setDefaultNavigationTimeout()',
