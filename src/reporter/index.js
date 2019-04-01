@@ -1,4 +1,5 @@
 import Reporter from './reporter/Reporter';
+import util from 'util';
 
 /** @module reporter */
 
@@ -14,7 +15,14 @@ export default (config) => {
 
 	process.on('message', ({ eventName, eventData }) => {
 		if (config.debug) {
-			console.log(eventName, '-', eventData);
+			let date = new Date().toISOString();
+
+			if (eventData) {
+				console.log(date, '-', eventName, '-', util.inspect(eventData, { depth: null }));
+			} else {
+				console.log(date, '-', eventName);
+			}
+			
 		}
 
 		reporter.emit(eventName, eventData);
