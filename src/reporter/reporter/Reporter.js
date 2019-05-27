@@ -81,8 +81,12 @@ export default class Reporter extends EventEmitter {
 	 * Initializes a reporter from a class constructor
 	 * @param {Class} Reporter
 	 */
-	_initReporterFromClass(Reporter) {
+	async _initReporterFromClass(Reporter) {
 		let instance = new Reporter(this._config);
+
+		if (typeof instance.init === 'function') {
+			await instance.init();
+		}
 
 		this._reporters.push(instance);
 	}

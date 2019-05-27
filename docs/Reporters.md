@@ -56,5 +56,11 @@ export default class DefaultReporter extends EventEmitter {
 		// eventData contains scenario, browser instance and error
 		this.on('runner:error', eventData => console.log(eventData));
 	}
+
+	// You can use init method, which is called right after constructor.
+	// This is the place for your async setup operations.
+	init() {
+		return Promise.resolve();
+	}
 }
 ```
