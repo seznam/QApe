@@ -22,24 +22,6 @@ export default class ClickAction extends AbstractAction {
 	}
 
 	/**
-	 * Finds specified, or random element
-	 * Generates action config for action re-run
-	 * Performs click on the element
-	 * @param {puppeteer.ElementHandle} element
-	 * @param {puppeteer.Page} page
-	 * @returns {Promise} Resolves when click is done
-	 */
-	async action(element, page) {
-		try {
-			await this._logInfo(element);
-		} catch (e) {
-			throw Error('Unable to log element information.\n' + e.stack);
-		}
-
-		await this._clickOnElement(page, element);
-	}
-
-	/**
 	 * Performs the click action with following wrappers:
 	 * - Hover over the element
 	 * (So that in preview mode, you will see the element before click)
@@ -49,7 +31,7 @@ export default class ClickAction extends AbstractAction {
 	 * @param {puppeteer.ElementHandle} element
 	 * @returns {Promise} Resolves when click is done
 	 */
-	async _clickOnElement(page, element) {
+	async action(element, page) {
 		await element.hover();
 
 		if (this._config.headlessModeDisabled) {
@@ -62,14 +44,12 @@ export default class ClickAction extends AbstractAction {
 
 	/**
 	 * Adds clicked element info to the action results
-	 * @returns {Promise} Resolves when action info is saved
+	 * @param {Object} results
+	 * @returns {Object}
 	 */
-	async _logInfo(element) {
-		let selector = await this._actionsHelper.getElementSelector(element);
-		let html = await this._actionsHelper.getElementHTML(element);
-
-		this._results.config = { selector };
-		this._results.html = html;
-		this._results.message = `Click on ${html} [selector:"${selector}"]`;
+	async updateResults(results) {
+		return Object.assign({}, results, {
+			message: `Click on ${results.html} [selector:"${results.config.selector}"]`
+		});
 	}
 }

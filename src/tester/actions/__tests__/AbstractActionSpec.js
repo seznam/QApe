@@ -19,6 +19,7 @@ describe('AbstractAction', () => {
 		expect(action._config).toEqual({});
 		expect(action._actionsHelper).toEqual({});
 		expect(action._actionConfig).toEqual({});
+		expect(action._listeners).toEqual([]);
 		expect(action._results).toEqual({
 			action: 'id',
 			errors: [],
@@ -30,41 +31,132 @@ describe('AbstractAction', () => {
 		expect(AbstractAction.isActionAvailable).toThrow();
 	});
 
+	it('can evaluate an action', async () => {
+		expect(await action.evaluateAction()).toEqual(undefined);
+	});
+
+	it('can update results', async () => {
+		let results = 'results';
+
+		expect(await action.updateResults(results)).toEqual(results);
+	});
+
 	it('can execute an action successfully', async () => {
-		let instance = 'instance';
+		let instance = {
+			pageErrorHandler: 'pageErrorHandler',
+			page: 'page'
+		};
 		let element = 'element';
 		action._results = {};
-		action._addErrorToResults = jest.fn();
-		action._executeActionLifecycle = jest.fn((element, page, errorHandler) => {
-			errorHandler('error');
-
-			return Promise.resolve();
-		});
+		action._executeActionLifecycle = jest.fn()
+			.mockReturnValue(Promise.resolve());
+		action._addEventListener = jest.fn();
+		action._clearAllEventListeners = jest.fn();
 
 		let results = await action.execute(element, instance);
 
 		expect(action._executeActionLifecycle)
-			.toHaveBeenCalledWith(element, instance, jasmine.any(Function), jasmine.any(Function));
-		expect(action._addErrorToResults)
-			.toHaveBeenCalledWith('error');
+			.toHaveBeenCalledWith(element, instance);
+		expect(action._addEventListener)
+			.toHaveBeenCalledWith(instance.pageErrorHandler, 'page-error', jasmine.any(Function));
+		expect(action._addEventListener)
+			.toHaveBeenCalledWith(instance.page, 'response', jasmine.any(Function));;
 		expect(results).toEqual({});
 	});
 
 	it('can execute an action and handle execution error', async () => {
-		let instance = 'instance';
+		let instance = {
+			pageErrorHandler: 'pageErrorHandler',
+			page: 'page'
+		};
 		let element = 'element';
 		action._results = {};
-		action._addErrorToResults = jest.fn();
 		action._executeActionLifecycle = jest.fn()
 			.mockReturnValue(Promise.reject('error'));
+		action._addEventListener = jest.fn();
+		action._clearAllEventListeners = jest.fn();
 		action._handleExecutionError = jest.fn();
 
 		let results = await action.execute(element, instance);
 
 		expect(action._executeActionLifecycle)
-			.toHaveBeenCalledWith(element, instance, jasmine.any(Function), jasmine.any(Function));
+			.toHaveBeenCalledWith(element, instance);
 		expect(action._handleExecutionError)
-			.toHaveBeenCalledWith(instance, 'error');
+			.toHaveBeenCalledWith('error');
+		expect(action._addEventListener)
+			.toHaveBeenCalledWith(instance.pageErrorHandler, 'page-error', jasmine.any(Function));
+		expect(action._addEventListener)
+			.toHaveBeenCalledWith(instance.page, 'response', jasmine.any(Function));;
+		expect(results).toEqual({});
+	});
+
+	it('can execute an action and handle a page error', async () => {
+		let instance = {
+			pageErrorHandler: 'pageErrorHandler',
+			page: 'page'
+		};
+		let element = 'element';
+		let error = 'error';
+		action._results = {};
+		action._executeActionLifecycle = jest.fn()
+			.mockReturnValue(Promise.resolve());
+		action._addErrorToResults = jest.fn();
+		action._addEventListener = jest.fn((target, event, fn) => {
+			if (event === 'page-error') {
+				fn(error);
+			}
+		});
+		action._clearAllEventListeners = jest.fn();
+
+		let results = await action.execute(element, instance);
+
+		expect(action._addErrorToResults)
+			.toHaveBeenCalledWith(error);
+		expect(action._executeActionLifecycle)
+			.toHaveBeenCalledWith(element, instance);
+		expect(action._addEventListener)
+			.toHaveBeenCalledWith(instance.pageErrorHandler, 'page-error', jasmine.any(Function));
+		expect(action._addEventListener)
+			.toHaveBeenCalledWith(instance.page, 'response', jasmine.any(Function));;
+		expect(results).toEqual({});
+	});
+
+	it('can execute an action and handle wrong request response', async () => {
+		let instance = {
+			pageErrorHandler: 'pageErrorHandler',
+			page: 'page'
+		};
+		let element = 'element';
+		let response = {
+			request: () => ({
+				url: () => 'url'
+			}),
+			status: () => 'status'
+		}
+		action._config = {
+			shouldRequestCauseError: () => true
+		};
+		action._results = {};
+		action._addErrorToResults = jest.fn();
+		action._executeActionLifecycle = jest.fn()
+			.mockReturnValue(Promise.resolve());
+		action._addEventListener = jest.fn((target, event, fn) => {
+			if (event === 'response') {
+				fn(response);
+			}
+		});
+		action._clearAllEventListeners = jest.fn();
+
+		let results = await action.execute(element, instance);
+
+		expect(action._addErrorToResults)
+			.toHaveBeenCalledWith(jasmine.any(String));
+		expect(action._executeActionLifecycle)
+			.toHaveBeenCalledWith(element, instance);
+		expect(action._addEventListener)
+			.toHaveBeenCalledWith(instance.pageErrorHandler, 'page-error', jasmine.any(Function));
+		expect(action._addEventListener)
+			.toHaveBeenCalledWith(instance.page, 'response', jasmine.any(Function));;
 		expect(results).toEqual({});
 	});
 
@@ -78,21 +170,23 @@ describe('AbstractAction', () => {
 			browser: 'browser',
 			page: 'page'
 		};
-		let errorHandler = 'errorHandler';
-		let responseHandler = 'responseHandler';
 		action.action = jest.fn()
+			.mockReturnValue(Promise.resolve());
+		action.evaluateAction = jest.fn()
 			.mockReturnValue(Promise.resolve());
 		action._beforeActionExecute = jest.fn();
 		action._afterActionExecute = jest.fn();
 
-		await action._executeActionLifecycle(element, instance, errorHandler, responseHandler);
+		await action._executeActionLifecycle(element, instance);
 
 		expect(action._beforeActionExecute)
-			.toHaveBeenCalledWith(instance, errorHandler, responseHandler);
+			.toHaveBeenCalledWith(instance);
 		expect(action.action)
 			.toHaveBeenCalledWith(element, instance.page, instance.browser);
-		expect(action._beforeActionExecute)
-			.toHaveBeenCalledWith(instance, errorHandler, responseHandler);
+		expect(action.evaluateAction)
+			.toHaveBeenCalledWith(element, instance.page, instance.browser);
+		expect(action._afterActionExecute)
+			.toHaveBeenCalledWith(element, instance);
 	});
 
 	it('can execute action lifecycle and handle execution error', async () => {
@@ -101,31 +195,59 @@ describe('AbstractAction', () => {
 			browser: 'browser',
 			page: 'page'
 		};
-		let errorHandler = 'errorHandler';
-		let responseHandler = 'responseHandler';
 		action.action = jest.fn()
 			.mockReturnValue(Promise.reject('error'));
+		action.evaluateAction = jest.fn()
+			.mockReturnValue(Promise.resolve());
 		action._beforeActionExecute = jest.fn();
 		action._afterActionExecute = jest.fn();
 		action._handleExecutionError = jest.fn();
 
-		await action._executeActionLifecycle(element, instance, errorHandler, responseHandler);
+		await action._executeActionLifecycle(element, instance);
 
 		expect(action._beforeActionExecute)
-			.toHaveBeenCalledWith(instance, errorHandler, responseHandler);
+			.toHaveBeenCalledWith(instance);
 		expect(action.action)
 			.toHaveBeenCalledWith(element, instance.page, instance.browser);
 		expect(action._handleExecutionError)
-			.toHaveBeenCalledWith(instance, 'error');
+			.toHaveBeenCalledWith('error');
+		expect(action.evaluateAction)
+			.toHaveBeenCalledWith(element, instance.page, instance.browser);
+		expect(action._afterActionExecute)
+			.toHaveBeenCalledWith(element, instance);
+	});
+
+	it('can execute action lifecycle and evaluate action failure', async () => {
+		let element = 'element';
+		let instance = {
+			browser: 'browser',
+			page: 'page'
+		};
+		action.action = jest.fn()
+			.mockReturnValue(Promise.resolve());
+		action.evaluateAction = jest.fn()
+			.mockReturnValue(Promise.reject({ stack: 'error' }));
+		action._addErrorToResults = jest.fn();
+		action._beforeActionExecute = jest.fn();
+		action._afterActionExecute = jest.fn();
+		action._handleExecutionError = jest.fn();
+
+		await action._executeActionLifecycle(element, instance);
+
 		expect(action._beforeActionExecute)
-			.toHaveBeenCalledWith(instance, errorHandler, responseHandler);
+			.toHaveBeenCalledWith(instance);
+		expect(action.action)
+			.toHaveBeenCalledWith(element, instance.page, instance.browser);
+		expect(action.evaluateAction)
+			.toHaveBeenCalledWith(element, instance.page, instance.browser);
+		expect(action._addErrorToResults)
+			.toHaveBeenCalledWith('error');
+		expect(action._afterActionExecute)
+			.toHaveBeenCalledWith(element, instance);
 	});
 
 	it('can execute after action scripts', async () => {
-		let errorHandler = 'errorHandler';
-		let responseHandler = 'responseHandler';
-		let removedPageErrorListeners = [];
-		let removedPageResponseListeners = [];
+		let element = 'element';
 		let instance = {
 			browser: 'browser',
 			page: {
@@ -137,25 +259,21 @@ describe('AbstractAction', () => {
 				goBack: jest.fn()
 					.mockReturnValue(Promise.resolve()),
 				bringToFront: jest.fn()
-					.mockReturnValue(Promise.resolve()),
-				removeListener: jest.fn((eventName, handler) => removedPageResponseListeners.push({ eventName, handler }))
+					.mockReturnValue(Promise.resolve())
 			},
-			pageErrorHandler: {
-				removeListener: jest.fn((eventName, handler) => removedPageErrorListeners.push({ eventName, handler }))
-			}
+			pageErrorHandler: 'pageErrorHandler'
 		};
 		action._results = {};
-		action._reporter = {
-			emit: jest.fn()
-		};
 		action._clearTabs = jest.fn();
 		action._config = {
 			afterActionScript: jest.fn(),
 			afterActionWaitTime: 99,
 			url: 'url'
 		};
+		action._logInfo = jest.fn()
+			.mockReturnValue(Promise.resolve());
 
-		await action._afterActionExecute(instance, errorHandler, responseHandler);
+		await action._afterActionExecute(element, instance);
 
 		expect(instance.page.bringToFront).toHaveBeenCalled();
 		expect(action._config.afterActionScript)
@@ -170,59 +288,34 @@ describe('AbstractAction', () => {
 		expect(instance.page.goBack).toHaveBeenCalled();
 		expect(instance.page.waitFor)
 			.toHaveBeenCalledWith(99);
-		expect(instance.pageErrorHandler.removeListener)
-			.toHaveBeenCalledWith('page-error', errorHandler);
-		expect(instance.page.removeListener)
-			.toHaveBeenCalledWith('response', responseHandler);
 		expect(action._results).toEqual({ afterLocation: 'url' });
+		expect(action._logInfo)
+			.toHaveBeenCalledWith(element);
 		expect(messanger.report)
 			.toHaveBeenCalledWith('action:end', {
 				action: 'id',
 				results: { afterLocation: 'url' }
 			});
-		expect(removedPageErrorListeners).toEqual([{
-			eventName: 'page-error',
-			handler: errorHandler
-		}]);
-		expect(removedPageResponseListeners).toEqual([{
-			eventName: 'response',
-			handler: responseHandler
-		}]);
 	});
 
-	it('can execute before action scripts', () => {
-		let pageErrorListeners = [];
-		let pageResponseListeners = [];
-		let errorHandler = 'errorHandler';
-		let responseHandler = 'responseHandler';
+	it('can execute before action scripts', async () => {
 		let instance = {
 			browser: 'browser',
 			page: {
-				url: jest.fn()
-					.mockReturnValue('url'),
-				on: jest.fn((eventName, handler) => pageResponseListeners.push({ eventName, handler }))
+				url: jest.fn().mockReturnValue('url')
 			},
-			pageErrorHandler: {
-				on: jest.fn((eventName, handler) => pageErrorListeners.push({ eventName, handler }))
-			}
-		}
-		action._reporter = {
-			emit: jest.fn()
+			pageErrorHandler: 'pageErrorHandler'
 		};
 		action._config = {
 			beforeActionScript: jest.fn()
 		};
 		action._results = {};
 
-		action._beforeActionExecute(instance, errorHandler, responseHandler);
+		await action._beforeActionExecute(instance);
 
 		expect(action._results).toEqual({
 			beforeLocation: 'url'
 		});
-		expect(instance.pageErrorHandler.on)
-			.toHaveBeenCalledWith('page-error', errorHandler);
-		expect(instance.page.on)
-			.toHaveBeenCalledWith('response', responseHandler);
 		expect(action._config.beforeActionScript)
 			.toHaveBeenCalledWith(
 				instance.browser,
@@ -231,14 +324,6 @@ describe('AbstractAction', () => {
 			);
 		expect(messanger.report)
 			.toHaveBeenCalledWith('action:start', { action: 'id' });
-		expect(pageErrorListeners).toEqual([{
-			eventName: 'page-error',
-			handler: errorHandler
-		}]);
-		expect(pageResponseListeners).toEqual([{
-			eventName: 'response',
-			handler: responseHandler
-		}]);
 	});
 
 	it('can add an error to the results', () => {
@@ -267,5 +352,61 @@ describe('AbstractAction', () => {
 		expect(browser.pages).toHaveBeenCalled();
 		expect(pages[0].close).not.toHaveBeenCalled();
 		expect(pages[1].close).toHaveBeenCalled();
+	});
+
+	it('can add an event listener', () => {
+		let target = {
+			on: jest.fn()
+		};
+		let event = 'event';
+		let fn = 'fn';
+
+		action._addEventListener(target, event, fn);
+
+		expect(target.on).toHaveBeenCalledWith(event, fn);
+		expect(action._listeners).toEqual([{
+			target, event, fn
+		}]);
+	});
+
+	it('can clear all registered event listeners', () => {
+		let target = {
+			removeListener: jest.fn()
+		};
+		let event = 'event';
+		let fn = 'fn';
+		action._listeners = [{
+			target, event, fn
+		}];
+
+		action._clearAllEventListeners();
+
+		expect(target.removeListener)
+			.toHaveBeenCalledWith(event, fn);
+		expect(action._listeners).toEqual([]);
+	});
+
+	it('can log an element info', async () => {
+		let element = 'element';
+		let selector = 'selector';
+		let html = 'html';
+		action._actionsHelper = {
+			getElementSelector: jest.fn().mockReturnValue(Promise.resolve(selector)),
+			getElementHTML: jest.fn().mockReturnValue(Promise.resolve(html))
+		};
+		action.updateResults = jest.fn(results => Promise.resolve(results));
+		action._results = {};
+
+		await action._logInfo(element);
+
+		expect(action._actionsHelper.getElementSelector)
+			.toHaveBeenCalledWith(element);
+		expect(action._actionsHelper.getElementHTML)
+			.toHaveBeenCalledWith(element);
+		expect(action._results)
+			.toEqual({
+				config: { selector },
+				html
+			});
 	});
 });

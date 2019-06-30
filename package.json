@@ -2,7 +2,7 @@
   "name": "qape",
   "version": "0.5.0",
   "description": "Monkey testing library",
-  "main": "bin/qape.js",
+  "main": "lib/exports.js",
   "scripts": {
     "test": "jest src",
     "test:prerelease": "utils/tests/release/test.sh",
@@ -55,7 +55,7 @@
     "faker": "4.1.0",
     "glob-all": "3.1.0",
     "lodash.isequal": "4.5.0",
-    "puppeteer": "1.17.0"
+    "puppeteer": "1.18.1"
   },
   "devDependencies": {
     "@babel/cli": "7.4.4",

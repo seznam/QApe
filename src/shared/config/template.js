@@ -281,5 +281,10 @@ module.exports = {
 		value: 20,
 		description: 'Delay between key strokes for type action so it would seem more user-like.',
 		type: 'number'
+	},
+	customActions: {
+		value: [],
+		description: 'List of paths to your custom actions, you can use glob patterns.',
+		type: 'string[]'
 	}
 }

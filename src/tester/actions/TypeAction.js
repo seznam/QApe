@@ -22,41 +22,44 @@ export default class TypeAction extends AbstractAction {
 	 * @returns {boolean}
 	 */
 	static isActionAvailable(element) {
-			return element.executionContext().evaluate(element => {
-				return element.matches(
-					// Is typable input box
-					'input' +
-					':not([type="radio"])' +
-					':not([type="checkbox"])' +
-					':not([type="date"])' +
-					':not(:disabled)' +
-					':not([readonly])' +
-					// Is typable textarea
-					', textarea' +
-					':not(:disabled)' +
-					':not([readonly])'
-				);
-			}, element);
+		return element.executionContext().evaluate(element => {
+			return element.matches(
+				// Is typable input box
+				'input' +
+				':not([type="radio"])' +
+				':not([type="checkbox"])' +
+				':not([type="date"])' +
+				':not(:disabled)' +
+				':not([readonly])' +
+				// Is typable textarea
+				', textarea' +
+				':not(:disabled)' +
+				':not([readonly])'
+			);
+		}, element);
 	}
 
 	/**
-	 * Generates random or uses specified text
-	 * Generates action config for action re-run
-	 * Types the generated text into the element
+	 * Performs the type action with following wrappers:
+	 * - Hover over the element
+	 * (So that in preview mode, you will see the element before typing)
+	 * - Highlight the element (Only in headfull mode)
+	 * - Type the configured or random text into the element
 	 * @param {puppeteer.ElementHandle} element
 	 * @param {puppeteer.Page} page
 	 * @returns {Promise} Resolves when typing is done
 	 */
 	async action(element, page) {
-		let text = this._getText();
+		this._text = this._getText();
 
-		try {
-			await this._logInfo(element, text);
-		} catch (e) {
-			throw Error('Unable to log element information.\n' + e.stack);
+		await element.hover();
+
+		if (this._config.headlessModeDisabled) {
+			await this._actionsHelper.highlightElement(element);
+			await page.waitFor(this._config.previewModePauseTime);
 		}
 
-		await this._typeIntoElement(page, element, text);
+		await element.type(this._text, { delay: this._config.typeActionDelay });
 	}
 
 	/**
@@ -70,38 +73,16 @@ export default class TypeAction extends AbstractAction {
 
 		return faker.fake(`{{${getRandomElementFromArray(this._config.typeActionTextTypes)}}}`);
 	}
-		
-	/**
-	 * Performs the type action with following wrappers:
-	 * - Hover over the element
-	 * (So that in preview mode, you will see the element before typing)
-	 * - Highlight the element (Only in headfull mode)
-	 * - Type the specified text into the element
-	 * @param {puppeteer.Page} page
-	 * @param {puppeteer.ElementHandle} element
-	 * @returns {Promise} Resolves when typing is done
-	 */
-	async _typeIntoElement(page, element, text) {
-		await element.hover();
-
-		if (this._config.headlessModeDisabled) {
-			await this._actionsHelper.highlightElement(element);
-			await page.waitFor(this._config.previewModePauseTime);
-		}
-
-		await element.type(text, { delay: this._config.typeActionDelay });
-	}
 
 	/**
-	 * Adds clicked element info to the action results
-	 * @returns {Promise} Resolves when action info is saved
+	 * Adds info to the action results
+	 * @param {Object} results
+	 * @returns {Object}
 	 */
-	async _logInfo(element, text) {
-		let selector = await this._actionsHelper.getElementSelector(element);
-		let html = await this._actionsHelper.getElementHTML(element);
+	async updateResults(results) {
+		results.config.text = this._text;
+		results.message = `Type '${this._text}' into ${results.html} [selector:"${results.config.selector}"]`;
 
-		this._results.config = { selector, text };
-		this._results.html = html;
-		this._results.message = `Type '${text}' into ${html} [selector:"${selector}"]`;
+		return results;
 	}
 }

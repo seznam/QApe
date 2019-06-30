@@ -84,9 +84,13 @@ export default class ActionsHandler {
 	 * Loads all defined actions
 	 */
 	_loadActions() {
-		glob.sync([
-			path.join(__dirname, '!(Abstract)Action.js')
-		]).map(actionFile => {
+		let paths = [path.join(__dirname, '!(Abstract)Action.js')];
+
+		if (this._config.customActions && this._config.customActions.length > 0) {
+			this._config.customActions.forEach(action => paths.push(path.join(process.cwd(), action)));
+		}
+
+		glob.sync(paths).map(actionFile => {
 			let action = require(actionFile).default;
 
 			if (this._actions[action.id]) {
@@ -99,6 +103,7 @@ export default class ActionsHandler {
 
 	/**
 	 * @param {puppeteer.Page} page 
+	 * @param {string[]} availableActionIds
 	 * @returns {Promise<Object[]>} Returns array of objects with keys
 	 * Action and element, which are all available page actions
 	 */
@@ -110,7 +115,7 @@ export default class ActionsHandler {
 			return Promise.all(availableActionIds.map(async id => {
 				let Action = this._actions[id];
 
-				if (await Action.isActionAvailable(element)) {
+				if (await Action.isActionAvailable(element, page)) {
 					actions.push({ Action, element });
 				}
 			}));

@@ -39,6 +39,7 @@ You can use pre-built QApe docker image. Just set volumes to your report dir and
 
 ## Guides
 - [Setup configuration file](./docs/Config.md)
+- [Add Custom Actions](./docs/CustomActions.md)
 - [Create custom reporters]('./docs/Reporters.md')
 
 ## Developers

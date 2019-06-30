@@ -32,21 +32,52 @@ describe('TypeAction', () => {
 	});
 
 	it('can perform the type action', async () => {
-		let element = 'element';
-		let page = 'page';
-		let text = 'text';
+		let page = {};
+		let element = {
+			hover: jest.fn().mockReturnValue(Promise.resolve()),
+			type: jest.fn().mockReturnValue(Promise.resolve())
+		};
 		typeAction._getText = jest.fn()
-			.mockReturnValue(text);
-		typeAction._logInfo = jest.fn()
-			.mockReturnValue(Promise.resolve());
-		typeAction._typeIntoElement = jest.fn()
-			.mockReturnValue(Promise.resolve());
+			.mockReturnValue('text');
+		typeAction._config = {
+			typeActionDelay: 50
+		};
 
 		await typeAction.action(element, page);
 
-		expect(typeAction._getText).toHaveBeenCalledTimes(1);
-		expect(typeAction._logInfo).toHaveBeenCalledWith(element, text);
-		expect(typeAction._typeIntoElement).toHaveBeenCalledWith(page, element, text);
+		expect(typeAction._getText).toHaveBeenCalled();
+		expect(element.hover).toHaveBeenCalledTimes(1);
+		expect(element.type)
+			.toHaveBeenCalledWith('text', { delay: typeAction._config.typeActionDelay });
+	});
+
+	it('can perform the type action in preview mode', async () => {
+		let page = {
+			waitFor: jest.fn()
+		};
+		let element = {
+			hover: jest.fn().mockReturnValue(Promise.resolve()),
+			type: jest.fn().mockReturnValue(Promise.resolve())
+		};
+		typeAction._config = {
+			headlessModeDisabled: true,
+			previewModePauseTime: 99,
+			typeActionDelay: 50
+		};
+		typeAction._actionsHelper.highlightElement = jest.fn()
+			.mockReturnValue(Promise.resolve());
+		typeAction._getText = jest.fn()
+			.mockReturnValue('text')
+
+		await typeAction.action(element, page);
+
+		expect(typeAction._getText).toHaveBeenCalled();
+		expect(element.hover).toHaveBeenCalledTimes(1);
+		expect(typeAction._actionsHelper.highlightElement)
+			.toHaveBeenCalledWith(element);
+		expect(page.waitFor).toHaveBeenCalledWith(99);
+		expect(element.type)
+			.toHaveBeenCalledWith('text', { delay: typeAction._config.typeActionDelay });
 	});
 
 	it('can get text from config', () => {
@@ -65,65 +96,20 @@ describe('TypeAction', () => {
 		expect(typeAction._getText()).toEqual(jasmine.any(String));
 	});
 
-	it('can type into a specified element', async () => {
-		let page = {};
-		let element = {
-			hover: jest.fn().mockReturnValue(Promise.resolve()),
-			type: jest.fn().mockReturnValue(Promise.resolve())
+	it('can update action results', async () => {
+		typeAction._text = 'text';
+		let results = {
+			html: '<a>a</a>',
+			config: {
+				selector: 'a'
+			}
 		};
-		let text = 'text';
-		typeAction._config = {
-			typeActionDelay: 50
-		};
+		let updatedResults = await typeAction.updateResults(results);
 
-		await typeAction._typeIntoElement(page, element, text);
-
-		expect(element.hover).toHaveBeenCalledTimes(1);
-		expect(element.type)
-			.toHaveBeenCalledWith(text, { delay: typeAction._config.typeActionDelay });
-	});
-
-	it('can type into a specified element in preview mode', async () => {
-		let page = {
-			waitFor: jest.fn()
-		};
-		let element = {
-			hover: jest.fn().mockReturnValue(Promise.resolve()),
-			type: jest.fn().mockReturnValue(Promise.resolve())
-		};
-		typeAction._config = {
-			headlessModeDisabled: true,
-			previewModePauseTime: 99,
-			typeActionDelay: 50
-		};
-		typeAction._actionsHelper.highlightElement = jest.fn()
-			.mockReturnValue(Promise.resolve());
-		let text = 'text';
-
-		await typeAction._typeIntoElement(page, element, text);
-
-		expect(element.hover).toHaveBeenCalledTimes(1);
-		expect(typeAction._actionsHelper.highlightElement)
-			.toHaveBeenCalledWith(element);
-		expect(page.waitFor).toHaveBeenCalledWith(99);
-		expect(element.type)
-			.toHaveBeenCalledWith(text, { delay: typeAction._config.typeActionDelay });
-	});
-
-	it('can log element info', async () => {
-		let element = {};
-		let actionsHelper = {
-			getElementSelector: jest.fn().mockReturnValue('selector'),
-			getElementHTML: jest.fn().mockReturnValue('html')
-		};
-		typeAction._actionsHelper = actionsHelper;
-
-		await typeAction._logInfo(element, 'text');
-
-		expect(typeAction._results.config.text).toEqual('text');
-		expect(typeAction._results.config.selector).toEqual('selector');
-		expect(typeAction._results.html).toEqual('html');
-		expect(actionsHelper.getElementSelector).toHaveBeenCalledWith(element);
-		expect(actionsHelper.getElementHTML).toHaveBeenCalledWith(element);
+		expect(updatedResults.message)
+			.toEqual(jasmine.any(String));
+		expect(updatedResults.html).toEqual(results.html);
+		expect(updatedResults.config.selector).toEqual(results.config.selector);
+		expect(updatedResults.config.text).toEqual(jasmine.any(String));
 	});
 });
