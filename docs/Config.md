@@ -16,6 +16,7 @@ module.exports = {
 - [beforeActionScript](#beforeActionScript)
 - [beforeScenarioScript](#beforeScenarioScript)
 - [browserWebSocketEndpoint](#browserWebSocketEndpoint)
+- [customActions](#customActions)
 - [debug](#debug)
 - [defaultBrowserSettings](#defaultBrowserSettings)
 - [defaultNavigationTimeout](#defaultNavigationTimeout)
@@ -108,6 +109,16 @@ A browser websocket endpoint to connect to (i.e. ws://5.5.5.5:3505)
 **Default:**
 ```javascript
 null
+```
+
+### customActions
+`<string[]>`
+
+List of paths to your custom actions, you can use glob patterns.
+
+**Default:**
+```javascript
+[]
 ```
 
 ### debug
