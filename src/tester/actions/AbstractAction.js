@@ -96,11 +96,10 @@ export default class AbstractAction {
 	 * Executes action lifecycle:
 	 * - Executes before action scripts (AbstractAction._beforeActionExecute)
 	 * - Executes the action and emits 'action:error' event for any error it throws
+	 * - Evaluates the action success
 	 * - Executes after action scripts (AbstractAction._afterActionExecute)
 	 * @param {puppeteer.ElementHandle} element
 	 * @param {Browser} instance
-	 * @param {Function} errorHandler
-	 * @param {Function} responseHandler
 	 * @returns {Promise} Resolves when lifecycle is finished
 	 */
 	async _executeActionLifecycle(element, instance) {
