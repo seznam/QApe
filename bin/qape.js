@@ -15,7 +15,7 @@ program
 	.option('-s, --browser-webs-socket-endpoint <value>', 'connect to remote chrome instance (i.e. "ws://5.5.5.5:3505")')
 	.option('-a, --stop-new-scenarios-after-time <number>', 'stops new scenarios after specified amount of time (in ms), set to 0 to disable', parseInt)
 	.option('-d, --debug', 'run in debug mode')
-	.action((...args) => {
+	.action(options => {
 		let cliConfig = {
 			url,
 			headlessModeDisabled,
@@ -25,10 +25,10 @@ program
 			browserWebSocketEndpoint,
 			stopNewScenariosAfterTime,
 			debug
-		} = args.pop();
+		} = options;
 
-		if (args.length > 0) {
-			cliConfig.files = args;
+		if (options.args.length > 0) {
+			cliConfig.files = options.args;
 		}
 
 		run(cliConfig);
