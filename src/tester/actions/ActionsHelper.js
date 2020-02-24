@@ -47,8 +47,7 @@ export default class ActionsHelper {
 	 */
 	async getAllVisiblePageElements(page) {
 		let visibleElements = [];
-		let disables = 'not(self::script) and not(self::noscript) and not(self::path)';
-		let allElements = await page.$x(`//body//*[${disables} and ancestor::*[${disables}]]`);
+		let allElements = await page.$x(this._config.elementSelector);
 
 		await Promise.all(allElements.map(async element => {
 			let executionContext = await element.executionContext();

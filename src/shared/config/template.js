@@ -150,6 +150,15 @@ module.exports = {
 		description: 'Script executed in browser context, which should generate unique element selector',
 		type: 'Function'
 	},
+	elementSelector: {
+		value: (() => {
+			const disables = 'self::script or self::noscript or self::path or self::style';
+
+			return `//body//*[not(${disables}) and not(ancestor::*[${disables}])]`;
+		})(),
+		description: 'XPath selector to gather all visible elements. There are also some extra filters, which remove elements with children (only elements without children are considered interactable), or zero size elements.',
+		type: 'string'
+	},
 	browserWebSocketEndpoint: {
 		value: null,
 		description: 'A browser websocket endpoint to connect to (i.e. ws://5.5.5.5:3505)',

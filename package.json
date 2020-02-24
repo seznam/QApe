@@ -51,20 +51,20 @@
   "author": "Filip Satek <filip.satek@firma.seznam.cz>",
   "license": "MIT",
   "dependencies": {
-    "commander": "2.20.0",
+    "commander": "4.1.1",
     "faker": "4.1.0",
     "glob-all": "3.1.0",
     "lodash.isequal": "4.5.0",
-    "puppeteer": "1.18.1"
+    "puppeteer": "2.1.1"
   },
   "devDependencies": {
-    "@babel/cli": "7.5.0",
-    "@babel/core": "7.5.0",
-    "@babel/plugin-transform-modules-commonjs": "7.5.0",
-    "auto-changelog": "1.13.0",
-    "documentation": "11.0.1",
-    "jest": "24.8.0",
-    "source-map-support": "0.5.12",
-    "verdaccio": "4.0.4"
+    "@babel/cli": "7.8.4",
+    "@babel/core": "7.8.4",
+    "@babel/plugin-transform-modules-commonjs": "7.8.3",
+    "auto-changelog": "1.16.2",
+    "documentation": "12.1.4",
+    "jest": "25.1.0",
+    "source-map-support": "0.5.16",
+    "verdaccio": "4.4.3"
   }
 }
