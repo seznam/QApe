@@ -20,6 +20,7 @@ module.exports = {
 - [debug](#debug)
 - [defaultBrowserSettings](#defaultBrowserSettings)
 - [defaultNavigationTimeout](#defaultNavigationTimeout)
+- [elementSelector](#elementSelector)
 - [files](#files)
 - [getElementSelector](#getElementSelector)
 - [headlessModeDisabled](#headlessModeDisabled)
@@ -159,6 +160,16 @@ Default navigation timeout set via page.setDefaultNavigationTimeout()
 **Default:**
 ```javascript
 60000
+```
+
+### elementSelector
+`<string>`
+
+XPath selector to gather all visible elements. There are also some extra filters, which remove elements with children (only elements without children are considered interactable), or zero size elements.
+
+**Default:**
+```javascript
+//body//*[not(self::script or self::noscript or self::path or self::style) and not(ancestor::*[self::script or self::noscript or self::path or self::style])]
 ```
 
 ### files
