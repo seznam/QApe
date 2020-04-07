@@ -7,7 +7,7 @@
  * @returns {*} Element from the array
  */
 function getRandomElementFromArray(array) {
-	return array[Math.floor(Math.random() * array.length)];
+    return array[Math.floor(Math.random() * array.length)];
 }
 
 /**
@@ -18,10 +18,7 @@ function getRandomElementFromArray(array) {
  * @returns {string} Number prefixed with ${digits} of zeros
  */
 function formatDigits(number, digits = 2) {
-	return String(number).padStart(digits, '0');
+    return String(number).padStart(digits, '0');
 }
 
-export {
-	getRandomElementFromArray,
-	formatDigits
-}
+export { getRandomElementFromArray, formatDigits };

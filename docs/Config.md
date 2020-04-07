@@ -59,7 +59,7 @@ Script executed after each action
 
 **Default:**
 ```javascript
-({ browser, page }, pageErrorHandler) => {}
+(/* { browser, page }, pageErrorHandler */) => {}
 ```
 
 ### afterActionWaitTime
@@ -79,7 +79,7 @@ Script executed after each scenario
 
 **Default:**
 ```javascript
-({ browser, page }) => {}
+(/* { browser, page } */) => {}
 ```
 
 ### beforeActionScript
@@ -89,7 +89,7 @@ Script executed before each action
 
 **Default:**
 ```javascript
-({ browser, page }, pageErrorHandler) => {}
+(/* { browser, page }, pageErrorHandler */) => {}
 ```
 
 ### beforeScenarioScript
@@ -99,7 +99,7 @@ Script executed before each scenario
 
 **Default:**
 ```javascript
-({ browser, page }) => {}
+(/* { browser, page } */) => {}
 ```
 
 ### browserWebSocketEndpoint
@@ -190,33 +190,30 @@ Script executed in browser context, which should generate unique element selecto
 **Default:**
 ```javascript
 input => {
-			function getPathTo(element) {
-				if (element === document.body) {
-					return '//' + element.tagName.toLowerCase();
-				}
+            function getXPathForElement(element) {
+                const idx = (sibling, name) =>
+                    sibling
+                        ? idx(sibling.previousElementSibling, name || sibling.localName) +
+                          (sibling.localName == name)
+                        : 1;
 
-				if (!element.parentNode) {
-					return '';
-				}
+                const segs = element => {
+                    if (!element || element.nodeType !== 1) {
+                        return [''];
+                    } else {
+                        return element.id && document.getElementById(element.id) === element
+                            ? [`id("${element.id}")`]
+                            : [
+                                  ...segs(element.parentNode),
+                                  `${element.localName.toLowerCase()}[${idx(element)}]`,
+                              ];
+                    }
+                };
+                return segs(element).join('/');
+            }
 
-				var siblings = element.parentNode.childNodes;
-				var index = 0;
-
-				for (var i= 0; i < siblings.length; i++) {
-					var sibling = siblings[i];
-
-					if (sibling === element) {
-						return getPathTo(element.parentNode) + '/' + element.tagName.toLowerCase() + '[' + (index + 1) + ']';
-					}
-
-					if (sibling.nodeType === 1 && sibling.tagName === element.tagName) {
-						index++;
-					}
-				}
-			}
-
-			return getPathTo(input);
-		}
+            return getXPathForElement(input);
+        }
 ```
 
 ### headlessModeDisabled
@@ -267,10 +264,10 @@ Page error handler, which should tell what is actually an error. Function is eva
 **Default:**
 ```javascript
 () => {
-			window.addEventListener('error', (event) => {
-				qapeError(event.error.stack);
-			});
-		}
+            window.addEventListener('error', event => {
+                qapeError(event.error.stack); // eslint-disable-line no-undef
+            });
+        }
 ```
 
 ### parallelInstances
@@ -344,7 +341,7 @@ This method is called whenever any page request recieves a response. It recieves
 
 **Default:**
 ```javascript
-(response, config) => (response.status() >= 500)
+(response /* , config */) => response.status() >= 500
 ```
 
 ### stopNewScenariosAfterTime

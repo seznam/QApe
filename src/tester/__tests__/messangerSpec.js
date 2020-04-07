@@ -1,62 +1,57 @@
-import {
-	report,
-	requestScenario,
-	sendFailingScenario
-} from '../messanger';
+import { report, requestScenario, sendFailingScenario } from '../messanger';
 
 const originalProcessSend = process.send;
 const originalProcessOnce = process.once;
 
 describe('Messanger', () => {
-	beforeEach(() => {
-		process.send = jest.fn();
-	});
+    beforeEach(() => {
+        process.send = jest.fn();
+    });
 
-	afterEach(() => {
-		process.send = originalProcessSend;
-	});
+    afterEach(() => {
+        process.send = originalProcessSend;
+    });
 
-	it('can report an event to reporter', () => {
-		let eventName = 'event';
-		let eventData = 'data';
+    it('can report an event to reporter', () => {
+        let eventName = 'event';
+        let eventData = 'data';
 
-		report(eventName, eventData);
+        report(eventName, eventData);
 
-		expect(process.send).toHaveBeenCalledWith({
-			reciever: 'reporter',
-			eventName,
-			eventData
-		});
-	});
+        expect(process.send).toHaveBeenCalledWith({
+            reciever: 'reporter',
+            eventName,
+            eventData,
+        });
+    });
 
-	it('can request a scenario from scriptwriter', async () => {
-		let scenario = 'scenario';
-		process.once = jest.fn((_, fn) => {
-			fn(scenario);
-		});
+    it('can request a scenario from scriptwriter', async () => {
+        let scenario = 'scenario';
+        process.once = jest.fn((_, fn) => {
+            fn(scenario);
+        });
 
-		let results = await requestScenario();
+        let results = await requestScenario();
 
-		expect(results).toEqual(scenario);
-		expect(process.once)
-			.toHaveBeenCalledWith('message', jasmine.any(Function));
-		expect(process.send).toHaveBeenCalledWith({
-			reciever: 'scriptwriter',
-			eventName: 'GET'
-		});
+        expect(results).toEqual(scenario);
+        expect(process.once).toHaveBeenCalledWith('message', jasmine.any(Function));
+        expect(process.send).toHaveBeenCalledWith({
+            reciever: 'scriptwriter',
+            eventName: 'GET',
+        });
 
-		process.once = originalProcessOnce;
-	});
+        process.once = originalProcessOnce;
+    });
 
-	it('can send a failing scenario to scriptwriter', () => {
-		let scenario = 'scenario';
+    it('can send a failing scenario to scriptwriter', () => {
+        let scenario = 'scenario';
 
-		sendFailingScenario(scenario);
+        sendFailingScenario(scenario);
 
-		expect(process.send).toHaveBeenCalledWith({
-			reciever: 'scriptwriter',
-			eventName: 'POST',
-			eventData: scenario
-		});
-	});
+        expect(process.send).toHaveBeenCalledWith({
+            reciever: 'scriptwriter',
+            eventName: 'POST',
+            eventData: scenario,
+        });
+    });
 });

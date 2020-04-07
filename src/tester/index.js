@@ -9,15 +9,15 @@ import Runner from './Runner';
  * @param {Object} config
  * @returns {Runner}
  */
-export default (config) => {
-	return new Runner(config)
-		.start()
-		.then(() => process.exit())
-		.catch(error => {
-			if (error) {
-				console.error(error);
-			}
+export default config => {
+    return new Runner(config)
+        .start()
+        .then(() => process.exit())
+        .catch(error => {
+            if (error) {
+                console.error(error);
+            }
 
-			process.exit(1);
-		});
-}
+            process.exit(1);
+        });
+};

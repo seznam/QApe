@@ -6,95 +6,96 @@ import { report } from '../messanger';
  * They randomly click on the website and search for errors.
  */
 export default class RandomScenarios {
-	/**
-	 * @param {Object} config
-	 * @param {ActionsHandler} actionsHandler
-	 * @param {Reporter} reporter
-	 */
-	constructor(config, actionsHandler, reporter) {
-		this._config = config;
+    /**
+     * @param {Object} config
+     * @param {ActionsHandler} actionsHandler
+     * @param {Reporter} reporter
+     */
+    constructor(config, actionsHandler, reporter) {
+        this._config = config;
 
-		this._actionsHandler = actionsHandler;
+        this._actionsHandler = actionsHandler;
 
-		this._reporter = reporter;
-	}
+        this._reporter = reporter;
+    }
 
-	/**
-	 * Specifies scenario type name
-	 * @returns {string} 'random'
-	 */
-	get type() {
-		return 'random';
-	}
+    /**
+     * Specifies scenario type name
+     * @returns {string} 'random'
+     */
+    get type() {
+        return 'random';
+    }
 
-	/**
-	 * Executes a random scenario
-	 * performing actions on random page elements
-	 * and trying to produce some page errors.
-	 * @param {Browser} instance
-	 * @returns {Promise<Object>} results
-	 */
-	async runScenario(instance) {
-		let results = {};
+    /**
+     * Executes a random scenario
+     * performing actions on random page elements
+     * and trying to produce some page errors.
+     * @param {Browser} instance
+     * @returns {Promise<Object>} results
+     */
+    async runScenario(instance) {
+        let results = {};
 
-		report('scenario:start', {
-			type: this.type
-		});
+        report('scenario:start', {
+            type: this.type,
+        });
 
-		let response = await instance.page.goto(this._config.url);
+        let response = await instance.page.goto(this._config.url);
 
-		if (response.status() >= 400) {
-			results.executionError = `Cannot load url ${this._config.url} [status: ${response.status()}]`;
-		} else {
-			results = await this._performActions(instance);
-		}
+        if (response.status() >= 400) {
+            results.executionError = `Cannot load url ${this._config.url} [status: ${response.status()}]`;
+        } else {
+            results = await this._performActions(instance);
+        }
 
-		report('scenario:end', {
-			type: this.type,
-			results
-		});
+        report('scenario:end', {
+            type: this.type,
+            results,
+        });
 
-		return results;
-	}
+        return results;
+    }
 
-	/**
-	 * Performs random actions on the instance
-	 * @param {Browser} instance
-	 * @returns {Promise<Object>} results
-	 */
-	async _performActions(instance) {
-		let results = { scenario: [], errors: [] };
-		let failedActionsCount = 0;
+    /**
+     * Performs random actions on the instance
+     * @param {Browser} instance
+     * @returns {Promise<Object>} results
+     */
+    async _performActions(instance) {
+        let results = { scenario: [], errors: [] };
+        let failedActionsCount = 0;
 
-		await this._config.beforeScenarioScript(instance);
+        await this._config.beforeScenarioScript(instance);
 
-		for (let i = 0; i < this._config.actionsPerScenario; i++) {
-			let actionResults = await this._actionsHandler.execute(instance);
+        for (let i = 0; i < this._config.actionsPerScenario; i++) {
+            let actionResults = await this._actionsHandler.execute(instance);
 
-			if (actionResults.executionError) {
-				failedActionsCount++;
+            if (actionResults.executionError) {
+                failedActionsCount++;
 
-				if (failedActionsCount >= this._config.numberOfActionFailuresToAbortRandomScenario) {
-					results.executionError = 'Reached limit of allowed action execution errors.\n' + actionResults.executionError;
-					break;
-				}
+                if (failedActionsCount >= this._config.numberOfActionFailuresToAbortRandomScenario) {
+                    results.executionError =
+                        'Reached limit of allowed action execution errors.\n' + actionResults.executionError;
+                    break;
+                }
 
-				i--;
-				continue;
-			} else {
-				failedActionsCount = 0;
-			}
+                i--;
+                continue;
+            } else {
+                failedActionsCount = 0;
+            }
 
-			results.scenario.push(actionResults);
+            results.scenario.push(actionResults);
 
-			if (actionResults && actionResults.errors && actionResults.errors.length > 0) {
-				results.errors = actionResults.errors;
-				break;
-			}
-		}
+            if (actionResults && actionResults.errors && actionResults.errors.length > 0) {
+                results.errors = actionResults.errors;
+                break;
+            }
+        }
 
-		await this._config.afterScenarioScript(instance);
+        await this._config.afterScenarioScript(instance);
 
-		return results;
-	}
+        return results;
+    }
 }

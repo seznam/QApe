@@ -7,120 +7,130 @@ import { getRandomElementFromArray } from '../../shared/helpers';
  * Actions handler which can work with specific actions.
  */
 export default class ActionsHandler {
-	/**
-	 * @param {Object} config
-	 */
-	constructor(config) {
-		this._config = config;
+    /**
+     * @param {Object} config
+     */
+    constructor(config) {
+        this._config = config;
 
-		this._actionsHelper = null;
+        this._actionsHelper = null;
 
-		this._actions = {};
-	}
+        this._actions = {};
+    }
 
-	/**
-	 * Initializes actions handler dependencies
-	 * @returns {ActionsHandler} this
-	 */
-	init() {
-		this._initActionsHelper();
-		this._loadActions();
+    /**
+     * Initializes actions handler dependencies
+     * @returns {ActionsHandler} this
+     */
+    init() {
+        this._initActionsHelper();
+        this._loadActions();
 
-		return this;
-	}
+        return this;
+    }
 
-	/**
-	 * Executes specific, or random action
-	 * @param {Browser} instance
-	 * @param {string} [actionId] Random if not defined
-	 * @param {Object} [actionConfig]
-	 * @returns {Promise<Object>} Resolves with action results
-	 */
-	async execute(instance, actionId, actionConfig) {
-		let pageAction;
+    /**
+     * Executes specific, or random action
+     * @param {Browser} instance
+     * @param {string} [actionId] Random if not defined
+     * @param {Object} [actionConfig]
+     * @returns {Promise<Object>} Resolves with action results
+     */
+    async execute(instance, actionId, actionConfig) {
+        let pageAction;
 
-		try {
-			await this._actionsHelper.waitForReadyState(instance.page);
-			pageAction = await this._getAction(instance, actionId, actionConfig);
-		} catch (e) {
-			return { executionError: e.stack };
-		}
+        try {
+            await this._actionsHelper.waitForReadyState(instance.page);
+            pageAction = await this._getAction(instance, actionId, actionConfig);
+        } catch (e) {
+            return { executionError: e.stack };
+        }
 
-		let { Action, element } = pageAction;
-		let action = new Action(this._config, this._actionsHelper, actionConfig);
+        if (!pageAction) {
+            return { executionError: 'pageAction not defined!' };
+        }
 
-		return action.execute(element, instance);
-	}
+        let { Action, element } = pageAction;
+        let action = new Action(this._config, this._actionsHelper, actionConfig);
 
-	/**
-	 * Gets random or specific action
-	 * @param {Browser} instance
-	 * @param {string} [actionId]
-	 * @param {Object} [actionConfig]
-	 * @returns {Object} { Action, element }
-	 */
-	async _getAction({ page }, actionId, actionConfig) {
-		if (actionId && actionConfig && actionConfig.selector) {
-			return {
-				Action: this._actions[actionId],
-				element: await this._actionsHelper.getElement(page, actionConfig)
-			};
-		}
+        return action.execute(element, instance);
+    }
 
-		let actions = actionId ? [actionId] : Object.keys(this._actions);
-		let pageActions = await this._getAvailablePageActions(page, actions);
+    /**
+     * Gets random or specific action
+     * @param {Browser} instance
+     * @param {string} [actionId]
+     * @param {Object} [actionConfig]
+     * @returns {Object} { Action, element }
+     */
+    async _getAction({ page }, actionId, actionConfig) {
+        if (actionId && actionConfig && actionConfig.selector) {
+            return {
+                Action: this._actions[actionId],
+                element: await this._actionsHelper.getElement(page, actionConfig),
+            };
+        }
 
-		return getRandomElementFromArray(pageActions);
-	}
+        let actions = actionId ? [actionId] : Object.keys(this._actions);
+        let pageActions = await this._getAvailablePageActions(page, actions);
 
-	/**
-	 * Initializes actions helper
-	 */
-	_initActionsHelper() {
-		this._actionsHelper = new ActionsHelper(this._config);
-	}
+        return getRandomElementFromArray(pageActions);
+    }
 
-	/**
-	 * Loads all defined actions
-	 */
-	_loadActions() {
-		let paths = [path.join(__dirname, '!(Abstract)Action.js')];
+    /**
+     * Initializes actions helper
+     */
+    _initActionsHelper() {
+        this._actionsHelper = new ActionsHelper(this._config);
+    }
 
-		if (this._config.customActions && this._config.customActions.length > 0) {
-			this._config.customActions.forEach(action => paths.push(path.join(process.cwd(), action)));
-		}
+    /**
+     * Loads all defined actions
+     */
+    _loadActions() {
+        let paths = [path.join(__dirname, '!(Abstract)Action.js')];
 
-		glob.sync(paths).map(actionFile => {
-			let action = require(actionFile).default;
+        if (this._config.customActions && this._config.customActions.length > 0) {
+            this._config.customActions.forEach(action => paths.push(path.join(process.cwd(), action)));
+        }
 
-			if (this._actions[action.id]) {
-				throw Error('ActionsHandler: The same action id for multiple actions has been set. Action id must be unique!');
-			}
+        glob.sync(paths).map(actionFile => {
+            let action = require(actionFile).default;
 
-			this._actions[action.id] = action;
-		});
-	}
+            if (this._actions[action.id]) {
+                throw Error(
+                    'ActionsHandler: The same action id for multiple actions has been set. Action id must be unique!'
+                );
+            }
 
-	/**
-	 * @param {puppeteer.Page} page 
-	 * @param {string[]} availableActionIds
-	 * @returns {Promise<Object[]>} Returns array of objects with keys
-	 * Action and element, which are all available page actions
-	 */
-	async _getAvailablePageActions(page, availableActionIds) {
-		let elements = await this._actionsHelper.getAllVisiblePageElements(page);
-		let actions = [];
+            this._actions[action.id] = action;
+        });
+    }
 
-		await Promise.all(elements.map(element => {
-			return Promise.all(availableActionIds.map(async id => {
-				let Action = this._actions[id];
+    /**
+     * @param {puppeteer.Page} page
+     * @param {string[]} availableActionIds
+     * @returns {Promise<Object[]>} Returns array of objects with keys
+     * Action and element, which are all available page actions
+     */
+    async _getAvailablePageActions(page, availableActionIds) {
+        let elements = await this._actionsHelper.getAllVisiblePageElements(page);
+        let actions = [];
 
-				if (await Action.isActionAvailable(element, page)) {
-					actions.push({ Action, element });
-				}
-			}));
-		}));
+        await Promise.all(
+            elements.map(element => {
+                return Promise.all(
+                    availableActionIds.map(async id => {
+                        let Action = this._actions[id];
 
-		return actions;
-	}
+                        if (await Action.isActionAvailable(element, page, this._config)) {
+                            actions.push({ Action, element });
+                        }
+                    })
+                );
+            })
+        );
+
+        return actions;
+    }
 }
