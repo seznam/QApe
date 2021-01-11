@@ -2,65 +2,67 @@
  * Scenarios helpers
  */
 export default class ScenariosHelper {
-	/**
-	 * @param {Object} config
-	 * @param {ActionsHandler} actionsHandler
-	 */
-	constructor(config, actionsHandler) {
-		this._config = config;
+    /**
+     * @param {Object} config
+     * @param {ActionsHandler} actionsHandler
+     */
+    constructor(config, actionsHandler) {
+        this._config = config;
 
-		this._actionsHandler = actionsHandler;
-	}
+        this._actionsHandler = actionsHandler;
+    }
 
-	/**
-	 * Executes specified scenario
-	 * @param {Browser} instance
-	 * @param {Object[]} scenario
-	 * @returns {Promise<Object>} Execution results
-	 */
-	async runScenario(instance, scenario) {
-		let errors = [];
-		let executedScenario = [];
-		let executionError;
+    /**
+     * Executes specified scenario
+     * @param {Browser} instance
+     * @param {Object[]} scenario
+     * @returns {Promise<Object>} Execution results
+     */
+    async runScenario(instance, scenario) {
+        let errors = [];
+        let executedScenario = [];
+        let executionError;
 
-		try {
-			const response = await instance.page.goto(scenario[0].beforeLocation);
+        try {
+            const response = await instance.page.goto(scenario[0].beforeLocation);
 
-			if (response.status() >= 400) {
-				throw Error(`Recieved wrong status code ${response.status()}`);
-			}
-		} catch (e) {
-			return {
-				scenario: executedScenario,
-				errors,
-				executionError: `ScenariosHelper: Unable to navigate to location ${scenario && scenario[0] && scenario[0].beforeLocation}\n${e.stack}`
-			};
-		}
+            if (response.status() >= 400) {
+                throw Error(`Recieved wrong status code ${response.status()}`);
+            }
+        } catch (e) {
+            return {
+                scenario: executedScenario,
+                errors,
+                executionError: `ScenariosHelper: Unable to navigate to location ${scenario &&
+                    scenario[0] &&
+                    scenario[0].beforeLocation}\n${e.stack}`,
+            };
+        }
 
-		await this._config.beforeScenarioScript(instance);
+        await this._config.beforeScenarioScript(instance);
 
-		for (let i = 0; i < scenario.length; i++) {
-			let results = await this._actionsHandler.execute(
-				instance,
-				scenario[i].action,
-				scenario[i].config
-			);
+        for (let i = 0; i < scenario.length; i++) {
+            let results = await this._actionsHandler.execute(
+                instance,
+                scenario[i].action,
+                scenario[i].config
+            );
 
-			executedScenario.push(results);
+            executedScenario.push(results);
 
-			if (results.executionError) {
-				executionError = results.executionError;
-				break;
-			}
+            if (results.executionError) {
+                executionError = results.executionError;
+                break;
+            }
 
-			if (results && results.errors && results.errors.length > 0) {
-				errors = results.errors;
-				break;
-			}
-		}
+            if (results && results.errors && results.errors.length > 0) {
+                errors = results.errors;
+                break;
+            }
+        }
 
-		await this._config.afterScenarioScript(instance);
+        await this._config.afterScenarioScript(instance);
 
-		return { scenario: executedScenario, errors, executionError };
-	}
+        return { scenario: executedScenario, errors, executionError };
+    }
 }

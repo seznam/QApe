@@ -1,43 +1,42 @@
 import template from './template';
+import path from 'path';
 
 /**
  * Class that can parse configuration with default values.
  */
 export default class Config {
-	/**
-	 * Loads configuration with default values
-	 * @param {Object} [userConfig] Overrides for default config
-	 */
-	static load(userConfig) {
-		let config = {};
+    /**
+     * Loads configuration with default values
+     * @param {Object} [userConfig] Overrides for default config
+     */
+    static load(userConfig) {
+        let config = {};
 
-		if (typeof userConfig === 'string') {
-			userConfig = require(path.join(process.cwd(), userConfig));
-		}
+        if (typeof userConfig === 'string') {
+            userConfig = require(path.join(process.cwd(), userConfig));
+        }
 
-		Object
-			.keys(template)
-			.forEach(key => config[key] = template[key].value);
+        Object.keys(template).forEach(key => (config[key] = template[key].value));
 
-		Object.assign(config, userConfig);
+        Object.assign(config, userConfig);
 
-		if (config.previewMode) {
-			Config._setPreviewMode(config);
-		}
+        if (config.previewMode) {
+            Config._setPreviewMode(config);
+        }
 
-		return config;
-	}
+        return config;
+    }
 
-	/**
-	 * Overrides preview mode configurations
-	 * @param {Object} config
-	 */
-	static _setPreviewMode(config) {
-		Object.assign(config, {
-			parallelInstances: 1,
-			randomScenariosDisabled: true,
-			minifyUserDefinedScenarios: false,
-			headlessModeDisabled: true
-		});
-	}
+    /**
+     * Overrides preview mode configurations
+     * @param {Object} config
+     */
+    static _setPreviewMode(config) {
+        Object.assign(config, {
+            parallelInstances: 1,
+            randomScenariosDisabled: true,
+            minifyUserDefinedScenarios: false,
+            headlessModeDisabled: true,
+        });
+    }
 }

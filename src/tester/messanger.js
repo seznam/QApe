@@ -7,7 +7,7 @@
  * @param {*} eventData
  */
 export function report(eventName, eventData) {
-	process.send({ reciever: 'reporter', eventName, eventData });
+    process.send({ reciever: 'reporter', eventName, eventData });
 }
 
 /**
@@ -17,15 +17,15 @@ export function report(eventName, eventData) {
  * or an empty object
  */
 export function requestScenario() {
-	return new Promise(resolve => {
-		const timeout = setTimeout(() => resolve({}), 5000);
+    return new Promise(resolve => {
+        const timeout = setTimeout(() => resolve({}), 5000);
 
-		process.once('message', (scenario) => {
-			clearTimeout(timeout);
-			resolve(scenario)
-		});
-		process.send({ reciever: 'scriptwriter', eventName: 'GET' });
-	});
+        process.once('message', scenario => {
+            clearTimeout(timeout);
+            resolve(scenario);
+        });
+        process.send({ reciever: 'scriptwriter', eventName: 'GET' });
+    });
 }
 
 /**
@@ -34,5 +34,5 @@ export function requestScenario() {
  * @param {Object} scenario
  */
 export function sendFailingScenario(scenario) {
-	process.send({ reciever: 'scriptwriter', eventName: 'POST', eventData: scenario });
+    process.send({ reciever: 'scriptwriter', eventName: 'POST', eventData: scenario });
 }
