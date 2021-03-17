@@ -74,7 +74,16 @@ export default class ActionsHandler {
         let actions = actionId ? [actionId] : Object.keys(this._actions);
         let pageActions = await this._getAvailablePageActions(page, actions);
 
-        return getRandomElementFromArray(pageActions);
+		if (pageActions.length > 0) {
+			return getRandomElementFromArray(pageActions);
+		}
+
+		throw Error(
+			'QApe is unable to determine any available actions ' +
+			`on the current page (url: '${page.url()}'). This can be caused by trying to ` +
+			'peform an action during a page load state, or wrong ' +
+			'configuration of "elementSelector".'
+		);
     }
 
     /**
@@ -88,7 +97,14 @@ export default class ActionsHandler {
      * Loads all defined actions
      */
     _loadActions() {
-        let paths = [path.join(__dirname, '!(Abstract)Action.js')];
+		/**
+		 * @FIXME Back action can get you to `about:blank` page,
+		 * which does not have any elements available and causes
+		 * crash of the QApe run. Back action should never get user
+		 * to `about:blank` page. This needs to be fixed at
+		 * `BackAction.prototype.isActionAvailable()`.
+		 */
+        let paths = [path.join(__dirname, '!(Abstract|Back)Action.js')];
 
         if (this._config.customActions && this._config.customActions.length > 0) {
             this._config.customActions.forEach(action => paths.push(path.join(process.cwd(), action)));
