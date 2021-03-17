@@ -52,7 +52,10 @@ export default class ScenariosHandler {
         }
 
         if (this._isAllowedToStartRandomScenario()) {
-            return { type: 'random' };
+            return {
+                type: 'random',
+                scenario: { startUrl: this._getRandomScenarioStartUrl() },
+            };
         }
 
         return {};
@@ -109,5 +112,15 @@ export default class ScenariosHandler {
         }
 
         return scenario;
+    }
+
+    /**
+     * Loads a start url for scenario from specified url paths
+     * @returns {string} start url
+     */
+    _getRandomScenarioStartUrl() {
+        let scenarios = this._config.urlPaths;
+
+        return scenarios[Math.floor(Math.random() * scenarios.length)];
     }
 }

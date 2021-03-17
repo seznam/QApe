@@ -32,25 +32,29 @@ export default class RandomScenarios {
      * performing actions on random page elements
      * and trying to produce some page errors.
      * @param {Browser} instance
+     * @param {Object} testData
      * @returns {Promise<Object>} results
      */
-    async runScenario(instance) {
+    async runScenario(instance, testData) {
+        let scenario = testData.startUrl;
         let results = {};
 
         report('scenario:start', {
             type: this.type,
+            scenario: testData,
         });
 
-        let response = await instance.page.goto(this._config.url);
+        let response = await instance.page.goto(this._config.url + testData.startUrl);
 
         if (response.status() >= 400) {
-            results.executionError = `Cannot load url ${this._config.url} [status: ${response.status()}]`;
+            results.executionError = `Cannot load url ${testData.startUrl} [status: ${response.status()}]`;
         } else {
             results = await this._performActions(instance);
         }
 
         report('scenario:end', {
             type: this.type,
+            scenario: testData,
             results,
         });
 

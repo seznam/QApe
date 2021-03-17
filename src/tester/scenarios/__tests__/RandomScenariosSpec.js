@@ -3,6 +3,7 @@ import RandomScenarios from '../RandomScenarios';
 
 describe('RandomScenarios', () => {
     let scenarios = null;
+    let startUrl = '/';
 
     beforeEach(() => {
         messanger.report = jest.fn();
@@ -31,13 +32,17 @@ describe('RandomScenarios', () => {
         };
         scenarios._performActions = jest.fn().mockReturnValue('results');
 
-        let results = await scenarios.runScenario(instance);
+        let results = await scenarios.runScenario(instance, { startUrl });
 
-        expect(messanger.report).toHaveBeenCalledWith('scenario:start', { type: 'random' });
-        expect(page.goto).toHaveBeenCalledWith('url');
+        expect(messanger.report).toHaveBeenCalledWith('scenario:start', {
+            type: 'random',
+            scenario: { startUrl },
+        });
+        expect(page.goto).toHaveBeenCalledWith(`url${startUrl}`);
         expect(scenarios._performActions).toHaveBeenCalledWith(instance);
         expect(messanger.report).toHaveBeenCalledWith('scenario:end', {
             type: 'random',
+            scenario: { startUrl },
             results,
         });
         expect(results).toEqual('results');
@@ -55,12 +60,16 @@ describe('RandomScenarios', () => {
             url: 'url',
         };
 
-        let results = await scenarios.runScenario(instance);
+        let results = await scenarios.runScenario(instance, { startUrl });
 
-        expect(messanger.report).toHaveBeenCalledWith('scenario:start', { type: 'random' });
-        expect(page.goto).toHaveBeenCalledWith('url');
+        expect(messanger.report).toHaveBeenCalledWith('scenario:start', {
+            type: 'random',
+            scenario: { startUrl },
+        });
+        expect(page.goto).toHaveBeenCalledWith(`url${startUrl}`);
         expect(messanger.report).toHaveBeenCalledWith('scenario:end', {
             type: 'random',
+            scenario: { startUrl },
             results,
         });
         expect(results).toEqual({

@@ -36,13 +36,14 @@ describe('ScenariosHandler', () => {
 
     it('can run random scenario', () => {
         let instance = 'instance';
+        let scenario = { startUrl: ['/start'] };
         scenariosHandler._randomScenarios = {
             runScenario: jest.fn(),
         };
 
-        scenariosHandler.runScenario(instance, 'random');
+        scenariosHandler.runScenario(instance, 'random', scenario);
 
-        expect(scenariosHandler._randomScenarios.runScenario).toHaveBeenCalledWith(instance);
+        expect(scenariosHandler._randomScenarios.runScenario).toHaveBeenCalledWith('instance', scenario);
     });
 
     it('can run defined scenario', () => {

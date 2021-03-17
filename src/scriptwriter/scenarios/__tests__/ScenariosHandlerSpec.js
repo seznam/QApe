@@ -43,10 +43,13 @@ describe('ScenariosHandler', () => {
             defined: ['definedScenario'],
             failing: ['failingScenario'],
         };
+        scenariosHandler._config = {
+            urlPaths: ['/start'],
+        };
 
         expect(scenariosHandler.getScenario()).toEqual({ type: 'failing', scenario: 'failingScenario' });
         expect(scenariosHandler.getScenario()).toEqual({ type: 'defined', scenario: 'definedScenario' });
-        expect(scenariosHandler.getScenario()).toEqual({ type: 'random' });
+        expect(scenariosHandler.getScenario()).toEqual({ type: 'random', scenario: { startUrl: '/start' } });
         expect(scenariosHandler.getScenario()).toEqual({});
         expect(scenariosHandler._isAllowedToStartRandomScenario).toHaveBeenCalledTimes(2);
     });
