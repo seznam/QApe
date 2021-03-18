@@ -18,13 +18,10 @@ export default class BackAction extends AbstractAction {
      * Back action should be always possible
      * @returns {boolean} true
      */
-    static async isActionAvailable(element, page, config) {
+    static async isActionAvailable(element, page) {
         const historyLength = await page.evaluate(() => window.history.length);
-        const originUrl = `${config.url}${config.url.endsWith('/') ? '' : '/'}`;
-        const actualUrl = `${page.url()}${page.url().endsWith('/') ? '' : '/'}`;
-        const isOriginUrl = originUrl === actualUrl;
 
-        return historyLength > 1 && !isOriginUrl && Math.floor(Math.random() * 100) > BACK_CHANCE;
+        return historyLength > 2 && Math.floor(Math.random() * 100) >= BACK_CHANCE;
     }
 
     /**
@@ -47,12 +44,8 @@ export default class BackAction extends AbstractAction {
      * @returns {Object}
      */
     async updateResults(results) {
-        const message =
-            results.afterLocation === results.beforeLocation
-                ? 'BackAction not available from start location'
-                : 'Back to previous page';
         return Object.assign({}, results, {
-            message,
+            message: 'Back to previous page',
         });
     }
 }
