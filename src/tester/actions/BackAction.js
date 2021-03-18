@@ -21,7 +21,7 @@ export default class BackAction extends AbstractAction {
     static async isActionAvailable(element, page) {
         const historyLength = await page.evaluate(() => window.history.length);
 
-        return historyLength > 2 && Math.floor(Math.random() * 100) >= BACK_CHANCE;
+        return historyLength > 2 && Math.floor(Math.random() * 100) <= BACK_CHANCE;
     }
 
     /**

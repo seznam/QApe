@@ -16,7 +16,7 @@ export default class ScenariosHandler {
             failing: [],
         };
         this._initTime = null;
-        this._index = 0;
+        this._urlPathsIndex = 0;
     }
 
     /**
@@ -120,15 +120,12 @@ export default class ScenariosHandler {
      * @returns {string} start url
      */
     _getRandomScenarioStartUrl() {
-        let scenarios = this._config.urlPaths;
+        const { urlPaths } = this._config;
 
-        if (this._index >= scenarios.length) {
-            this._index = 0;
+        if (this._urlPathsIndex >= urlPaths.length) {
+            this._urlPathsIndex = 0;
         }
 
-        let path = scenarios[this._index];
-        this._index++;
-
-        return this._config.url + path;
+        return this._config.url + urlPaths[this._urlPathsIndex++];
     }
 }
