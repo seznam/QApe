@@ -3,7 +3,6 @@ import RandomScenarios from '../RandomScenarios';
 
 describe('RandomScenarios', () => {
     let scenarios = null;
-    let startUrl = '/';
 
     beforeEach(() => {
         messanger.report = jest.fn();
@@ -29,20 +28,21 @@ describe('RandomScenarios', () => {
         let instance = { page };
         scenarios._config = {
             url: 'url',
+            urlPaths: ['/start'],
         };
         scenarios._performActions = jest.fn().mockReturnValue('results');
 
-        let results = await scenarios.runScenario(instance, { startUrl });
+        let results = await scenarios.runScenario(instance, { startUrl: `url/start` });
 
         expect(messanger.report).toHaveBeenCalledWith('scenario:start', {
             type: 'random',
-            scenario: { startUrl },
+            scenario: { startUrl: `url/start` },
         });
-        expect(page.goto).toHaveBeenCalledWith(`url${startUrl}`);
+        expect(page.goto).toHaveBeenCalledWith(`url/start`);
         expect(scenarios._performActions).toHaveBeenCalledWith(instance);
         expect(messanger.report).toHaveBeenCalledWith('scenario:end', {
             type: 'random',
-            scenario: { startUrl },
+            scenario: { startUrl: `url/start` },
             results,
         });
         expect(results).toEqual('results');
@@ -58,18 +58,19 @@ describe('RandomScenarios', () => {
         let instance = { page };
         scenarios._config = {
             url: 'url',
+            urlPaths: ['/start'],
         };
 
-        let results = await scenarios.runScenario(instance, { startUrl });
+        let results = await scenarios.runScenario(instance, { startUrl: `url/start` });
 
         expect(messanger.report).toHaveBeenCalledWith('scenario:start', {
             type: 'random',
-            scenario: { startUrl },
+            scenario: { startUrl: `url/start` },
         });
-        expect(page.goto).toHaveBeenCalledWith(`url${startUrl}`);
+        expect(page.goto).toHaveBeenCalledWith(`url/start`);
         expect(messanger.report).toHaveBeenCalledWith('scenario:end', {
             type: 'random',
-            scenario: { startUrl },
+            scenario: { startUrl: `url/start` },
             results,
         });
         expect(results).toEqual({
