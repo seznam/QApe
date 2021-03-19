@@ -176,7 +176,7 @@ module.exports = {
         type: 'string',
     },
     reporters: {
-        value: ['console', 'file', 'spinner'],
+        value: ['console', 'file', 'spinner', 'error'],
         description:
             "Define your reporters for the QApe run. You can pass a string for reporters in npm registry, i.e. if you pass 'super', QApe will look for reporter 'qape-reporter-super'. You can also pass Class.",
         type: 'string[]|Class[]',

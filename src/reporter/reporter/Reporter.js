@@ -2,6 +2,7 @@ import EventEmitter from 'events';
 import ConsoleReporter from './ConsoleReporter';
 import FileReporter from './FileReporter';
 import SpinnerReporter from './SpinnerReporter';
+import ErrorReporter from './ErrorReporter';
 
 /**
  * Base Reporter distributing events to all defined reporters
@@ -33,6 +34,10 @@ export default class Reporter extends EventEmitter {
 
             if (reporter === 'spinner') {
                 return this._initReporterFromClass(SpinnerReporter);
+            }
+
+            if (reporter === 'error') {
+                return this._initReporterFromClass(ErrorReporter);
             }
 
             if (typeof reporter === 'string') {
