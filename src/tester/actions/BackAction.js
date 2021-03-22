@@ -1,7 +1,6 @@
 import AbstractAction from './AbstractAction';
 
-const BACK_CHANCE = 80;
-
+const BACK_CHANCE = 30;
 /**
  * Back action, which will click on random
  * or specific (if actionConfig is passed) page element

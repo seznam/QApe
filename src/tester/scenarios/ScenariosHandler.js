@@ -48,6 +48,6 @@ export default class ScenariosHandler {
             return this._failingScenarios.runScenario(instance, scenario);
         }
 
-        return this._randomScenarios.runScenario(instance);
+        return this._randomScenarios.runScenario(instance, scenario);
     }
 }

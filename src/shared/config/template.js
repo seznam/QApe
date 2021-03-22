@@ -32,6 +32,11 @@ module.exports = {
         description: 'Starting url for all random scenarios',
         type: 'string',
     },
+    urlPaths: {
+        value: ['/'],
+        description: 'List of start url paths for random scenarios',
+        type: 'string[]',
+    },
     numberOfAllowedActionsToReproduceErrorFromPreviousRun: {
         value: 20,
         description:
