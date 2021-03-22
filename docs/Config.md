@@ -40,6 +40,7 @@ module.exports = {
 - [typeActionDelay](#typeActionDelay)
 - [typeActionTextTypes](#typeActionTextTypes)
 - [url](#url)
+- [urlPaths](#urlPaths)
 
 ## Options
 ### actionsPerScenario
@@ -189,7 +190,7 @@ Script executed in browser context, which should generate unique element selecto
 
 **Default:**
 ```javascript
-input => {
+(input) => {
             function getXPathForElement(element) {
                 const idx = (sibling, name) =>
                     sibling
@@ -197,7 +198,7 @@ input => {
                           (sibling.localName == name)
                         : 1;
 
-                const segs = element => {
+                const segs = (element) => {
                     if (!element || element.nodeType !== 1) {
                         return [''];
                     } else {
@@ -264,7 +265,7 @@ Page error handler, which should tell what is actually an error. Function is eva
 **Default:**
 ```javascript
 () => {
-            window.addEventListener('error', event => {
+            window.addEventListener('error', (event) => {
                 qapeError(event.error.stack); // eslint-disable-line no-undef
             });
         }
@@ -489,5 +490,17 @@ Starting url for all random scenarios
 **Default:**
 ```javascript
 http://localhost:4444
+```
+
+### urlPaths
+`<string[]>`
+
+List of start url paths for random scenarios
+
+**Default:**
+```javascript
+[
+	"/"
+]
 ```
 
