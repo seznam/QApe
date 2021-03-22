@@ -30,7 +30,7 @@ program
 		} = options;
 
 		if (args.length > 0) {
-			cliConfig.files = options.args;
+			cliConfig.files = args;
 		}
 
 		run(cliConfig);

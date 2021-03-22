@@ -36,7 +36,7 @@ export default class ClickAction extends AbstractAction {
 
         if (this._config.headlessModeDisabled) {
             await this._actionsHelper.highlightElement(element);
-            await page.waitFor(this._config.previewModePauseTime);
+            await page.waitForTimeout(this._config.previewModePauseTime);
         }
 
         await element.click();

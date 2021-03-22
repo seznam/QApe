@@ -97,7 +97,7 @@ module.exports = {
     },
     pageErrorHandler: {
         value: () => {
-            window.addEventListener('error', event => {
+            window.addEventListener('error', (event) => {
                 qapeError(event.error.stack); // eslint-disable-line no-undef
             });
         },
@@ -132,7 +132,7 @@ module.exports = {
         type: 'Function',
     },
     getElementSelector: {
-        value: input => {
+        value: (input) => {
             function getXPathForElement(element) {
                 const idx = (sibling, name) =>
                     sibling
@@ -140,7 +140,7 @@ module.exports = {
                           (sibling.localName == name)
                         : 1;
 
-                const segs = element => {
+                const segs = (element) => {
                     if (!element || element.nodeType !== 1) {
                         return [''];
                     } else {

@@ -100,7 +100,7 @@ export default class Browser {
      * test run.
      */
     _initFatalErrorHandler() {
-        this._page.on('error', error => {
+        this._page.on('error', (error) => {
             let msg =
                 error.stack +
                 '\n' +
@@ -122,7 +122,7 @@ export default class Browser {
     async _initPageErrorHandler() {
         this._pageErrorHandler = this._getEventEmitter();
 
-        await this._page.exposeFunction('qapeError', error =>
+        await this._page.exposeFunction('qapeError', (error) =>
             this._pageErrorHandler.emit('page-error', error)
         );
         await this._page.evaluateOnNewDocument(this._config.pageErrorHandler);

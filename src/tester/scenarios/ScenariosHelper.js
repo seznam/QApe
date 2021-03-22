@@ -33,9 +33,9 @@ export default class ScenariosHelper {
             return {
                 scenario: executedScenario,
                 errors,
-                executionError: `ScenariosHelper: Unable to navigate to location ${scenario &&
-                    scenario[0] &&
-                    scenario[0].beforeLocation}\n${e.stack}`,
+                executionError: `ScenariosHelper: Unable to navigate to location ${
+                    scenario && scenario[0] && scenario[0].beforeLocation
+                }\n${e.stack}`,
             };
         }
 

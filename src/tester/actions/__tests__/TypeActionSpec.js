@@ -13,7 +13,7 @@ describe('TypeAction', () => {
 
     it('can check if a type action is available', () => {
         let context = {
-            evaluate: jest.fn(fn => fn(element)),
+            evaluate: jest.fn((fn) => fn(element)),
         };
         let executionContext = jest.fn().mockReturnValue(context);
         let element = {
@@ -47,7 +47,7 @@ describe('TypeAction', () => {
 
     it('can perform the type action in preview mode', async () => {
         let page = {
-            waitFor: jest.fn(),
+            waitForTimeout: jest.fn(),
         };
         let element = {
             hover: jest.fn().mockReturnValue(Promise.resolve()),
@@ -66,7 +66,7 @@ describe('TypeAction', () => {
         expect(typeAction._getText).toHaveBeenCalled();
         expect(element.hover).toHaveBeenCalledTimes(1);
         expect(typeAction._actionsHelper.highlightElement).toHaveBeenCalledWith(element);
-        expect(page.waitFor).toHaveBeenCalledWith(99);
+        expect(page.waitForTimeout).toHaveBeenCalledWith(99);
         expect(element.type).toHaveBeenCalledWith('text', { delay: typeAction._config.typeActionDelay });
     });
 

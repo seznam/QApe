@@ -100,8 +100,8 @@ describe('ScenariosHandler', () => {
             files: ['a'],
         };
         fs.existsSync = jest.fn().mockReturnValue(true);
-        scenariosHandler._loadScenarioFromPath = jest.fn(a => a);
-        glob.sync = jest.fn(files => files);
+        scenariosHandler._loadScenarioFromPath = jest.fn((a) => a);
+        glob.sync = jest.fn((files) => files);
 
         scenariosHandler._loadDefinedScenarios();
 
@@ -119,7 +119,7 @@ describe('ScenariosHandler', () => {
         };
         fs.existsSync = jest.fn().mockReturnValue(false);
         scenariosHandler._loadScenarioFromPath = jest.fn();
-        glob.sync = jest.fn(files => files);
+        glob.sync = jest.fn((files) => files);
 
         scenariosHandler._loadDefinedScenarios();
 

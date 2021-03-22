@@ -5,6 +5,7 @@ describe('RandomScenarios', () => {
     let scenarios = null;
 
     beforeEach(() => {
+        // eslint-disable-next-line no-import-assign
         messanger.report = jest.fn();
         scenarios = new RandomScenarios({}, {});
     });
@@ -87,10 +88,7 @@ describe('RandomScenarios', () => {
             afterScenarioScript: jest.fn().mockReturnValue(Promise.resolve()),
         };
         scenarios._actionsHandler = {
-            execute: jest
-                .fn()
-                .mockReturnValueOnce(scenario[0])
-                .mockReturnValue(scenario[1]),
+            execute: jest.fn().mockReturnValueOnce(scenario[0]).mockReturnValue(scenario[1]),
         };
 
         let results = await scenarios._performActions(instance);

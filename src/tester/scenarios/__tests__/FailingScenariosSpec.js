@@ -7,6 +7,7 @@ describe('FailingScenarios', () => {
     let scenarios = null;
 
     beforeEach(() => {
+        // eslint-disable-next-line no-import-assign
         messanger.report = jest.fn();
         scenarios = new FailingScenarios({}, {});
     });

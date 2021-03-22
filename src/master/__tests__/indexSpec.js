@@ -14,7 +14,7 @@ describe('Master', () => {
         process.exit = jest.fn();
         workers = [];
         cluster = {
-            fork: jest.fn(env => {
+            fork: jest.fn((env) => {
                 let onFunctions = {};
                 let worker = {
                     on: jest.fn((name, fn) => {
@@ -49,7 +49,7 @@ describe('Master', () => {
 
     it('can handle exit of the reporter', () => {
         cluster.fork.mockClear();
-        let reporter = workers.find(worker => worker.env && worker.env.worker_type === 'reporter');
+        let reporter = workers.find((worker) => worker.env && worker.env.worker_type === 'reporter');
 
         reporter.onFunctions.exit(0);
 
@@ -59,7 +59,7 @@ describe('Master', () => {
 
     it('can handle exit of the scriptwriter', () => {
         cluster.fork.mockClear();
-        let scriptwriter = workers.find(worker => worker.env && worker.env.worker_type === 'scriptwriter');
+        let scriptwriter = workers.find((worker) => worker.env && worker.env.worker_type === 'scriptwriter');
 
         scriptwriter.onFunctions.exit(0);
 
@@ -68,7 +68,7 @@ describe('Master', () => {
     });
 
     it('can handle message from the scriptwriter', () => {
-        let scriptwriter = workers.find(worker => worker.env && worker.env.worker_type === 'scriptwriter');
+        let scriptwriter = workers.find((worker) => worker.env && worker.env.worker_type === 'scriptwriter');
         let msg = {
             reciever: 'tester',
             workerId: 2,
@@ -80,8 +80,8 @@ describe('Master', () => {
     });
 
     it('can handle message from a tester to the reporter', () => {
-        let reporter = workers.find(worker => worker.env && worker.env.worker_type === 'reporter');
-        let tester = workers.find(worker => !worker.env);
+        let reporter = workers.find((worker) => worker.env && worker.env.worker_type === 'reporter');
+        let tester = workers.find((worker) => !worker.env);
         let msg = { reciever: 'reporter' };
 
         tester.onFunctions.message(msg);
@@ -93,8 +93,8 @@ describe('Master', () => {
     });
 
     it('can handle message from a tester to the scriptwriter', () => {
-        let scriptwriter = workers.find(worker => worker.env && worker.env.worker_type === 'scriptwriter');
-        let tester = workers.find(worker => !worker.env);
+        let scriptwriter = workers.find((worker) => worker.env && worker.env.worker_type === 'scriptwriter');
+        let tester = workers.find((worker) => !worker.env);
         let msg = { reciever: 'scriptwriter' };
 
         tester.onFunctions.message(msg);
@@ -107,7 +107,7 @@ describe('Master', () => {
 
     it('can handle exit of a tester, when it was killed due to an inactivity', () => {
         cluster.fork.mockClear();
-        let tester = workers.find(worker => !worker.env);
+        let tester = workers.find((worker) => !worker.env);
 
         tester.onFunctions.exit(null, 'SIGKILL');
 
@@ -116,7 +116,7 @@ describe('Master', () => {
     });
 
     it('can handle exit of a tester for a successful run', () => {
-        let tester = workers.find(worker => !worker.env);
+        let tester = workers.find((worker) => !worker.env);
 
         tester.onFunctions.exit(0);
 
@@ -125,7 +125,7 @@ describe('Master', () => {
     });
 
     it('can handle exit of a tester for a unsuccessful run', () => {
-        let tester = workers.find(worker => !worker.env);
+        let tester = workers.find((worker) => !worker.env);
 
         tester.onFunctions.exit(1);
 

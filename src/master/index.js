@@ -30,7 +30,7 @@ export default (cluster, config) => {
     function initScriptwriter() {
         scriptwriter = cluster
             .fork({ worker_type: 'scriptwriter' })
-            .on('message', msg => {
+            .on('message', (msg) => {
                 if (msg.reciever === 'tester') {
                     cluster.workers[msg.workerId].send(msg.eventData);
                 }
@@ -47,7 +47,7 @@ export default (cluster, config) => {
         let timeout = setTimeout(timeoutHandler, config.testerTimeout);
 
         worker
-            .on('message', msg => {
+            .on('message', (msg) => {
                 clearTimeout(timeout);
                 timeout = setTimeout(timeoutHandler, config.testerTimeout);
                 let fullMsg = Object.assign({}, msg, { workerId: worker.id });

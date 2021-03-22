@@ -16,7 +16,7 @@ export default class Config {
             userConfig = require(path.join(process.cwd(), userConfig));
         }
 
-        Object.keys(template).forEach(key => (config[key] = template[key].value));
+        Object.keys(template).forEach((key) => (config[key] = template[key].value));
 
         Object.assign(config, userConfig);
 
@@ -32,12 +32,12 @@ export default class Config {
     /**
      * If url is configured with url path (https://www.example.com/index.html),
      * then this method splits the configuration into `url` and `urlPaths`.
-     * 
+     *
      * @example Following config
      * `{ url: 'https://www.example.com/index.html' }`
      * would be transformed into the following config
      * `{ url: 'https://www.example.com', urlPaths: ['/index.html'] }`
-     * @param {Object} config 
+     * @param {Object} config
      */
     static _resolveUrl(config) {
         const host = config.url.replace(/http(s)?:\/\//, '');

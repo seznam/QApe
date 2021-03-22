@@ -9,11 +9,11 @@ import Runner from './Runner';
  * @param {Object} config
  * @returns {Runner}
  */
-export default config => {
+export default (config) => {
     return new Runner(config)
         .start()
         .then(() => process.exit())
-        .catch(error => {
+        .catch((error) => {
             if (error) {
                 console.error(error);
             }

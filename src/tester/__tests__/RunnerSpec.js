@@ -1,3 +1,5 @@
+/* eslint-disable no-import-assign */
+
 jest.mock('../browser/Browser');
 jest.mock('../scenarios/ScenariosHandler');
 jest.mock('../actions/ActionsHandler');

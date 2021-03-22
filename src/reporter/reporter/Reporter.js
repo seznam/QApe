@@ -22,7 +22,7 @@ export default class Reporter extends EventEmitter {
      * Initializes all reporters defined in config
      */
     init() {
-        this._config.reporters.forEach(reporter => {
+        this._config.reporters.forEach((reporter) => {
             if (reporter === 'console') {
                 return this._initReporterFromClass(ConsoleReporter);
             }
@@ -58,7 +58,7 @@ export default class Reporter extends EventEmitter {
      * @param {Object} eventData
      */
     emit(eventName, eventData) {
-        this._reporters.forEach(reporter => {
+        this._reporters.forEach((reporter) => {
             try {
                 reporter.emit(eventName, eventData);
             } catch (e) {

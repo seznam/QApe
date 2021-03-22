@@ -19,7 +19,7 @@ export default class FileReporter extends EventEmitter {
 
         this._results = [];
 
-        this.on('scenario:end', eventData => this._handleScenarioEnd(eventData));
+        this.on('scenario:end', (eventData) => this._handleScenarioEnd(eventData));
     }
 
     /**
@@ -99,6 +99,6 @@ export default class FileReporter extends EventEmitter {
      * @returns {boolean}
      */
     _isFailureReported(scenario) {
-        return !!this._results.find(result => isEqual(result.scenario, scenario));
+        return !!this._results.find((result) => isEqual(result.scenario, scenario));
     }
 }

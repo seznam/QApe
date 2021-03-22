@@ -66,10 +66,10 @@ export default class AbstractAction {
      * @returns {Object} results
      */
     async execute(element, instance) {
-        this._addEventListener(instance.pageErrorHandler, 'page-error', error =>
+        this._addEventListener(instance.pageErrorHandler, 'page-error', (error) =>
             this._addErrorToResults(error)
         );
-        this._addEventListener(instance.page, 'response', response => {
+        this._addEventListener(instance.page, 'response', (response) => {
             if (this._config.shouldRequestCauseError(response, this._config)) {
                 let error = `Requested page "${response
                     .request()
@@ -162,7 +162,7 @@ export default class AbstractAction {
             await page.goBack();
         }
 
-        await page.waitFor(this._config.afterActionWaitTime);
+        await page.waitForTimeout(this._config.afterActionWaitTime);
 
         this._results.afterLocation = page.url();
 
@@ -214,7 +214,7 @@ export default class AbstractAction {
         let pages = await browser.pages();
         let shiftedPages = pages.slice(1);
 
-        return Promise.all(shiftedPages.map(page => page.close()));
+        return Promise.all(shiftedPages.map((page) => page.close()));
     }
 
     /**

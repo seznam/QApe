@@ -97,7 +97,7 @@ export default class ActionsHandler {
      * Loads all defined actions
      */
     _loadActions() {
-        /**
+        /*
          * @FIXME Back action can get you to `about:blank` page,
          * which does not have any elements available and causes
          * crash of the QApe run. Back action should never get user
@@ -107,10 +107,10 @@ export default class ActionsHandler {
         let paths = [path.join(__dirname, '!(Abstract|Back)Action.js')];
 
         if (this._config.customActions && this._config.customActions.length > 0) {
-            this._config.customActions.forEach(action => paths.push(path.join(process.cwd(), action)));
+            this._config.customActions.forEach((action) => paths.push(path.join(process.cwd(), action)));
         }
 
-        glob.sync(paths).map(actionFile => {
+        glob.sync(paths).map((actionFile) => {
             let action = require(actionFile).default;
 
             if (this._actions[action.id]) {
@@ -134,9 +134,9 @@ export default class ActionsHandler {
         let actions = [];
 
         await Promise.all(
-            elements.map(element => {
+            elements.map((element) => {
                 return Promise.all(
-                    availableActionIds.map(async id => {
+                    availableActionIds.map(async (id) => {
                         let Action = this._actions[id];
 
                         if (await Action.isActionAvailable(element, page, this._config)) {

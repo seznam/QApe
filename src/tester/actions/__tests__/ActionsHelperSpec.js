@@ -17,15 +17,15 @@ describe('ActionsHelper', () => {
                 .fn()
                 .mockReturnValueOnce(Promise.resolve('loading'))
                 .mockReturnValue(Promise.resolve('interactive')),
-            waitFor: jest.fn().mockReturnValue(Promise.resolve()),
+            waitForTimeout: jest.fn().mockReturnValue(Promise.resolve()),
         };
 
         await actionsHelper.waitForReadyState(page);
 
         expect(page.evaluate).toHaveBeenCalledTimes(2);
         expect(page.evaluate).toHaveBeenCalledWith(jasmine.any(Function));
-        expect(page.waitFor).toHaveBeenCalledTimes(1);
-        expect(page.waitFor).toHaveBeenCalledWith(jasmine.any(Number));
+        expect(page.waitForTimeout).toHaveBeenCalledTimes(1);
+        expect(page.waitForTimeout).toHaveBeenCalledWith(jasmine.any(Number));
     });
 
     it('can get all visible elements in DOM', async () => {

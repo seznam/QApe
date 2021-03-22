@@ -22,7 +22,7 @@ export default class TypeAction extends AbstractAction {
      * @returns {boolean}
      */
     static isActionAvailable(element) {
-        return element.executionContext().evaluate(element => {
+        return element.executionContext().evaluate((element) => {
             return element.matches(
                 // Is typable input box
                 'input' +
@@ -56,7 +56,7 @@ export default class TypeAction extends AbstractAction {
 
         if (this._config.headlessModeDisabled) {
             await this._actionsHelper.highlightElement(element);
-            await page.waitFor(this._config.previewModePauseTime);
+            await page.waitForTimeout(this._config.previewModePauseTime);
         }
 
         await element.type(this._text, { delay: this._config.typeActionDelay });

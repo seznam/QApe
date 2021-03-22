@@ -11,6 +11,7 @@ describe('AbstractAction', () => {
         Object.defineProperty(AbstractAction, 'id', {
             get: () => 'id',
         });
+        // eslint-disable-next-line no-import-assign
         messanger.report = jest.fn();
         action = new AbstractAction({}, {});
     });
@@ -244,11 +245,8 @@ describe('AbstractAction', () => {
         let instance = {
             browser: 'browser',
             page: {
-                url: jest
-                    .fn()
-                    .mockReturnValueOnce('afterUrl')
-                    .mockReturnValue('url'),
-                waitFor: jest.fn().mockReturnValue(Promise.resolve()),
+                url: jest.fn().mockReturnValueOnce('afterUrl').mockReturnValue('url'),
+                waitForTimeout: jest.fn().mockReturnValue(Promise.resolve()),
                 goBack: jest.fn().mockReturnValue(Promise.resolve()),
                 bringToFront: jest.fn().mockReturnValue(Promise.resolve()),
             },
@@ -274,7 +272,7 @@ describe('AbstractAction', () => {
         expect(action._clearTabs).toHaveBeenCalledWith(instance.browser);
         expect(instance.page.url).toHaveBeenCalled();
         expect(instance.page.goBack).toHaveBeenCalled();
-        expect(instance.page.waitFor).toHaveBeenCalledWith(99);
+        expect(instance.page.waitForTimeout).toHaveBeenCalledWith(99);
         expect(action._results).toEqual({ afterLocation: 'url' });
         expect(action._logInfo).toHaveBeenCalledWith(element);
         expect(messanger.report).toHaveBeenCalledWith('action:end', {
@@ -383,7 +381,7 @@ describe('AbstractAction', () => {
             getElementSelector: jest.fn().mockReturnValue(Promise.resolve(selector)),
             getElementHTML: jest.fn().mockReturnValue(Promise.resolve(html)),
         };
-        action.updateResults = jest.fn(results => Promise.resolve(results));
+        action.updateResults = jest.fn((results) => Promise.resolve(results));
         action._results = {};
 
         await action._logInfo(element);

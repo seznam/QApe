@@ -12,7 +12,7 @@ import scriptwriter from './scriptwriter';
 /**
  * Sets up a QApe run
  */
-export default configOverride => {
+export default (configOverride) => {
     const USER_CONFIG_PATH = path.join(process.cwd(), './qape.conf.js');
 
     let configValues = {};

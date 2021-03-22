@@ -32,7 +32,7 @@ export default class BackAction extends AbstractAction {
      */
     async action(element, page) {
         if (this._config.headlessModeDisabled) {
-            await page.waitFor(this._config.previewModePauseTime);
+            await page.waitForTimeout(this._config.previewModePauseTime);
         }
 
         await Promise.all([page.waitForNavigation(), page.goBack()]);

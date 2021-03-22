@@ -86,7 +86,7 @@ export default class ScenariosHandler {
      * Loads all user defined scenarios specified in config
      */
     _loadDefinedScenarios() {
-        glob.sync(this._config.files).forEach(file => {
+        glob.sync(this._config.files).forEach((file) => {
             let scenarioPath = path.join(process.cwd(), file);
 
             if (!fs.existsSync(scenarioPath)) {

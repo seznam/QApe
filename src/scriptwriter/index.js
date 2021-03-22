@@ -8,7 +8,7 @@ import Scenarios from './scenarios/ScenariosHandler';
  * @memberof scriptwriter
  * @param {Object} config
  */
-export default config => {
+export default (config) => {
     let scenarios = new Scenarios(config).init();
 
     process.on('message', ({ eventName, eventData, workerId }) => {

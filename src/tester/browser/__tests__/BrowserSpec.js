@@ -55,6 +55,7 @@ describe('Browser', () => {
     });
 
     it('can initialize fatal error handler', () => {
+        // eslint-disable-next-line no-import-assign
         messanger.report = jest.fn();
         browser._page = {
             on: jest.fn((_, fn) => {

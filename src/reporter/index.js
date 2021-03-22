@@ -10,7 +10,7 @@ import util from 'util';
  * @memberof reporter
  * @param {Object} config
  */
-export default config => {
+export default (config) => {
     let reporter = new Reporter(config).init();
 
     process.on('message', ({ eventName, eventData }) => {

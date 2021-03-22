@@ -13,10 +13,10 @@ export default class ConsoleReporter extends EventEmitter {
 
         this._config = config;
 
-        this.on('scenario:start', eventData => this._handleScenarioStart(eventData));
-        this.on('scenario:end', eventData => this._handleScenarioEnd(eventData));
-        this.on('runner:error', eventData => this._handleError(eventData));
-        this.on('browser:error', eventData => this._handleError(eventData));
+        this.on('scenario:start', (eventData) => this._handleScenarioStart(eventData));
+        this.on('scenario:end', (eventData) => this._handleScenarioEnd(eventData));
+        this.on('runner:error', (eventData) => this._handleError(eventData));
+        this.on('browser:error', (eventData) => this._handleError(eventData));
     }
 
     /**
@@ -92,7 +92,7 @@ export default class ConsoleReporter extends EventEmitter {
         } else if (results.errors.length > 0) {
             console.log('Random scenario recieved following error.');
 
-            results.errors.forEach(error => console.log(error));
+            results.errors.forEach((error) => console.log(error));
         } else {
             console.log('Random scenario did not find any errors.');
         }
@@ -108,8 +108,8 @@ export default class ConsoleReporter extends EventEmitter {
         console.log(text);
         if (scenario.length > 0) {
             console.log('StartLocation:', scenario[0].beforeLocation);
-            scenario.forEach(action => console.log(action.message));
+            scenario.forEach((action) => console.log(action.message));
         }
-        errors.forEach(error => console.log(error));
+        errors.forEach((error) => console.log(error));
     }
 }

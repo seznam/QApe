@@ -17,10 +17,10 @@ export function report(eventName, eventData) {
  * or an empty object
  */
 export function requestScenario() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         const timeout = setTimeout(() => resolve({}), 5000);
 
-        process.once('message', scenario => {
+        process.once('message', (scenario) => {
             clearTimeout(timeout);
             resolve(scenario);
         });

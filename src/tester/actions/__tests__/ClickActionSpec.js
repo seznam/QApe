@@ -30,7 +30,7 @@ describe('ClickAction', () => {
 
     it('can click on a specified element in preview mode', async () => {
         let page = {
-            waitFor: jest.fn(),
+            waitForTimeout: jest.fn(),
         };
         let element = {
             hover: jest.fn().mockReturnValue(Promise.resolve()),
@@ -46,7 +46,7 @@ describe('ClickAction', () => {
 
         expect(element.hover).toHaveBeenCalledTimes(1);
         expect(clickAction._actionsHelper.highlightElement).toHaveBeenCalledWith(element);
-        expect(page.waitFor).toHaveBeenCalledWith(99);
+        expect(page.waitForTimeout).toHaveBeenCalledWith(99);
         expect(element.click).toHaveBeenCalledTimes(1);
     });
 
