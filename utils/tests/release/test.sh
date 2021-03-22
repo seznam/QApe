@@ -34,7 +34,7 @@ sleep 1
 STATUS=0
 
 echo "Test1: QApe can pass the run when there are no error at the page."
-node_modules/.bin/qape -u "$TARGET_WEB_URL/noerror.html"
+node_modules/.bin/qape -u "$TARGET_WEB_URL" --url-paths "/noerror.html"
 if [ "$?" = "0" ] ; then
 	echo "pass"
 else
@@ -43,7 +43,7 @@ else
 fi
 
 echo "Test2: QApe can find an error and minify the scenario."
-node_modules/.bin/qape -u "$TARGET_WEB_URL/error.html"
+node_modules/.bin/qape -u "$TARGET_WEB_URL" --url-paths "/error.html"
 if [ "$?" = "1" ] && ls report/*-minified.json ; then
 	echo "pass"
 else
@@ -53,7 +53,7 @@ fi
 
 echo "Test3: QApe can replay the failing scenario."
 mv report scenarios
-node_modules/.bin/qape -u "$TARGET_WEB_URL/error.html" --random-scenarios-disabled scenarios/*-minified.json
+node_modules/.bin/qape -u "$TARGET_WEB_URL" --url-paths "/error.html" --random-scenarios-disabled scenarios/*-minified.json
 if [ "$?" = "1" ] && ls report/*-minified.json ; then
 	echo "pass"
 else

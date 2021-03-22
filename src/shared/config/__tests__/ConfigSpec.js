@@ -6,13 +6,22 @@ describe('Config', () => {
     });
 
     it('can merge default config with user config', () => {
-        let files = ['file1', 'file2'];
+        const files = ['file1', 'file2'];
 
         expect(Config.load({ files }).files).toEqual(files);
     });
 
+    for (const protocol of ['http', 'https']) {
+        it(`can resolve url config with ${protocol} protocol`, () => {
+            const config = Config.load({ url: `${protocol}://www.example.com/index.html` });
+
+            expect(config.url).toEqual(`${protocol}://www.example.com`);
+            expect(config.urlPaths).toEqual(['/index.html']);
+        });
+    }
+
     it('can set preview mode settings', () => {
-        let config = Config.load({ previewMode: true });
+        const config = Config.load({ previewMode: true });
 
         expect(config.parallelInstances).toEqual(1);
         expect(config.randomScenariosDisabled).toEqual(true);

@@ -52,7 +52,7 @@
   "author": "Filip Satek <filip.satek@firma.seznam.cz>",
   "license": "MIT",
   "dependencies": {
-    "commander": "4.1.1",
+    "commander": "7.2.0",
     "faker": "4.1.0",
     "glob-all": "3.1.0",
     "lodash.isequal": "4.5.0",

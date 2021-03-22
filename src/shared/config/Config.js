@@ -24,7 +24,30 @@ export default class Config {
             Config._setPreviewMode(config);
         }
 
+        Config._resolveUrl(config);
+
         return config;
+    }
+
+    /**
+     * If url is configured with url path (https://www.example.com/index.html),
+     * then this method splits the configuration into `url` and `urlPaths`.
+     * 
+     * @example Following config
+     * `{ url: 'https://www.example.com/index.html' }`
+     * would be transformed into the following config
+     * `{ url: 'https://www.example.com', urlPaths: ['/index.html'] }`
+     * @param {Object} config 
+     */
+    static _resolveUrl(config) {
+        const host = config.url.replace(/http(s)?:\/\//, '');
+
+        if (host.includes('/')) {
+            const urlPaths = [`/${host.split('/')[1]}`];
+            const url = config.url.replace(urlPaths[0], '');
+
+            Object.assign(config, { url, urlPaths });
+        }
     }
 
     /**
