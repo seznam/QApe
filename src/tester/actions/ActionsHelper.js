@@ -11,7 +11,7 @@ export default class ActionsHelper {
 
     /**
      * Resolves when page readyState equals to one of specified states.
-     * If the state does not equal after specified timeout, it throw error.
+     * If the states are not equal after specified timeout, error is thrown.
      * @param {puppeteer.Page} page
      * @param {Object} [options]
      * @param {number} [options.timeout=30000]
@@ -74,15 +74,7 @@ export default class ActionsHelper {
      * @returns {Promise<puppeteer.ElementHandle>} element
      */
     async getElement(page, actionConfig = {}) {
-        let element = (await page.$x(actionConfig.selector))[0];
-
-        if (!element) {
-            let config = JSON.stringify(actionConfig, null, 2);
-
-            throw Error('Unable to initialize an element with following config.\n' + config);
-        }
-
-        return element;
+        return page.waitForXPath(actionConfig.selector);
     }
 
     /**
