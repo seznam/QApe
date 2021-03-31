@@ -51,14 +51,14 @@ describe('ActionsHelper', () => {
     it('can get an element from actionConfig', async () => {
         let element = 'element';
         let page = {
-            $x: jest.fn().mockReturnValue(Promise.resolve([element])),
+            waitForXPath: jest.fn().mockReturnValue(Promise.resolve(element)),
         };
         let actionConfig = { selector: 'selector' };
 
         let results = await actionsHelper.getElement(page, actionConfig);
 
         expect(results).toEqual(element);
-        expect(page.$x).toHaveBeenCalledWith(actionConfig.selector);
+        expect(page.waitForXPath).toHaveBeenCalledWith(actionConfig.selector);
     });
 
     it('can highlight an element', async () => {
