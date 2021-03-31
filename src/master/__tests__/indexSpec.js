@@ -124,7 +124,7 @@ describe('Master', () => {
         expect(process.exit).toHaveBeenCalledWith(0);
     });
 
-    it('can handle exit of a tester for a unsuccessful run', () => {
+    it('can handle exit of a tester for an unsuccessful run', () => {
         let tester = workers.find((worker) => !worker.env);
 
         tester.onFunctions.exit(1);

@@ -72,6 +72,8 @@ export default (cluster, config) => {
                     liveWorkers--;
 
                     if (liveWorkers <= 0) {
+                        reporter.send({ eventName: 'process:exit', eventData: { exitCode } });
+
                         process.exit(exitCode);
                     }
                 }
