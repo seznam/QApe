@@ -55,6 +55,8 @@ export default class DefaultReporter extends EventEmitter {
 		// runner:error is emitted whenever an uncaught error occurred
 		// eventData contains scenario, browser instance and error
 		this.on('runner:error', eventData => console.log(eventData));
+		// process:exit is emitted right before the QApe run ends
+		this.on('process:exit', () => console.log('it\'s done'));
 	}
 
 	// You can use init method, which is called right after constructor.
