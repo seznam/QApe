@@ -191,29 +191,50 @@ Script executed in browser context, which should generate unique element selecto
 **Default:**
 ```javascript
 (input) => {
-            function getXPathForElement(element) {
-                const idx = (sibling, name) =>
-                    sibling
-                        ? idx(sibling.previousElementSibling, name || sibling.localName) +
-                          (sibling.localName == name)
-                        : 1;
+            function getTagSelector(tagName) {
+                const tag = tagName.toLowerCase();
 
-                const segs = (element) => {
-                    if (!element || element.nodeType !== 1) {
-                        return [''];
-                    } else {
-                        return element.id && document.getElementById(element.id) === element
-                            ? [`id("${element.id}")`]
-                            : [
-                                  ...segs(element.parentNode),
-                                  `${element.localName.toLowerCase()}[${idx(element)}]`,
-                              ];
-                    }
-                };
-                return segs(element).join('/');
+                // Some tag names cannot be simply selected by xpath
+                if (['svg', 'path'].includes(tag)) {
+                    return `*[local-name() = '${tag}']`;
+                }
+
+                return tag;
             }
 
-            return getXPathForElement(input);
+            function getPathTo(element) {
+                if (element === document.body) {
+                    return '//' + element.tagName.toLowerCase();
+                }
+
+                if (!element.parentNode) {
+                    return '/';
+                }
+
+                var siblings = element.parentNode.childNodes;
+                var index = 0;
+
+                for (var i = 0; i < siblings.length; i++) {
+                    var sibling = siblings[i];
+
+                    if (sibling === element) {
+                        return (
+                            getPathTo(element.parentNode) +
+                            '/' +
+                            getTagSelector(element.tagName) +
+                            '[' +
+                            (index + 1) +
+                            ']'
+                        );
+                    }
+
+                    if (sibling.nodeType === 1 && sibling.tagName === element.tagName) {
+                        index++;
+                    }
+                }
+            }
+
+            return getPathTo(input);
         }
 ```
 
