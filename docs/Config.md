@@ -60,7 +60,7 @@ Script executed after each action
 
 **Default:**
 ```javascript
-(/* { browser, page }, pageErrorHandler */) => {}
+(/* browser, page, pageErrorHandler */) => {}
 ```
 
 ### afterActionWaitTime
@@ -90,7 +90,7 @@ Script executed before each action
 
 **Default:**
 ```javascript
-(/* { browser, page }, pageErrorHandler */) => {}
+(/* browser, page, pageErrorHandler */) => {}
 ```
 
 ### beforeScenarioScript
