@@ -61,6 +61,8 @@ export default (cluster, config) => {
                 }
             })
             .on('exit', (code, signal) => {
+                clearTimeout(timeout);
+
                 console.log(`Tester ${worker.id} exited. [code: ${code}, signal: ${signal}]`); // eslint-disable-line no-console
                 if (code > exitCode) {
                     exitCode = code;

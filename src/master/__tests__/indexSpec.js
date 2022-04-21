@@ -4,6 +4,8 @@ const originalConsoleLog = console.log;
 const originalConsoleError = console.error;
 const originalProcessExit = process.exit;
 
+jest.useFakeTimers();
+
 describe('Master', () => {
     let cluster = null;
     let workers = null;
