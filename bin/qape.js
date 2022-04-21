@@ -13,6 +13,7 @@ program
 	.option('-i, --parallel-instances <number>', 'parallel browser instances', parseInt)
 	.option('-p, --preview-mode', 'run in preview mode')
 	.option('-r, --random-scenarios-disabled', 'disables random scenarios')
+	.option('--report-path <path>', 'relative, or absolute report path')
 	.option('-s, --browser-web-socket-endpoint <value>', 'connect to remote chrome instance (i.e. "ws://5.5.5.5:3505")')
 	.option('-a, --stop-new-scenarios-after-time <number>', 'stops new scenarios after specified amount of time (in ms), set to 0 to disable', parseInt)
 	.option('-d, --debug', 'run in debug mode')
@@ -24,6 +25,7 @@ program
 			parallelInstance,
 			previewMode,
 			randomScenariosDisabled,
+			reportPath,
 			browserWebSocketEndpoint,
 			stopNewScenariosAfterTime,
 			debug
