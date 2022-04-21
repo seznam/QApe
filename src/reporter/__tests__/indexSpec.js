@@ -20,7 +20,7 @@ describe('Reporter', () => {
         Reporter.mockImplementation(() => reporter);
         worker({});
 
-        expect(process.on).toHaveBeenCalledWith('message', jasmine.any(Function));
+        expect(process.on).toHaveBeenCalledWith('message', expect.any(Function));
         expect(reporter.emit).toHaveBeenCalledWith('eventName', 'eventData');
 
         process.on = originalProcessOn;

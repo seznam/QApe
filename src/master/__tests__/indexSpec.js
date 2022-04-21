@@ -53,7 +53,7 @@ describe('Master', () => {
 
         reporter.onFunctions.exit(0);
 
-        expect(console.error).toHaveBeenCalledWith(jasmine.any(String));
+        expect(console.error).toHaveBeenCalledWith(expect.any(String));
         expect(cluster.fork).toHaveBeenCalledWith({ worker_type: 'reporter' });
     });
 
@@ -63,7 +63,7 @@ describe('Master', () => {
 
         scriptwriter.onFunctions.exit(0);
 
-        expect(console.error).toHaveBeenCalledWith(jasmine.any(String));
+        expect(console.error).toHaveBeenCalledWith(expect.any(String));
         expect(cluster.fork).toHaveBeenCalledWith({ worker_type: 'scriptwriter' });
     });
 
@@ -111,7 +111,7 @@ describe('Master', () => {
 
         tester.onFunctions.exit(null, 'SIGKILL');
 
-        expect(console.log).toHaveBeenCalledWith(jasmine.any(String));
+        expect(console.log).toHaveBeenCalledWith(expect.any(String));
         expect(cluster.fork).toHaveBeenCalledTimes(1);
     });
 
@@ -120,7 +120,7 @@ describe('Master', () => {
 
         tester.onFunctions.exit(0);
 
-        expect(console.log).toHaveBeenCalledWith(jasmine.any(String));
+        expect(console.log).toHaveBeenCalledWith(expect.any(String));
         expect(process.exit).toHaveBeenCalledWith(0);
     });
 
@@ -129,7 +129,7 @@ describe('Master', () => {
 
         tester.onFunctions.exit(1);
 
-        expect(console.log).toHaveBeenCalledWith(jasmine.any(String));
+        expect(console.log).toHaveBeenCalledWith(expect.any(String));
         expect(process.exit).toHaveBeenCalledWith(1);
     });
 });

@@ -2,7 +2,7 @@ import Config from '../Config';
 
 describe('Config', () => {
     it('can be loaded when no user configuration passed', () => {
-        expect(Config.load()).toEqual(jasmine.any(Object));
+        expect(Config.load()).toEqual(expect.any(Object));
     });
 
     it('can merge default config with user config', () => {

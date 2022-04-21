@@ -28,7 +28,7 @@ describe('SpinnerReporter', () => {
         reporter._handleEvent();
 
         expect(reporter._clearSpinner).toHaveBeenCalled();
-        expect(stdout.write).toHaveBeenCalledWith(jasmine.any(String));
+        expect(stdout.write).toHaveBeenCalledWith(expect.any(String));
         expect(readline.cursorTo).toHaveBeenCalledWith(stdout, 0, 0);
         expect(reporter._index).toEqual(currentSpinnerIndex + 1);
     });

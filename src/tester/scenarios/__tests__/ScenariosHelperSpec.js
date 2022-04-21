@@ -67,7 +67,7 @@ describe('ScenariosHelper', () => {
         expect(results).toEqual({
             scenario: [],
             errors: [],
-            executionError: jasmine.any(String),
+            executionError: expect.any(String),
         });
     });
 
@@ -93,7 +93,7 @@ describe('ScenariosHelper', () => {
         expect(results).toEqual({
             scenario: [],
             errors: [],
-            executionError: jasmine.any(String),
+            executionError: expect.any(String),
         });
     });
 

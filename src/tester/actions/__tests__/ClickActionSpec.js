@@ -59,7 +59,7 @@ describe('ClickAction', () => {
         };
         let updatedResults = await clickAction.updateResults(results);
 
-        expect(updatedResults.message).toEqual(jasmine.any(String));
+        expect(updatedResults.message).toEqual(expect.any(String));
         expect(updatedResults.html).toEqual(results.html);
         expect(updatedResults.config).toEqual(results.config);
     });

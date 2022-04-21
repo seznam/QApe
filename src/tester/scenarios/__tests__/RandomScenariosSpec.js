@@ -75,7 +75,7 @@ describe('RandomScenarios', () => {
             results,
         });
         expect(results).toEqual({
-            executionError: jasmine.any(String),
+            executionError: expect.any(String),
         });
     });
 
@@ -146,7 +146,7 @@ describe('RandomScenarios', () => {
         expect(results).toEqual({
             scenario: [],
             errors: [],
-            executionError: jasmine.any(String),
+            executionError: expect.any(String),
         });
         expect(scenarios._config.afterScenarioScript).toHaveBeenCalledWith(instance);
     });

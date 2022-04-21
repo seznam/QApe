@@ -24,7 +24,7 @@ describe('AbstractAction', () => {
         expect(action._results).toEqual({
             action: 'id',
             errors: [],
-            message: jasmine.any(String),
+            message: expect.any(String),
         });
     });
 
@@ -59,12 +59,12 @@ describe('AbstractAction', () => {
         expect(action._addEventListener).toHaveBeenCalledWith(
             instance.pageErrorHandler,
             'page-error',
-            jasmine.any(Function)
+            expect.any(Function)
         );
         expect(action._addEventListener).toHaveBeenCalledWith(
             instance.page,
             'response',
-            jasmine.any(Function)
+            expect.any(Function)
         );
         expect(results).toEqual({});
     });
@@ -88,12 +88,12 @@ describe('AbstractAction', () => {
         expect(action._addEventListener).toHaveBeenCalledWith(
             instance.pageErrorHandler,
             'page-error',
-            jasmine.any(Function)
+            expect.any(Function)
         );
         expect(action._addEventListener).toHaveBeenCalledWith(
             instance.page,
             'response',
-            jasmine.any(Function)
+            expect.any(Function)
         );
         expect(results).toEqual({});
     });
@@ -122,12 +122,12 @@ describe('AbstractAction', () => {
         expect(action._addEventListener).toHaveBeenCalledWith(
             instance.pageErrorHandler,
             'page-error',
-            jasmine.any(Function)
+            expect.any(Function)
         );
         expect(action._addEventListener).toHaveBeenCalledWith(
             instance.page,
             'response',
-            jasmine.any(Function)
+            expect.any(Function)
         );
         expect(results).toEqual({});
     });
@@ -159,17 +159,17 @@ describe('AbstractAction', () => {
 
         let results = await action.execute(element, instance);
 
-        expect(action._addErrorToResults).toHaveBeenCalledWith(jasmine.any(String));
+        expect(action._addErrorToResults).toHaveBeenCalledWith(expect.any(String));
         expect(action._executeActionLifecycle).toHaveBeenCalledWith(element, instance);
         expect(action._addEventListener).toHaveBeenCalledWith(
             instance.pageErrorHandler,
             'page-error',
-            jasmine.any(Function)
+            expect.any(Function)
         );
         expect(action._addEventListener).toHaveBeenCalledWith(
             instance.page,
             'response',
-            jasmine.any(Function)
+            expect.any(Function)
         );
         expect(results).toEqual({});
     });

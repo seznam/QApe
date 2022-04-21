@@ -99,7 +99,7 @@ describe('FileReporter', () => {
     });
 
     it('can get scenario name', () => {
-        expect(reporter._getScenarioName()).toEqual(jasmine.any(String));
+        expect(reporter._getScenarioName()).toEqual(expect.any(String));
         expect(reporter._getScenarioName('.json')).toMatch(/\.json$/);
     });
 

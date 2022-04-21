@@ -66,9 +66,9 @@ describe('Browser', () => {
 
         browser._initFatalErrorHandler();
 
-        expect(browser._page.on).toHaveBeenCalledWith('error', jasmine.any(Function));
+        expect(browser._page.on).toHaveBeenCalledWith('error', expect.any(Function));
         expect(messanger.report).toHaveBeenCalledWith('browser:error', {
-            error: jasmine.any(String),
+            error: expect.any(String),
         });
         expect(browser.clear).toHaveBeenCalled();
     });
@@ -87,7 +87,7 @@ describe('Browser', () => {
         await browser._initPageErrorHandler();
 
         expect(browser._pageErrorHandler).toEqual(eventEmitter);
-        expect(page.exposeFunction).toHaveBeenCalledWith('qapeError', jasmine.any(Function));
+        expect(page.exposeFunction).toHaveBeenCalledWith('qapeError', expect.any(Function));
         expect(page.evaluateOnNewDocument).toHaveBeenCalledWith(pageErrorHandler);
     });
 });

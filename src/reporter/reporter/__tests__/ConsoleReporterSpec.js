@@ -110,7 +110,7 @@ describe('ConsoleReporter', () => {
 
         reporter._handleFailingScenarioEnd(eventData);
 
-        expect(reporter._logConsole).toHaveBeenCalledWith(jasmine.any(String), 'scenario', ['error']);
+        expect(reporter._logConsole).toHaveBeenCalledWith(expect.any(String), 'scenario', ['error']);
     });
 
     it('can handle failing scenario end for not reproduced scenario', () => {
@@ -123,7 +123,7 @@ describe('ConsoleReporter', () => {
 
         reporter._handleFailingScenarioEnd(eventData);
 
-        expect(reporter._logConsole).toHaveBeenCalledWith(jasmine.any(String), [], ['error']);
+        expect(reporter._logConsole).toHaveBeenCalledWith(expect.any(String), [], ['error']);
     });
 
     it('can handle random scenario end with an error in results', () => {

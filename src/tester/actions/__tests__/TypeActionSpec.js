@@ -23,8 +23,8 @@ describe('TypeAction', () => {
 
         expect(TypeAction.isActionAvailable(element)).toEqual(true);
         expect(element.executionContext).toHaveBeenCalledTimes(1);
-        expect(context.evaluate).toHaveBeenCalledWith(jasmine.any(Function), element);
-        expect(element.matches).toHaveBeenCalledWith(jasmine.any(String));
+        expect(context.evaluate).toHaveBeenCalledWith(expect.any(Function), element);
+        expect(element.matches).toHaveBeenCalledWith(expect.any(String));
     });
 
     it('can perform the type action', async () => {
@@ -83,7 +83,7 @@ describe('TypeAction', () => {
             typeActionTextTypes: ['name.firstName'],
         };
 
-        expect(typeAction._getText()).toEqual(jasmine.any(String));
+        expect(typeAction._getText()).toEqual(expect.any(String));
     });
 
     it('can update action results', async () => {
@@ -96,9 +96,9 @@ describe('TypeAction', () => {
         };
         let updatedResults = await typeAction.updateResults(results);
 
-        expect(updatedResults.message).toEqual(jasmine.any(String));
+        expect(updatedResults.message).toEqual(expect.any(String));
         expect(updatedResults.html).toEqual(results.html);
         expect(updatedResults.config.selector).toEqual(results.config.selector);
-        expect(updatedResults.config.text).toEqual(jasmine.any(String));
+        expect(updatedResults.config.text).toEqual(expect.any(String));
     });
 });

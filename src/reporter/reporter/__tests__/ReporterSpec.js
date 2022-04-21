@@ -37,7 +37,7 @@ describe('Reporter', () => {
         let reporters = [{}];
         reporter._config = { reporters };
 
-        expect(reporter.init).toThrowError(Error, jasmine.any(String));
+        expect(reporter.init).toThrowError(Error, expect.any(String));
     });
 
     it('can emit an event for all defined reporters', () => {

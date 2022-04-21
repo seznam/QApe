@@ -23,9 +23,9 @@ describe('ActionsHelper', () => {
         await actionsHelper.waitForReadyState(page);
 
         expect(page.evaluate).toHaveBeenCalledTimes(2);
-        expect(page.evaluate).toHaveBeenCalledWith(jasmine.any(Function));
+        expect(page.evaluate).toHaveBeenCalledWith(expect.any(Function));
         expect(page.waitForTimeout).toHaveBeenCalledTimes(1);
-        expect(page.waitForTimeout).toHaveBeenCalledWith(jasmine.any(Number));
+        expect(page.waitForTimeout).toHaveBeenCalledWith(expect.any(Number));
     });
 
     it('can get all visible elements in DOM', async () => {
@@ -44,7 +44,7 @@ describe('ActionsHelper', () => {
 
         expect(visibleElements).toEqual([element]);
         expect(element.executionContext).toHaveBeenCalledTimes(1);
-        expect(executionContext.evaluate).toHaveBeenCalledWith(jasmine.any(Function), element);
+        expect(executionContext.evaluate).toHaveBeenCalledWith(expect.any(Function), element);
         expect(actionsHelper.isElementVisible).toHaveBeenCalledWith(element);
     });
 
@@ -75,7 +75,7 @@ describe('ActionsHelper', () => {
 
         expect(element.executionContext).toHaveBeenCalledTimes(1);
         expect(executionContext.evaluate).toHaveBeenCalledWith(
-            jasmine.any(Function),
+            expect.any(Function),
             element,
             previewModePauseTime - 250
         );
@@ -94,7 +94,7 @@ describe('ActionsHelper', () => {
 
         expect(html).toEqual('html');
         expect(element.executionContext).toHaveBeenCalledTimes(1);
-        expect(context.evaluate).toHaveBeenCalledWith(jasmine.any(Function), element);
+        expect(context.evaluate).toHaveBeenCalledWith(expect.any(Function), element);
     });
 
     it('can check if an element is visible', async () => {

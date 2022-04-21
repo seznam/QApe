@@ -30,7 +30,7 @@ describe('ScenariosHandler', () => {
             defined: [],
             failing: [],
         });
-        expect(scenariosHandler._initTime).toEqual(jasmine.any(Number));
+        expect(scenariosHandler._initTime).toEqual(expect.any(Number));
         expect(scenariosHandler._loadDefinedScenarios).toHaveBeenCalledTimes(1);
     });
 

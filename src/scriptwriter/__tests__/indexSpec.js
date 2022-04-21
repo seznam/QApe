@@ -29,7 +29,7 @@ describe('Scriptwriter', () => {
 
         scriptwriter();
 
-        expect(process.on).toHaveBeenCalledWith('message', jasmine.any(Function));
+        expect(process.on).toHaveBeenCalledWith('message', expect.any(Function));
         expect(process.send).toHaveBeenCalledWith({
             reciever: 'tester',
             eventData: 'scenario',
@@ -53,7 +53,7 @@ describe('Scriptwriter', () => {
 
         scriptwriter();
 
-        expect(process.on).toHaveBeenCalledWith('message', jasmine.any(Function));
+        expect(process.on).toHaveBeenCalledWith('message', expect.any(Function));
         expect(scenarios.addFailingScenario).toHaveBeenCalledWith('eventData');
     });
 });

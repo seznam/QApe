@@ -34,7 +34,7 @@ describe('Messanger', () => {
         let results = await requestScenario();
 
         expect(results).toEqual(scenario);
-        expect(process.once).toHaveBeenCalledWith('message', jasmine.any(Function));
+        expect(process.once).toHaveBeenCalledWith('message', expect.any(Function));
         expect(process.send).toHaveBeenCalledWith({
             reciever: 'scriptwriter',
             eventName: 'GET',
