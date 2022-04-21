@@ -117,12 +117,12 @@ module.exports = {
         type: 'Function',
     },
     beforeActionScript: {
-        value: (/* { browser, page }, pageErrorHandler */) => {},
+        value: (/* browser, page, pageErrorHandler */) => {},
         description: 'Script executed before each action',
         type: 'Function',
     },
     afterActionScript: {
-        value: (/* { browser, page }, pageErrorHandler */) => {},
+        value: (/* browser, page, pageErrorHandler */) => {},
         description: 'Script executed after each action',
         type: 'Function',
     },
