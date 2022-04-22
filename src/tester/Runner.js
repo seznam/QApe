@@ -67,7 +67,7 @@ export default class Runner {
                 sendFailingScenario(results);
             }
 
-            if (results && results.executionError) {
+            if (results && results.executionError && instance.unknownExecutionErrorOccured) {
                 this._isSuccess = false;
             }
 

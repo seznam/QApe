@@ -3,6 +3,13 @@ import EventEmitter from 'events';
 import { report } from '../messanger';
 
 /**
+ * These errors will not cause test run to exit as failrue
+ */
+const KNOWN_FATAL_ERROR_MESSAGES = [
+    'Page crashed!', // See https://github.com/seznam/QApe/issues/13
+];
+
+/**
  * Browser instance
  */
 export default class Browser {
@@ -17,6 +24,8 @@ export default class Browser {
         this._page = null;
 
         this._pageErrorHandler = null;
+
+        this._unknownExecutionErrorOccured = false;
     }
 
     /**
@@ -43,6 +52,13 @@ export default class Browser {
      */
     get pageErrorHandler() {
         return this._pageErrorHandler;
+    }
+
+    /**
+     * Test run with execution error will fail only when unknown execution error occured
+     */
+    get unknownExecutionErrorOccured() {
+        return this._unknownExecutionErrorOccured;
     }
 
     /**
@@ -110,8 +126,23 @@ export default class Browser {
                 'tester should recover by itself.';
 
             report('browser:error', { error: msg });
+
+            this._handleUnknownExecutionErrors(error);
+
             this.clear();
         });
+    }
+
+    /**
+     * Sets unknown execution error indicator
+     * @param {Object} error
+     */
+    _handleUnknownExecutionErrors(error) {
+        if (KNOWN_FATAL_ERROR_MESSAGES.some((message) => error.message.includes(message))) {
+            return;
+        }
+
+        this._unknownExecutionErrorOccured = true;
     }
 
     /**

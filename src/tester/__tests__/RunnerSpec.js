@@ -124,8 +124,8 @@ describe('Runner', () => {
         expect(messanger.report).toHaveBeenCalledWith('runner:end');
     });
 
-    it('can start a test instance and handle run with execution errors', async () => {
-        let instance = { clear: jest.fn() };
+    it('can start a test instance and handle run with unknown execution errors', async () => {
+        let instance = { clear: jest.fn(), unknownExecutionErrorOccured: true };
         messanger.requestScenario = jest
             .fn()
             .mockReturnValueOnce(Promise.resolve({ type: 'random', scenario: 'scenario' }))

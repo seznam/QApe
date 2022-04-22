@@ -62,6 +62,7 @@ describe('Browser', () => {
                 fn({ stack: 'error' });
             }),
         };
+        browser._handleUnknownExecutionErrors = jest.fn();
         browser.clear = jest.fn();
 
         browser._initFatalErrorHandler();
@@ -70,7 +71,18 @@ describe('Browser', () => {
         expect(messanger.report).toHaveBeenCalledWith('browser:error', {
             error: expect.any(String),
         });
+        expect(browser._handleUnknownExecutionErrors).toHaveBeenCalled();
         expect(browser.clear).toHaveBeenCalled();
+    });
+
+    it('can handle unknown execution error', () => {
+        browser._handleUnknownExecutionErrors({ message: 'Error: Page crashed!' });
+
+        expect(browser.unknownExecutionErrorOccured).toEqual(false);
+
+        browser._handleUnknownExecutionErrors({ message: 'Unknown error' });
+
+        expect(browser.unknownExecutionErrorOccured).toEqual(true);
     });
 
     it('can initialize page error handler', async () => {
