@@ -12,7 +12,7 @@ IMAGE_LATEST=qape/qape:latest
 
 echo Releasing $IMAGE_VERSION
 
-docker build --build-arg QAPE_VERSION=$npm_package_version -t $IMAGE_VERSION -t $IMAGE_LATEST .
+docker build --platform amd64 --build-arg QAPE_VERSION=$npm_package_version -t $IMAGE_VERSION -t $IMAGE_LATEST .
 
 echo Build finished!
 echo Pushing to docker registry...
