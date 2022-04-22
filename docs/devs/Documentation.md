@@ -164,63 +164,67 @@
     *   [id][160]
     *   [isActionAvailable][161]
         *   [Parameters][162]
-*   [Browser][163]
-    *   [Parameters][164]
-    *   [browser][165]
-    *   [page][166]
-    *   [pageErrorHandler][167]
-    *   [initBrowser][168]
-    *   [clear][169]
-    *   [\_getBrowser][170]
-    *   [\_initFatalErrorHandler][171]
-    *   [\_initPageErrorHandler][172]
-    *   [\_getEventEmitter][173]
-*   [tester][174]
-    *   [index][175]
-        *   [Parameters][176]
-*   [messanger][177]
-    *   [report][178]
-        *   [Parameters][179]
-    *   [requestScenario][180]
-    *   [sendFailingScenario][181]
-        *   [Parameters][182]
-*   [Runner][183]
-    *   [Parameters][184]
-    *   [start][185]
-    *   [\_startInstance][186]
-    *   [\_getBrowserInstance][187]
-    *   [\_init][188]
-    *   [\_initActionsHandler][189]
-    *   [\_initScenariosHandler][190]
-*   [DefinedScenarios][191]
-    *   [Parameters][192]
-    *   [type][193]
-    *   [runScenario][194]
-        *   [Parameters][195]
-*   [FailingScenarios][196]
-    *   [Parameters][197]
-    *   [type][198]
-    *   [runScenario][199]
-        *   [Parameters][200]
-    *   [\_getNumberOfRetryActions][201]
-        *   [Parameters][202]
-    *   [\_reduceScenarioSteps][203]
+*   [KNOWN_FATAL_ERROR_MESSAGES][163]
+*   [Browser][164]
+    *   [Parameters][165]
+    *   [browser][166]
+    *   [page][167]
+    *   [pageErrorHandler][168]
+    *   [unknownExecutionErrorOccured][169]
+    *   [initBrowser][170]
+    *   [clear][171]
+    *   [\_getBrowser][172]
+    *   [\_initFatalErrorHandler][173]
+    *   [\_handleUnknownExecutionErrors][174]
+        *   [Parameters][175]
+    *   [\_initPageErrorHandler][176]
+    *   [\_getEventEmitter][177]
+*   [tester][178]
+    *   [index][179]
+        *   [Parameters][180]
+*   [messanger][181]
+    *   [report][182]
+        *   [Parameters][183]
+    *   [requestScenario][184]
+    *   [sendFailingScenario][185]
+        *   [Parameters][186]
+*   [Runner][187]
+    *   [Parameters][188]
+    *   [start][189]
+    *   [\_startInstance][190]
+    *   [\_getBrowserInstance][191]
+    *   [\_init][192]
+    *   [\_initActionsHandler][193]
+    *   [\_initScenariosHandler][194]
+*   [DefinedScenarios][195]
+    *   [Parameters][196]
+    *   [type][197]
+    *   [runScenario][198]
+        *   [Parameters][199]
+*   [FailingScenarios][200]
+    *   [Parameters][201]
+    *   [type][202]
+    *   [runScenario][203]
         *   [Parameters][204]
-*   [RandomScenarios][205]
-    *   [Parameters][206]
-    *   [type][207]
-    *   [runScenario][208]
-        *   [Parameters][209]
-    *   [\_performActions][210]
-        *   [Parameters][211]
-*   [ScenariosHelper][212]
-    *   [Parameters][213]
-    *   [runScenario][214]
+    *   [\_getNumberOfRetryActions][205]
+        *   [Parameters][206]
+    *   [\_reduceScenarioSteps][207]
+        *   [Parameters][208]
+*   [RandomScenarios][209]
+    *   [Parameters][210]
+    *   [type][211]
+    *   [runScenario][212]
+        *   [Parameters][213]
+    *   [\_performActions][214]
         *   [Parameters][215]
+*   [ScenariosHelper][216]
+    *   [Parameters][217]
+    *   [runScenario][218]
+        *   [Parameters][219]
 
 ## index
 
-[src/index.js:15-39][216]
+[src/index.js:15-39][220]
 
 Sets up a QApe run
 
@@ -230,26 +234,26 @@ Sets up a QApe run
 
 ## master
 
-[src/master/index.js:9-84][217]
+[src/master/index.js:9-84][221]
 
 ### index
 
-[src/master/index.js:9-84][217]
+[src/master/index.js:9-84][221]
 
 Initializes all QApe workers and handles their communication.
 
 #### Parameters
 
 *   `cluster` **cluster** 
-*   `config` **[Object][218]** 
+*   `config` **[Object][222]** 
 
 ## reporter
 
-[src/reporter/index.js:13-29][219]
+[src/reporter/index.js:13-29][223]
 
 ### index
 
-[src/reporter/index.js:13-29][219]
+[src/reporter/index.js:13-29][223]
 
 Initializes reporter worker.
 It handles all the test results and the distribution
@@ -257,11 +261,11 @@ to all defined reporters.
 
 #### Parameters
 
-*   `config` **[Object][218]** 
+*   `config` **[Object][222]** 
 
 ## ConsoleReporter
 
-[src/reporter/reporter/ConsoleReporter.js:7-115][220]
+[src/reporter/reporter/ConsoleReporter.js:7-115][224]
 
 **Extends EventEmitter**
 
@@ -269,60 +273,60 @@ Console reporter
 
 ### Parameters
 
-*   `config` **[Object][218]** 
+*   `config` **[Object][222]** 
 
 ### \_handleScenarioStart
 
-[src/reporter/reporter/ConsoleReporter.js:26-28][221]
+[src/reporter/reporter/ConsoleReporter.js:26-28][225]
 
 Handler for scenario:start event
 
 #### Parameters
 
-*   `eventData` **[Object][218]** 
+*   `eventData` **[Object][222]** 
 
 ### \_handleScenarioEnd
 
-[src/reporter/reporter/ConsoleReporter.js:34-43][222]
+[src/reporter/reporter/ConsoleReporter.js:34-43][226]
 
 Handler for scenario:end event
 
 #### Parameters
 
-*   `eventData` **[Object][218]** 
+*   `eventData` **[Object][222]** 
 
 ### \_handleError
 
-[src/reporter/reporter/ConsoleReporter.js:49-51][223]
+[src/reporter/reporter/ConsoleReporter.js:49-51][227]
 
 Handler for runner:error event
 
 #### Parameters
 
-*   `eventData` **[Object][218]** 
+*   `eventData` **[Object][222]** 
 
 ### \_handleDefinedScenarioEnd
 
-[src/reporter/reporter/ConsoleReporter.js:57-70][224]
+[src/reporter/reporter/ConsoleReporter.js:57-70][228]
 
 Handler for scenario:end of type 'defined'
 
 #### Parameters
 
-*   `eventData` **[Object][218]** 
+*   `eventData` **[Object][222]** 
 
     *   `eventData.name`  
     *   `eventData.results`  
 
 ### \_handleFailingScenarioEnd
 
-[src/reporter/reporter/ConsoleReporter.js:76-82][225]
+[src/reporter/reporter/ConsoleReporter.js:76-82][229]
 
 Handler for scenario:end of type 'failing'
 
 #### Parameters
 
-*   `eventData` **[Object][218]** 
+*   `eventData` **[Object][222]** 
 
     *   `eventData.minified`  
     *   `eventData.scenario`  
@@ -330,31 +334,31 @@ Handler for scenario:end of type 'failing'
 
 ### \_handleRandomScenarioEnd
 
-[src/reporter/reporter/ConsoleReporter.js:88-99][226]
+[src/reporter/reporter/ConsoleReporter.js:88-99][230]
 
 Handler for scenario:end of type 'random'
 
 #### Parameters
 
-*   `eventData` **[Object][218]** 
+*   `eventData` **[Object][222]** 
 
     *   `eventData.results`  
 
 ### \_logConsole
 
-[src/reporter/reporter/ConsoleReporter.js:107-114][227]
+[src/reporter/reporter/ConsoleReporter.js:107-114][231]
 
 Logs scenario to console
 
 #### Parameters
 
-*   `text` **[string][228]** 
-*   `scenario` **[Array][229]<[Object][218]>** 
-*   `errors` **[Array][229]<[Object][218]>** 
+*   `text` **[string][232]** 
+*   `scenario` **[Array][233]<[Object][222]>** 
+*   `errors` **[Array][233]<[Object][222]>** 
 
 ## FileReporter
 
-[src/reporter/reporter/FileReporter.js:11-104][230]
+[src/reporter/reporter/FileReporter.js:11-104][234]
 
 **Extends EventEmitter**
 
@@ -362,27 +366,27 @@ Default reporter
 
 ### Parameters
 
-*   `config` **[Object][218]** 
+*   `config` **[Object][222]** 
 
 ### \_handleScenarioEnd
 
-[src/reporter/reporter/FileReporter.js:29-33][231]
+[src/reporter/reporter/FileReporter.js:29-33][235]
 
 Handler for scenario:end event
 
 #### Parameters
 
-*   `eventData` **[Object][218]** 
+*   `eventData` **[Object][222]** 
 
 ### \_handleFailingScenarioEnd
 
-[src/reporter/reporter/FileReporter.js:39-47][232]
+[src/reporter/reporter/FileReporter.js:39-47][236]
 
 Handler for scenario:end of type 'failing'
 
 #### Parameters
 
-*   `eventData` **[Object][218]** 
+*   `eventData` **[Object][222]** 
 
     *   `eventData.minified`  
     *   `eventData.scenario`  
@@ -390,32 +394,32 @@ Handler for scenario:end of type 'failing'
 
 ### \_logFile
 
-[src/reporter/reporter/FileReporter.js:55-73][233]
+[src/reporter/reporter/FileReporter.js:55-73][237]
 
 Logs scenario to file
 
 #### Parameters
 
-*   `scenario` **[Array][229]<[Object][218]>** 
-*   `errors` **[Array][229]<[Object][218]>** 
-*   `name` **[string][228]** 
+*   `scenario` **[Array][233]<[Object][222]>** 
+*   `errors` **[Array][233]<[Object][222]>** 
+*   `name` **[string][232]** 
 
 ### \_getScenarioName
 
-[src/reporter/reporter/FileReporter.js:81-95][234]
+[src/reporter/reporter/FileReporter.js:81-95][238]
 
 Generates scenario name from current date
 
 #### Parameters
 
-*   `extension` **[string][228]?** This string
+*   `extension` **[string][232]?** This string
     will be added to the end of the name (optional, default `''`)
 
-Returns **[string][228]** 
+Returns **[string][232]** 
 
 ### \_isFailureReported
 
-[src/reporter/reporter/FileReporter.js:101-103][235]
+[src/reporter/reporter/FileReporter.js:101-103][239]
 
 Checks if provided scenario is already reported
 
@@ -423,11 +427,11 @@ Checks if provided scenario is already reported
 
 *   `scenario`  
 
-Returns **[boolean][236]** 
+Returns **[boolean][240]** 
 
 ## Reporter
 
-[src/reporter/reporter/Reporter.js:9-94][237]
+[src/reporter/reporter/Reporter.js:9-94][241]
 
 **Extends EventEmitter**
 
@@ -435,39 +439,39 @@ Base Reporter distributing events to all defined reporters
 
 ### Parameters
 
-*   `config` **[Object][218]** 
+*   `config` **[Object][222]** 
 
 ### init
 
-[src/reporter/reporter/Reporter.js:24-52][238]
+[src/reporter/reporter/Reporter.js:24-52][242]
 
 Initializes all reporters defined in config
 
 ### emit
 
-[src/reporter/reporter/Reporter.js:60-68][239]
+[src/reporter/reporter/Reporter.js:60-68][243]
 
 Emits an event with data
 and propagets it to all reporters
 
 #### Parameters
 
-*   `eventName` **[string][228]** 
-*   `eventData` **[Object][218]** 
+*   `eventName` **[string][232]** 
+*   `eventData` **[Object][222]** 
 
 ### \_initReporterFromString
 
-[src/reporter/reporter/Reporter.js:74-79][240]
+[src/reporter/reporter/Reporter.js:74-79][244]
 
 Initializes a reporter from string
 
 #### Parameters
 
-*   `reporter` **[string][228]** 
+*   `reporter` **[string][232]** 
 
 ### \_initReporterFromClass
 
-[src/reporter/reporter/Reporter.js:85-93][241]
+[src/reporter/reporter/Reporter.js:85-93][245]
 
 Initializes a reporter from a class constructor
 
@@ -477,7 +481,7 @@ Initializes a reporter from a class constructor
 
 ## SpinnerReporter
 
-[src/reporter/reporter/SpinnerReporter.js:10-58][242]
+[src/reporter/reporter/SpinnerReporter.js:10-58][246]
 
 **Extends EventEmitter**
 
@@ -485,58 +489,58 @@ Default reporter
 
 ### Parameters
 
-*   `config` **[Object][218]** 
-*   `stdout` **[Object][218]** 
+*   `config` **[Object][222]** 
+*   `stdout` **[Object][222]** 
 
 ### \_handleEvent
 
-[src/reporter/reporter/SpinnerReporter.js:38-48][243]
+[src/reporter/reporter/SpinnerReporter.js:38-48][247]
 
 Handler for events which should cause a spin
 
 ## scriptwriter
 
-[src/scriptwriter/index.js:11-27][244]
+[src/scriptwriter/index.js:11-27][248]
 
 ### index
 
-[src/scriptwriter/index.js:11-27][244]
+[src/scriptwriter/index.js:11-27][248]
 
 Initializes a scriptwriter worker.
 It handles scenarios distribution to the testers.
 
 #### Parameters
 
-*   `config` **[Object][218]** 
+*   `config` **[Object][222]** 
 
 ## ScenariosHandler
 
-[src/scriptwriter/scenarios/ScenariosHandler.js:8-131][245]
+[src/scriptwriter/scenarios/ScenariosHandler.js:8-131][249]
 
 Handles scenarios execution order
 
 ### Parameters
 
-*   `config` **[Object][218]** 
+*   `config` **[Object][222]** 
 
 ### init
 
-[src/scriptwriter/scenarios/ScenariosHandler.js:26-31][246]
+[src/scriptwriter/scenarios/ScenariosHandler.js:26-31][250]
 
 Initializes default values
 and loads defined scenarios
 
 ### init
 
-[src/tester/scenarios/ScenariosHandler.js:33-40][247]
+[src/tester/scenarios/ScenariosHandler.js:33-40][251]
 
 Initializes all dependencies
 
-Returns **[ScenariosHandler][248]** 
+Returns **[ScenariosHandler][252]** 
 
 ### getScenario
 
-[src/scriptwriter/scenarios/ScenariosHandler.js:40-63][249]
+[src/scriptwriter/scenarios/ScenariosHandler.js:40-63][253]
 
 Returns available scenario with highest priority
 
@@ -544,72 +548,72 @@ Returns available scenario with highest priority
 2.  DefinedScenario
 3.  RandomScenario (if allowed by config)
 
-Returns **[Object][218]** 
+Returns **[Object][222]** 
 
 ### \_isAllowedToStartRandomScenario
 
-[src/scriptwriter/scenarios/ScenariosHandler.js:73-83][250]
+[src/scriptwriter/scenarios/ScenariosHandler.js:73-83][254]
 
 Checks if new random scenarios are allowed based on configuration
 
-Returns **[boolean][236]** 
+Returns **[boolean][240]** 
 
 ### \_loadDefinedScenarios
 
-[src/scriptwriter/scenarios/ScenariosHandler.js:88-101][251]
+[src/scriptwriter/scenarios/ScenariosHandler.js:88-101][255]
 
 Loads all user defined scenarios specified in config
 
 ### \_loadScenarioFromPath
 
-[src/scriptwriter/scenarios/ScenariosHandler.js:108-116][252]
+[src/scriptwriter/scenarios/ScenariosHandler.js:108-116][256]
 
 Loads a scenario from specified scenarioPath
 
 #### Parameters
 
-*   `scenarioPath` **[string][228]** 
+*   `scenarioPath` **[string][232]** 
 
-Returns **[Object][218]** scenario
+Returns **[Object][222]** scenario
 
 ### \_getRandomScenarioStartUrl
 
-[src/scriptwriter/scenarios/ScenariosHandler.js:122-130][253]
+[src/scriptwriter/scenarios/ScenariosHandler.js:122-130][257]
 
 Loads a start url for scenario from specified url paths
 
-Returns **[string][228]** start url
+Returns **[string][232]** start url
 
 ## ScenariosHandler
 
-[src/tester/scenarios/ScenariosHandler.js:10-53][254]
+[src/tester/scenarios/ScenariosHandler.js:10-53][258]
 
 Handles scenarios execution and
 initializes necessary dependencies
 
 ### Parameters
 
-*   `config` **[Object][218]** 
-*   `actionsHandler` **[ActionsHandler][255]** 
+*   `config` **[Object][222]** 
+*   `actionsHandler` **[ActionsHandler][259]** 
 
 ### init
 
-[src/scriptwriter/scenarios/ScenariosHandler.js:26-31][246]
+[src/scriptwriter/scenarios/ScenariosHandler.js:26-31][250]
 
 Initializes default values
 and loads defined scenarios
 
 ### init
 
-[src/tester/scenarios/ScenariosHandler.js:33-40][247]
+[src/tester/scenarios/ScenariosHandler.js:33-40][251]
 
 Initializes all dependencies
 
-Returns **[ScenariosHandler][248]** 
+Returns **[ScenariosHandler][252]** 
 
 ### getScenario
 
-[src/scriptwriter/scenarios/ScenariosHandler.js:40-63][249]
+[src/scriptwriter/scenarios/ScenariosHandler.js:40-63][253]
 
 Returns available scenario with highest priority
 
@@ -617,68 +621,68 @@ Returns available scenario with highest priority
 2.  DefinedScenario
 3.  RandomScenario (if allowed by config)
 
-Returns **[Object][218]** 
+Returns **[Object][222]** 
 
 ### \_isAllowedToStartRandomScenario
 
-[src/scriptwriter/scenarios/ScenariosHandler.js:73-83][250]
+[src/scriptwriter/scenarios/ScenariosHandler.js:73-83][254]
 
 Checks if new random scenarios are allowed based on configuration
 
-Returns **[boolean][236]** 
+Returns **[boolean][240]** 
 
 ### \_loadDefinedScenarios
 
-[src/scriptwriter/scenarios/ScenariosHandler.js:88-101][251]
+[src/scriptwriter/scenarios/ScenariosHandler.js:88-101][255]
 
 Loads all user defined scenarios specified in config
 
 ### \_loadScenarioFromPath
 
-[src/scriptwriter/scenarios/ScenariosHandler.js:108-116][252]
+[src/scriptwriter/scenarios/ScenariosHandler.js:108-116][256]
 
 Loads a scenario from specified scenarioPath
 
 #### Parameters
 
-*   `scenarioPath` **[string][228]** 
+*   `scenarioPath` **[string][232]** 
 
-Returns **[Object][218]** scenario
+Returns **[Object][222]** scenario
 
 ### \_getRandomScenarioStartUrl
 
-[src/scriptwriter/scenarios/ScenariosHandler.js:122-130][253]
+[src/scriptwriter/scenarios/ScenariosHandler.js:122-130][257]
 
 Loads a start url for scenario from specified url paths
 
-Returns **[string][228]** start url
+Returns **[string][232]** start url
 
 ## Config
 
-[src/shared/config/Config.js:7-65][256]
+[src/shared/config/Config.js:7-65][260]
 
 Class that can parse configuration with default values.
 
 ### load
 
-[src/shared/config/Config.js:12-30][257]
+[src/shared/config/Config.js:12-30][261]
 
 Loads configuration with default values
 
 #### Parameters
 
-*   `userConfig` **[Object][218]?** Overrides for default config
+*   `userConfig` **[Object][222]?** Overrides for default config
 
 ### \_resolveUrl
 
-[src/shared/config/Config.js:42-51][258]
+[src/shared/config/Config.js:42-51][262]
 
-If url is configured with url path ([https://www.example.com/index.html][259]),
+If url is configured with url path ([https://www.example.com/index.html][263]),
 then this method splits the configuration into `url` and `urlPaths`.
 
 #### Parameters
 
-*   `config` **[Object][218]** 
+*   `config` **[Object][222]** 
 
 #### Examples
 
@@ -691,46 +695,46 @@ would be transformed into the following config
 
 ### \_setPreviewMode
 
-[src/shared/config/Config.js:57-64][260]
+[src/shared/config/Config.js:57-64][264]
 
 Overrides preview mode configurations
 
 #### Parameters
 
-*   `config` **[Object][218]** 
+*   `config` **[Object][222]** 
 
 ## helpers
 
-[src/shared/helpers.js:9-11][261]
+[src/shared/helpers.js:9-11][265]
 
 ### getRandomElementFromArray
 
-[src/shared/helpers.js:9-11][261]
+[src/shared/helpers.js:9-11][265]
 
 Gets a random element from the array
 
 #### Parameters
 
-*   `array` **[Array][229]** 
+*   `array` **[Array][233]** 
 
 Returns **any** Element from the array
 
 ### formatDigits
 
-[src/shared/helpers.js:20-22][262]
+[src/shared/helpers.js:20-22][266]
 
 Formats number to specified number of digits
 
 #### Parameters
 
-*   `number` **[number][263]** 
-*   `digits` **[number][263]**  (optional, default `2`)
+*   `number` **[number][267]** 
+*   `digits` **[number][267]**  (optional, default `2`)
 
-Returns **[string][228]** Number prefixed with ${digits} of zeros
+Returns **[string][232]** Number prefixed with ${digits} of zeros
 
 ## AbstractAction
 
-[src/tester/actions/AbstractAction.js:8-257][264]
+[src/tester/actions/AbstractAction.js:8-257][268]
 
 Abstract action class which should be extended
 with specific action classes.
@@ -738,51 +742,51 @@ Each class has to have static getter id and method action.
 
 ### Parameters
 
-*   `config` **[Object][218]** 
-*   `actionsHelper` **[ActionsHelper][265]** 
-*   `actionConfig` **[Object][218]**  (optional, default `{}`)
+*   `config` **[Object][222]** 
+*   `actionsHelper` **[ActionsHelper][269]** 
+*   `actionConfig` **[Object][222]**  (optional, default `{}`)
 
 ### evaluateAction
 
-[src/tester/actions/AbstractAction.js:49-51][266]
+[src/tester/actions/AbstractAction.js:49-51][270]
 
 Overridable method returning a promise, that should resolve when action was successfull and reject when not.
 
 ### updateResults
 
-[src/tester/actions/AbstractAction.js:58-60][267]
+[src/tester/actions/AbstractAction.js:58-60][271]
 
 Override if you need to update action config, or message
 
 #### Parameters
 
-*   `results` **[Object][218]** Current results without your updates
+*   `results` **[Object][222]** Current results without your updates
 
-Returns **[Promise][268]<[Object][218]>** Updated results with your overrides
+Returns **[Promise][272]<[Object][222]>** Updated results with your overrides
 
 ### execute
 
-[src/tester/actions/AbstractAction.js:68-91][269]
+[src/tester/actions/AbstractAction.js:68-91][273]
 
 Prepares action error handler and executes action lifecycle
 
 #### Parameters
 
 *   `element` **puppeteer.ElementHandle** 
-*   `instance` **[Object][218]** Browser instance
+*   `instance` **[Object][222]** Browser instance
 
-Returns **[Object][218]** results
+Returns **[Object][222]** results
 
 ### action
 
-[src/tester/actions/AbstractAction.js:97-99][270]
+[src/tester/actions/AbstractAction.js:97-99][274]
 
 Override with specific action method,
 which is executed during AbstractAction.execute()
 
 ### \_executeActionLifecycle
 
-[src/tester/actions/AbstractAction.js:111-127][271]
+[src/tester/actions/AbstractAction.js:111-127][275]
 
 Executes action lifecycle:
 
@@ -794,25 +798,25 @@ Executes action lifecycle:
 #### Parameters
 
 *   `element` **puppeteer.ElementHandle** 
-*   `instance` **[Browser][272]** 
+*   `instance` **[Browser][276]** 
 
-Returns **[Promise][268]** Resolves when lifecycle is finished
+Returns **[Promise][272]** Resolves when lifecycle is finished
 
 ### \_handleExecutionError
 
-[src/tester/actions/AbstractAction.js:133-139][273]
+[src/tester/actions/AbstractAction.js:133-139][277]
 
 Distributes action execution error
 
 #### Parameters
 
-*   `error` **[Error][274]** 
+*   `error` **[Error][278]** 
 
     *   `error.stack`  
 
 ### \_afterActionExecute
 
-[src/tester/actions/AbstractAction.js:154-175][275]
+[src/tester/actions/AbstractAction.js:154-175][279]
 
 Executes after action scripts
 
@@ -829,13 +833,13 @@ and no more errors will occure before next action
 #### Parameters
 
 *   `element` **puppeteer.ElementHandle** 
-*   `instance` **[Browser][272]** 
+*   `instance` **[Browser][276]** 
 
-Returns **[Promise][268]** Resolves when after action is done
+Returns **[Promise][272]** Resolves when after action is done
 
 ### \_beforeActionExecute
 
-[src/tester/actions/AbstractAction.js:185-195][276]
+[src/tester/actions/AbstractAction.js:185-195][280]
 
 Executes before action scripts
 
@@ -845,23 +849,23 @@ Executes before action scripts
 
 #### Parameters
 
-*   `instance` **[Browser][272]** 
+*   `instance` **[Browser][276]** 
 
-Returns **[Promise][268]** Resolves when before action is done
+Returns **[Promise][272]** Resolves when before action is done
 
 ### \_addErrorToResults
 
-[src/tester/actions/AbstractAction.js:201-206][277]
+[src/tester/actions/AbstractAction.js:201-206][281]
 
 Adds the error to action results
 
 #### Parameters
 
-*   `error` **[string][228]** 
+*   `error` **[string][232]** 
 
 ### \_clearTabs
 
-[src/tester/actions/AbstractAction.js:213-218][278]
+[src/tester/actions/AbstractAction.js:213-218][282]
 
 Clears all browser tabs except for the tab at index 0
 
@@ -869,29 +873,29 @@ Clears all browser tabs except for the tab at index 0
 
 *   `browser` **puppeteer.Browser** 
 
-Returns **[Promise][268]** Resolves when the tabs are closed
+Returns **[Promise][272]** Resolves when the tabs are closed
 
 ### \_addEventListener
 
-[src/tester/actions/AbstractAction.js:226-230][279]
+[src/tester/actions/AbstractAction.js:226-230][283]
 
 Adds an event listener and registers it to
 
 #### Parameters
 
-*   `target` **[EventListener][280]** Event listener instance
-*   `event` **[string][228]** Name of the event
-*   `fn` **[Function][281]** Function evaluated on event call
+*   `target` **[EventListener][284]** Event listener instance
+*   `event` **[string][232]** Name of the event
+*   `fn` **[Function][285]** Function evaluated on event call
 
 ### \_clearAllEventListeners
 
-[src/tester/actions/AbstractAction.js:235-241][282]
+[src/tester/actions/AbstractAction.js:235-241][286]
 
 Clears all registered event listeners
 
 ### \_logInfo
 
-[src/tester/actions/AbstractAction.js:248-256][283]
+[src/tester/actions/AbstractAction.js:248-256][287]
 
 Adds action info to the results
 
@@ -899,105 +903,105 @@ Adds action info to the results
 
 *   `element` **puppeteer.ElementHandle** 
 
-Returns **[Promise][268]** Resolves when action info is saved
+Returns **[Promise][272]** Resolves when action info is saved
 
 ### id
 
-[src/tester/actions/AbstractAction.js:12-14][284]
+[src/tester/actions/AbstractAction.js:12-14][288]
 
 Override with action identifier
 
 ### isActionAvailable
 
-[src/tester/actions/AbstractAction.js:19-23][285]
+[src/tester/actions/AbstractAction.js:19-23][289]
 
 Override with method returning true, when the action should be available for the specified element
 
 ## ActionsHandler
 
-[src/tester/actions/ActionsHandler.js:9-152][286]
+[src/tester/actions/ActionsHandler.js:9-152][290]
 
 Actions handler which can work with specific actions.
 
 ### Parameters
 
-*   `config` **[Object][218]** 
+*   `config` **[Object][222]** 
 
 ### init
 
-[src/tester/actions/ActionsHandler.js:25-30][287]
+[src/tester/actions/ActionsHandler.js:25-30][291]
 
 Initializes actions handler dependencies
 
-Returns **[ActionsHandler][255]** this
+Returns **[ActionsHandler][259]** this
 
 ### execute
 
-[src/tester/actions/ActionsHandler.js:39-57][288]
+[src/tester/actions/ActionsHandler.js:39-57][292]
 
 Executes specific, or random action
 
 #### Parameters
 
-*   `instance` **[Browser][272]** 
-*   `actionId` **[string][228]?** Random if not defined
-*   `actionConfig` **[Object][218]?** 
+*   `instance` **[Browser][276]** 
+*   `actionId` **[string][232]?** Random if not defined
+*   `actionConfig` **[Object][222]?** 
 
-Returns **[Promise][268]<[Object][218]>** Resolves with action results
+Returns **[Promise][272]<[Object][222]>** Resolves with action results
 
 ### \_getAction
 
-[src/tester/actions/ActionsHandler.js:66-87][289]
+[src/tester/actions/ActionsHandler.js:66-87][293]
 
 Gets random or specific action
 
 #### Parameters
 
-*   `instance` **[Browser][272]** 
+*   `instance` **[Browser][276]** 
 
     *   `instance.page`  
-*   `actionId` **[string][228]?** 
-*   `actionConfig` **[Object][218]?** 
+*   `actionId` **[string][232]?** 
+*   `actionConfig` **[Object][222]?** 
 
-Returns **[Object][218]** { Action, element }
+Returns **[Object][222]** { Action, element }
 
 ### \_initActionsHelper
 
-[src/tester/actions/ActionsHandler.js:92-94][290]
+[src/tester/actions/ActionsHandler.js:92-94][294]
 
 Initializes actions helper
 
 ### \_loadActions
 
-[src/tester/actions/ActionsHandler.js:99-124][291]
+[src/tester/actions/ActionsHandler.js:99-124][295]
 
 Loads all defined actions
 
 ### \_getAvailablePageActions
 
-[src/tester/actions/ActionsHandler.js:132-151][292]
+[src/tester/actions/ActionsHandler.js:132-151][296]
 
 #### Parameters
 
 *   `page` **puppeteer.Page** 
-*   `availableActionIds` **[Array][229]<[string][228]>** 
+*   `availableActionIds` **[Array][233]<[string][232]>** 
 
-Returns **[Promise][268]<[Array][229]<[Object][218]>>** Returns array of objects with keys
+Returns **[Promise][272]<[Array][233]<[Object][222]>>** Returns array of objects with keys
 Action and element, which are all available page actions
 
 ## ActionsHelper
 
-[src/tester/actions/ActionsHelper.js:4-134][293]
+[src/tester/actions/ActionsHelper.js:4-134][297]
 
 Useful helpers that can be used by any action
 
 ### Parameters
 
-*   `config` **[Object][218]** 
+*   `config` **[Object][222]** 
 
 ### waitForReadyState
 
-[src/tester/actions/ActionsHelper.js:21-41][294]
+[src/tester/actions/ActionsHelper.js:21-41][298]
 
 Resolves when page readyState equals to one of specified states.
 If the states are not equal after specified timeout, error is thrown.
@@ -1005,15 +1009,15 @@ If the states are not equal after specified timeout, error is thrown.
 #### Parameters
 
 *   `page` **puppeteer.Page** 
-*   `options` **[Object][218]?** 
+*   `options` **[Object][222]?** 
 
-    *   `options.timeout` **[number][263]**  (optional, default `30000`)
-    *   `options.states` **[Array][229]<[string][228]>** document.readyState values (optional, default `[interactive,complete]`)
-    *   `options.checkInterval` **[number][263]**  (optional, default `50`)
+    *   `options.timeout` **[number][267]**  (optional, default `30000`)
+    *   `options.states` **[Array][233]<[string][232]>** document.readyState values (optional, default `[interactive,complete]`)
+    *   `options.checkInterval` **[number][267]**  (optional, default `50`)
 
 ### getAllVisiblePageElements
 
-[src/tester/actions/ActionsHelper.js:48-68][295]
+[src/tester/actions/ActionsHelper.js:48-68][299]
 
 Searches for all visible elements in DOM
 
@@ -1021,24 +1025,24 @@ Searches for all visible elements in DOM
 
 *   `page` **puppeteer.Page** 
 
-Returns **[Promise][268]<[Array][229]\<puppeteer.ElementHandle>>** Array of elements
+Returns **[Promise][272]<[Array][233]\<puppeteer.ElementHandle>>** Array of elements
 
 ### getElement
 
-[src/tester/actions/ActionsHelper.js:76-78][296]
+[src/tester/actions/ActionsHelper.js:76-78][300]
 
 Searches for an element based on action configuration
 
 #### Parameters
 
 *   `page` **puppeteer.Page** 
-*   `actionConfig` **[Object][218]**  (optional, default `{}`)
+*   `actionConfig` **[Object][222]**  (optional, default `{}`)
 
-Returns **[Promise][268]\<puppeteer.ElementHandle>** element
+Returns **[Promise][272]\<puppeteer.ElementHandle>** element
 
 ### getElementSelector
 
-[src/tester/actions/ActionsHelper.js:85-89][297]
+[src/tester/actions/ActionsHelper.js:85-89][301]
 
 Creates a selector for the element
 
@@ -1046,11 +1050,11 @@ Creates a selector for the element
 
 *   `element` **puppeteer.ElementHandle** 
 
-Returns **[Promise][268]<[string][228]>** selector
+Returns **[Promise][272]<[string][232]>** selector
 
 ### highlightElement
 
-[src/tester/actions/ActionsHelper.js:96-114][298]
+[src/tester/actions/ActionsHelper.js:96-114][302]
 
 Highlights the element in the dom by adding some styles
 
@@ -1058,21 +1062,21 @@ Highlights the element in the dom by adding some styles
 
 *   `element` **puppeteer.ElementHandle** 
 
-Returns **[Promise][268]** Resolves when element highlight is started
+Returns **[Promise][272]** Resolves when element highlight is started
 
 ### getElementHTML
 
-[src/tester/actions/ActionsHelper.js:120-124][299]
+[src/tester/actions/ActionsHelper.js:120-124][303]
 
 #### Parameters
 
 *   `element` **puppeteer.ElementHandle** 
 
-Returns **[Promise][268]<[string][228]>** element.outerHTML
+Returns **[Promise][272]<[string][232]>** element.outerHTML
 
 ### isElementVisible
 
-[src/tester/actions/ActionsHelper.js:131-133][300]
+[src/tester/actions/ActionsHelper.js:131-133][304]
 
 Checks if an element is visible
 
@@ -1080,11 +1084,11 @@ Checks if an element is visible
 
 *   `element` **puppeteer.ElementHandle** 
 
-Returns **[Promise][268]<[boolean][236]>** true if an element is visible
+Returns **[Promise][272]<[boolean][240]>** true if an element is visible
 
 ## BackAction
 
-[src/tester/actions/BackAction.js:9-51][301]
+[src/tester/actions/BackAction.js:9-51][305]
 
 **Extends AbstractAction**
 
@@ -1093,7 +1097,7 @@ or specific (if actionConfig is passed) page element
 
 ### action
 
-[src/tester/actions/BackAction.js:33-39][302]
+[src/tester/actions/BackAction.js:33-39][306]
 
 Performs the back action on document
 
@@ -1102,29 +1106,29 @@ Performs the back action on document
 *   `element` **puppeteer.ElementHandle** 
 *   `page` **puppeteer.Page** 
 
-Returns **[Promise][268]** Resolves when back event is done
+Returns **[Promise][272]** Resolves when back event is done
 
 ### updateResults
 
-[src/tester/actions/BackAction.js:46-50][303]
+[src/tester/actions/BackAction.js:46-50][307]
 
 Adds clicked element info to the action results
 
 #### Parameters
 
-*   `results` **[Object][218]** 
+*   `results` **[Object][222]** 
 
-Returns **[Object][218]** 
+Returns **[Object][222]** 
 
 ### id
 
-[src/tester/actions/BackAction.js:13-15][304]
+[src/tester/actions/BackAction.js:13-15][308]
 
-Returns **[string][228]** 'back'
+Returns **[string][232]** 'back'
 
 ### isActionAvailable
 
-[src/tester/actions/BackAction.js:21-25][305]
+[src/tester/actions/BackAction.js:21-25][309]
 
 Back action should be always possible
 
@@ -1133,11 +1137,11 @@ Back action should be always possible
 *   `element`  
 *   `page`  
 
-Returns **[boolean][236]** true
+Returns **[boolean][240]** true
 
 ## ClickAction
 
-[src/tester/actions/ClickAction.js:8-55][306]
+[src/tester/actions/ClickAction.js:8-55][310]
 
 **Extends AbstractAction**
 
@@ -1146,7 +1150,7 @@ or specific (if actionConfig is passed) page element
 
 ### action
 
-[src/tester/actions/ClickAction.js:34-43][307]
+[src/tester/actions/ClickAction.js:34-43][311]
 
 Performs the click action with following wrappers:
 
@@ -1162,37 +1166,37 @@ Performs the click action with following wrappers:
 *   `element` **puppeteer.ElementHandle** 
 *   `page` **puppeteer.Page** 
 
-Returns **[Promise][268]** Resolves when click is done
+Returns **[Promise][272]** Resolves when click is done
 
 ### updateResults
 
-[src/tester/actions/ClickAction.js:50-54][308]
+[src/tester/actions/ClickAction.js:50-54][312]
 
 Adds clicked element info to the action results
 
 #### Parameters
 
-*   `results` **[Object][218]** 
+*   `results` **[Object][222]** 
 
-Returns **[Object][218]** 
+Returns **[Object][222]** 
 
 ### id
 
-[src/tester/actions/ClickAction.js:12-14][309]
+[src/tester/actions/ClickAction.js:12-14][313]
 
-Returns **[string][228]** 'click'
+Returns **[string][232]** 'click'
 
 ### isActionAvailable
 
-[src/tester/actions/ClickAction.js:20-22][310]
+[src/tester/actions/ClickAction.js:20-22][314]
 
 Click action should be always possible
 
-Returns **[boolean][236]** true
+Returns **[boolean][240]** true
 
 ## TypeAction
 
-[src/tester/actions/TypeAction.js:11-88][311]
+[src/tester/actions/TypeAction.js:11-88][315]
 
 **Extends AbstractAction**
 
@@ -1202,7 +1206,7 @@ when actionsConfig is specified.
 
 ### action
 
-[src/tester/actions/TypeAction.js:52-63][312]
+[src/tester/actions/TypeAction.js:52-63][316]
 
 Performs the type action with following wrappers:
 
@@ -1218,36 +1222,36 @@ Performs the type action with following wrappers:
 *   `element` **puppeteer.ElementHandle** 
 *   `page` **puppeteer.Page** 
 
-Returns **[Promise][268]** Resolves when typing is done
+Returns **[Promise][272]** Resolves when typing is done
 
 ### \_getText
 
-[src/tester/actions/TypeAction.js:69-75][313]
+[src/tester/actions/TypeAction.js:69-75][317]
 
-Returns **[string][228]** Text from action config,
+Returns **[string][232]** Text from action config,
 or random string the list of available texts
 
 ### updateResults
 
-[src/tester/actions/TypeAction.js:82-87][314]
+[src/tester/actions/TypeAction.js:82-87][318]
 
 Adds info to the action results
 
 #### Parameters
 
-*   `results` **[Object][218]** 
+*   `results` **[Object][222]** 
 
-Returns **[Object][218]** 
+Returns **[Object][222]** 
 
 ### id
 
-[src/tester/actions/TypeAction.js:15-17][315]
+[src/tester/actions/TypeAction.js:15-17][319]
 
-Returns **[string][228]** 'type'
+Returns **[string][232]** 'type'
 
 ### isActionAvailable
 
-[src/tester/actions/TypeAction.js:24-40][316]
+[src/tester/actions/TypeAction.js:24-40][320]
 
 Checks if an elements is a typable input or textarea
 
@@ -1255,33 +1259,39 @@ Checks if an elements is a typable input or textarea
 
 *   `element` **puppeteer.ElementHandle** 
 
-Returns **[boolean][236]** 
+Returns **[boolean][240]** 
+
+## KNOWN_FATAL_ERROR_MESSAGES
+
+[src/tester/browser/Browser.js:8-10][321]
+
+These errors will not cause test run to exit as failrue
 
 ## Browser
 
-[src/tester/browser/Browser.js:8-137][317]
+[src/tester/browser/Browser.js:15-168][322]
 
 Browser instance
 
 ### Parameters
 
-*   `config` **[Object][218]** 
+*   `config` **[Object][222]** 
 
 ### browser
 
-[src/tester/browser/Browser.js:25-27][318]
+[src/tester/browser/Browser.js:34-36][323]
 
 Returns **puppeteer.Browser** 
 
 ### page
 
-[src/tester/browser/Browser.js:32-34][319]
+[src/tester/browser/Browser.js:41-43][324]
 
 Returns **puppeteer.Page** 
 
 ### pageErrorHandler
 
-[src/tester/browser/Browser.js:44-46][320]
+[src/tester/browser/Browser.js:53-55][325]
 
 Page error handler recieves 'page-error' event
 whenever an error occures on the page.
@@ -1289,167 +1299,183 @@ Action should add listener to this handler and
 listen to the 'page-error' event to see if the action
 caused an error on the page.
 
-Returns **[Function][281]** 
+Returns **[Function][285]** 
+
+### unknownExecutionErrorOccured
+
+[src/tester/browser/Browser.js:60-62][326]
+
+Test run with execution error will fail only when unknown execution error occured
 
 ### initBrowser
 
-[src/tester/browser/Browser.js:52-61][321]
+[src/tester/browser/Browser.js:68-77][327]
 
 Initializes browser instance
 
-Returns **[Promise][268]<[Browser][272]>** 
+Returns **[Promise][272]<[Browser][276]>** 
 
 ### clear
 
-[src/tester/browser/Browser.js:67-71][322]
+[src/tester/browser/Browser.js:83-87][328]
 
 Clears browser instance
 
-Returns **[Promise][268]** Resolves when the instance is cleared
+Returns **[Promise][272]** Resolves when the instance is cleared
 
 ### \_getBrowser
 
-[src/tester/browser/Browser.js:80-94][323]
+[src/tester/browser/Browser.js:96-110][329]
 
 Gets browser instance from puppeteer.
 If there is a config.browserWebSocketEndpoint set,
 it will connect to remote chrome instance,
 otherwise it will create new instance locally
 
-Returns **[Promise][268]\<puppeteer.Browser>** 
+Returns **[Promise][272]\<puppeteer.Browser>** 
 
 ### \_initFatalErrorHandler
 
-[src/tester/browser/Browser.js:102-115][324]
+[src/tester/browser/Browser.js:118-134][330]
 
 Whenever a page error occures, there is a strong possibility,
 that QApe tester is in inconsistent state.
 So it will try to clear the instance and wait for the new
 test run.
 
+### \_handleUnknownExecutionErrors
+
+[src/tester/browser/Browser.js:140-146][331]
+
+Sets unknown execution error indicator
+
+#### Parameters
+
+*   `error` **[Object][222]** 
+
 ### \_initPageErrorHandler
 
-[src/tester/browser/Browser.js:122-129][325]
+[src/tester/browser/Browser.js:153-160][332]
 
 Initializes pageErrorHandler, exposes it to the
 page instance and loads config.pageErrorHandler
 
-Returns **[Promise][268]** Resolves when handler is initialized
+Returns **[Promise][272]** Resolves when handler is initialized
 
 ### \_getEventEmitter
 
-[src/tester/browser/Browser.js:134-136][326]
+[src/tester/browser/Browser.js:165-167][333]
 
 Returns **EventEmitter** 
 
 ## tester
 
-[src/tester/index.js:12-23][327]
+[src/tester/index.js:12-23][334]
 
 ### index
 
-[src/tester/index.js:12-23][327]
+[src/tester/index.js:12-23][334]
 
 Initializes a tester worker.
 It handles the test execution.
 
 #### Parameters
 
-*   `config` **[Object][218]** 
+*   `config` **[Object][222]** 
 
-Returns **[Runner][328]** 
+Returns **[Runner][335]** 
 
 ## messanger
 
-[src/tester/messanger.js:9-11][329]
+[src/tester/messanger.js:9-11][336]
 
 ### report
 
-[src/tester/messanger.js:9-11][329]
+[src/tester/messanger.js:9-11][336]
 
 Sends a message to the reporter
 
 #### Parameters
 
-*   `eventName` **[string][228]** 
+*   `eventName` **[string][232]** 
 *   `eventData` **any** 
 
 ### requestScenario
 
-[src/tester/messanger.js:19-29][330]
+[src/tester/messanger.js:19-29][337]
 
 Requests a scenario from the scripwriter
 
-Returns **[Promise][268]<[Object][218]>** Resolves with scenario,
+Returns **[Promise][272]<[Object][222]>** Resolves with scenario,
 or an empty object
 
 ### sendFailingScenario
 
-[src/tester/messanger.js:36-38][331]
+[src/tester/messanger.js:36-38][338]
 
 Sends a failing scenario to the scripwriter
 
 #### Parameters
 
-*   `scenario` **[Object][218]** 
+*   `scenario` **[Object][222]** 
 
 ## Runner
 
-[src/tester/Runner.js:9-109][332]
+[src/tester/Runner.js:9-109][339]
 
 QApe runner class which sets up the whole test run.
 
 ### Parameters
 
-*   `config` **[Object][218]** 
+*   `config` **[Object][222]** 
 
 ### start
 
-[src/tester/Runner.js:26-36][333]
+[src/tester/Runner.js:26-36][340]
 
 Initializes all dependencies and
 starts all parallel instances.
 
-Returns **[Promise][268]** Resolves for successful run,
+Returns **[Promise][272]** Resolves for successful run,
 rejects for failure
 
 ### \_startInstance
 
-[src/tester/Runner.js:42-78][334]
+[src/tester/Runner.js:42-78][341]
 
 Starts single test instance with all dependencies
 
-Returns **[Promise][268]** 
+Returns **[Promise][272]** 
 
 ### \_getBrowserInstance
 
-[src/tester/Runner.js:84-86][335]
+[src/tester/Runner.js:84-86][342]
 
 Initializes browser instance
 
-Returns **[Browser][272]** instance
+Returns **[Browser][276]** instance
 
 ### \_init
 
-[src/tester/Runner.js:91-94][336]
+[src/tester/Runner.js:91-94][343]
 
 Initializes all runner dependencies
 
 ### \_initActionsHandler
 
-[src/tester/Runner.js:99-101][337]
+[src/tester/Runner.js:99-101][344]
 
 Initializes ActionsHandler instance
 
 ### \_initScenariosHandler
 
-[src/tester/Runner.js:106-108][338]
+[src/tester/Runner.js:106-108][345]
 
 Initializes ScenariosHandler instance
 
 ## DefinedScenarios
 
-[src/tester/scenarios/DefinedScenarios.js:8-55][339]
+[src/tester/scenarios/DefinedScenarios.js:8-55][346]
 
 Defined scenarios are saved scenarios from previous runs,
 or manually created. They are executed with higher priority,
@@ -1457,33 +1483,33 @@ than random scenarios.
 
 ### Parameters
 
-*   `config` **[Object][218]** 
-*   `scenariosHelper` **[ScenariosHelper][340]** 
+*   `config` **[Object][222]** 
+*   `scenariosHelper` **[ScenariosHelper][347]** 
 
 ### type
 
-[src/tester/scenarios/DefinedScenarios.js:23-25][341]
+[src/tester/scenarios/DefinedScenarios.js:23-25][348]
 
 Specifies scenario type name
 
-Returns **[string][228]** 'defined'
+Returns **[string][232]** 'defined'
 
 ### runScenario
 
-[src/tester/scenarios/DefinedScenarios.js:33-54][342]
+[src/tester/scenarios/DefinedScenarios.js:33-54][349]
 
 Runs a scenario defined by the user.
 
 #### Parameters
 
-*   `instance` **[Browser][272]** 
-*   `testData` **[Object][218]** 
+*   `instance` **[Browser][276]** 
+*   `testData` **[Object][222]** 
 
-Returns **[Promise][268]** 
+Returns **[Promise][272]** 
 
 ## FailingScenarios
 
-[src/tester/scenarios/FailingScenarios.js:8-112][343]
+[src/tester/scenarios/FailingScenarios.js:8-112][350]
 
 FailingScenarios is initialized, when page error occured.
 It tries to reproduce the error and tell you the exact steps,
@@ -1491,20 +1517,20 @@ how to do that.
 
 ### Parameters
 
-*   `config` **[Object][218]** 
-*   `scenariosHelper` **[ScenariosHelper][340]** 
+*   `config` **[Object][222]** 
+*   `scenariosHelper` **[ScenariosHelper][347]** 
 
 ### type
 
-[src/tester/scenarios/FailingScenarios.js:23-25][344]
+[src/tester/scenarios/FailingScenarios.js:23-25][351]
 
 Specifies scenario type name
 
-Returns **[string][228]** 'failing'
+Returns **[string][232]** 'failing'
 
 ### runScenario
 
-[src/tester/scenarios/FailingScenarios.js:35-74][345]
+[src/tester/scenarios/FailingScenarios.js:35-74][352]
 
 Runs a scenario, which tries to reproduce
 an error from the random/defined scenario
@@ -1512,39 +1538,39 @@ with minimal number of steps.
 
 #### Parameters
 
-*   `instance` **[Browser][272]** 
-*   `testData` **[Object][218]** 
+*   `instance` **[Browser][276]** 
+*   `testData` **[Object][222]** 
 
-Returns **[Promise][268]** 
+Returns **[Promise][272]** 
 
 ### \_getNumberOfRetryActions
 
-[src/tester/scenarios/FailingScenarios.js:81-87][346]
+[src/tester/scenarios/FailingScenarios.js:81-87][353]
 
 #### Parameters
 
-*   `scenarioLength` **[number][263]** 
+*   `scenarioLength` **[number][267]** 
 
-Returns **[number][263]** Allowed number of actions from history
+Returns **[number][267]** Allowed number of actions from history
 to reproduce the error based on scenario length and config.
 
 ### \_reduceScenarioSteps
 
-[src/tester/scenarios/FailingScenarios.js:96-111][347]
+[src/tester/scenarios/FailingScenarios.js:96-111][354]
 
 Removes scenario actions,
 that are not necessary to reproduce the error
 
 #### Parameters
 
-*   `instance` **[Browser][272]** 
-*   `scenario` **[Array][229]<[Object][218]>** 
+*   `instance` **[Browser][276]** 
+*   `scenario` **[Array][233]<[Object][222]>** 
 
-Returns **[Object][218]** Minified scenario reproducing the error
+Returns **[Object][222]** Minified scenario reproducing the error
 
 ## RandomScenarios
 
-[src/tester/scenarios/RandomScenarios.js:8-104][348]
+[src/tester/scenarios/RandomScenarios.js:8-104][355]
 
 Random scenarios are default types of scenarios
 executed whenever there is nothing else to execute.
@@ -1552,21 +1578,21 @@ They randomly click on the website and search for errors.
 
 ### Parameters
 
-*   `config` **[Object][218]** 
-*   `actionsHandler` **[ActionsHandler][255]** 
-*   `reporter` **[Reporter][349]** 
+*   `config` **[Object][222]** 
+*   `actionsHandler` **[ActionsHandler][259]** 
+*   `reporter` **[Reporter][356]** 
 
 ### type
 
-[src/tester/scenarios/RandomScenarios.js:26-28][350]
+[src/tester/scenarios/RandomScenarios.js:26-28][357]
 
 Specifies scenario type name
 
-Returns **[string][228]** 'random'
+Returns **[string][232]** 'random'
 
 ### runScenario
 
-[src/tester/scenarios/RandomScenarios.js:38-61][351]
+[src/tester/scenarios/RandomScenarios.js:38-61][358]
 
 Executes a random scenario
 performing actions on random page elements
@@ -1574,46 +1600,46 @@ and trying to produce some page errors.
 
 #### Parameters
 
-*   `instance` **[Browser][272]** 
-*   `scenario` **[Object][218]** 
+*   `instance` **[Browser][276]** 
+*   `scenario` **[Object][222]** 
 
-Returns **[Promise][268]<[Object][218]>** results
+Returns **[Promise][272]<[Object][222]>** results
 
 ### \_performActions
 
-[src/tester/scenarios/RandomScenarios.js:68-103][352]
+[src/tester/scenarios/RandomScenarios.js:68-103][359]
 
 Performs random actions on the instance
 
 #### Parameters
 
-*   `instance` **[Browser][272]** 
+*   `instance` **[Browser][276]** 
 
-Returns **[Promise][268]<[Object][218]>** results
+Returns **[Promise][272]<[Object][222]>** results
 
 ## ScenariosHelper
 
-[src/tester/scenarios/ScenariosHelper.js:4-68][353]
+[src/tester/scenarios/ScenariosHelper.js:4-68][360]
 
 Scenarios helpers
 
 ### Parameters
 
-*   `config` **[Object][218]** 
-*   `actionsHandler` **[ActionsHandler][255]** 
+*   `config` **[Object][222]** 
+*   `actionsHandler` **[ActionsHandler][259]** 
 
 ### runScenario
 
-[src/tester/scenarios/ScenariosHelper.js:21-67][354]
+[src/tester/scenarios/ScenariosHelper.js:21-67][361]
 
 Executes specified scenario
 
 #### Parameters
 
-*   `instance` **[Browser][272]** 
-*   `scenario` **[Array][229]<[Object][218]>** 
+*   `instance` **[Browser][276]** 
+*   `scenario` **[Array][233]<[Object][222]>** 
 
-Returns **[Promise][268]<[Object][218]>** Execution results
+Returns **[Promise][272]<[Object][222]>** Execution results
 
 [1]: #index
 
@@ -1939,386 +1965,400 @@ Returns **[Promise][268]<[Object][218]>** Execution results
 
 [162]: #parameters-62
 
-[163]: #browser
+[163]: #known_fatal_error_messages
 
-[164]: #parameters-63
+[164]: #browser
 
-[165]: #browser-1
+[165]: #parameters-63
 
-[166]: #page
+[166]: #browser-1
 
-[167]: #pageerrorhandler
+[167]: #page
 
-[168]: #initbrowser
+[168]: #pageerrorhandler
 
-[169]: #clear
+[169]: #unknownexecutionerroroccured
 
-[170]: #_getbrowser
+[170]: #initbrowser
 
-[171]: #_initfatalerrorhandler
+[171]: #clear
 
-[172]: #_initpageerrorhandler
+[172]: #_getbrowser
 
-[173]: #_geteventemitter
+[173]: #_initfatalerrorhandler
 
-[174]: #tester
+[174]: #_handleunknownexecutionerrors
 
-[175]: #index-4
+[175]: #parameters-64
 
-[176]: #parameters-64
+[176]: #_initpageerrorhandler
 
-[177]: #messanger
+[177]: #_geteventemitter
 
-[178]: #report
+[178]: #tester
 
-[179]: #parameters-65
+[179]: #index-4
 
-[180]: #requestscenario
+[180]: #parameters-65
 
-[181]: #sendfailingscenario
+[181]: #messanger
 
-[182]: #parameters-66
+[182]: #report
 
-[183]: #runner
+[183]: #parameters-66
 
-[184]: #parameters-67
+[184]: #requestscenario
 
-[185]: #start
+[185]: #sendfailingscenario
 
-[186]: #_startinstance
+[186]: #parameters-67
 
-[187]: #_getbrowserinstance
+[187]: #runner
 
-[188]: #_init
+[188]: #parameters-68
 
-[189]: #_initactionshandler
+[189]: #start
 
-[190]: #_initscenarioshandler
+[190]: #_startinstance
 
-[191]: #definedscenarios
+[191]: #_getbrowserinstance
 
-[192]: #parameters-68
+[192]: #_init
 
-[193]: #type
+[193]: #_initactionshandler
 
-[194]: #runscenario
+[194]: #_initscenarioshandler
 
-[195]: #parameters-69
+[195]: #definedscenarios
 
-[196]: #failingscenarios
+[196]: #parameters-69
 
-[197]: #parameters-70
+[197]: #type
 
-[198]: #type-1
+[198]: #runscenario
 
-[199]: #runscenario-1
+[199]: #parameters-70
 
-[200]: #parameters-71
+[200]: #failingscenarios
 
-[201]: #_getnumberofretryactions
+[201]: #parameters-71
 
-[202]: #parameters-72
+[202]: #type-1
 
-[203]: #_reducescenariosteps
+[203]: #runscenario-1
 
-[204]: #parameters-73
+[204]: #parameters-72
 
-[205]: #randomscenarios
+[205]: #_getnumberofretryactions
 
-[206]: #parameters-74
+[206]: #parameters-73
 
-[207]: #type-2
+[207]: #_reducescenariosteps
 
-[208]: #runscenario-2
+[208]: #parameters-74
 
-[209]: #parameters-75
+[209]: #randomscenarios
 
-[210]: #_performactions
+[210]: #parameters-75
 
-[211]: #parameters-76
+[211]: #type-2
 
-[212]: #scenarioshelper
+[212]: #runscenario-2
 
-[213]: #parameters-77
+[213]: #parameters-76
 
-[214]: #runscenario-3
+[214]: #_performactions
 
-[215]: #parameters-78
+[215]: #parameters-77
 
-[216]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/index.js#L15-L39 "Source code on GitHub"
+[216]: #scenarioshelper
 
-[217]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/master/index.js#L9-L84 "Source code on GitHub"
+[217]: #parameters-78
 
-[218]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[218]: #runscenario-3
 
-[219]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/index.js#L13-L29 "Source code on GitHub"
+[219]: #parameters-79
 
-[220]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/ConsoleReporter.js#L7-L115 "Source code on GitHub"
+[220]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/index.js#L15-L39 "Source code on GitHub"
 
-[221]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/ConsoleReporter.js#L26-L28 "Source code on GitHub"
+[221]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/master/index.js#L9-L84 "Source code on GitHub"
 
-[222]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/ConsoleReporter.js#L34-L43 "Source code on GitHub"
+[222]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[223]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/ConsoleReporter.js#L49-L51 "Source code on GitHub"
+[223]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/index.js#L13-L29 "Source code on GitHub"
 
-[224]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/ConsoleReporter.js#L57-L70 "Source code on GitHub"
+[224]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/ConsoleReporter.js#L7-L115 "Source code on GitHub"
 
-[225]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/ConsoleReporter.js#L76-L82 "Source code on GitHub"
+[225]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/ConsoleReporter.js#L26-L28 "Source code on GitHub"
 
-[226]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/ConsoleReporter.js#L88-L99 "Source code on GitHub"
+[226]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/ConsoleReporter.js#L34-L43 "Source code on GitHub"
 
-[227]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/ConsoleReporter.js#L107-L114 "Source code on GitHub"
+[227]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/ConsoleReporter.js#L49-L51 "Source code on GitHub"
 
-[228]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[228]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/ConsoleReporter.js#L57-L70 "Source code on GitHub"
 
-[229]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[229]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/ConsoleReporter.js#L76-L82 "Source code on GitHub"
 
-[230]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/FileReporter.js#L11-L104 "Source code on GitHub"
+[230]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/ConsoleReporter.js#L88-L99 "Source code on GitHub"
 
-[231]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/FileReporter.js#L29-L33 "Source code on GitHub"
+[231]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/ConsoleReporter.js#L107-L114 "Source code on GitHub"
 
-[232]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/FileReporter.js#L39-L47 "Source code on GitHub"
+[232]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[233]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/FileReporter.js#L55-L73 "Source code on GitHub"
+[233]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[234]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/FileReporter.js#L81-L95 "Source code on GitHub"
+[234]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/FileReporter.js#L11-L104 "Source code on GitHub"
 
-[235]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/FileReporter.js#L101-L103 "Source code on GitHub"
+[235]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/FileReporter.js#L29-L33 "Source code on GitHub"
 
-[236]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[236]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/FileReporter.js#L39-L47 "Source code on GitHub"
 
-[237]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/Reporter.js#L9-L94 "Source code on GitHub"
+[237]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/FileReporter.js#L55-L73 "Source code on GitHub"
 
-[238]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/Reporter.js#L24-L52 "Source code on GitHub"
+[238]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/FileReporter.js#L81-L95 "Source code on GitHub"
 
-[239]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/Reporter.js#L60-L68 "Source code on GitHub"
+[239]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/FileReporter.js#L101-L103 "Source code on GitHub"
 
-[240]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/Reporter.js#L74-L79 "Source code on GitHub"
+[240]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[241]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/Reporter.js#L85-L93 "Source code on GitHub"
+[241]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/Reporter.js#L9-L94 "Source code on GitHub"
 
-[242]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/SpinnerReporter.js#L10-L58 "Source code on GitHub"
+[242]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/Reporter.js#L24-L52 "Source code on GitHub"
 
-[243]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/reporter/reporter/SpinnerReporter.js#L38-L48 "Source code on GitHub"
+[243]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/Reporter.js#L60-L68 "Source code on GitHub"
 
-[244]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/scriptwriter/index.js#L11-L27 "Source code on GitHub"
+[244]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/Reporter.js#L74-L79 "Source code on GitHub"
 
-[245]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/scriptwriter/scenarios/ScenariosHandler.js#L8-L131 "Source code on GitHub"
+[245]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/Reporter.js#L85-L93 "Source code on GitHub"
 
-[246]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/scriptwriter/scenarios/ScenariosHandler.js#L26-L31 "Source code on GitHub"
+[246]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/SpinnerReporter.js#L10-L58 "Source code on GitHub"
 
-[247]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/scenarios/ScenariosHandler.js#L33-L40 "Source code on GitHub"
+[247]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/reporter/reporter/SpinnerReporter.js#L38-L48 "Source code on GitHub"
 
-[248]: #scenarioshandler
+[248]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/scriptwriter/index.js#L11-L27 "Source code on GitHub"
 
-[249]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/scriptwriter/scenarios/ScenariosHandler.js#L40-L63 "Source code on GitHub"
+[249]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/scriptwriter/scenarios/ScenariosHandler.js#L8-L131 "Source code on GitHub"
 
-[250]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/scriptwriter/scenarios/ScenariosHandler.js#L73-L83 "Source code on GitHub"
+[250]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/scriptwriter/scenarios/ScenariosHandler.js#L26-L31 "Source code on GitHub"
 
-[251]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/scriptwriter/scenarios/ScenariosHandler.js#L88-L101 "Source code on GitHub"
+[251]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/scenarios/ScenariosHandler.js#L33-L40 "Source code on GitHub"
 
-[252]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/scriptwriter/scenarios/ScenariosHandler.js#L108-L116 "Source code on GitHub"
+[252]: #scenarioshandler
 
-[253]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/scriptwriter/scenarios/ScenariosHandler.js#L122-L130 "Source code on GitHub"
+[253]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/scriptwriter/scenarios/ScenariosHandler.js#L40-L63 "Source code on GitHub"
 
-[254]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/scenarios/ScenariosHandler.js#L10-L53 "Source code on GitHub"
+[254]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/scriptwriter/scenarios/ScenariosHandler.js#L73-L83 "Source code on GitHub"
 
-[255]: #actionshandler
+[255]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/scriptwriter/scenarios/ScenariosHandler.js#L88-L101 "Source code on GitHub"
 
-[256]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/shared/config/Config.js#L7-L65 "Source code on GitHub"
+[256]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/scriptwriter/scenarios/ScenariosHandler.js#L108-L116 "Source code on GitHub"
 
-[257]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/shared/config/Config.js#L12-L30 "Source code on GitHub"
+[257]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/scriptwriter/scenarios/ScenariosHandler.js#L122-L130 "Source code on GitHub"
 
-[258]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/shared/config/Config.js#L42-L51 "Source code on GitHub"
+[258]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/scenarios/ScenariosHandler.js#L10-L53 "Source code on GitHub"
 
-[259]: https://www.example.com/index.html
+[259]: #actionshandler
 
-[260]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/shared/config/Config.js#L57-L64 "Source code on GitHub"
+[260]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/shared/config/Config.js#L7-L65 "Source code on GitHub"
 
-[261]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/shared/helpers.js#L9-L11 "Source code on GitHub"
+[261]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/shared/config/Config.js#L12-L30 "Source code on GitHub"
 
-[262]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/shared/helpers.js#L20-L22 "Source code on GitHub"
+[262]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/shared/config/Config.js#L42-L51 "Source code on GitHub"
 
-[263]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[263]: https://www.example.com/index.html
 
-[264]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/AbstractAction.js#L8-L257 "Source code on GitHub"
+[264]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/shared/config/Config.js#L57-L64 "Source code on GitHub"
 
-[265]: #actionshelper
+[265]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/shared/helpers.js#L9-L11 "Source code on GitHub"
 
-[266]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/AbstractAction.js#L49-L51 "Source code on GitHub"
+[266]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/shared/helpers.js#L20-L22 "Source code on GitHub"
 
-[267]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/AbstractAction.js#L58-L60 "Source code on GitHub"
+[267]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
-[268]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[268]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/AbstractAction.js#L8-L257 "Source code on GitHub"
 
-[269]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/AbstractAction.js#L68-L91 "Source code on GitHub"
+[269]: #actionshelper
 
-[270]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/AbstractAction.js#L97-L99 "Source code on GitHub"
+[270]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/AbstractAction.js#L49-L51 "Source code on GitHub"
 
-[271]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/AbstractAction.js#L111-L127 "Source code on GitHub"
+[271]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/AbstractAction.js#L58-L60 "Source code on GitHub"
 
-[272]: #browser
+[272]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-[273]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/AbstractAction.js#L133-L139 "Source code on GitHub"
+[273]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/AbstractAction.js#L68-L91 "Source code on GitHub"
 
-[274]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error
+[274]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/AbstractAction.js#L97-L99 "Source code on GitHub"
 
-[275]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/AbstractAction.js#L154-L175 "Source code on GitHub"
+[275]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/AbstractAction.js#L111-L127 "Source code on GitHub"
 
-[276]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/AbstractAction.js#L185-L195 "Source code on GitHub"
+[276]: #browser
 
-[277]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/AbstractAction.js#L201-L206 "Source code on GitHub"
+[277]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/AbstractAction.js#L133-L139 "Source code on GitHub"
 
-[278]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/AbstractAction.js#L213-L218 "Source code on GitHub"
+[278]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error
 
-[279]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/AbstractAction.js#L226-L230 "Source code on GitHub"
+[279]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/AbstractAction.js#L154-L175 "Source code on GitHub"
 
-[280]: https://developer.mozilla.org/docs/Web/API/EventListener
+[280]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/AbstractAction.js#L185-L195 "Source code on GitHub"
 
-[281]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[281]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/AbstractAction.js#L201-L206 "Source code on GitHub"
 
-[282]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/AbstractAction.js#L235-L241 "Source code on GitHub"
+[282]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/AbstractAction.js#L213-L218 "Source code on GitHub"
 
-[283]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/AbstractAction.js#L248-L256 "Source code on GitHub"
+[283]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/AbstractAction.js#L226-L230 "Source code on GitHub"
 
-[284]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/AbstractAction.js#L12-L14 "Source code on GitHub"
+[284]: https://developer.mozilla.org/docs/Web/API/EventListener
 
-[285]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/AbstractAction.js#L19-L23 "Source code on GitHub"
+[285]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
 
-[286]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ActionsHandler.js#L9-L152 "Source code on GitHub"
+[286]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/AbstractAction.js#L235-L241 "Source code on GitHub"
 
-[287]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ActionsHandler.js#L25-L30 "Source code on GitHub"
+[287]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/AbstractAction.js#L248-L256 "Source code on GitHub"
 
-[288]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ActionsHandler.js#L39-L57 "Source code on GitHub"
+[288]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/AbstractAction.js#L12-L14 "Source code on GitHub"
 
-[289]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ActionsHandler.js#L66-L87 "Source code on GitHub"
+[289]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/AbstractAction.js#L19-L23 "Source code on GitHub"
 
-[290]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ActionsHandler.js#L92-L94 "Source code on GitHub"
+[290]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ActionsHandler.js#L9-L152 "Source code on GitHub"
 
-[291]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ActionsHandler.js#L99-L124 "Source code on GitHub"
+[291]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ActionsHandler.js#L25-L30 "Source code on GitHub"
 
-[292]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ActionsHandler.js#L132-L151 "Source code on GitHub"
+[292]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ActionsHandler.js#L39-L57 "Source code on GitHub"
 
-[293]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ActionsHelper.js#L4-L134 "Source code on GitHub"
+[293]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ActionsHandler.js#L66-L87 "Source code on GitHub"
 
-[294]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ActionsHelper.js#L21-L41 "Source code on GitHub"
+[294]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ActionsHandler.js#L92-L94 "Source code on GitHub"
 
-[295]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ActionsHelper.js#L48-L68 "Source code on GitHub"
+[295]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ActionsHandler.js#L99-L124 "Source code on GitHub"
 
-[296]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ActionsHelper.js#L76-L78 "Source code on GitHub"
+[296]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ActionsHandler.js#L132-L151 "Source code on GitHub"
 
-[297]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ActionsHelper.js#L85-L89 "Source code on GitHub"
+[297]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ActionsHelper.js#L4-L134 "Source code on GitHub"
 
-[298]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ActionsHelper.js#L96-L114 "Source code on GitHub"
+[298]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ActionsHelper.js#L21-L41 "Source code on GitHub"
 
-[299]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ActionsHelper.js#L120-L124 "Source code on GitHub"
+[299]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ActionsHelper.js#L48-L68 "Source code on GitHub"
 
-[300]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ActionsHelper.js#L131-L133 "Source code on GitHub"
+[300]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ActionsHelper.js#L76-L78 "Source code on GitHub"
 
-[301]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/BackAction.js#L9-L51 "Source code on GitHub"
+[301]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ActionsHelper.js#L85-L89 "Source code on GitHub"
 
-[302]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/BackAction.js#L33-L39 "Source code on GitHub"
+[302]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ActionsHelper.js#L96-L114 "Source code on GitHub"
 
-[303]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/BackAction.js#L46-L50 "Source code on GitHub"
+[303]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ActionsHelper.js#L120-L124 "Source code on GitHub"
 
-[304]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/BackAction.js#L13-L15 "Source code on GitHub"
+[304]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ActionsHelper.js#L131-L133 "Source code on GitHub"
 
-[305]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/BackAction.js#L21-L25 "Source code on GitHub"
+[305]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/BackAction.js#L9-L51 "Source code on GitHub"
 
-[306]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ClickAction.js#L8-L55 "Source code on GitHub"
+[306]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/BackAction.js#L33-L39 "Source code on GitHub"
 
-[307]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ClickAction.js#L34-L43 "Source code on GitHub"
+[307]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/BackAction.js#L46-L50 "Source code on GitHub"
 
-[308]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ClickAction.js#L50-L54 "Source code on GitHub"
+[308]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/BackAction.js#L13-L15 "Source code on GitHub"
 
-[309]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ClickAction.js#L12-L14 "Source code on GitHub"
+[309]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/BackAction.js#L21-L25 "Source code on GitHub"
 
-[310]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/ClickAction.js#L20-L22 "Source code on GitHub"
+[310]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ClickAction.js#L8-L55 "Source code on GitHub"
 
-[311]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/TypeAction.js#L11-L88 "Source code on GitHub"
+[311]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ClickAction.js#L34-L43 "Source code on GitHub"
 
-[312]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/TypeAction.js#L52-L63 "Source code on GitHub"
+[312]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ClickAction.js#L50-L54 "Source code on GitHub"
 
-[313]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/TypeAction.js#L69-L75 "Source code on GitHub"
+[313]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ClickAction.js#L12-L14 "Source code on GitHub"
 
-[314]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/TypeAction.js#L82-L87 "Source code on GitHub"
+[314]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/ClickAction.js#L20-L22 "Source code on GitHub"
 
-[315]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/TypeAction.js#L15-L17 "Source code on GitHub"
+[315]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/TypeAction.js#L11-L88 "Source code on GitHub"
 
-[316]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/actions/TypeAction.js#L24-L40 "Source code on GitHub"
+[316]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/TypeAction.js#L52-L63 "Source code on GitHub"
 
-[317]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/browser/Browser.js#L8-L137 "Source code on GitHub"
+[317]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/TypeAction.js#L69-L75 "Source code on GitHub"
 
-[318]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/browser/Browser.js#L25-L27 "Source code on GitHub"
+[318]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/TypeAction.js#L82-L87 "Source code on GitHub"
 
-[319]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/browser/Browser.js#L32-L34 "Source code on GitHub"
+[319]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/TypeAction.js#L15-L17 "Source code on GitHub"
 
-[320]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/browser/Browser.js#L44-L46 "Source code on GitHub"
+[320]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/actions/TypeAction.js#L24-L40 "Source code on GitHub"
 
-[321]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/browser/Browser.js#L52-L61 "Source code on GitHub"
+[321]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/browser/Browser.js#L8-L10 "Source code on GitHub"
 
-[322]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/browser/Browser.js#L67-L71 "Source code on GitHub"
+[322]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/browser/Browser.js#L15-L168 "Source code on GitHub"
 
-[323]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/browser/Browser.js#L80-L94 "Source code on GitHub"
+[323]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/browser/Browser.js#L34-L36 "Source code on GitHub"
 
-[324]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/browser/Browser.js#L102-L115 "Source code on GitHub"
+[324]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/browser/Browser.js#L41-L43 "Source code on GitHub"
 
-[325]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/browser/Browser.js#L122-L129 "Source code on GitHub"
+[325]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/browser/Browser.js#L53-L55 "Source code on GitHub"
 
-[326]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/browser/Browser.js#L134-L136 "Source code on GitHub"
+[326]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/browser/Browser.js#L60-L62 "Source code on GitHub"
 
-[327]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/index.js#L12-L23 "Source code on GitHub"
+[327]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/browser/Browser.js#L68-L77 "Source code on GitHub"
 
-[328]: #runner
+[328]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/browser/Browser.js#L83-L87 "Source code on GitHub"
 
-[329]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/messanger.js#L9-L11 "Source code on GitHub"
+[329]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/browser/Browser.js#L96-L110 "Source code on GitHub"
 
-[330]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/messanger.js#L19-L29 "Source code on GitHub"
+[330]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/browser/Browser.js#L118-L134 "Source code on GitHub"
 
-[331]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/messanger.js#L36-L38 "Source code on GitHub"
+[331]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/browser/Browser.js#L140-L146 "Source code on GitHub"
 
-[332]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/Runner.js#L9-L109 "Source code on GitHub"
+[332]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/browser/Browser.js#L153-L160 "Source code on GitHub"
 
-[333]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/Runner.js#L26-L36 "Source code on GitHub"
+[333]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/browser/Browser.js#L165-L167 "Source code on GitHub"
 
-[334]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/Runner.js#L42-L78 "Source code on GitHub"
+[334]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/index.js#L12-L23 "Source code on GitHub"
 
-[335]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/Runner.js#L84-L86 "Source code on GitHub"
+[335]: #runner
 
-[336]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/Runner.js#L91-L94 "Source code on GitHub"
+[336]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/messanger.js#L9-L11 "Source code on GitHub"
 
-[337]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/Runner.js#L99-L101 "Source code on GitHub"
+[337]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/messanger.js#L19-L29 "Source code on GitHub"
 
-[338]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/Runner.js#L106-L108 "Source code on GitHub"
+[338]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/messanger.js#L36-L38 "Source code on GitHub"
 
-[339]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/scenarios/DefinedScenarios.js#L8-L55 "Source code on GitHub"
+[339]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/Runner.js#L9-L109 "Source code on GitHub"
 
-[340]: #scenarioshelper
+[340]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/Runner.js#L26-L36 "Source code on GitHub"
 
-[341]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/scenarios/DefinedScenarios.js#L23-L25 "Source code on GitHub"
+[341]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/Runner.js#L42-L78 "Source code on GitHub"
 
-[342]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/scenarios/DefinedScenarios.js#L33-L54 "Source code on GitHub"
+[342]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/Runner.js#L84-L86 "Source code on GitHub"
 
-[343]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/scenarios/FailingScenarios.js#L8-L112 "Source code on GitHub"
+[343]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/Runner.js#L91-L94 "Source code on GitHub"
 
-[344]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/scenarios/FailingScenarios.js#L23-L25 "Source code on GitHub"
+[344]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/Runner.js#L99-L101 "Source code on GitHub"
 
-[345]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/scenarios/FailingScenarios.js#L35-L74 "Source code on GitHub"
+[345]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/Runner.js#L106-L108 "Source code on GitHub"
 
-[346]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/scenarios/FailingScenarios.js#L81-L87 "Source code on GitHub"
+[346]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/scenarios/DefinedScenarios.js#L8-L55 "Source code on GitHub"
 
-[347]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/scenarios/FailingScenarios.js#L96-L111 "Source code on GitHub"
+[347]: #scenarioshelper
 
-[348]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/scenarios/RandomScenarios.js#L8-L104 "Source code on GitHub"
+[348]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/scenarios/DefinedScenarios.js#L23-L25 "Source code on GitHub"
 
-[349]: #reporter
+[349]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/scenarios/DefinedScenarios.js#L33-L54 "Source code on GitHub"
 
-[350]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/scenarios/RandomScenarios.js#L26-L28 "Source code on GitHub"
+[350]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/scenarios/FailingScenarios.js#L8-L112 "Source code on GitHub"
 
-[351]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/scenarios/RandomScenarios.js#L38-L61 "Source code on GitHub"
+[351]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/scenarios/FailingScenarios.js#L23-L25 "Source code on GitHub"
 
-[352]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/scenarios/RandomScenarios.js#L68-L103 "Source code on GitHub"
+[352]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/scenarios/FailingScenarios.js#L35-L74 "Source code on GitHub"
 
-[353]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/scenarios/ScenariosHelper.js#L4-L68 "Source code on GitHub"
+[353]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/scenarios/FailingScenarios.js#L81-L87 "Source code on GitHub"
 
-[354]: https://github.com/seznam/QApe/blob/5d6dc1bb1bdc0b31597ad4b3036ce12d729fad99/src/tester/scenarios/ScenariosHelper.js#L21-L67 "Source code on GitHub"
+[354]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/scenarios/FailingScenarios.js#L96-L111 "Source code on GitHub"
+
+[355]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/scenarios/RandomScenarios.js#L8-L104 "Source code on GitHub"
+
+[356]: #reporter
+
+[357]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/scenarios/RandomScenarios.js#L26-L28 "Source code on GitHub"
+
+[358]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/scenarios/RandomScenarios.js#L38-L61 "Source code on GitHub"
+
+[359]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/scenarios/RandomScenarios.js#L68-L103 "Source code on GitHub"
+
+[360]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/scenarios/ScenariosHelper.js#L4-L68 "Source code on GitHub"
+
+[361]: https://github.com/seznam/QApe/blob/caa45c24e47e33e6f13d6722c0065b3d64f008be/src/tester/scenarios/ScenariosHelper.js#L21-L67 "Source code on GitHub"
