@@ -11,14 +11,17 @@ describe('Config', () => {
         expect(Config.load({ files }).files).toEqual(files);
     });
 
-    for (const protocol of ['http', 'https']) {
-        it(`can resolve url config with ${protocol} protocol`, () => {
-            const config = Config.load({ url: `${protocol}://www.example.com/index.html` });
+    it.each([
+        ['http://www.example.com/index.html', 'http://www.example.com', '/index.html'],
+        ['https://www.example.com/index.html', 'https://www.example.com', '/index.html'],
+        ['https://www.example.com/', 'https://www.example.com', '/'],
+        ['https://www.example.com/one/two/three.html', 'https://www.example.com', '/one/two/three.html'],
+    ])(`can resolve url config for %s`, (originalUrl, parsedUrl, parsedUrlPath) => {
+        const config = Config.load({ url: originalUrl });
 
-            expect(config.url).toEqual(`${protocol}://www.example.com`);
-            expect(config.urlPaths).toEqual(['/index.html']);
-        });
-    }
+        expect(config.url).toEqual(parsedUrl);
+        expect(config.urlPaths).toEqual([parsedUrlPath]);
+    });
 
     it('can set preview mode settings', () => {
         const config = Config.load({ previewMode: true });

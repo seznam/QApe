@@ -1,5 +1,6 @@
 import template from './template';
 import path from 'path';
+import _ from 'lodash';
 
 /**
  * Class that can parse configuration with default values.
@@ -43,8 +44,9 @@ export default class Config {
         const host = config.url.replace(/http(s)?:\/\//, '');
 
         if (host.includes('/')) {
-            const urlPaths = [`/${host.split('/')[1]}`];
-            const url = config.url.replace(urlPaths[0], '');
+            const urlPaths = [host.substring(host.indexOf('/'))];
+            const urlPathMatcher = new RegExp(_.escapeRegExp(urlPaths[0]) + '$');
+            const url = config.url.replace(urlPathMatcher, '');
 
             Object.assign(config, { url, urlPaths });
         }

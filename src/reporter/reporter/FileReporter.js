@@ -1,7 +1,7 @@
 import EventEmitter from 'events';
 import fs from 'fs';
 import path from 'path';
-import isEqual from 'lodash.isequal';
+import _ from 'lodash';
 import { formatDigits } from '../../shared/helpers';
 
 /**
@@ -99,6 +99,6 @@ export default class FileReporter extends EventEmitter {
      * @returns {boolean}
      */
     _isFailureReported(scenario) {
-        return !!this._results.find((result) => isEqual(result.scenario, scenario));
+        return !!this._results.find((result) => _.isEqual(result.scenario, scenario));
     }
 }
